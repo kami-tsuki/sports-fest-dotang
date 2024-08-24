@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\app\services\api\" />
+    <Folder Include="src\app\sf\" />
   </ItemGroup>
 </Project>

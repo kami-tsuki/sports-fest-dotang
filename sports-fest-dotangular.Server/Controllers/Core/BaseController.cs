@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace sports_fest_dotangular.Server.Controllers.Core;
 
-[ApiController, Route("api/v{version:apiVersion}/data/[controller]"), ApiVersion("1.0"), AllowAnonymous]
+[ApiController, Route("api/v1/_/[controller]"), ApiVersion("1.0"), AllowAnonymous]
 public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseService, ResultService resultService) : ControllerBase
     where TEntity : Entity<Guid>
 {
@@ -38,7 +38,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpGet("{id:guid}"), ProducesResponseType(typeof(ResultModel<object>), 200), ProducesResponseType(typeof(ResultModel<string>), 404), ProducesResponseType(typeof(ResultModel<string>), 400)]
+    [HttpGet("{id:guid}")]
     public async Task<ActionResult<ResultModel<TEntity>>> Get(Guid id, [FromQuery] string? properties = null)
     {
         try
@@ -56,7 +56,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpPost, ProducesResponseType(typeof(ResultModel<object>), 201), ProducesResponseType(typeof(ResultModel<string>), 400), ProducesResponseType(typeof(ResultModel<string>), 409)]
+    [HttpPost]
     public async Task<ActionResult<ResultModel<TEntity>>> Post(TEntity entity, [FromQuery] bool ignoreNullProperties = false)
     {
         try
@@ -84,7 +84,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpPut("{id:guid}"), ProducesResponseType(204), ProducesResponseType(typeof(ResultModel<string>), 404), ProducesResponseType(typeof(ResultModel<string>), 400)]
+    [HttpPut("{id:guid}"), ]
     public async Task<ActionResult<ResultModel<TEntity>>> Put(Guid id, TEntity entity, [FromQuery] bool ignoreNullProperties = false)
     {
         try
@@ -109,7 +109,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpPut, ProducesResponseType(typeof(ResultModel<object>), 201), ProducesResponseType(typeof(ResultModel<object>), 200), ProducesResponseType(typeof(ResultModel<string>), 400)]
+    [HttpPut]
     public async Task<ActionResult<ResultModel<TEntity>>> Put(TEntity entity, [FromQuery] bool ignoreNullProperties = false)
     {
         try
@@ -153,7 +153,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         
         
 
-    [HttpPatch("{id:guid}"), ProducesResponseType(204), ProducesResponseType(typeof(ResultModel<string>), 404), ProducesResponseType(typeof(ResultModel<string>), 400)]
+    [HttpPatch("{id:guid}")]
     public async Task<ActionResult<ResultModel<TEntity>>> Patch(Guid id, [FromBody] JsonPatchDocument<TEntity>? patchDoc)
     {
         if (patchDoc == null)
@@ -185,7 +185,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpDelete("{id:guid}"), ProducesResponseType(typeof(ResultModel<object>), 200), ProducesResponseType(typeof(ResultModel<string>), 404), ProducesResponseType(typeof(ResultModel<string>), 400)]
+    [HttpDelete("{id:guid}")]
     public async Task<ActionResult<ResultModel<TEntity>>> Delete(Guid id)
     {
         try
@@ -202,7 +202,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpGet("count"), ProducesResponseType(typeof(ResultModel<long>), 200), ProducesResponseType(typeof(ResultModel<string>), 400)]
+    [HttpGet("count")]
     public async Task<ActionResult<ResultModel<long>>> GetCount([FromQuery] Dictionary<string, string>? filters = null)
     {
         try
@@ -220,7 +220,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpOptions, ProducesResponseType(typeof(ResultModel<object>), 200)]
+    [HttpOptions]
     public ActionResult<ResultModel<object>> Options(
         [FromQuery] string? path = null,
         [FromQuery] bool includeModels = false,

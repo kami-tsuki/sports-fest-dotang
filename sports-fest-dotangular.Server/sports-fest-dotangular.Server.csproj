@@ -58,4 +58,8 @@
     <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/run-nswag.ps1&quot; $(Configuration)" />
   </Target>
 
+  <Target Name="ProxyConf" AfterTargets="NSwag" Condition=" '$(Configuration)' == 'Debug' ">
+    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/Update-ProxyConfig.ps1&quot;"/>
+  </Target>
+
 </Project>

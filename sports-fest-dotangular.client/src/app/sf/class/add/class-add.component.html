@@ -1,0 +1,15 @@
+<form #classForm="ngForm" (ngSubmit)="createClass(class)" class="space-y-4">
+  <div class="form-group">
+    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+    <input type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="name" name="name" [(ngModel)]="class.name" required>
+  </div>
+  <div class="form-group">
+    <label for="short" class="block text-sm font-medium text-gray-700">Short Name</label>
+    <input type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="short" name="short" [(ngModel)]="class.short" required>
+  </div>
+  <div class="form-group">
+    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+    <textarea class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="description" name="description" [(ngModel)]="class.comment"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" [disabled]="!classForm.valid">Submit</button>
+</form>

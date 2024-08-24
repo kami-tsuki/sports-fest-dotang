@@ -12,19 +12,19 @@ export interface IClassClient {
 
     getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass>;
 
-    post(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfObject>;
+    post(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
 
-    put(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfObject>;
+    put(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject>;
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfClass>;
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<void>;
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void>;
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfClass>;
 
-    delete(id: string): Promise<ResultModelOfObject>;
+    delete(id: string): Promise<ResultModelOfClass>;
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
 }
@@ -89,7 +89,7 @@ export class ClassClient implements IClassClient {
         return Promise.resolve<ResultModelOfPageOfClass>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfObject> {
+    post(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass> {
         let url_ = this.baseUrl + "/api/v1/data/classes?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -113,39 +113,25 @@ export class ClassClient implements IClassClient {
         });
     }
 
-    protected processPost(response: Response): Promise<ResultModelOfObject> {
+    protected processPost(response: Response): Promise<ResultModelOfClass> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
-        } else if (status === 409) {
-            return response.text().then((_responseText) => {
-            let result409: any = null;
-            let resultData409 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result409 = ResultModelOfString.fromJS(resultData409);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result409);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfClass.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfObject> {
+    put(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass> {
         let url_ = this.baseUrl + "/api/v1/data/classes?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -169,36 +155,22 @@ export class ClassClient implements IClassClient {
         });
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfObject> {
+    protected processPut(response: Response): Promise<ResultModelOfClass> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 200) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfClass.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
@@ -245,7 +217,7 @@ export class ClassClient implements IClassClient {
         return Promise.resolve<ResultModelOfObject>(null as any);
     }
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject> {
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfClass> {
         let url_ = this.baseUrl + "/api/v1/data/classes/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -266,39 +238,25 @@ export class ClassClient implements IClassClient {
         });
     }
 
-    protected processGet(response: Response): Promise<ResultModelOfObject> {
+    protected processGet(response: Response): Promise<ResultModelOfClass> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfClass.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<void> {
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass> {
         let url_ = this.baseUrl + "/api/v1/data/classes/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -316,6 +274,7 @@ export class ClassClient implements IClassClient {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -324,36 +283,25 @@ export class ClassClient implements IClassClient {
         });
     }
 
-    protected processPut2(response: Response): Promise<void> {
+    protected processPut2(response: Response): Promise<ResultModelOfClass> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfClass.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void> {
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfClass> {
         let url_ = this.baseUrl + "/api/v1/data/classes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -367,6 +315,7 @@ export class ClassClient implements IClassClient {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -375,36 +324,25 @@ export class ClassClient implements IClassClient {
         });
     }
 
-    protected processPatch(response: Response): Promise<void> {
+    protected processPatch(response: Response): Promise<ResultModelOfClass> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfClass.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
-    delete(id: string): Promise<ResultModelOfObject> {
+    delete(id: string): Promise<ResultModelOfClass> {
         let url_ = this.baseUrl + "/api/v1/data/classes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -423,36 +361,22 @@ export class ClassClient implements IClassClient {
         });
     }
 
-    protected processDelete(response: Response): Promise<ResultModelOfObject> {
+    protected processDelete(response: Response): Promise<ResultModelOfClass> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfClass.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
@@ -483,13 +407,6 @@ export class ClassClient implements IClassClient {
             result200 = ResultModelOfLong.fromJS(resultData200);
             return result200;
             });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -503,19 +420,19 @@ export interface IDisciplineClient {
 
     getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline>;
 
-    post(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfObject>;
+    post(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
 
-    put(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfObject>;
+    put(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject>;
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfDiscipline>;
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<void>;
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void>;
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfDiscipline>;
 
-    delete(id: string): Promise<ResultModelOfObject>;
+    delete(id: string): Promise<ResultModelOfDiscipline>;
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
 }
@@ -580,7 +497,7 @@ export class DisciplineClient implements IDisciplineClient {
         return Promise.resolve<ResultModelOfPageOfDiscipline>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfObject> {
+    post(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline> {
         let url_ = this.baseUrl + "/api/v1/data/disciplines?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -604,39 +521,25 @@ export class DisciplineClient implements IDisciplineClient {
         });
     }
 
-    protected processPost(response: Response): Promise<ResultModelOfObject> {
+    protected processPost(response: Response): Promise<ResultModelOfDiscipline> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
-        } else if (status === 409) {
-            return response.text().then((_responseText) => {
-            let result409: any = null;
-            let resultData409 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result409 = ResultModelOfString.fromJS(resultData409);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result409);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfDiscipline.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfObject> {
+    put(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline> {
         let url_ = this.baseUrl + "/api/v1/data/disciplines?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -660,36 +563,22 @@ export class DisciplineClient implements IDisciplineClient {
         });
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfObject> {
+    protected processPut(response: Response): Promise<ResultModelOfDiscipline> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 200) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfDiscipline.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
@@ -736,7 +625,7 @@ export class DisciplineClient implements IDisciplineClient {
         return Promise.resolve<ResultModelOfObject>(null as any);
     }
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject> {
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfDiscipline> {
         let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -757,39 +646,25 @@ export class DisciplineClient implements IDisciplineClient {
         });
     }
 
-    protected processGet(response: Response): Promise<ResultModelOfObject> {
+    protected processGet(response: Response): Promise<ResultModelOfDiscipline> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfDiscipline.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<void> {
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline> {
         let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -807,6 +682,7 @@ export class DisciplineClient implements IDisciplineClient {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -815,36 +691,25 @@ export class DisciplineClient implements IDisciplineClient {
         });
     }
 
-    protected processPut2(response: Response): Promise<void> {
+    protected processPut2(response: Response): Promise<ResultModelOfDiscipline> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfDiscipline.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void> {
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfDiscipline> {
         let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -858,6 +723,7 @@ export class DisciplineClient implements IDisciplineClient {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -866,36 +732,25 @@ export class DisciplineClient implements IDisciplineClient {
         });
     }
 
-    protected processPatch(response: Response): Promise<void> {
+    protected processPatch(response: Response): Promise<ResultModelOfDiscipline> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfDiscipline.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
-    delete(id: string): Promise<ResultModelOfObject> {
+    delete(id: string): Promise<ResultModelOfDiscipline> {
         let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -914,36 +769,22 @@ export class DisciplineClient implements IDisciplineClient {
         });
     }
 
-    protected processDelete(response: Response): Promise<ResultModelOfObject> {
+    protected processDelete(response: Response): Promise<ResultModelOfDiscipline> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfDiscipline.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
@@ -974,13 +815,6 @@ export class DisciplineClient implements IDisciplineClient {
             result200 = ResultModelOfLong.fromJS(resultData200);
             return result200;
             });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -994,19 +828,19 @@ export interface IEntryClient {
 
     getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry>;
 
-    post(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfObject>;
+    post(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
 
-    put(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfObject>;
+    put(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject>;
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfEntry>;
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<void>;
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void>;
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfEntry>;
 
-    delete(id: string): Promise<ResultModelOfObject>;
+    delete(id: string): Promise<ResultModelOfEntry>;
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
 }
@@ -1071,7 +905,7 @@ export class EntryClient implements IEntryClient {
         return Promise.resolve<ResultModelOfPageOfEntry>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfObject> {
+    post(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry> {
         let url_ = this.baseUrl + "/api/v1/data/entries?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -1095,39 +929,25 @@ export class EntryClient implements IEntryClient {
         });
     }
 
-    protected processPost(response: Response): Promise<ResultModelOfObject> {
+    protected processPost(response: Response): Promise<ResultModelOfEntry> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
-        } else if (status === 409) {
-            return response.text().then((_responseText) => {
-            let result409: any = null;
-            let resultData409 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result409 = ResultModelOfString.fromJS(resultData409);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result409);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfEntry.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfObject> {
+    put(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry> {
         let url_ = this.baseUrl + "/api/v1/data/entries?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -1151,36 +971,22 @@ export class EntryClient implements IEntryClient {
         });
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfObject> {
+    protected processPut(response: Response): Promise<ResultModelOfEntry> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 200) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfEntry.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
@@ -1227,7 +1033,7 @@ export class EntryClient implements IEntryClient {
         return Promise.resolve<ResultModelOfObject>(null as any);
     }
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject> {
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfEntry> {
         let url_ = this.baseUrl + "/api/v1/data/entries/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1248,39 +1054,25 @@ export class EntryClient implements IEntryClient {
         });
     }
 
-    protected processGet(response: Response): Promise<ResultModelOfObject> {
+    protected processGet(response: Response): Promise<ResultModelOfEntry> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfEntry.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<void> {
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry> {
         let url_ = this.baseUrl + "/api/v1/data/entries/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1298,6 +1090,7 @@ export class EntryClient implements IEntryClient {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -1306,36 +1099,25 @@ export class EntryClient implements IEntryClient {
         });
     }
 
-    protected processPut2(response: Response): Promise<void> {
+    protected processPut2(response: Response): Promise<ResultModelOfEntry> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfEntry.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void> {
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfEntry> {
         let url_ = this.baseUrl + "/api/v1/data/entries/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1349,6 +1131,7 @@ export class EntryClient implements IEntryClient {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -1357,36 +1140,25 @@ export class EntryClient implements IEntryClient {
         });
     }
 
-    protected processPatch(response: Response): Promise<void> {
+    protected processPatch(response: Response): Promise<ResultModelOfEntry> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfEntry.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
-    delete(id: string): Promise<ResultModelOfObject> {
+    delete(id: string): Promise<ResultModelOfEntry> {
         let url_ = this.baseUrl + "/api/v1/data/entries/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1405,36 +1177,22 @@ export class EntryClient implements IEntryClient {
         });
     }
 
-    protected processDelete(response: Response): Promise<ResultModelOfObject> {
+    protected processDelete(response: Response): Promise<ResultModelOfEntry> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfEntry.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
@@ -1465,13 +1223,6 @@ export class EntryClient implements IEntryClient {
             result200 = ResultModelOfLong.fromJS(resultData200);
             return result200;
             });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -1485,19 +1236,19 @@ export interface ILocationClient {
 
     getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation>;
 
-    post(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfObject>;
+    post(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
 
-    put(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfObject>;
+    put(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject>;
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfLocation>;
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<void>;
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void>;
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfLocation>;
 
-    delete(id: string): Promise<ResultModelOfObject>;
+    delete(id: string): Promise<ResultModelOfLocation>;
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
 }
@@ -1562,7 +1313,7 @@ export class LocationClient implements ILocationClient {
         return Promise.resolve<ResultModelOfPageOfLocation>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfObject> {
+    post(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation> {
         let url_ = this.baseUrl + "/api/v1/data/locations?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -1586,39 +1337,25 @@ export class LocationClient implements ILocationClient {
         });
     }
 
-    protected processPost(response: Response): Promise<ResultModelOfObject> {
+    protected processPost(response: Response): Promise<ResultModelOfLocation> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
-        } else if (status === 409) {
-            return response.text().then((_responseText) => {
-            let result409: any = null;
-            let resultData409 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result409 = ResultModelOfString.fromJS(resultData409);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result409);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfLocation.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfLocation>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfObject> {
+    put(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation> {
         let url_ = this.baseUrl + "/api/v1/data/locations?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
@@ -1642,36 +1379,22 @@ export class LocationClient implements ILocationClient {
         });
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfObject> {
+    protected processPut(response: Response): Promise<ResultModelOfLocation> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 200) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfLocation.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfLocation>(null as any);
     }
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
@@ -1718,7 +1441,7 @@ export class LocationClient implements ILocationClient {
         return Promise.resolve<ResultModelOfObject>(null as any);
     }
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfObject> {
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfLocation> {
         let url_ = this.baseUrl + "/api/v1/data/locations/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1739,39 +1462,25 @@ export class LocationClient implements ILocationClient {
         });
     }
 
-    protected processGet(response: Response): Promise<ResultModelOfObject> {
+    protected processGet(response: Response): Promise<ResultModelOfLocation> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfLocation.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfLocation>(null as any);
     }
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<void> {
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation> {
         let url_ = this.baseUrl + "/api/v1/data/locations/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1789,6 +1498,7 @@ export class LocationClient implements ILocationClient {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -1797,36 +1507,25 @@ export class LocationClient implements ILocationClient {
         });
     }
 
-    protected processPut2(response: Response): Promise<void> {
+    protected processPut2(response: Response): Promise<ResultModelOfLocation> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfLocation.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfLocation>(null as any);
     }
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<void> {
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfLocation> {
         let url_ = this.baseUrl + "/api/v1/data/locations/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1840,6 +1539,7 @@ export class LocationClient implements ILocationClient {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -1848,36 +1548,25 @@ export class LocationClient implements ILocationClient {
         });
     }
 
-    protected processPatch(response: Response): Promise<void> {
+    protected processPatch(response: Response): Promise<ResultModelOfLocation> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfLocation.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfLocation>(null as any);
     }
 
-    delete(id: string): Promise<ResultModelOfObject> {
+    delete(id: string): Promise<ResultModelOfLocation> {
         let url_ = this.baseUrl + "/api/v1/data/locations/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1896,36 +1585,22 @@ export class LocationClient implements ILocationClient {
         });
     }
 
-    protected processDelete(response: Response): Promise<ResultModelOfObject> {
+    protected processDelete(response: Response): Promise<ResultModelOfLocation> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfLocation.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfLocation>(null as any);
     }
 
     getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
@@ -1956,13 +1631,6 @@ export class LocationClient implements ILocationClient {
             result200 = ResultModelOfLong.fromJS(resultData200);
             return result200;
             });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -1974,23 +1642,23 @@ export class LocationClient implements ILocationClient {
 
 export interface IUserClient {
 
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined, version: string): Promise<ResultModelOfPageOfUser>;
+    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser>;
 
-    post(ignoreNullProperties: boolean | undefined, version: string, entity: User): Promise<ResultModelOfObject>;
+    post(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
 
-    put(ignoreNullProperties: boolean | undefined, version: string, entity: User): Promise<ResultModelOfObject>;
+    put(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
 
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined, version: string): Promise<ResultModelOfObject>;
+    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
-    get(id: string, properties: string | null | undefined, version: string): Promise<ResultModelOfObject>;
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfUser>;
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, version: string, entity: User): Promise<void>;
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
 
-    patch(id: string, version: string, patchDoc: Operation[] | undefined): Promise<void>;
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfUser>;
 
-    delete(id: string, version: string): Promise<ResultModelOfObject>;
+    delete(id: string): Promise<ResultModelOfUser>;
 
-    getCount(filters: { [key: string]: string; } | null | undefined, version: string): Promise<ResultModelOfLong>;
+    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
 }
 
 export class UserClient implements IUserClient {
@@ -2003,11 +1671,8 @@ export class UserClient implements IUserClient {
         this.baseUrl = baseUrl ?? "";
     }
 
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined, version: string): Promise<ResultModelOfPageOfUser> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User?";
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
+    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User?";
         if (page === null)
             throw new Error("The parameter 'page' cannot be null.");
         else if (page !== undefined)
@@ -2056,11 +1721,8 @@ export class UserClient implements IUserClient {
         return Promise.resolve<ResultModelOfPageOfUser>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, version: string, entity: User): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User?";
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
+    post(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
         else if (ignoreNullProperties !== undefined)
@@ -2083,43 +1745,26 @@ export class UserClient implements IUserClient {
         });
     }
 
-    protected processPost(response: Response): Promise<ResultModelOfObject> {
+    protected processPost(response: Response): Promise<ResultModelOfUser> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
-            });
-        } else if (status === 409) {
-            return response.text().then((_responseText) => {
-            let result409: any = null;
-            let resultData409 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result409 = ResultModelOfString.fromJS(resultData409);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result409);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfUser.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, version: string, entity: User): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User?";
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
+    put(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User?";
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
         else if (ignoreNullProperties !== undefined)
@@ -2142,43 +1787,26 @@ export class UserClient implements IUserClient {
         });
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfObject> {
+    protected processPut(response: Response): Promise<ResultModelOfUser> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = ResultModelOfObject.fromJS(resultData201);
-            return result201;
-            });
-        } else if (status === 200) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfUser.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined, version: string): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User?";
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
+    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
+        let url_ = this.baseUrl + "/api/v1/_/User?";
         if (path !== undefined && path !== null)
             url_ += "path=" + encodeURIComponent("" + path) + "&";
         if (includeModels === null)
@@ -2221,14 +1849,11 @@ export class UserClient implements IUserClient {
         return Promise.resolve<ResultModelOfObject>(null as any);
     }
 
-    get(id: string, properties: string | null | undefined, version: string): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User/{id}?";
+    get(id: string, properties: string | null | undefined): Promise<ResultModelOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
         if (properties !== undefined && properties !== null)
             url_ += "properties=" + encodeURIComponent("" + properties) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -2245,46 +1870,29 @@ export class UserClient implements IUserClient {
         });
     }
 
-    protected processGet(response: Response): Promise<ResultModelOfObject> {
+    protected processGet(response: Response): Promise<ResultModelOfUser> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfUser.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, version: string, entity: User): Promise<void> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User/{id}?";
+    put2(id: string, ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
         if (ignoreNullProperties === null)
             throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
         else if (ignoreNullProperties !== undefined)
@@ -2298,6 +1906,7 @@ export class UserClient implements IUserClient {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -2306,43 +1915,29 @@ export class UserClient implements IUserClient {
         });
     }
 
-    protected processPut2(response: Response): Promise<void> {
+    protected processPut2(response: Response): Promise<ResultModelOfUser> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfUser.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    patch(id: string, version: string, patchDoc: Operation[] | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User/{id}";
+    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(patchDoc);
@@ -2352,6 +1947,7 @@ export class UserClient implements IUserClient {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -2360,43 +1956,29 @@ export class UserClient implements IUserClient {
         });
     }
 
-    protected processPatch(response: Response): Promise<void> {
+    protected processPatch(response: Response): Promise<ResultModelOfUser> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 204) {
+        if (status === 200) {
             return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfUser.fromJS(resultData200);
+            return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    delete(id: string, version: string): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User/{id}";
+    delete(id: string): Promise<ResultModelOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -2411,43 +1993,26 @@ export class UserClient implements IUserClient {
         });
     }
 
-    protected processDelete(response: Response): Promise<ResultModelOfObject> {
+    protected processDelete(response: Response): Promise<ResultModelOfUser> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
+            result200 = ResultModelOfUser.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ResultModelOfString.fromJS(resultData404);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ResultModelOfObject>(null as any);
+        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    getCount(filters: { [key: string]: string; } | null | undefined, version: string): Promise<ResultModelOfLong> {
-        let url_ = this.baseUrl + "/api/v{version}/data/User/count?";
-        if (version === undefined || version === null)
-            throw new Error("The parameter 'version' must be defined.");
-        url_ = url_.replace("{version}", encodeURIComponent("" + version));
+    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
+        let url_ = this.baseUrl + "/api/v1/_/User/count?";
         if (filters !== undefined && filters !== null)
             url_ += "filters=" + encodeURIComponent("" + filters) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -2473,13 +2038,6 @@ export class UserClient implements IUserClient {
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = ResultModelOfLong.fromJS(resultData200);
             return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ResultModelOfString.fromJS(resultData400);
-            return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -2959,14 +2517,14 @@ export enum Severity {
     Fatal = "Fatal",
 }
 
-export class ResultModelOfObject implements IResultModelOfObject {
+export class ResultModelOfClass implements IResultModelOfClass {
     success?: boolean;
     error?: boolean;
     message?: string | undefined;
-    data?: any | undefined;
+    data?: Class | undefined;
     messages?: Message[] | undefined;
 
-    constructor(data?: IResultModelOfObject) {
+    constructor(data?: IResultModelOfClass) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -2980,7 +2538,7 @@ export class ResultModelOfObject implements IResultModelOfObject {
             this.success = _data["success"];
             this.error = _data["error"];
             this.message = _data["message"];
-            this.data = _data["data"];
+            this.data = _data["data"] ? Class.fromJS(_data["data"]) : <any>undefined;
             if (Array.isArray(_data["messages"])) {
                 this.messages = [] as any;
                 for (let item of _data["messages"])
@@ -2989,9 +2547,9 @@ export class ResultModelOfObject implements IResultModelOfObject {
         }
     }
 
-    static fromJS(data: any): ResultModelOfObject {
+    static fromJS(data: any): ResultModelOfClass {
         data = typeof data === 'object' ? data : {};
-        let result = new ResultModelOfObject();
+        let result = new ResultModelOfClass();
         result.init(data);
         return result;
     }
@@ -3001,7 +2559,7 @@ export class ResultModelOfObject implements IResultModelOfObject {
         data["success"] = this.success;
         data["error"] = this.error;
         data["message"] = this.message;
-        data["data"] = this.data;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
         if (Array.isArray(this.messages)) {
             data["messages"] = [];
             for (let item of this.messages)
@@ -3011,71 +2569,11 @@ export class ResultModelOfObject implements IResultModelOfObject {
     }
 }
 
-export interface IResultModelOfObject {
+export interface IResultModelOfClass {
     success?: boolean;
     error?: boolean;
     message?: string | undefined;
-    data?: any | undefined;
-    messages?: Message[] | undefined;
-}
-
-export class ResultModelOfString implements IResultModelOfString {
-    success?: boolean;
-    error?: boolean;
-    message?: string | undefined;
-    data?: string | undefined;
-    messages?: Message[] | undefined;
-
-    constructor(data?: IResultModelOfString) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.success = _data["success"];
-            this.error = _data["error"];
-            this.message = _data["message"];
-            this.data = _data["data"];
-            if (Array.isArray(_data["messages"])) {
-                this.messages = [] as any;
-                for (let item of _data["messages"])
-                    this.messages!.push(Message.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): ResultModelOfString {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultModelOfString();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["success"] = this.success;
-        data["error"] = this.error;
-        data["message"] = this.message;
-        data["data"] = this.data;
-        if (Array.isArray(this.messages)) {
-            data["messages"] = [];
-            for (let item of this.messages)
-                data["messages"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-export interface IResultModelOfString {
-    success?: boolean;
-    error?: boolean;
-    message?: string | undefined;
-    data?: string | undefined;
+    data?: Class | undefined;
     messages?: Message[] | undefined;
 }
 
@@ -3213,6 +2711,66 @@ export interface IResultModelOfLong {
     error?: boolean;
     message?: string | undefined;
     data?: number;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfObject implements IResultModelOfObject {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: any | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfObject) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"];
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfObject {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfObject();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfObject {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: any | undefined;
     messages?: Message[] | undefined;
 }
 
@@ -3405,6 +2963,66 @@ export interface IDiscipline extends IEntityOfGuid {
     entryIds?: string[] | undefined;
 }
 
+export class ResultModelOfDiscipline implements IResultModelOfDiscipline {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Discipline | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfDiscipline) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? Discipline.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfDiscipline {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfDiscipline();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfDiscipline {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Discipline | undefined;
+    messages?: Message[] | undefined;
+}
+
 export class ResultModelOfPageOfEntry implements IResultModelOfPageOfEntry {
     success?: boolean;
     error?: boolean;
@@ -3566,6 +3184,66 @@ export interface IEntry extends IEntityOfGuid {
     note?: string;
 }
 
+export class ResultModelOfEntry implements IResultModelOfEntry {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Entry | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfEntry) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? Entry.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfEntry {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfEntry();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfEntry {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Entry | undefined;
+    messages?: Message[] | undefined;
+}
+
 export class ResultModelOfPageOfLocation implements IResultModelOfPageOfLocation {
     success?: boolean;
     error?: boolean;
@@ -3682,6 +3360,66 @@ export interface IPageOfLocation {
     data?: Location[];
 }
 
+export class ResultModelOfLocation implements IResultModelOfLocation {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Location | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfLocation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? Location.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfLocation {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfLocation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfLocation {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Location | undefined;
+    messages?: Message[] | undefined;
+}
+
 export class ResultModelOfPageOfUser implements IResultModelOfPageOfUser {
     success?: boolean;
     error?: boolean;
@@ -3796,6 +3534,66 @@ export interface IPageOfUser {
     size?: number;
     total?: number;
     data?: User[];
+}
+
+export class ResultModelOfUser implements IResultModelOfUser {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: User | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfUser) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? User.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfUser {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: User | undefined;
+    messages?: Message[] | undefined;
 }
 
 export class ApiException extends Error {

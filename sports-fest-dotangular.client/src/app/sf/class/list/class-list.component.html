@@ -1,0 +1,30 @@
+<!--suppress ReservedWordAsName -->
+<p *ngIf="!classes" class="text-gray-500 italic">
+  <em>Loading... Please refresh once the ASP\.NET backend has started\. See
+    <a href="https://aka\.ms/jspsintegrationangular" class="text-blue-500 underline">https://aka\.ms/jspsintegrationangular</a>
+    for more details\.
+  </em>
+</p>
+
+<button class="btn btn-primary bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" [routerLink]="['/' + AppPaths.classBase + AppPaths.add]">Add</button>
+
+<div class="overflow-x-auto">
+  <table *ngIf="classes" class="min-w-full bg-white border border-gray-200">
+    <thead>
+    <tr class="bg-gray-100 border-b">
+      <th class="py-2 px-4 text-left">Id</th>
+      <th class="py-2 px-4 text-left">Short</th>
+      <th class="py-2 px-4 text-left">Name</th>
+      <th class="py-2 px-4 text-left">Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let class of classes" class="border-b hover:bg-gray-50">
+      <td class="py-2 px-4">{{ class.id }}</td>
+      <td class="py-2 px-4">{{ class.short }}</td>
+      <td class="py-2 px-4">{{ class.name }}</td>
+      <td class="py-2 px-4">{{ class.comment }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
