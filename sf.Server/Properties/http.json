@@ -1,0 +1,10 @@
+﻿{
+  "inputFile": "Properties/openapi.json",
+  "outputFile": "sf.Server.http",
+  "variables": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5056"
+    }
+  ]
+}

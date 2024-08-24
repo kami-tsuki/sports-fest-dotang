@@ -5,7 +5,7 @@
     <!-- Allows the build (or compile) script located on package.json to run on Build -->
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
     <!-- Folder where production build objects will be placed -->
-    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\sports-fest-dotangular.client\browser\</BuildOutputFolder>
+    <BuildOutputFolder>C:\Users\PhilippNeube_z3wwico\Desktop\git\sports-fest-dotangular\sf.client\dist\sf.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

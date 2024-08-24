@@ -4,8 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>sports_fest_dotangular.Server</RootNamespace>
-    <SpaRoot>..\sports-fest-dotangular.client</SpaRoot>
+    <RootNamespace>sf.Server</RootNamespace>
+    <SpaRoot>..\sf.client</SpaRoot>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
   </PropertyGroup>
@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\sports-fest-dotangular.client\sports-fest-dotangular.client.esproj">
+    <ProjectReference Include="..\sf.client\sf.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
@@ -52,14 +52,25 @@
   <ItemGroup>
     <Folder Include="Client\" />
     <Folder Include="Data\" />
+    <Folder Include="sf.Server\Client\" />
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
+    <Message Text="Running NSwag..." Importance="high" />
     <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/run-nswag.ps1&quot; $(Configuration)" />
+    <Message Text="NSwag has been run." Importance="high" />
   </Target>
 
   <Target Name="ProxyConf" AfterTargets="NSwag" Condition=" '$(Configuration)' == 'Debug' ">
+    <Message Text="Updating proxy configuration..." Importance="high" />
     <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/Update-ProxyConfig.ps1&quot;"/>
+    <Message Text="Proxy configuration has been updated." Importance="high" />
+  </Target>
+
+  <Target Name="GenerateHttpRequests" AfterTargets="NSwag" Condition=" '$(Configuration)' == 'Debug' ">
+    <Message Text="Generating HTTP requests..." Importance="high" />
+    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/GenerateHttpRequest.ps1&quot; -configFilePath &quot;$(ProjectDir)Properties/http.json&quot;"/>
+    <Message Text="HTTP requests have been generated." Importance="high" />
   </Target>
 
 </Project>

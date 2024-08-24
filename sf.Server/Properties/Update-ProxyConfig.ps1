@@ -1,5 +1,5 @@
 ﻿$openApiPath = "Properties\openapi.json"
-$proxyConfigPath = "../sports-fest-dotangular.client/src/proxy.conf.js"
+$proxyConfigPath = "../sf.client/src/proxy.conf.js"
 $openApi = Get-Content $openApiPath | ConvertFrom-Json
 $paths = $openApi.paths.PSObject.Properties.Name
 $proxyConfig = @"

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sports-fest-dotangular.Server", "sports-fest-dotangular.Server\sports-fest-dotangular.Server.csproj", "{1555E4E8-6938-4820-9593-6535CBE4848E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sf.Server", "sf.Server\sf.Server.csproj", "{1555E4E8-6938-4820-9593-6535CBE4848E}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "sports-fest-dotangular.client", "sports-fest-dotangular.client\sports-fest-dotangular.client.esproj", "{0675A1DF-14DC-496B-A954-FF9BC8296B02}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "sf.client", "sf.client\sf.client.esproj", "{0675A1DF-14DC-496B-A954-FF9BC8296B02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,0 @@
-@sports_fest_dotangular.Server_HostAddress = http://localhost:5056
-
-GET {{sports_fest_dotangular.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sports-fest-dotangular.client": {
+    "sf.client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/sports-fest-dotangular.client",
+            "outputPath": "dist/sf.client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sports-fest-dotangular.client:build:production"
+              "buildTarget": "sf.client:build:production"
             },
             "development": {
-              "buildTarget": "sports-fest-dotangular.client:build:development"
+              "buildTarget": "sf.client:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "sports-fest-dotangular.client:build"
+            "buildTarget": "sf.client:build"
           }
         },
         "test": {

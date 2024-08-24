@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "../sports-fest-dotangular.Server.csproj",
+      "project": "../sf.Server.csproj",
       "msBuildProjectExtensionsPath": null,
       "configuration": null,
       "runtime": null,
@@ -98,7 +98,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../../sports-fest-dotangular.client/src/app/services/api/sf-client.ts"
+      "output": "../../sf.client/src/app/services/api/sf-client.ts"
     },
     "openApiToCSharpClient": {
       "generateClientClasses": true,
@@ -151,7 +151,7 @@
       "handleReferences": true,
       "generateImmutableArrayProperties": false,
       "generateImmutableDictionaryProperties": false,
-      "output": "../sports-fest-dotangular.Server/Client/Sf.Client.cs"
+      "output": "../sf.Server/Client/Sf.Client.cs"
     }
   }
 }

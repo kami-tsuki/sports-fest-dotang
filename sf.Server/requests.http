@@ -1,0 +1,69 @@
+@sf.Server_HostAddress = {{sf.Server_HostAddress}}
+@sf.ApiKey = {{sf.ApiKey}}
+
+# sf.server
+
+@sf.page = 1
+@sf.entities = 10
+@sf.properties = null
+@sf.sendNull = false
+@sf.filters = null
+@sf.ignoreNullProperties = false
+@sf.path = null
+@sf.includeModels = false
+@sf.includeHttpCodes = false
+
+## /api/v1/data/classes
+
+### GET /api/v1/data/classes
+
+GET {{sf.Server_HostAddress}}/api/v1/data/classes?page={{sf.page}}&entities={{sf.entities}}&properties={{sf.properties}}&sendNull={{sf.sendNull}}&filters={{sf.filters}}
+Accept: application/json
+
+### POST /api/v1/data/classes
+POST {{sf.Server_HostAddress}}/api/v1/data/classes?ignoreNullProperties={{sf.ignoreNullProperties}}
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/data/classes
+PUT {{sf.Server_HostAddress}}/api/v1/data/classes?ignoreNullProperties={{sf.ignoreNullProperties}}
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/data/classes
+OPTIONS {{sf.Server_HostAddress}}/api/v1/data/classes?path={{sf.path}}&includeModels={{sf.includeModels}}&includeHttpCodes={{sf.includeHttpCodes}}
+Accept: application/json
+
+
+### GET /api/v1/data/classes/{id}
+@sf.classes.GET.id = 1
+GET {{sf.Server_HostAddress}}/api/v1/data/classes/{{sf.id.query1}}?properties={{sf.properties}}
+Accept: application/json
+
+### PUT /api/v1/data/classes/{id}
+@sf.classes.PUT.id = 1
+PUT {{sf.Server_HostAddress}}/api/v1/data/classes/{id}?ignoreNullProperties={{sf.ignoreNullProperties}}
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/data/classes/{id}
+@sf.classes.PATCH.id = 1
+PATCH {{sf.Server_HostAddress}}/api/v1/data/classes/{id}
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/data/classes/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/data/classes/{id}
+Accept: application/json
+
+### GET /api/v1/data/classes/count 
+GET {{sf.Server_HostAddress}}/api/v1/data/classes/count?filters={{sf.filters}}
+Accept: application/json
