@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# secret files
+.editorconfig
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+launchSettings.json
