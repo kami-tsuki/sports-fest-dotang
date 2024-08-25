@@ -105,5 +105,11 @@ namespace sf.Server.Services
                     property.SetValue(entity, null);
         }
         
+        public void Detach<TEntity>(TEntity entity) where TEntity : class
+        {
+            var entry = _context.Entry(entity);
+            entry.State = EntityState.Detached;
+        }
+        
     }
 }

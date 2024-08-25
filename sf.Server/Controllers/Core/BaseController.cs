@@ -142,16 +142,19 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpPut("{id:guid}"),]
+    [HttpPut("{id:guid}")]
     public async Task<ActionResult<ResultModel<TEntity>>> Put(Guid id, TEntity entity, [FromQuery] bool ignoreNullProperties = false)
     {
         try
         {
-            if (!dataBaseService.EntityExists(id))
+            var existingEntity = await dataBaseService.FindAsync(id);
+            if (existingEntity == null)
                 return NotFound(resultService.BuildErrorResult("Entity not found", "The entity to update does not exist."));
 
             if (ignoreNullProperties) dataBaseService.IgnoreNullProperties(entity);
 
+            dataBaseService.Detach(existingEntity); // Detach the existing entity to avoid tracking issues
+            entity.Id = id;                         // Ensure the entity has the correct ID
             dataBaseService.UpdateEntity(entity);
             await dataBaseService.SaveChangesAsync();
 

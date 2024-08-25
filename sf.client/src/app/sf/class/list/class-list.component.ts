@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Class, ResultModelOfPageOfClass } from "../../../services/api/sf-client";
-import { ApiService } from "../../../services/api.service";
-import { AppPaths } from "../../../app-paths";
-import { DeleteModalComponent } from "../delete-modal/delete-modal.component";
-import { EditAddModalComponent } from "../edit-add-modal/edit-add-modal.component";
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {Class, ResultModelOfPageOfClass} from "../../../services/api/sf-client";
+import {ApiService} from "../../../services/api.service";
+import {AppPaths} from "../../../app-paths";
+import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
+import {EditAddModalComponent} from "../edit-add-modal/edit-add-modal.component";
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
     selector: 'sf-class-list',
@@ -32,7 +32,8 @@ export class ClassListComponent implements OnInit {
         private dialog: MatDialog,
         private route: ActivatedRoute,
         private router: Router
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
@@ -96,11 +97,11 @@ export class ClassListComponent implements OnInit {
     }
 
     applyPagination() {
-        const filtered = this.classes.filter(item =>
-            item.id?.toString().includes(this.searchText) ||
-            item.short?.includes(this.searchText) ||
-            item.name?.includes(this.searchText) ||
-            item.comment?.includes(this.searchText)
+        const filtered = this.classes.filter(
+            item => item.id?.toString().includes(this.searchText)
+                || item.short?.includes(this.searchText)
+                || item.name?.includes(this.searchText)
+                || item.comment?.includes(this.searchText)
         );
         this.paginatedClasses = this.sort(filtered);
         console.log('ClassListComponent: Pagination applied', this.paginatedClasses);
@@ -161,7 +162,7 @@ export class ClassListComponent implements OnInit {
     edit(item: Class) {
         const dialogRef = this.dialog.open(EditAddModalComponent, {
             width: '400px',
-            data: {class: {...item}, isEdit: true}
+            data: { class: { ...item }, isEdit: true }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -193,7 +194,7 @@ export class ClassListComponent implements OnInit {
     }
 
     delete(item: Class) {
-        this.classToDelete = item;
+        this.classToDelete = item || null;
         const dialogRef = this.dialog.open(DeleteModalComponent, {
             width: '250px',
             data: {classToDelete: this.classToDelete}
