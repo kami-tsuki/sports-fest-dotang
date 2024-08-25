@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace sports_fest_dotangular.Server.Models.Core;
+namespace sf.Server.Models.Core;
 
 public class Entity<TKey> where TKey : IComparable<TKey>
 {

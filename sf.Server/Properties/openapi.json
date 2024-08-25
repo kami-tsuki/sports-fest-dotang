@@ -207,6 +207,86 @@
         }
       }
     },
+    "/api/v1/data/classes/search": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/data/classes/{id}": {
       "get": {
         "tags": [
@@ -601,6 +681,86 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/disciplines/search": {
+      "get": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfDiscipline"
                 }
               }
             }
@@ -1009,6 +1169,86 @@
         }
       }
     },
+    "/api/v1/data/entries/search": {
+      "get": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfEntry"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/data/entries/{id}": {
       "get": {
         "tags": [
@@ -1410,6 +1650,86 @@
         }
       }
     },
+    "/api/v1/data/locations/search": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfLocation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/data/locations/{id}": {
       "get": {
         "tags": [
@@ -1804,6 +2124,86 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/_/User/search": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfUser"
                 }
               }
             }

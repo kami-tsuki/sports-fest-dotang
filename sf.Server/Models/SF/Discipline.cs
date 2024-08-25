@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using sf.Server.Models.Auth;
+using sf.Server.Models.Core;
 
-namespace sports_fest_dotangular.Server.Models.SF;
+namespace sf.Server.Models.SF;
 
 [Index(nameof(ShortName), IsUnique = true)]
 public class Discipline : Entity<Guid>

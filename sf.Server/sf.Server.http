@@ -25,6 +25,11 @@ Content-Type: application/json
 ### OPTIONS /api/v1/data/classes
 OPTIONS {{sf.Server_HostAddress}}/api/v1/data/classes
 
+## /api/v1/data/classes/search
+
+### GET /api/v1/data/classes/search
+GET {{sf.Server_HostAddress}}/api/v1/data/classes/search
+
 ## /api/v1/data/classes/{id}
 
 ### GET /api/v1/data/classes/{id}
@@ -69,6 +74,11 @@ Content-Type: application/json
 
 ### OPTIONS /api/v1/data/disciplines
 OPTIONS {{sf.Server_HostAddress}}/api/v1/data/disciplines
+
+## /api/v1/data/disciplines/search
+
+### GET /api/v1/data/disciplines/search
+GET {{sf.Server_HostAddress}}/api/v1/data/disciplines/search
 
 ## /api/v1/data/disciplines/{id}
 
@@ -115,6 +125,11 @@ Content-Type: application/json
 ### OPTIONS /api/v1/data/entries
 OPTIONS {{sf.Server_HostAddress}}/api/v1/data/entries
 
+## /api/v1/data/entries/search
+
+### GET /api/v1/data/entries/search
+GET {{sf.Server_HostAddress}}/api/v1/data/entries/search
+
 ## /api/v1/data/entries/{id}
 
 ### GET /api/v1/data/entries/{id}
@@ -160,6 +175,11 @@ Content-Type: application/json
 ### OPTIONS /api/v1/data/locations
 OPTIONS {{sf.Server_HostAddress}}/api/v1/data/locations
 
+## /api/v1/data/locations/search
+
+### GET /api/v1/data/locations/search
+GET {{sf.Server_HostAddress}}/api/v1/data/locations/search
+
 ## /api/v1/data/locations/{id}
 
 ### GET /api/v1/data/locations/{id}
@@ -204,6 +224,11 @@ Content-Type: application/json
 
 ### OPTIONS /api/v1/_/User
 OPTIONS {{sf.Server_HostAddress}}/api/v1/_/User
+
+## /api/v1/_/User/search
+
+### GET /api/v1/_/User/search
+GET {{sf.Server_HostAddress}}/api/v1/_/User/search
 
 ## /api/v1/_/User/{id}
 

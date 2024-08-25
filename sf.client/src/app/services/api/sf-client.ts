@@ -18,6 +18,8 @@ export interface IClassClient {
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass>;
+
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfClass>;
 
     put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
@@ -215,6 +217,60 @@ export class ClassClient implements IClassClient {
             });
         }
         return Promise.resolve<ResultModelOfObject>(null as any);
+    }
+
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass> {
+        let url_ = this.baseUrl + "/api/v1/data/classes/search?";
+        if (query === null)
+            throw new Error("The parameter 'query' cannot be null.");
+        else if (query !== undefined)
+            url_ += "query=" + encodeURIComponent("" + query) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (entities === null)
+            throw new Error("The parameter 'entities' cannot be null.");
+        else if (entities !== undefined)
+            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
+        if (properties !== undefined && properties !== null)
+            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
+        if (sendNull === null)
+            throw new Error("The parameter 'sendNull' cannot be null.");
+        else if (sendNull !== undefined)
+            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
+        if (filters !== undefined && filters !== null)
+            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSearch(_response);
+        });
+    }
+
+    protected processSearch(response: Response): Promise<ResultModelOfPageOfClass> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfPageOfClass.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<ResultModelOfPageOfClass>(null as any);
     }
 
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfClass> {
@@ -426,6 +482,8 @@ export interface IDisciplineClient {
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline>;
+
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfDiscipline>;
 
     put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
@@ -623,6 +681,60 @@ export class DisciplineClient implements IDisciplineClient {
             });
         }
         return Promise.resolve<ResultModelOfObject>(null as any);
+    }
+
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline> {
+        let url_ = this.baseUrl + "/api/v1/data/disciplines/search?";
+        if (query === null)
+            throw new Error("The parameter 'query' cannot be null.");
+        else if (query !== undefined)
+            url_ += "query=" + encodeURIComponent("" + query) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (entities === null)
+            throw new Error("The parameter 'entities' cannot be null.");
+        else if (entities !== undefined)
+            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
+        if (properties !== undefined && properties !== null)
+            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
+        if (sendNull === null)
+            throw new Error("The parameter 'sendNull' cannot be null.");
+        else if (sendNull !== undefined)
+            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
+        if (filters !== undefined && filters !== null)
+            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSearch(_response);
+        });
+    }
+
+    protected processSearch(response: Response): Promise<ResultModelOfPageOfDiscipline> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfPageOfDiscipline.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<ResultModelOfPageOfDiscipline>(null as any);
     }
 
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfDiscipline> {
@@ -834,6 +946,8 @@ export interface IEntryClient {
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry>;
+
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfEntry>;
 
     put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
@@ -1031,6 +1145,60 @@ export class EntryClient implements IEntryClient {
             });
         }
         return Promise.resolve<ResultModelOfObject>(null as any);
+    }
+
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry> {
+        let url_ = this.baseUrl + "/api/v1/data/entries/search?";
+        if (query === null)
+            throw new Error("The parameter 'query' cannot be null.");
+        else if (query !== undefined)
+            url_ += "query=" + encodeURIComponent("" + query) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (entities === null)
+            throw new Error("The parameter 'entities' cannot be null.");
+        else if (entities !== undefined)
+            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
+        if (properties !== undefined && properties !== null)
+            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
+        if (sendNull === null)
+            throw new Error("The parameter 'sendNull' cannot be null.");
+        else if (sendNull !== undefined)
+            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
+        if (filters !== undefined && filters !== null)
+            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSearch(_response);
+        });
+    }
+
+    protected processSearch(response: Response): Promise<ResultModelOfPageOfEntry> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfPageOfEntry.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<ResultModelOfPageOfEntry>(null as any);
     }
 
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfEntry> {
@@ -1242,6 +1410,8 @@ export interface ILocationClient {
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation>;
+
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfLocation>;
 
     put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
@@ -1439,6 +1609,60 @@ export class LocationClient implements ILocationClient {
             });
         }
         return Promise.resolve<ResultModelOfObject>(null as any);
+    }
+
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation> {
+        let url_ = this.baseUrl + "/api/v1/data/locations/search?";
+        if (query === null)
+            throw new Error("The parameter 'query' cannot be null.");
+        else if (query !== undefined)
+            url_ += "query=" + encodeURIComponent("" + query) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (entities === null)
+            throw new Error("The parameter 'entities' cannot be null.");
+        else if (entities !== undefined)
+            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
+        if (properties !== undefined && properties !== null)
+            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
+        if (sendNull === null)
+            throw new Error("The parameter 'sendNull' cannot be null.");
+        else if (sendNull !== undefined)
+            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
+        if (filters !== undefined && filters !== null)
+            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSearch(_response);
+        });
+    }
+
+    protected processSearch(response: Response): Promise<ResultModelOfPageOfLocation> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfPageOfLocation.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<ResultModelOfPageOfLocation>(null as any);
     }
 
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfLocation> {
@@ -1650,6 +1874,8 @@ export interface IUserClient {
 
     options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
 
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser>;
+
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfUser>;
 
     put2(id: string, ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
@@ -1847,6 +2073,60 @@ export class UserClient implements IUserClient {
             });
         }
         return Promise.resolve<ResultModelOfObject>(null as any);
+    }
+
+    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser> {
+        let url_ = this.baseUrl + "/api/v1/_/User/search?";
+        if (query === null)
+            throw new Error("The parameter 'query' cannot be null.");
+        else if (query !== undefined)
+            url_ += "query=" + encodeURIComponent("" + query) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (entities === null)
+            throw new Error("The parameter 'entities' cannot be null.");
+        else if (entities !== undefined)
+            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
+        if (properties !== undefined && properties !== null)
+            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
+        if (sendNull === null)
+            throw new Error("The parameter 'sendNull' cannot be null.");
+        else if (sendNull !== undefined)
+            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
+        if (filters !== undefined && filters !== null)
+            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSearch(_response);
+        });
+    }
+
+    protected processSearch(response: Response): Promise<ResultModelOfPageOfUser> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ResultModelOfPageOfUser.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<ResultModelOfPageOfUser>(null as any);
     }
 
     get(id: string, properties: string | null | undefined): Promise<ResultModelOfUser> {

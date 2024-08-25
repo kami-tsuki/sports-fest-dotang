@@ -1,3 +1,8 @@
+using sf.Server.Data.Sf;
+using sf.Server.Models.Auth;
+using sf.Server.Models.SF;
+using sf.Server.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 

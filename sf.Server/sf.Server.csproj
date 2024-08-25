@@ -52,7 +52,6 @@
   <ItemGroup>
     <Folder Include="Client\" />
     <Folder Include="Data\" />
-    <Folder Include="sf.Server\Client\" />
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">

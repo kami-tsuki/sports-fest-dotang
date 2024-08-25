@@ -1,4 +1,4 @@
-﻿namespace sports_fest_dotangular.Server.Builder.Core;
+﻿namespace sf.Server.Builder.Core;
 
 public class Builder<T> where T : class
 {

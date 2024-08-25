@@ -1,6 +1,7 @@
-﻿using sports_fest_dotangular.Server.Builder;
+﻿using sf.Server.Builder;
+using sf.Server.Models.Result;
 
-namespace sports_fest_dotangular.Server.Services
+namespace sf.Server.Services
 {
     public class ResultService
     {

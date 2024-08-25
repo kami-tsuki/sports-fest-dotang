@@ -1,30 +1,75 @@
-<!--suppress ReservedWordAsName -->
-<p *ngIf="!classes" class="text-gray-500 italic">
-  <em>Loading... Please refresh once the ASP\.NET backend has started\. See
-    <a href="https://aka\.ms/jspsintegrationangular" class="text-blue-500 underline">https://aka\.ms/jspsintegrationangular</a>
-    for more details\.
-  </em>
-</p>
+<div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-4">
+        <button (click)="add()"
+                class="btn btn-primary bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span class="material-icons">add</span>
+        </button>
+        <input
+                type="text"
+                [(ngModel)]="searchText"
+                (ngModelChange)="onSearchTextChange($event)"
+                (keypress)="onSearchKeyPress($event)"
+                placeholder="Search..."
+                class="border border-gray-300 rounded-md px-3 py-1"
+        />
+        <button
+                (click)="refreshData()"
+                class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <span class="material-icons">refresh</span>
+        </button>
+    </div>
 
-<button class="btn btn-primary bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" [routerLink]="['/' + AppPaths.classBase + AppPaths.add]">Add</button>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead>
+            <tr class="bg-gray-100 border-b">
+                <th class="py-2 px-4 text-left">
+                    <button (click)="sortCol('short')">Short</button>
+                </th>
+                <th class="py-2 px-4 text-left">
+                    <button (click)="sortCol('name')">Name</button>
+                </th>
+                <th class="py-2 px-4 text-left">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="class_table_body">
+            <tr id="{{item.id}}" *ngFor="let item of paginatedClasses" class="border-b hover:bg-gray-50">
+                <td id="{{item.id}}_short" class="py-2 px-4">{{ item.short }}</td>
+                <td id="{{item.id}}_name" class="py-2 px-4">{{ item.name }}</td>
+                <td id="{{item.id}}_actions" class="py-2 px-4">
+                    <button id="{{item.id}}_edit" (click)="edit(item)" class="text-blue-500 hover:underline">
+                        <span class="material-icons">edit</span>
+                    </button>
+                    <button id="{{item.id}}_delete" (click)="delete(item)" class="text-red-500 hover:underline ml-2">
+                        <span class="material-icons">delete</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-<div class="overflow-x-auto">
-  <table *ngIf="classes" class="min-w-full bg-white border border-gray-200">
-    <thead>
-    <tr class="bg-gray-100 border-b">
-      <th class="py-2 px-4 text-left">Id</th>
-      <th class="py-2 px-4 text-left">Short</th>
-      <th class="py-2 px-4 text-left">Name</th>
-      <th class="py-2 px-4 text-left">Comment</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let class of classes" class="border-b hover:bg-gray-50">
-      <td class="py-2 px-4">{{ class.id }}</td>
-      <td class="py-2 px-4">{{ class.short }}</td>
-      <td class="py-2 px-4">{{ class.name }}</td>
-      <td class="py-2 px-4">{{ class.comment }}</td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="flex justify-between items-center mt-4">
+        <div>
+            <span> Page {{ page }} of {{ totalPages }} </span>
+            |
+            <span> Entities {{ paginatedClasses.length }} of {{ totalEntities }}</span>
+        </div>
+        <div>
+            <label for="pageSize">Entities per page:</label>
+            <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+                <option *ngFor="let size of [10, 25, 50, 100, 200]" [value]="size">{{ size }}</option>
+            </select>
+        </div>
+        <div>
+            <button (click)="prevPage()" [disabled]="page === 1"
+                    class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <span class="material-icons">chevron_left</span>
+            </button>
+            <button (click)="nextPage()" [disabled]="page === totalPages"
+                    class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <span class="material-icons">chevron_right</span>
+            </button>
+        </div>
+    </div>
 </div>

@@ -1,6 +1,7 @@
-﻿using sports_fest_dotangular.Server.Builder.Core;
+﻿using sf.Server.Builder.Core;
+using sf.Server.Models.Result;
 
-namespace sports_fest_dotangular.Server.Builder;
+namespace sf.Server.Builder;
 
 public class ResultModelBuilder<T> : Builder<ResultModel<T>>
 {

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using sf.Server.Models.Auth;
+using sf.Server.Models.Core;
+using sf.Server.Models.SF;
 
-namespace sports_fest_dotangular.Server.Data.Sf;
+namespace sf.Server.Data.Sf;
 
 public class SfContext(DbContextOptions<SfContext> options) : DbContext(options)
 {

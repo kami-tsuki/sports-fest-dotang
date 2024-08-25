@@ -1,4 +1,4 @@
-﻿namespace sports_fest_dotangular.Server.Models.Result;
+﻿namespace sf.Server.Models.Result;
 
 public class ResultModel<T>
 {

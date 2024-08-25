@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Primitives;
+using sf.Server.Models.Auth;
 
-namespace sports_fest_dotangular.Server.Services.Interfaces;
+namespace sf.Server.Services.Interfaces;
 
 public interface IApiKeyService
 {

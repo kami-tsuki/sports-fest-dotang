@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq.Expressions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.Routing;
+using sf.Server.Models.Core;
+using sf.Server.Models.Result;
+using sf.Server.Services;
 
-namespace sports_fest_dotangular.Server.Controllers.Core;
+namespace sf.Server.Controllers.Core;
 
 [ApiController, Route("api/v1/_/[controller]"), ApiVersion("1.0"), AllowAnonymous]
 public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseService, ResultService resultService) : ControllerBase
@@ -38,13 +42,67 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
+    [HttpGet("search")]
+    public async Task<ActionResult<ResultModel<Page<TEntity>>>> Search(
+        [FromQuery] string query,
+        [FromQuery] long page = 1,
+        [FromQuery] long entities = 10,
+        [FromQuery] string? properties = null,
+        [FromQuery] bool sendNull = false,
+        [FromQuery] Dictionary<string, string>? filters = null)
+    {
+        try
+        {
+            var queryable = dataBaseService.ApplyFilters(dataBaseService.GetQueryable(), filters);
+            if (!string.IsNullOrEmpty(query))
+            {
+                var parameter = Expression.Parameter(typeof(TEntity), "entity");
+                var props = typeof(TEntity).GetProperties();
+                var predicate = (
+                    from property in props
+                    where property.PropertyType == typeof(string)
+                    select Expression.Call(
+                        Expression.Call(
+                            Expression.MakeMemberAccess(parameter, property),
+                            typeof(string).GetMethod("ToLower", Type.EmptyTypes)
+                        ),
+                        typeof(string).GetMethod("Contains", new[] { typeof(string) }),
+                        Expression.Constant(query.ToLower())
+                    )).Aggregate<MethodCallExpression?, Expression?>(null, (current, containsExpression) => current == null ? containsExpression : Expression.OrElse(current, containsExpression));
+
+                if (predicate != null)
+                {
+                    var lambda = Expression.Lambda<Func<TEntity, bool>>(predicate, parameter);
+                    queryable = queryable.Where(lambda);
+                }
+            }
+
+            var totalEntities = await dataBaseService.GetCountAsync(queryable);
+            var data = await dataBaseService.GetPagedDataAsync(queryable, page, entities);
+            if (!string.IsNullOrEmpty(properties))
+                data = data.Select(entity => dataBaseService.FilterProperties(entity, properties.Split(','))).ToList();
+            var pageModel = new Page<TEntity>
+            {
+                Number = page,
+                TotalEntities = totalEntities,
+                Data = data
+            };
+            return Ok(resultService.BuildResult(true, pageModel));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(resultService.BuildErrorResult("An error occurred while processing the request", ex.Message));
+        }
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ResultModel<TEntity>>> Get(Guid id, [FromQuery] string? properties = null)
     {
         try
         {
             var entity = await dataBaseService.FindAsync(id);
-            if (entity == null) return NotFound(resultService.BuildErrorResult("Entity not found", "The requested entity does not exist."));
+            if (entity == null)
+                return NotFound(resultService.BuildErrorResult("Entity not found", "The requested entity does not exist."));
 
             if (!IsNullOrEmpty(properties)) entity = dataBaseService.FilterProperties(entity, properties.Split(','));
 
@@ -84,7 +142,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
         }
     }
 
-    [HttpPut("{id:guid}"), ]
+    [HttpPut("{id:guid}"),]
     public async Task<ActionResult<ResultModel<TEntity>>> Put(Guid id, TEntity entity, [FromQuery] bool ignoreNullProperties = false)
     {
         try
@@ -150,8 +208,7 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
             return BadRequest(resultService.BuildErrorResult("An error occurred while processing the request", ex.Message));
         }
     }
-        
-        
+
 
     [HttpPatch("{id:guid}")]
     public async Task<ActionResult<ResultModel<TEntity>>> Patch(Guid id, [FromBody] JsonPatchDocument<TEntity>? patchDoc)
@@ -277,6 +334,4 @@ public abstract class BaseController<TEntity>(DataBaseService<TEntity> dataBaseS
 
     //Set headers method
     protected void SetHeaders(HttpResponse response, string key, string value) => response.Headers.Append(key, value);
-
-        
 }

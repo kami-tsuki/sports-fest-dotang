@@ -1,4 +1,7 @@
-﻿namespace sports_fest_dotangular.Server.Models.SF;
+﻿using sf.Server.Models.Auth;
+using sf.Server.Models.Core;
+
+namespace sf.Server.Models.SF;
 
 public class Entry : Entity<Guid>
 { 

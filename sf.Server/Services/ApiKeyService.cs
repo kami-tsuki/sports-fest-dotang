@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Primitives;
-using sports_fest_dotangular.Server.Services.Interfaces;
+using sf.Server.Models.Auth;
+using sf.Server.Services.Interfaces;
 
-namespace sports_fest_dotangular.Server.Services;
+namespace sf.Server.Services;
 
 public class ApiKeyService(UserManager<User> userManager) : IApiKeyService
 {

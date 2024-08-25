@@ -151,7 +151,7 @@
       "handleReferences": true,
       "generateImmutableArrayProperties": false,
       "generateImmutableDictionaryProperties": false,
-      "output": "../sf.Server/Client/Sf.Client.cs"
+      "output": "../Client/Sf.Client.cs"
     }
   }
 }

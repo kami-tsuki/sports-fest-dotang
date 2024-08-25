@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using sf.Server.Models.Core;
+using sf.Server.Models.SF;
 
-namespace sports_fest_dotangular.Server.Models.Auth;
+namespace sf.Server.Models.Auth;
 
 public class User : Entity<Guid>
 {

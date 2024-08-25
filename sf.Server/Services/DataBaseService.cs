@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using sf.Server.Data.Sf;
 
-namespace sports_fest_dotangular.Server.Services
+namespace sf.Server.Services
 {
     public class DataBaseService<TEntity> where TEntity : class
     {
