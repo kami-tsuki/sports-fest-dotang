@@ -1,0 +1,4 @@
+﻿{
+  "cacheDuration": 60000,  // Cache duration in milliseconds (e.g., 10 minutes)
+  "maxCacheSize": 100       // Optional: Max number of cached items (adjust as needed)
+}
