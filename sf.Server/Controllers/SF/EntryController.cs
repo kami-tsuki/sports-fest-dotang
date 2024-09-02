@@ -1,11 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using sf.Server.Controllers.Core;
-using sf.Server.Data.Sf;
-using sf.Server.Models.SF;
-using sf.Server.Services;
+﻿namespace sf.Server.Controllers.SF;
 
-namespace sf.Server.Controllers.SF;
-
-[Route("api/v1/data/entries"), Authorize]
-public class EntryController(SfContext context, DataBaseService<Entry> dbService, ResultService resultService)
-    : BaseController<Entry>(dbService, resultService);
+[Route("api/v1/data/entry")]
+public class EntryController(IServiceProvider services)
+    : BaseController<Entry>(services);

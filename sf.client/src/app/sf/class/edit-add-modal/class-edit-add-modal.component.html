@@ -1,0 +1,31 @@
+<div class="p-4">
+    <h2 class="text-xl font-semibold mb-4">{{ data.isEdit ? 'Edit Class' : 'Add Class' }}</h2>
+    <form (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+            <label for="short" class="block text-sm font-medium text-gray-700">Short</label>
+            <input id="short" [(ngModel)]="data.class.short" name="short"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                   required>
+        </div>
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input id="name" [(ngModel)]="data.class.name" name="name"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                   required>
+        </div>
+        <div class="mb-4">
+            <label for="comment" class="block text-sm font-medium text-gray-700">Comment</label>
+            <textarea id="comment" [(ngModel)]="data.class.comment" name="comment"
+                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+        </div>
+        <div class="flex justify-end">
+            <button type="button" (click)="onCancel()"
+                    class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mr-2">
+                Cancel
+            </button>
+            <button type="submit"
+                    class="btn btn-primary bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ data.isEdit ? 'Save' : 'Add' }}
+            </button>
+        </div>
+    </form>
+</div>

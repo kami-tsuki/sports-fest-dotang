@@ -4,12 +4,12 @@ import {Class} from '../../../services/api/sf-client';
 
 @Component({
     selector: 'sf-edit-add-modal',
-    templateUrl: './edit-add-modal.component.html',
-    styleUrls: ['./edit-add-modal.component.css']
+    templateUrl: './class-edit-add-modal.component.html',
+    styleUrls: ['./class-edit-add-modal.component.css']
 })
-export class EditAddModalComponent {
+export class ClassEditAddModalComponent {
     constructor(
-        public dialogRef: MatDialogRef<EditAddModalComponent>,
+        public dialogRef: MatDialogRef<ClassEditAddModalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {
             class: Class,
             isEdit: boolean

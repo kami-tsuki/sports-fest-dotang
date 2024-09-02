@@ -1,0 +1,20 @@
+<div>
+    <div *ngIf="tutor">
+        <p id="{{tutor?.id}}">
+            <strong>Tutor:</strong>
+            {{ tutor?.last }}, {{ tutor?.first }}
+        </p>
+        <button *ngIf="tutor?.id && classId" (click)="unassignTutor(classId, tutor?.id)" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600">
+            Unassign
+        </button>
+    </div>
+    <div *ngIf="!tutor">
+        <p><strong>Tutor:</strong> No tutor assigned</p>
+        <button *ngIf="classId" (click)="assignTutor(classId)" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600">
+            Assign
+        </button>
+        <button *ngIf="classId" (click)="createTutor(classId)" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600">
+            Create
+        </button>
+    </div>
+</div>

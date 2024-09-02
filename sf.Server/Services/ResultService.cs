@@ -1,10 +1,9 @@
-﻿using sf.Server.Builder;
-using sf.Server.Models.Result;
-
-namespace sf.Server.Services
+﻿namespace sf.Server.Services
 {
     public class ResultService
     {
+        public ResultService(IServiceProvider services) { }
+
         public ResultModel<T> BuildResult<T>(bool success, T data, string title = "", List<string>? messages = null)
         {
             var resultBuilder = new ResultModelBuilder<T>().WithSuccess(success).WithData(data);

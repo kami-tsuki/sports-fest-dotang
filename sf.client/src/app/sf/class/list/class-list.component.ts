@@ -1,13 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {Class, ResultModelOfPageOfClass} from "../../../services/api/sf-client";
+import {
+    Class,
+    IResultModelOfClass,
+    IResultModelOfPageOfClass,
+    ResultModelOfPageOfClass
+} from "../../../services/api/sf-client";
 import {ApiService} from "../../../services/api.service";
 import {AppPaths} from "../../../app-paths";
-import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
-import {EditAddModalComponent} from "../edit-add-modal/edit-add-modal.component";
+import {ClassDeleteModalComponent} from "../delete-modal/class-delete-modal.component";
+import {ClassEditAddModalComponent} from "../edit-add-modal/class-edit-add-modal.component";
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'sf-class-list',
@@ -22,16 +28,18 @@ export class ClassListComponent implements OnInit {
     public totalPages = 1;
     public totalEntities = 0;
     public searchText = '';
-    private sortColumn: string | null = null;
-    private sortDirection: 'asc' | 'desc' = 'asc';
+    protected sortColumn: string | null = null;
+    protected sortDirection: 'asc' | 'desc' = 'asc';
     private classToDelete: Class | null = null;
     private searchSubject: Subject<string> = new Subject<string>();
+    protected selected: String[] = [];
 
     constructor(
         private readonly api: ApiService,
         private dialog: MatDialog,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private snackBar: MatSnackBar
     ) {
     }
 
@@ -44,7 +52,7 @@ export class ClassListComponent implements OnInit {
         });
 
         this.searchSubject.pipe(
-            debounceTime(3000),
+            debounceTime(1000),
             distinctUntilChanged()
         ).subscribe(searchText => {
             this.searchText = searchText;
@@ -63,26 +71,28 @@ export class ClassListComponent implements OnInit {
                 searchText: this.searchText
             },
             queryParamsHandling: 'merge'
-        });
+        }).then(r => console.log('ClassListComponent: Query params updated', r));
     }
 
     loadClasses(cache: boolean = true) {
-        this.api.get<ResultModelOfPageOfClass>(`/api/v1/data/classes?page=${this.page}&entities=${this.pageSize}`, undefined, undefined, cache)
-            .subscribe(result => {
-                if (!result.data) {
-                    console.error('ClassListComponent: Failed to load classes', result.error);
-                    return;
-                }
-                this.classes = result.data?.data || [];
-                this.totalEntities = result.data.total as number;
-                this.totalPages = Math.ceil(this.totalEntities / this.pageSize);
-                this.applyPagination();
-                console.log('ClassListComponent: Classes loaded', this.classes);
+        this.api.get<IResultModelOfPageOfClass>(`/api/v1/data/class?page=${this.page}&entities=${this.pageSize}`, undefined, undefined, cache)
+            .subscribe({
+                next: result => {
+                    if (!result.data) {
+                        this.showError('Failed to load classes');
+                        return;
+                    }
+                    this.classes = result.data?.data || [];
+                    this.totalEntities = result.data.total as number;
+                    this.totalPages = Math.ceil(this.totalEntities / this.pageSize);
+                    this.applyPagination();
+                },
+                error: err => this.showError('Error loading classes: ' + err.message)
             });
     }
 
     searchClasses() {
-        this.api.get<ResultModelOfPageOfClass>(`/api/v1/data/classes/search?query=${this.searchText}&page=${this.page}&entities=${this.pageSize}`)
+        this.api.get<IResultModelOfPageOfClass>(`/api/v1/data/class/search?query=${this.searchText}&page=${this.page}&entities=${this.pageSize}`)
             .subscribe(result => {
                 if (!result.data) {
                     console.error('ClassListComponent: Failed to search classes', result.error);
@@ -160,14 +170,14 @@ export class ClassListComponent implements OnInit {
     }
 
     edit(item: Class) {
-        const dialogRef = this.dialog.open(EditAddModalComponent, {
+        const dialogRef = this.dialog.open(ClassEditAddModalComponent, {
             width: '400px',
-            data: { class: { ...item }, isEdit: true }
+            data: {class: {...item}, isEdit: true}
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.api.put(`/api/v1/data/classes/${result.id}`, result)
+                this.api.put<IResultModelOfClass>(`/api/v1/data/class/${result.id}`, result)
                     .subscribe(() => {
                         console.log('ClassListComponent: Class updated', result);
                         this.refreshData(false);
@@ -177,25 +187,26 @@ export class ClassListComponent implements OnInit {
     }
 
     add() {
-        const dialogRef = this.dialog.open(EditAddModalComponent, {
+        const dialogRef = this.dialog.open(ClassEditAddModalComponent, {
             width: '400px',
             data: {class: new Class(), isEdit: false}
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.api.post('/api/v1/data/classes', result)
+                this.api.post<IResultModelOfClass>('/api/v1/data/class', result)
                     .subscribe(() => {
                         console.log('ClassListComponent: Class added', result);
                         this.refreshData(false);
                     });
+
             }
         });
     }
 
     delete(item: Class) {
         this.classToDelete = item || null;
-        const dialogRef = this.dialog.open(DeleteModalComponent, {
+        const dialogRef = this.dialog.open(ClassDeleteModalComponent, {
             width: '250px',
             data: {classToDelete: this.classToDelete}
         });
@@ -212,7 +223,7 @@ export class ClassListComponent implements OnInit {
     confirmDelete() {
         if (this.classToDelete) {
             console.log('ClassListComponent: Delete ' + this.classToDelete.id, this.classToDelete);
-            this.api.delete(`/api/v1/data/classes/${this.classToDelete.id}`)
+            this.api.delete(`/api/v1/data/class/${this.classToDelete.id}`)
                 .subscribe(() => {
                     console.log('ClassListComponent: Class deleted', this.classToDelete?.id);
                     this.refreshData(false);
@@ -240,7 +251,75 @@ export class ClassListComponent implements OnInit {
         }
     }
 
+    onSelectChange(event: Event, id: string | undefined) {
+        if (event.target && event.target instanceof HTMLInputElement && event.target.checked && id) {
+            this.selected.push(id);
+            console.log('Selected', this.selected);
+        } else {
+            this.selected = this.selected.filter(x => x !== id);
+            console.log('Unselected', this.selected);
+        }
+    }
+
     protected readonly AppPaths = AppPaths;
 
     title = 'Sports Fest | Classes';
+
+    bulkEdit() {
+        let classes = this.classes.filter(x => this.selected.includes(x.id?.toString() || ''));
+        const dialogRef = this.dialog.open(ClassEditAddModalComponent, {
+            width: '400px',
+            data: {class: new Class(), isEdit: true}
+        });
+
+    }
+
+    bulkDelete() {
+        const dialogRef = this.dialog.open(ClassDeleteModalComponent, {
+            width: '250px',
+            data: {classToDelete: this.classToDelete}
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.confirmBulkDelete();
+            } else {
+                this.cancelBulkDelete();
+            }
+        });
+    }
+
+    confirmBulkDelete() {
+        let classes = this.classes.filter(x => this.selected.includes(x.id?.toString() || ''));
+        console.log('Classes to delete:', classes);
+
+        this.api.delete(`/api/v1/data/class/bulk`, classes)
+            .subscribe({
+                next: () => {
+                    console.log('ClassListComponent: Classes deleted', classes.map(x => x.id));
+                    this.refreshData(false);
+                },
+                error: (error) => {
+                    console.error('Failed to delete classes:', error);
+                }
+            });
+    }
+
+    cancelBulkDelete() {
+        this.selected = [];
+    }
+
+    showError(message: string) {
+        const snackBarRef = this.snackBar.open(message, 'Dismiss', {
+            panelClass: ['error-banner']
+        });
+        snackBarRef.onAction().subscribe(() => snackBarRef.dismiss());
+    }
+
+    viewDetail(item: Class) {
+        this.router.navigate([AppPaths.classBase, item.id]).then(
+            r =>
+                console.log('ClassListComponent: Navigated to class detail', r
+                ));
+    }
+
 }

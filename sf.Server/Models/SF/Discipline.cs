@@ -1,45 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using sf.Server.Models.Auth;
-using sf.Server.Models.Core;
-
-namespace sf.Server.Models.SF;
+﻿namespace sf.Server.Models.SF;
 
 [Index(nameof(ShortName), IsUnique = true)]
-public class Discipline : Entity<Guid>
+public class Discipline : Entity<Guid>, IName, IComment, ICampaignJudgeReference, ILocationReference, IStudentsReference, IEntriesReference
 {
-    [MaxLength(64), JsonProperty("name")]
+    [MaxLength(64), MinLength(2), JsonProperty("name")]
     public string Name { get; set; } = Empty;
 
-    [MaxLength(8), JsonProperty("short")]
+    [MaxLength(8), MinLength(2), JsonProperty("short")]
     public string ShortName { get; set; } = Empty;
 
-    [MaxLength(1024), JsonProperty("description")]
-    public string Description { get; set; } = Empty;
 
-    [InverseProperty(nameof(User.Disciplines)), JsonIgnore]
-    public IEnumerable<User>? Users { get; init; }
+    [MaxLength(1024), JsonProperty("comment")]
+    public string Comment { get; set; } = Empty;
 
-    [NotMapped, JsonIgnore]
-    public User? Manager => Users?.FirstOrDefault(u => u.Role == RoleType.CampaignManager);
 
-    [NotMapped, JsonProperty("judgeIds")]
-    public IEnumerable<Guid>? JudgeIds => Judges?.Select(j => j.Id);
+    [InverseProperty(nameof(Student.Disciplines)), JsonIgnore]
+    public IEnumerable<Student>? Students { get; set; }
 
-    [NotMapped, JsonIgnore]
-    public IEnumerable<User>? Judges => Users?.Where(u => u.Role == RoleType.CampaignJudge);
+    [NotMapped, JsonIgnore, ForeignKey(nameof(JudgeId))]
+    public CampaignJudge? Judge { get; set; }
 
-    [NotMapped, JsonProperty("managerId")]
-    public Guid? ManagerId => Manager?.Id;
+
+    [NotMapped, JsonProperty("judgeId")]
+    public Guid? JudgeId { get; set; }
+
 
     [JsonIgnore]
     public Guid? LocationId { get; init; }
-    
+
     [ForeignKey(nameof(LocationId)), JsonProperty("locationId")]
     public Location? Location { get; set; }
 
     [InverseProperty(nameof(Entry.Discipline)), JsonIgnore]
     public IEnumerable<Entry>? Entries { get; init; }
-    
-    [JsonProperty("entryIds")]
-    public IEnumerable<Guid>? EntryIds => Entries?.Select(e => e.Id);
 }

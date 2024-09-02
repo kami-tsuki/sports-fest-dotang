@@ -8,2324 +8,536 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
-export interface IClassClient {
 
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass>;
 
-    post(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
+export class RegisterModel implements IRegisterModel {
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    schoolname?: string | undefined;
+    password?: string | undefined;
 
-    put(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass>;
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfClass>;
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass>;
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfClass>;
-
-    delete(id: string): Promise<ResultModelOfClass>;
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
-}
-
-export class ClassClient implements IClassClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
-    }
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes?";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
+    constructor(data?: IRegisterModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAll(_response);
-        });
-    }
-
-    protected processGetAll(response: Response): Promise<ResultModelOfPageOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfPageOfClass>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPost(_response);
-        });
-    }
-
-    protected processPost(response: Response): Promise<ResultModelOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
+    init(_data?: any) {
+        if (_data) {
+            this.email = _data["email"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.schoolname = _data["schoolname"];
+            this.password = _data["password"];
         }
-        return Promise.resolve<ResultModelOfClass>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut(_response);
-        });
+    static fromJS(data: any): RegisterModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RegisterModel();
+        result.init(data);
+        return result;
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfClass>(null as any);
-    }
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v1/data/classes?";
-        if (path !== undefined && path !== null)
-            url_ += "path=" + encodeURIComponent("" + path) + "&";
-        if (includeModels === null)
-            throw new Error("The parameter 'includeModels' cannot be null.");
-        else if (includeModels !== undefined)
-            url_ += "includeModels=" + encodeURIComponent("" + includeModels) + "&";
-        if (includeHttpCodes === null)
-            throw new Error("The parameter 'includeHttpCodes' cannot be null.");
-        else if (includeHttpCodes !== undefined)
-            url_ += "includeHttpCodes=" + encodeURIComponent("" + includeHttpCodes) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "OPTIONS",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processOptions(_response);
-        });
-    }
-
-    protected processOptions(response: Response): Promise<ResultModelOfObject> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfObject>(null as any);
-    }
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes/search?";
-        if (query === null)
-            throw new Error("The parameter 'query' cannot be null.");
-        else if (query !== undefined)
-            url_ += "query=" + encodeURIComponent("" + query) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSearch(_response);
-        });
-    }
-
-    protected processSearch(response: Response): Promise<ResultModelOfPageOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfPageOfClass>(null as any);
-    }
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: Response): Promise<ResultModelOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfClass>(null as any);
-    }
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Class): Promise<ResultModelOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut2(_response);
-        });
-    }
-
-    protected processPut2(response: Response): Promise<ResultModelOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfClass>(null as any);
-    }
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(patchDoc);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPatch(_response);
-        });
-    }
-
-    protected processPatch(response: Response): Promise<ResultModelOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfClass>(null as any);
-    }
-
-    delete(id: string): Promise<ResultModelOfClass> {
-        let url_ = this.baseUrl + "/api/v1/data/classes/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDelete(_response);
-        });
-    }
-
-    protected processDelete(response: Response): Promise<ResultModelOfClass> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfClass.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfClass>(null as any);
-    }
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
-        let url_ = this.baseUrl + "/api/v1/data/classes/count?";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetCount(_response);
-        });
-    }
-
-    protected processGetCount(response: Response): Promise<ResultModelOfLong> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLong.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLong>(null as any);
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["email"] = this.email;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["schoolname"] = this.schoolname;
+        data["password"] = this.password;
+        return data;
     }
 }
 
-export interface IDisciplineClient {
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline>;
-
-    post(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
-
-    put(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline>;
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfDiscipline>;
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline>;
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfDiscipline>;
-
-    delete(id: string): Promise<ResultModelOfDiscipline>;
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
+export interface IRegisterModel {
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    schoolname?: string | undefined;
+    password?: string | undefined;
 }
 
-export class DisciplineClient implements IDisciplineClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+export class LoginModel implements ILoginModel {
+    username?: User | undefined;
+    password?: string | undefined;
+    schoolID?: string | undefined;
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
-    }
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines?";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
+    constructor(data?: ILoginModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAll(_response);
-        });
-    }
-
-    protected processGetAll(response: Response): Promise<ResultModelOfPageOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfPageOfDiscipline>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPost(_response);
-        });
-    }
-
-    protected processPost(response: Response): Promise<ResultModelOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
+    init(_data?: any) {
+        if (_data) {
+            this.username = _data["username"] ? User.fromJS(_data["username"]) : <any>undefined;
+            this.password = _data["password"];
+            this.schoolID = _data["schoolID"];
         }
-        return Promise.resolve<ResultModelOfDiscipline>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut(_response);
-        });
+    static fromJS(data: any): LoginModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new LoginModel();
+        result.init(data);
+        return result;
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfDiscipline>(null as any);
-    }
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines?";
-        if (path !== undefined && path !== null)
-            url_ += "path=" + encodeURIComponent("" + path) + "&";
-        if (includeModels === null)
-            throw new Error("The parameter 'includeModels' cannot be null.");
-        else if (includeModels !== undefined)
-            url_ += "includeModels=" + encodeURIComponent("" + includeModels) + "&";
-        if (includeHttpCodes === null)
-            throw new Error("The parameter 'includeHttpCodes' cannot be null.");
-        else if (includeHttpCodes !== undefined)
-            url_ += "includeHttpCodes=" + encodeURIComponent("" + includeHttpCodes) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "OPTIONS",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processOptions(_response);
-        });
-    }
-
-    protected processOptions(response: Response): Promise<ResultModelOfObject> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfObject>(null as any);
-    }
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines/search?";
-        if (query === null)
-            throw new Error("The parameter 'query' cannot be null.");
-        else if (query !== undefined)
-            url_ += "query=" + encodeURIComponent("" + query) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSearch(_response);
-        });
-    }
-
-    protected processSearch(response: Response): Promise<ResultModelOfPageOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfPageOfDiscipline>(null as any);
-    }
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: Response): Promise<ResultModelOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfDiscipline>(null as any);
-    }
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Discipline): Promise<ResultModelOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut2(_response);
-        });
-    }
-
-    protected processPut2(response: Response): Promise<ResultModelOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfDiscipline>(null as any);
-    }
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(patchDoc);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPatch(_response);
-        });
-    }
-
-    protected processPatch(response: Response): Promise<ResultModelOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfDiscipline>(null as any);
-    }
-
-    delete(id: string): Promise<ResultModelOfDiscipline> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDelete(_response);
-        });
-    }
-
-    protected processDelete(response: Response): Promise<ResultModelOfDiscipline> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfDiscipline.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfDiscipline>(null as any);
-    }
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
-        let url_ = this.baseUrl + "/api/v1/data/disciplines/count?";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetCount(_response);
-        });
-    }
-
-    protected processGetCount(response: Response): Promise<ResultModelOfLong> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLong.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLong>(null as any);
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["username"] = this.username ? this.username.toJSON() : <any>undefined;
+        data["password"] = this.password;
+        data["schoolID"] = this.schoolID;
+        return data;
     }
 }
 
-export interface IEntryClient {
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry>;
-
-    post(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
-
-    put(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry>;
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfEntry>;
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry>;
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfEntry>;
-
-    delete(id: string): Promise<ResultModelOfEntry>;
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
+export interface ILoginModel {
+    username?: User | undefined;
+    password?: string | undefined;
+    schoolID?: string | undefined;
 }
 
-export class EntryClient implements IEntryClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+export class IdentityUserOfGuid implements IIdentityUserOfGuid {
+    id?: string;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed?: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled?: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled?: boolean;
+    accessFailedCount?: number;
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
-    }
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries?";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
+    constructor(data?: IIdentityUserOfGuid) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAll(_response);
-        });
-    }
-
-    protected processGetAll(response: Response): Promise<ResultModelOfPageOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfPageOfEntry>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPost(_response);
-        });
-    }
-
-    protected processPost(response: Response): Promise<ResultModelOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userName = _data["userName"];
+            this.normalizedUserName = _data["normalizedUserName"];
+            this.email = _data["email"];
+            this.normalizedEmail = _data["normalizedEmail"];
+            this.emailConfirmed = _data["emailConfirmed"];
+            this.passwordHash = _data["passwordHash"];
+            this.securityStamp = _data["securityStamp"];
+            this.concurrencyStamp = _data["concurrencyStamp"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.phoneNumberConfirmed = _data["phoneNumberConfirmed"];
+            this.twoFactorEnabled = _data["twoFactorEnabled"];
+            this.lockoutEnd = _data["lockoutEnd"] ? new Date(_data["lockoutEnd"].toString()) : <any>undefined;
+            this.lockoutEnabled = _data["lockoutEnabled"];
+            this.accessFailedCount = _data["accessFailedCount"];
         }
-        return Promise.resolve<ResultModelOfEntry>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut(_response);
-        });
+    static fromJS(data: any): IdentityUserOfGuid {
+        data = typeof data === 'object' ? data : {};
+        let result = new IdentityUserOfGuid();
+        result.init(data);
+        return result;
     }
 
-    protected processPut(response: Response): Promise<ResultModelOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfEntry>(null as any);
-    }
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v1/data/entries?";
-        if (path !== undefined && path !== null)
-            url_ += "path=" + encodeURIComponent("" + path) + "&";
-        if (includeModels === null)
-            throw new Error("The parameter 'includeModels' cannot be null.");
-        else if (includeModels !== undefined)
-            url_ += "includeModels=" + encodeURIComponent("" + includeModels) + "&";
-        if (includeHttpCodes === null)
-            throw new Error("The parameter 'includeHttpCodes' cannot be null.");
-        else if (includeHttpCodes !== undefined)
-            url_ += "includeHttpCodes=" + encodeURIComponent("" + includeHttpCodes) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "OPTIONS",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processOptions(_response);
-        });
-    }
-
-    protected processOptions(response: Response): Promise<ResultModelOfObject> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfObject>(null as any);
-    }
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries/search?";
-        if (query === null)
-            throw new Error("The parameter 'query' cannot be null.");
-        else if (query !== undefined)
-            url_ += "query=" + encodeURIComponent("" + query) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSearch(_response);
-        });
-    }
-
-    protected processSearch(response: Response): Promise<ResultModelOfPageOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfPageOfEntry>(null as any);
-    }
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: Response): Promise<ResultModelOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfEntry>(null as any);
-    }
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Entry): Promise<ResultModelOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut2(_response);
-        });
-    }
-
-    protected processPut2(response: Response): Promise<ResultModelOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfEntry>(null as any);
-    }
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(patchDoc);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPatch(_response);
-        });
-    }
-
-    protected processPatch(response: Response): Promise<ResultModelOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfEntry>(null as any);
-    }
-
-    delete(id: string): Promise<ResultModelOfEntry> {
-        let url_ = this.baseUrl + "/api/v1/data/entries/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDelete(_response);
-        });
-    }
-
-    protected processDelete(response: Response): Promise<ResultModelOfEntry> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfEntry.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfEntry>(null as any);
-    }
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
-        let url_ = this.baseUrl + "/api/v1/data/entries/count?";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetCount(_response);
-        });
-    }
-
-    protected processGetCount(response: Response): Promise<ResultModelOfLong> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLong.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLong>(null as any);
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["normalizedUserName"] = this.normalizedUserName;
+        data["email"] = this.email;
+        data["normalizedEmail"] = this.normalizedEmail;
+        data["emailConfirmed"] = this.emailConfirmed;
+        data["passwordHash"] = this.passwordHash;
+        data["securityStamp"] = this.securityStamp;
+        data["concurrencyStamp"] = this.concurrencyStamp;
+        data["phoneNumber"] = this.phoneNumber;
+        data["phoneNumberConfirmed"] = this.phoneNumberConfirmed;
+        data["twoFactorEnabled"] = this.twoFactorEnabled;
+        data["lockoutEnd"] = this.lockoutEnd ? this.lockoutEnd.toISOString() : <any>undefined;
+        data["lockoutEnabled"] = this.lockoutEnabled;
+        data["accessFailedCount"] = this.accessFailedCount;
+        return data;
     }
 }
 
-export interface ILocationClient {
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation>;
-
-    post(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
-
-    put(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation>;
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfLocation>;
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation>;
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfLocation>;
-
-    delete(id: string): Promise<ResultModelOfLocation>;
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
+export interface IIdentityUserOfGuid {
+    id?: string;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed?: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled?: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled?: boolean;
+    accessFailedCount?: number;
 }
 
-export class LocationClient implements ILocationClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+export class User extends IdentityUserOfGuid implements IUser {
+    first?: string | undefined;
+    last?: string | undefined;
+    role?: RoleType;
+    created!: Date;
+    updated!: Date;
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
+    constructor(data?: IUser) {
+        super(data);
     }
 
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations?";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAll(_response);
-        });
-    }
-
-    protected processGetAll(response: Response): Promise<ResultModelOfPageOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.first = _data["first"];
+            this.last = _data["last"];
+            this.role = _data["role"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.updated = _data["updated"] ? new Date(_data["updated"].toString()) : <any>undefined;
         }
-        return Promise.resolve<ResultModelOfPageOfLocation>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPost(_response);
-        });
+    static override fromJS(data: any): User {
+        data = typeof data === 'object' ? data : {};
+        let result = new User();
+        result.init(data);
+        return result;
     }
 
-    protected processPost(response: Response): Promise<ResultModelOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLocation>(null as any);
-    }
-
-    put(ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut(_response);
-        });
-    }
-
-    protected processPut(response: Response): Promise<ResultModelOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLocation>(null as any);
-    }
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v1/data/locations?";
-        if (path !== undefined && path !== null)
-            url_ += "path=" + encodeURIComponent("" + path) + "&";
-        if (includeModels === null)
-            throw new Error("The parameter 'includeModels' cannot be null.");
-        else if (includeModels !== undefined)
-            url_ += "includeModels=" + encodeURIComponent("" + includeModels) + "&";
-        if (includeHttpCodes === null)
-            throw new Error("The parameter 'includeHttpCodes' cannot be null.");
-        else if (includeHttpCodes !== undefined)
-            url_ += "includeHttpCodes=" + encodeURIComponent("" + includeHttpCodes) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "OPTIONS",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processOptions(_response);
-        });
-    }
-
-    protected processOptions(response: Response): Promise<ResultModelOfObject> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfObject>(null as any);
-    }
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations/search?";
-        if (query === null)
-            throw new Error("The parameter 'query' cannot be null.");
-        else if (query !== undefined)
-            url_ += "query=" + encodeURIComponent("" + query) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSearch(_response);
-        });
-    }
-
-    protected processSearch(response: Response): Promise<ResultModelOfPageOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfPageOfLocation>(null as any);
-    }
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: Response): Promise<ResultModelOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLocation>(null as any);
-    }
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: Location): Promise<ResultModelOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut2(_response);
-        });
-    }
-
-    protected processPut2(response: Response): Promise<ResultModelOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLocation>(null as any);
-    }
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(patchDoc);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPatch(_response);
-        });
-    }
-
-    protected processPatch(response: Response): Promise<ResultModelOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLocation>(null as any);
-    }
-
-    delete(id: string): Promise<ResultModelOfLocation> {
-        let url_ = this.baseUrl + "/api/v1/data/locations/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDelete(_response);
-        });
-    }
-
-    protected processDelete(response: Response): Promise<ResultModelOfLocation> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLocation.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLocation>(null as any);
-    }
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
-        let url_ = this.baseUrl + "/api/v1/data/locations/count?";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetCount(_response);
-        });
-    }
-
-    protected processGetCount(response: Response): Promise<ResultModelOfLong> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLong.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLong>(null as any);
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["first"] = this.first;
+        data["last"] = this.last;
+        data["role"] = this.role;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["updated"] = this.updated ? this.updated.toISOString() : <any>undefined;
+        super.toJSON(data);
+        return data;
     }
 }
 
-export interface IUserClient {
-
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser>;
-
-    post(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
-
-    put(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
-
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject>;
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser>;
-
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfUser>;
-
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser>;
-
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfUser>;
-
-    delete(id: string): Promise<ResultModelOfUser>;
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong>;
+export interface IUser extends IIdentityUserOfGuid {
+    first?: string | undefined;
+    last?: string | undefined;
+    role?: RoleType;
+    created: Date;
+    updated: Date;
 }
 
-export class UserClient implements IUserClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+export enum RoleType {
+    Student = "Student",
+    Tutor = "Tutor",
+    CampaignManager = "CampaignManager",
+    CampaignJudge = "CampaignJudge",
+    User = "User",
+}
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
-    }
+export class ResultModelOfSchool implements IResultModelOfSchool {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: School | undefined;
+    messages?: Message[] | undefined;
 
-    getAll(page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User?";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
+    constructor(data?: IResultModelOfSchool) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAll(_response);
-        });
-    }
-
-    protected processGetAll(response: Response): Promise<ResultModelOfPageOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfPageOfUser>(null as any);
     }
 
-    post(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? School.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPost(_response);
-        });
-    }
-
-    protected processPost(response: Response): Promise<ResultModelOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    put(ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User?";
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
+    static fromJS(data: any): ResultModelOfSchool {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfSchool();
+        result.init(data);
+        return result;
+    }
 
-        const content_ = JSON.stringify(entity);
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
 
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+export interface IResultModelOfSchool {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: School | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class EntityOfGuid implements IEntityOfGuid {
+    id?: string;
+    created!: Date;
+    updated!: Date;
+
+    constructor(data?: IEntityOfGuid) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut(_response);
-        });
-    }
-
-    protected processPut(response: Response): Promise<ResultModelOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    options(path: string | null | undefined, includeModels: boolean | undefined, includeHttpCodes: boolean | undefined): Promise<ResultModelOfObject> {
-        let url_ = this.baseUrl + "/api/v1/_/User?";
-        if (path !== undefined && path !== null)
-            url_ += "path=" + encodeURIComponent("" + path) + "&";
-        if (includeModels === null)
-            throw new Error("The parameter 'includeModels' cannot be null.");
-        else if (includeModels !== undefined)
-            url_ += "includeModels=" + encodeURIComponent("" + includeModels) + "&";
-        if (includeHttpCodes === null)
-            throw new Error("The parameter 'includeHttpCodes' cannot be null.");
-        else if (includeHttpCodes !== undefined)
-            url_ += "includeHttpCodes=" + encodeURIComponent("" + includeHttpCodes) + "&";
-        url_ = url_.replace(/[?&]$/, "");
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.updated = _data["updated"] ? new Date(_data["updated"].toString()) : <any>undefined;
+        }
+    }
 
-        let options_: RequestInit = {
-            method: "OPTIONS",
-            headers: {
-                "Accept": "application/json"
+    static fromJS(data: any): EntityOfGuid {
+        data = typeof data === 'object' ? data : {};
+        let result = new EntityOfGuid();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["updated"] = this.updated ? this.updated.toISOString() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IEntityOfGuid {
+    id?: string;
+    created: Date;
+    updated: Date;
+}
+
+export class School extends EntityOfGuid implements ISchool {
+    name?: string;
+    shortName?: string;
+    comment?: string;
+    managerId?: string | undefined;
+    judgeIds?: Tutor[] | undefined;
+    studentIds?: string[];
+
+    constructor(data?: ISchool) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.shortName = _data["shortName"];
+            this.comment = _data["comment"];
+            this.managerId = _data["managerId"];
+            if (Array.isArray(_data["judgeIds"])) {
+                this.judgeIds = [] as any;
+                for (let item of _data["judgeIds"])
+                    this.judgeIds!.push(Tutor.fromJS(item));
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processOptions(_response);
-        });
-    }
-
-    protected processOptions(response: Response): Promise<ResultModelOfObject> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfObject.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfObject>(null as any);
-    }
-
-    search(query: string | undefined, page: number | undefined, entities: number | undefined, properties: string | null | undefined, sendNull: boolean | undefined, filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfPageOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User/search?";
-        if (query === null)
-            throw new Error("The parameter 'query' cannot be null.");
-        else if (query !== undefined)
-            url_ += "query=" + encodeURIComponent("" + query) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (entities === null)
-            throw new Error("The parameter 'entities' cannot be null.");
-        else if (entities !== undefined)
-            url_ += "entities=" + encodeURIComponent("" + entities) + "&";
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        if (sendNull === null)
-            throw new Error("The parameter 'sendNull' cannot be null.");
-        else if (sendNull !== undefined)
-            url_ += "sendNull=" + encodeURIComponent("" + sendNull) + "&";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
+            if (Array.isArray(_data["studentIds"])) {
+                this.studentIds = [] as any;
+                for (let item of _data["studentIds"])
+                    this.studentIds!.push(item);
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSearch(_response);
-        });
-    }
-
-    protected processSearch(response: Response): Promise<ResultModelOfPageOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfPageOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfPageOfUser>(null as any);
     }
 
-    get(id: string, properties: string | null | undefined): Promise<ResultModelOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (properties !== undefined && properties !== null)
-            url_ += "properties=" + encodeURIComponent("" + properties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
+    static override fromJS(data: any): School {
+        data = typeof data === 'object' ? data : {};
+        let result = new School();
+        result.init(data);
+        return result;
+    }
 
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["shortName"] = this.shortName;
+        data["comment"] = this.comment;
+        data["managerId"] = this.managerId;
+        if (Array.isArray(this.judgeIds)) {
+            data["judgeIds"] = [];
+            for (let item of this.judgeIds)
+                data["judgeIds"].push(item.toJSON());
+        }
+        if (Array.isArray(this.studentIds)) {
+            data["studentIds"] = [];
+            for (let item of this.studentIds)
+                data["studentIds"].push(item);
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ISchool extends IEntityOfGuid {
+    name?: string;
+    shortName?: string;
+    comment?: string;
+    managerId?: string | undefined;
+    judgeIds?: Tutor[] | undefined;
+    studentIds?: string[];
+}
+
+export class Tutor extends User implements ITutor {
+    classId?: string | undefined;
+    schoolId?: string;
+
+    constructor(data?: ITutor) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.classId = _data["classId"];
+            this.schoolId = _data["schoolId"];
+        }
+    }
+
+    static override fromJS(data: any): Tutor {
+        data = typeof data === 'object' ? data : {};
+        let result = new Tutor();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["classId"] = this.classId;
+        data["schoolId"] = this.schoolId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ITutor extends IUser {
+    classId?: string | undefined;
+    schoolId?: string;
+}
+
+export class Message implements IMessage {
+    errorMessage?: string | undefined;
+    errorType?: ErrorResult | undefined;
+    errorSeverity?: Severity | undefined;
+
+    constructor(data?: IMessage) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: Response): Promise<ResultModelOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    put2(id: string, ignoreNullProperties: boolean | undefined, entity: User): Promise<ResultModelOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User/{id}?";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (ignoreNullProperties === null)
-            throw new Error("The parameter 'ignoreNullProperties' cannot be null.");
-        else if (ignoreNullProperties !== undefined)
-            url_ += "ignoreNullProperties=" + encodeURIComponent("" + ignoreNullProperties) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(entity);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPut2(_response);
-        });
-    }
-
-    protected processPut2(response: Response): Promise<ResultModelOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
+    init(_data?: any) {
+        if (_data) {
+            this.errorMessage = _data["error.message"];
+            this.errorType = _data["error.type"];
+            this.errorSeverity = _data["error.severity"];
         }
-        return Promise.resolve<ResultModelOfUser>(null as any);
     }
 
-    patch(id: string, patchDoc: Operation[] | undefined): Promise<ResultModelOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(patchDoc);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processPatch(_response);
-        });
+    static fromJS(data: any): Message {
+        data = typeof data === 'object' ? data : {};
+        let result = new Message();
+        result.init(data);
+        return result;
     }
 
-    protected processPatch(response: Response): Promise<ResultModelOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfUser>(null as any);
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["error.message"] = this.errorMessage;
+        data["error.type"] = this.errorType;
+        data["error.severity"] = this.errorSeverity;
+        return data;
     }
+}
 
-    delete(id: string): Promise<ResultModelOfUser> {
-        let url_ = this.baseUrl + "/api/v1/_/User/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
+export interface IMessage {
+    errorMessage?: string | undefined;
+    errorType?: ErrorResult | undefined;
+    errorSeverity?: Severity | undefined;
+}
 
-        let options_: RequestInit = {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
+export enum ErrorResult {
+    InternalException = "InternalException",
+    InvalidModel = "InvalidModel",
+    InvalidCredentials = "InvalidCredentials",
+    InvalidToken = "InvalidToken",
+    InvalidRole = "InvalidRole",
+    InvalidUser = "InvalidUser",
+    InvalidPassword = "InvalidPassword",
+    InvalidEmail = "InvalidEmail",
+    InvalidUsername = "InvalidUsername",
+    InvalidOldPassword = "InvalidOldPassword",
+    InvalidNewPassword = "InvalidNewPassword",
+    InvalidModelState = "InvalidModelState",
+    PasswordChangeFailed = "PasswordChangeFailed",
+    AccountLocked = "AccountLocked",
+    UserNotFound = "UserNotFound",
+    UserCreationFailed = "UserCreationFailed",
+    RoleCreationFailed = "RoleCreationFailed",
+    Validation = "Validation",
+    InvalidId = "InvalidId",
+}
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDelete(_response);
-        });
-    }
-
-    protected processDelete(response: Response): Promise<ResultModelOfUser> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfUser.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfUser>(null as any);
-    }
-
-    getCount(filters: { [key: string]: string; } | null | undefined): Promise<ResultModelOfLong> {
-        let url_ = this.baseUrl + "/api/v1/_/User/count?";
-        if (filters !== undefined && filters !== null)
-            url_ += "filters=" + encodeURIComponent("" + filters) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetCount(_response);
-        });
-    }
-
-    protected processGetCount(response: Response): Promise<ResultModelOfLong> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ResultModelOfLong.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<ResultModelOfLong>(null as any);
-    }
+export enum Severity {
+    Verbose = "Verbose",
+    Debug = "Debug",
+    Information = "Information",
+    Warning = "Warning",
+    Error = "Error",
+    Fatal = "Fatal",
 }
 
 export class ResultModelOfPageOfClass implements IResultModelOfPageOfClass {
@@ -2444,61 +656,14 @@ export interface IPageOfClass {
     data?: Class[];
 }
 
-export class EntityOfGuid implements IEntityOfGuid {
-    id?: string;
-    created!: Date;
-    updated!: Date;
-
-    constructor(data?: IEntityOfGuid) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
-            this.updated = _data["updated"] ? new Date(_data["updated"].toString()) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): EntityOfGuid {
-        data = typeof data === 'object' ? data : {};
-        let result = new EntityOfGuid();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
-        data["updated"] = this.updated ? this.updated.toISOString() : <any>undefined;
-        return data;
-    }
-}
-
-export interface IEntityOfGuid {
-    id?: string;
-    created: Date;
-    updated: Date;
-}
-
 export class Class extends EntityOfGuid implements IClass {
     name?: string;
     short?: string;
     comment?: string;
-    users?: User[] | undefined;
-    tutor?: User | undefined;
     tutorId?: string | undefined;
-    room?: Location | undefined;
-    students?: User[] | undefined;
-    studentIds?: string[] | undefined;
-    studentCount?: number;
+    roomId?: string | undefined;
+    schoolId?: string | undefined;
+    locationId?: string | undefined;
 
     constructor(data?: IClass) {
         super(data);
@@ -2510,25 +675,10 @@ export class Class extends EntityOfGuid implements IClass {
             this.name = _data["name"];
             this.short = _data["short"];
             this.comment = _data["comment"];
-            if (Array.isArray(_data["users"])) {
-                this.users = [] as any;
-                for (let item of _data["users"])
-                    this.users!.push(User.fromJS(item));
-            }
-            this.tutor = _data["tutor"] ? User.fromJS(_data["tutor"]) : <any>undefined;
             this.tutorId = _data["tutorId"];
-            this.room = _data["room"] ? Location.fromJS(_data["room"]) : <any>undefined;
-            if (Array.isArray(_data["students"])) {
-                this.students = [] as any;
-                for (let item of _data["students"])
-                    this.students!.push(User.fromJS(item));
-            }
-            if (Array.isArray(_data["studentIds"])) {
-                this.studentIds = [] as any;
-                for (let item of _data["studentIds"])
-                    this.studentIds!.push(item);
-            }
-            this.studentCount = _data["studentCount"];
+            this.roomId = _data["roomId"];
+            this.schoolId = _data["schoolId"];
+            this.locationId = _data["locationId"];
         }
     }
 
@@ -2544,25 +694,10 @@ export class Class extends EntityOfGuid implements IClass {
         data["name"] = this.name;
         data["short"] = this.short;
         data["comment"] = this.comment;
-        if (Array.isArray(this.users)) {
-            data["users"] = [];
-            for (let item of this.users)
-                data["users"].push(item.toJSON());
-        }
-        data["tutor"] = this.tutor ? this.tutor.toJSON() : <any>undefined;
         data["tutorId"] = this.tutorId;
-        data["room"] = this.room ? this.room.toJSON() : <any>undefined;
-        if (Array.isArray(this.students)) {
-            data["students"] = [];
-            for (let item of this.students)
-                data["students"].push(item.toJSON());
-        }
-        if (Array.isArray(this.studentIds)) {
-            data["studentIds"] = [];
-            for (let item of this.studentIds)
-                data["studentIds"].push(item);
-        }
-        data["studentCount"] = this.studentCount;
+        data["roomId"] = this.roomId;
+        data["schoolId"] = this.schoolId;
+        data["locationId"] = this.locationId;
         super.toJSON(data);
         return data;
     }
@@ -2572,162 +707,20 @@ export interface IClass extends IEntityOfGuid {
     name?: string;
     short?: string;
     comment?: string;
-    users?: User[] | undefined;
-    tutor?: User | undefined;
     tutorId?: string | undefined;
-    room?: Location | undefined;
-    students?: User[] | undefined;
-    studentIds?: string[] | undefined;
-    studentCount?: number;
+    roomId?: string | undefined;
+    schoolId?: string | undefined;
+    locationId?: string | undefined;
 }
 
-export class User extends EntityOfGuid implements IUser {
-    first?: string;
-    last?: string;
-    role?: RoleType;
-    classId?: string | undefined;
-    entryIds?: string[] | undefined;
-    disciplineIds?: string[] | undefined;
+export class ResultModelOfTutor implements IResultModelOfTutor {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Tutor | undefined;
+    messages?: Message[] | undefined;
 
-    constructor(data?: IUser) {
-        super(data);
-    }
-
-    override init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.first = _data["first"];
-            this.last = _data["last"];
-            this.role = _data["role"];
-            this.classId = _data["classId"];
-            if (Array.isArray(_data["entryIds"])) {
-                this.entryIds = [] as any;
-                for (let item of _data["entryIds"])
-                    this.entryIds!.push(item);
-            }
-            if (Array.isArray(_data["disciplineIds"])) {
-                this.disciplineIds = [] as any;
-                for (let item of _data["disciplineIds"])
-                    this.disciplineIds!.push(item);
-            }
-        }
-    }
-
-    static override fromJS(data: any): User {
-        data = typeof data === 'object' ? data : {};
-        let result = new User();
-        result.init(data);
-        return result;
-    }
-
-    override toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["first"] = this.first;
-        data["last"] = this.last;
-        data["role"] = this.role;
-        data["classId"] = this.classId;
-        if (Array.isArray(this.entryIds)) {
-            data["entryIds"] = [];
-            for (let item of this.entryIds)
-                data["entryIds"].push(item);
-        }
-        if (Array.isArray(this.disciplineIds)) {
-            data["disciplineIds"] = [];
-            for (let item of this.disciplineIds)
-                data["disciplineIds"].push(item);
-        }
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface IUser extends IEntityOfGuid {
-    first?: string;
-    last?: string;
-    role?: RoleType;
-    classId?: string | undefined;
-    entryIds?: string[] | undefined;
-    disciplineIds?: string[] | undefined;
-}
-
-export enum RoleType {
-    Student = "Student",
-    Tutor = "Tutor",
-    CampaignManager = "CampaignManager",
-    CampaignJudge = "CampaignJudge",
-}
-
-export class Location extends EntityOfGuid implements ILocation {
-    name?: string;
-    short?: string;
-    description?: string;
-    classIds?: string[] | undefined;
-    disciplineIds?: string[] | undefined;
-
-    constructor(data?: ILocation) {
-        super(data);
-    }
-
-    override init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.name = _data["name"];
-            this.short = _data["short"];
-            this.description = _data["description"];
-            if (Array.isArray(_data["classIds"])) {
-                this.classIds = [] as any;
-                for (let item of _data["classIds"])
-                    this.classIds!.push(item);
-            }
-            if (Array.isArray(_data["disciplineIds"])) {
-                this.disciplineIds = [] as any;
-                for (let item of _data["disciplineIds"])
-                    this.disciplineIds!.push(item);
-            }
-        }
-    }
-
-    static override fromJS(data: any): Location {
-        data = typeof data === 'object' ? data : {};
-        let result = new Location();
-        result.init(data);
-        return result;
-    }
-
-    override toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["short"] = this.short;
-        data["description"] = this.description;
-        if (Array.isArray(this.classIds)) {
-            data["classIds"] = [];
-            for (let item of this.classIds)
-                data["classIds"].push(item);
-        }
-        if (Array.isArray(this.disciplineIds)) {
-            data["disciplineIds"] = [];
-            for (let item of this.disciplineIds)
-                data["disciplineIds"].push(item);
-        }
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface ILocation extends IEntityOfGuid {
-    name?: string;
-    short?: string;
-    description?: string;
-    classIds?: string[] | undefined;
-    disciplineIds?: string[] | undefined;
-}
-
-export class Message implements IMessage {
-    errorMessage?: string | undefined;
-    errorType?: ErrorResult | undefined;
-    errorSeverity?: Severity | undefined;
-
-    constructor(data?: IMessage) {
+    constructor(data?: IResultModelOfTutor) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -2738,63 +731,46 @@ export class Message implements IMessage {
 
     init(_data?: any) {
         if (_data) {
-            this.errorMessage = _data["error.message"];
-            this.errorType = _data["error.type"];
-            this.errorSeverity = _data["error.severity"];
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? Tutor.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
         }
     }
 
-    static fromJS(data: any): Message {
+    static fromJS(data: any): ResultModelOfTutor {
         data = typeof data === 'object' ? data : {};
-        let result = new Message();
+        let result = new ResultModelOfTutor();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["error.message"] = this.errorMessage;
-        data["error.type"] = this.errorType;
-        data["error.severity"] = this.errorSeverity;
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
         return data;
     }
 }
 
-export interface IMessage {
-    errorMessage?: string | undefined;
-    errorType?: ErrorResult | undefined;
-    errorSeverity?: Severity | undefined;
-}
-
-export enum ErrorResult {
-    InternalException = "InternalException",
-    InvalidModel = "InvalidModel",
-    InvalidCredentials = "InvalidCredentials",
-    InvalidToken = "InvalidToken",
-    InvalidRole = "InvalidRole",
-    InvalidUser = "InvalidUser",
-    InvalidPassword = "InvalidPassword",
-    InvalidEmail = "InvalidEmail",
-    InvalidUsername = "InvalidUsername",
-    InvalidOldPassword = "InvalidOldPassword",
-    InvalidNewPassword = "InvalidNewPassword",
-    InvalidModelState = "InvalidModelState",
-    PasswordChangeFailed = "PasswordChangeFailed",
-    AccountLocked = "AccountLocked",
-    UserNotFound = "UserNotFound",
-    UserCreationFailed = "UserCreationFailed",
-    RoleCreationFailed = "RoleCreationFailed",
-    Validation = "Validation",
-    InvalidId = "InvalidId",
-}
-
-export enum Severity {
-    Verbose = "Verbose",
-    Debug = "Debug",
-    Information = "Information",
-    Warning = "Warning",
-    Error = "Error",
-    Fatal = "Fatal",
+export interface IResultModelOfTutor {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Tutor | undefined;
+    messages?: Message[] | undefined;
 }
 
 export class ResultModelOfClass implements IResultModelOfClass {
@@ -2854,6 +830,355 @@ export interface IResultModelOfClass {
     error?: boolean;
     message?: string | undefined;
     data?: Class | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfPageOfStudent implements IResultModelOfPageOfStudent {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfStudent | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfStudent) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfStudent.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfStudent {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfStudent();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfStudent {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfStudent | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfStudent implements IPageOfStudent {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: Student[];
+
+    constructor(data?: IPageOfStudent) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Student.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfStudent {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfStudent();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfStudent {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: Student[];
+}
+
+export class Student extends User implements IStudent {
+    classId?: string | undefined;
+    schoolId?: string;
+
+    constructor(data?: IStudent) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.classId = _data["classId"];
+            this.schoolId = _data["schoolId"];
+        }
+    }
+
+    static override fromJS(data: any): Student {
+        data = typeof data === 'object' ? data : {};
+        let result = new Student();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["classId"] = this.classId;
+        data["schoolId"] = this.schoolId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IStudent extends IUser {
+    classId?: string | undefined;
+    schoolId?: string;
+}
+
+export class ResultModelOfIEnumerableOfClass implements IResultModelOfIEnumerableOfClass {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Class[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfClass) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Class.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfClass {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfClass();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfClass {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Class[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfGuid implements IResultModelOfIEnumerableOfGuid {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: string[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfGuid) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(item);
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfGuid {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfGuid();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item);
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfGuid {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: string[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfLong implements IResultModelOfLong {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: number;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfLong) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"];
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfLong {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfLong();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfLong {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: number;
     messages?: Message[] | undefined;
 }
 
@@ -2934,66 +1259,6 @@ export interface IOperation extends IOperationBase {
     value?: any | undefined;
 }
 
-export class ResultModelOfLong implements IResultModelOfLong {
-    success?: boolean;
-    error?: boolean;
-    message?: string | undefined;
-    data?: number;
-    messages?: Message[] | undefined;
-
-    constructor(data?: IResultModelOfLong) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.success = _data["success"];
-            this.error = _data["error"];
-            this.message = _data["message"];
-            this.data = _data["data"];
-            if (Array.isArray(_data["messages"])) {
-                this.messages = [] as any;
-                for (let item of _data["messages"])
-                    this.messages!.push(Message.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): ResultModelOfLong {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResultModelOfLong();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["success"] = this.success;
-        data["error"] = this.error;
-        data["message"] = this.message;
-        data["data"] = this.data;
-        if (Array.isArray(this.messages)) {
-            data["messages"] = [];
-            for (let item of this.messages)
-                data["messages"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-export interface IResultModelOfLong {
-    success?: boolean;
-    error?: boolean;
-    message?: string | undefined;
-    data?: number;
-    messages?: Message[] | undefined;
-}
-
 export class ResultModelOfObject implements IResultModelOfObject {
     success?: boolean;
     error?: boolean;
@@ -3052,6 +1317,134 @@ export interface IResultModelOfObject {
     message?: string | undefined;
     data?: any | undefined;
     messages?: Message[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfAuditLog implements IResultModelOfIEnumerableOfAuditLog {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: AuditLog[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfAuditLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(AuditLog.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfAuditLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfAuditLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfAuditLog {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: AuditLog[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class AuditLog implements IAuditLog {
+    id?: string;
+    entityId?: string;
+    entityType?: string | undefined;
+    action?: string;
+    changedBy?: string;
+    timestamp?: Date;
+    changes?: string;
+
+    constructor(data?: IAuditLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.entityId = _data["entityId"];
+            this.entityType = _data["entityType"];
+            this.action = _data["action"];
+            this.changedBy = _data["changedBy"];
+            this.timestamp = _data["timestamp"] ? new Date(_data["timestamp"].toString()) : <any>undefined;
+            this.changes = _data["changes"];
+        }
+    }
+
+    static fromJS(data: any): AuditLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new AuditLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["entityId"] = this.entityId;
+        data["entityType"] = this.entityType;
+        data["action"] = this.action;
+        data["changedBy"] = this.changedBy;
+        data["timestamp"] = this.timestamp ? this.timestamp.toISOString() : <any>undefined;
+        data["changes"] = this.changes;
+        return data;
+    }
+}
+
+export interface IAuditLog {
+    id?: string;
+    entityId?: string;
+    entityType?: string | undefined;
+    action?: string;
+    changedBy?: string;
+    timestamp?: Date;
+    changes?: string;
 }
 
 export class ResultModelOfPageOfDiscipline implements IResultModelOfPageOfDiscipline {
@@ -3173,11 +1566,9 @@ export interface IPageOfDiscipline {
 export class Discipline extends EntityOfGuid implements IDiscipline {
     name?: string;
     short?: string;
-    description?: string;
-    judgeIds?: string[] | undefined;
-    managerId?: string | undefined;
+    comment?: string;
+    judgeId?: string | undefined;
     locationId?: Location | undefined;
-    entryIds?: string[] | undefined;
 
     constructor(data?: IDiscipline) {
         super(data);
@@ -3188,19 +1579,9 @@ export class Discipline extends EntityOfGuid implements IDiscipline {
         if (_data) {
             this.name = _data["name"];
             this.short = _data["short"];
-            this.description = _data["description"];
-            if (Array.isArray(_data["judgeIds"])) {
-                this.judgeIds = [] as any;
-                for (let item of _data["judgeIds"])
-                    this.judgeIds!.push(item);
-            }
-            this.managerId = _data["managerId"];
+            this.comment = _data["comment"];
+            this.judgeId = _data["judgeId"];
             this.locationId = _data["locationId"] ? Location.fromJS(_data["locationId"]) : <any>undefined;
-            if (Array.isArray(_data["entryIds"])) {
-                this.entryIds = [] as any;
-                for (let item of _data["entryIds"])
-                    this.entryIds!.push(item);
-            }
         }
     }
 
@@ -3215,19 +1596,9 @@ export class Discipline extends EntityOfGuid implements IDiscipline {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["short"] = this.short;
-        data["description"] = this.description;
-        if (Array.isArray(this.judgeIds)) {
-            data["judgeIds"] = [];
-            for (let item of this.judgeIds)
-                data["judgeIds"].push(item);
-        }
-        data["managerId"] = this.managerId;
+        data["comment"] = this.comment;
+        data["judgeId"] = this.judgeId;
         data["locationId"] = this.locationId ? this.locationId.toJSON() : <any>undefined;
-        if (Array.isArray(this.entryIds)) {
-            data["entryIds"] = [];
-            for (let item of this.entryIds)
-                data["entryIds"].push(item);
-        }
         super.toJSON(data);
         return data;
     }
@@ -3236,11 +1607,142 @@ export class Discipline extends EntityOfGuid implements IDiscipline {
 export interface IDiscipline extends IEntityOfGuid {
     name?: string;
     short?: string;
-    description?: string;
-    judgeIds?: string[] | undefined;
-    managerId?: string | undefined;
+    comment?: string;
+    judgeId?: string | undefined;
     locationId?: Location | undefined;
-    entryIds?: string[] | undefined;
+}
+
+export class Location extends EntityOfGuid implements ILocation {
+    name?: string;
+    short?: string;
+    comment?: string;
+    classIds?: string[];
+    disciplineIds?: string[] | undefined;
+
+    constructor(data?: ILocation) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.short = _data["short"];
+            this.comment = _data["comment"];
+            if (Array.isArray(_data["classIds"])) {
+                this.classIds = [] as any;
+                for (let item of _data["classIds"])
+                    this.classIds!.push(item);
+            }
+            if (Array.isArray(_data["disciplineIds"])) {
+                this.disciplineIds = [] as any;
+                for (let item of _data["disciplineIds"])
+                    this.disciplineIds!.push(item);
+            }
+        }
+    }
+
+    static override fromJS(data: any): Location {
+        data = typeof data === 'object' ? data : {};
+        let result = new Location();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["short"] = this.short;
+        data["comment"] = this.comment;
+        if (Array.isArray(this.classIds)) {
+            data["classIds"] = [];
+            for (let item of this.classIds)
+                data["classIds"].push(item);
+        }
+        if (Array.isArray(this.disciplineIds)) {
+            data["disciplineIds"] = [];
+            for (let item of this.disciplineIds)
+                data["disciplineIds"].push(item);
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ILocation extends IEntityOfGuid {
+    name?: string;
+    short?: string;
+    comment?: string;
+    classIds?: string[];
+    disciplineIds?: string[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfDiscipline implements IResultModelOfIEnumerableOfDiscipline {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Discipline[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfDiscipline) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Discipline.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfDiscipline {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfDiscipline();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfDiscipline {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Discipline[] | undefined;
+    messages?: Message[] | undefined;
 }
 
 export class ResultModelOfDiscipline implements IResultModelOfDiscipline {
@@ -3464,6 +1966,74 @@ export interface IEntry extends IEntityOfGuid {
     note?: string;
 }
 
+export class ResultModelOfIEnumerableOfEntry implements IResultModelOfIEnumerableOfEntry {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Entry[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfEntry) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Entry.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfEntry {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfEntry();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfEntry {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Entry[] | undefined;
+    messages?: Message[] | undefined;
+}
+
 export class ResultModelOfEntry implements IResultModelOfEntry {
     success?: boolean;
     error?: boolean;
@@ -3521,6 +2091,287 @@ export interface IResultModelOfEntry {
     error?: boolean;
     message?: string | undefined;
     data?: Entry | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfPageOfCampaignJudge implements IResultModelOfPageOfCampaignJudge {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfCampaignJudge | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfCampaignJudge) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfCampaignJudge.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfCampaignJudge {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfCampaignJudge();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfCampaignJudge {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfCampaignJudge | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfCampaignJudge implements IPageOfCampaignJudge {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: CampaignJudge[];
+
+    constructor(data?: IPageOfCampaignJudge) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(CampaignJudge.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfCampaignJudge {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfCampaignJudge();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfCampaignJudge {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: CampaignJudge[];
+}
+
+export class CampaignJudge extends User implements ICampaignJudge {
+    disciplineId?: string | undefined;
+    schoolId?: string;
+
+    constructor(data?: ICampaignJudge) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.disciplineId = _data["disciplineId"];
+            this.schoolId = _data["schoolId"];
+        }
+    }
+
+    static override fromJS(data: any): CampaignJudge {
+        data = typeof data === 'object' ? data : {};
+        let result = new CampaignJudge();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["disciplineId"] = this.disciplineId;
+        data["schoolId"] = this.schoolId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ICampaignJudge extends IUser {
+    disciplineId?: string | undefined;
+    schoolId?: string;
+}
+
+export class ResultModelOfIEnumerableOfCampaignJudge implements IResultModelOfIEnumerableOfCampaignJudge {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignJudge[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfCampaignJudge) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(CampaignJudge.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfCampaignJudge {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfCampaignJudge();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfCampaignJudge {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignJudge[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfCampaignJudge implements IResultModelOfCampaignJudge {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignJudge | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfCampaignJudge) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? CampaignJudge.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfCampaignJudge {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfCampaignJudge();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfCampaignJudge {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignJudge | undefined;
     messages?: Message[] | undefined;
 }
 
@@ -3640,6 +2491,74 @@ export interface IPageOfLocation {
     data?: Location[];
 }
 
+export class ResultModelOfIEnumerableOfLocation implements IResultModelOfIEnumerableOfLocation {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Location[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfLocation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Location.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfLocation {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfLocation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfLocation {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Location[] | undefined;
+    messages?: Message[] | undefined;
+}
+
 export class ResultModelOfLocation implements IResultModelOfLocation {
     success?: boolean;
     error?: boolean;
@@ -3697,6 +2616,779 @@ export interface IResultModelOfLocation {
     error?: boolean;
     message?: string | undefined;
     data?: Location | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfPageOfCampaignManager implements IResultModelOfPageOfCampaignManager {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfCampaignManager | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfCampaignManager) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfCampaignManager.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfCampaignManager {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfCampaignManager();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfCampaignManager {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfCampaignManager | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfCampaignManager implements IPageOfCampaignManager {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: CampaignManager[];
+
+    constructor(data?: IPageOfCampaignManager) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(CampaignManager.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfCampaignManager {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfCampaignManager();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfCampaignManager {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: CampaignManager[];
+}
+
+export class CampaignManager extends User implements ICampaignManager {
+    schoolId?: string;
+
+    constructor(data?: ICampaignManager) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.schoolId = _data["schoolId"];
+        }
+    }
+
+    static override fromJS(data: any): CampaignManager {
+        data = typeof data === 'object' ? data : {};
+        let result = new CampaignManager();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["schoolId"] = this.schoolId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ICampaignManager extends IUser {
+    schoolId?: string;
+}
+
+export class ResultModelOfIEnumerableOfCampaignManager implements IResultModelOfIEnumerableOfCampaignManager {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignManager[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfCampaignManager) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(CampaignManager.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfCampaignManager {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfCampaignManager();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfCampaignManager {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignManager[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfCampaignManager implements IResultModelOfCampaignManager {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignManager | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfCampaignManager) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? CampaignManager.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfCampaignManager {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfCampaignManager();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfCampaignManager {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: CampaignManager | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfPageOfTutor implements IResultModelOfPageOfTutor {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfTutor | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfTutor) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfTutor.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfTutor {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfTutor();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfTutor {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfTutor | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfTutor implements IPageOfTutor {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: Tutor[];
+
+    constructor(data?: IPageOfTutor) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Tutor.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfTutor {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfTutor();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfTutor {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: Tutor[];
+}
+
+export class ResultModelOfPageOfSchool implements IResultModelOfPageOfSchool {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfSchool | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfSchool) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfSchool.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfSchool {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfSchool();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfSchool {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfSchool | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfSchool implements IPageOfSchool {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: School[];
+
+    constructor(data?: IPageOfSchool) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(School.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfSchool {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfSchool();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfSchool {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: School[];
+}
+
+export class ResultModelOfIEnumerableOfSchool implements IResultModelOfIEnumerableOfSchool {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: School[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfSchool) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(School.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfSchool {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfSchool();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfSchool {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: School[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfStudent implements IResultModelOfIEnumerableOfStudent {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Student[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfStudent) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Student.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfStudent {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfStudent();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfStudent {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Student[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfStudent implements IResultModelOfStudent {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Student | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfStudent) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? Student.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfStudent {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfStudent();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfStudent {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Student | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfTutor implements IResultModelOfIEnumerableOfTutor {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Tutor[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfTutor) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(Tutor.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfTutor {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfTutor();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfTutor {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: Tutor[] | undefined;
     messages?: Message[] | undefined;
 }
 
@@ -3816,6 +3508,74 @@ export interface IPageOfUser {
     data?: User[];
 }
 
+export class ResultModelOfIEnumerableOfUser implements IResultModelOfIEnumerableOfUser {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: User[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfUser) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(User.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfUser {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: User[] | undefined;
+    messages?: Message[] | undefined;
+}
+
 export class ResultModelOfUser implements IResultModelOfUser {
     success?: boolean;
     error?: boolean;
@@ -3876,35 +3636,11 @@ export interface IResultModelOfUser {
     messages?: Message[] | undefined;
 }
 
-export class ApiException extends Error {
-    override message: string;
+export interface FileResponse {
+    data: Blob;
     status: number;
-    response: string;
-    headers: { [key: string]: any; };
-    result: any;
-
-    constructor(message: string, status: number, response: string, headers: { [key: string]: any; }, result: any) {
-        super();
-
-        this.message = message;
-        this.status = status;
-        this.response = response;
-        this.headers = headers;
-        this.result = result;
-    }
-
-    protected isApiException = true;
-
-    static isApiException(obj: any): obj is ApiException {
-        return obj.isApiException === true;
-    }
-}
-
-function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): any {
-    if (result !== null && result !== undefined)
-        throw result;
-    else
-        throw new ApiException(message, status, response, headers, null);
+    fileName?: string;
+    headers?: { [name: string]: any };
 }
 
 // This file uses TypeScript 4.5 syntax

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditAddModalComponent } from './edit-add-modal.component';
+import { ClassDetailComponent } from './class-detail.component';
 
-describe('EditAddModalComponent', () => {
-  let component: EditAddModalComponent;
-  let fixture: ComponentFixture<EditAddModalComponent>;
+describe('ClassDetailComponent', () => {
+  let component: ClassDetailComponent;
+  let fixture: ComponentFixture<ClassDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditAddModalComponent]
+      declarations: [ClassDetailComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EditAddModalComponent);
+    fixture = TestBed.createComponent(ClassDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

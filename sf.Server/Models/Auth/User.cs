@@ -1,46 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using sf.Server.Models.Core;
-using sf.Server.Models.SF;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace sf.Server.Models.Auth;
 
-public class User : Entity<Guid>
+public class User : IdentityUser<Guid>, IEntity<Guid>
 {
     [MaxLength(256), JsonProperty("first")]
-    public string FirstName { get; set; } = Empty;
+    public string? FirstName { get; set; } = Empty;
 
     [MaxLength(256), JsonProperty("last")]
-    public string LastName { get; set; } = Empty;
+    public string? LastName { get; set; } = Empty;
 
-    [JsonProperty("role")]
-    public RoleType Role { get; set; }
-
-    [JsonProperty("classId")]
-    public Guid? ClassId { get; set; }
-    [ForeignKey(nameof(ClassId)), JsonIgnore]
-    public Class? Class { get; init; }
-
-    [InverseProperty(nameof(Entry.Student)), JsonIgnore]
-    public IEnumerable<Entry>? Entries { get; init; }
-
-    [NotMapped, JsonProperty("entryIds")]
-    public IEnumerable<Guid>? EntryIds => Entries?.Select(e => e.Id);
-
-    [InverseProperty(nameof(Discipline.Users)), JsonIgnore]
-    public IEnumerable<Discipline>? Disciplines { get; init; }
-
-    [NotMapped, JsonProperty("disciplineIds")]
-    public IEnumerable<Guid>? DisciplineIds => Disciplines?.Select(d => d.Id);
+    [JsonIgnore, MaxLength(256)]
+    public string RoleString
+    {
+        get => Role.ToString();
+        set => Role = Enum.Parse<RoleType>(value);
+    }
     
+    [JsonProperty("role"), NotMapped]
+    public virtual RoleType Role { get; set; }
+
     [JsonIgnore, MaxLength(256)]
     public string ApiKey { get; init; } = Empty;
+    
+    [Timestamp, Required, JsonProperty("created")]
+    public DateTime CreatedAt { get; set; }
+    
+    [Timestamp, Required, JsonProperty("updated")]
+    public DateTime UpdatedAt { get; set; }
 }
-
 
 public enum RoleType
 {
     Student,
     Tutor,
     CampaignManager,
-    CampaignJudge
+    CampaignJudge,
+    User
 }

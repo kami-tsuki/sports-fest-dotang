@@ -1,7 +1,7 @@
-using sf.Server.Data.Sf;
-using sf.Server.Models.Auth;
-using sf.Server.Models.SF;
-using sf.Server.Services;
+using System.Text;
+using JWT.Extensions.AspNetCore;
+using Microsoft.IdentityModel.Tokens;
+using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -63,13 +63,39 @@ builder.Services.AddSwaggerGen(
 builder.Services.AddSwaggerGenNewtonsoftSupport();
 builder.Services.AddOpenApiDocument();
 
+builder.Services.AddSerilog();
+builder.Services.AddScoped<ILogger>(
+    provider =>
+        new LoggerConfiguration()
+           .WriteTo.Console()
+           .WriteTo.File(".logs/latest.log", rollingInterval: RollingInterval.Day)
+           .WriteTo.File($".logs/{DateTime.Now:dd-MM-yyyy}.log")
+           .CreateLogger());
 
 builder.Services.AddScoped<ResultService>();
+
 builder.Services.AddScoped<DataBaseService<User>>();
 builder.Services.AddScoped<DataBaseService<Class>>();
 builder.Services.AddScoped<DataBaseService<Discipline>>();
 builder.Services.AddScoped<DataBaseService<Entry>>();
 builder.Services.AddScoped<DataBaseService<Location>>();
+builder.Services.AddScoped<DataBaseService<Student>>();
+builder.Services.AddScoped<DataBaseService<School>>();
+builder.Services.AddScoped<DataBaseService<CampaignManager>>();
+builder.Services.AddScoped<DataBaseService<CampaignJudge>>();
+builder.Services.AddScoped<DataBaseService<Tutor>>();
+
+builder.Services.AddScoped<UserController>();
+builder.Services.AddScoped<ClassController>();
+builder.Services.AddScoped<DisciplineController>();
+builder.Services.AddScoped<EntryController>();
+builder.Services.AddScoped<LocationController>();
+builder.Services.AddScoped<StudentController>();
+builder.Services.AddScoped<SchoolController>();
+builder.Services.AddScoped<ManagerController>();
+builder.Services.AddScoped<JudgeController>();
+builder.Services.AddScoped<TutorController>();
+
 
 var app = builder.Build();
 

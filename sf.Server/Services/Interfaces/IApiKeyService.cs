@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Primitives;
-using sf.Server.Models.Auth;
 
 namespace sf.Server.Services.Interfaces;
 

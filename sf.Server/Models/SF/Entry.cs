@@ -1,20 +1,18 @@
-﻿using sf.Server.Models.Auth;
-using sf.Server.Models.Core;
+﻿namespace sf.Server.Models.SF;
 
-namespace sf.Server.Models.SF;
-
-public class Entry : Entity<Guid>
+public class Entry : Entity<Guid>, IStudentReference, IDisciplineReference, IScore
 { 
     [JsonProperty("studentId")]
     public Guid? StudentId { get; set; }
     [Required, JsonIgnore]
-    public User? Student { get; init; }
+    public Student? Student { get; set; }
 
     
     [JsonProperty("disciplineId")]
     public Guid? DisciplineId { get; set; }
     [Required, JsonIgnore]
-    public Discipline? Discipline { get; init; } 
+    public Discipline? Discipline { get; set; } 
+    
 
     [Range(0, 100), JsonProperty("score")]
     public double Score { get; set; }

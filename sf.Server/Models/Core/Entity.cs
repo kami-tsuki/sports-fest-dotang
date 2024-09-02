@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace sf.Server.Models.Core;
 
-namespace sf.Server.Models.Core;
-
-public class Entity<TKey> where TKey : IComparable<TKey>
+public class Entity<TKey> : IEntity<TKey> where TKey : IComparable<TKey>
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), JsonProperty("id")]
     public required TKey Id { get; set; }

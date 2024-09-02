@@ -1,0 +1,30 @@
+<div class="container mx-auto p-4">
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead>
+            <tr class="bg-gray-100 border-b">
+                <th class="py-2 px-4 text-left">Lastname</th>
+                <th class="py-2 px-4 text-left">Firstname</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of students" class="border-b hover:bg-gray-50 transition-colors duration-200">
+                <td class="py-2 px-4">{{ student.last }}</td>
+                <td class="py-2 px-4">{{ student.first }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex justify-between items-center mt-4">
+        <button (click)="prevPage()" [disabled]="page === 1"
+                class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600">
+            Previous
+        </button>
+        <span>Page {{ page }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="page === totalPages"
+                class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600">
+            Next
+        </button>
+    </div>
+</div>

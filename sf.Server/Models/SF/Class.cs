@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using sf.Server.Models.Auth;
-using sf.Server.Models.Core;
-
-namespace sf.Server.Models.SF;
+﻿namespace sf.Server.Models.SF;
 
 [Index(nameof(ShortName), IsUnique = true)]
-public class Class : Entity<Guid>
+public class Class : Entity<Guid>, ITutorReference, IStudentsReference, ILocationReference
 {
     [MaxLength(64), JsonProperty("name")]
     public string Name { get; set; } = Empty;
@@ -15,24 +11,30 @@ public class Class : Entity<Guid>
     [MaxLength(1024), JsonProperty("comment")]
     public string Comment { get; set; } = Empty;
 
-    [InverseProperty(nameof(User.Class)), System.Text.Json.Serialization.JsonIgnore]
-    public IEnumerable<User>? Users { get; init; }
-
-    [NotMapped, System.Text.Json.Serialization.JsonIgnore]
-    public User? Tutor => Users?.FirstOrDefault(u => u.Role == RoleType.Tutor);
 
     [JsonProperty("tutorId")]
+    public Guid? TutorId { get; set; }
+
+    [ForeignKey(nameof(TutorId)), JsonIgnore]
+    public Tutor? Tutor { get; set; }
+
+    [JsonIgnore, InverseProperty(nameof(Student.Class))]
+    public IEnumerable<Student>? Students { get; set; }
+
     public Guid? RoomId { get; set; }
 
-    [ForeignKey(nameof(RoomId)), System.Text.Json.Serialization.JsonIgnore]
-    public Location? Room { get; init; }
+    [ForeignKey(nameof(RoomId)), JsonIgnore]
+    public Location? Room { get; set; }
+    
+    [JsonProperty("schoolId")]
+    public Guid? SchoolId { get; set; }
 
-    [NotMapped, System.Text.Json.Serialization.JsonIgnore]
-    public IEnumerable<User>? Students => Users?.Where(u => u.Role == RoleType.Student);
+    [ForeignKey(nameof(SchoolId)), JsonIgnore]
+    public School? School { get; set; }
 
-    [NotMapped, JsonProperty("studentIds")]
-    public IEnumerable<Guid>? StudentIds => Students?.Select(s => s.Id) ?? [];
+    [JsonProperty("locationId")]
+    public Guid? LocationId { get; init; }
 
-    [NotMapped, JsonProperty("studentCount")]
-    public long StudentCount => Students?.LongCount() ?? 0;
+    [ForeignKey(nameof(LocationId)), JsonIgnore]
+    public Location? Location { get; set; }
 }

@@ -6,12 +6,337 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/v1/data/classes": {
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_Register",
+        "requestBody": {
+          "x-name": "model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_Login",
+        "requestBody": {
+          "x-name": "model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/{id}/school": {
       "get": {
         "tags": [
           "Class"
         ],
-        "operationId": "Class_GetAll",
+        "operationId": "Class_GetSchool",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/school/{schoolId}": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_GetBySchool",
+        "parameters": [
+          {
+            "name": "schoolId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/{id}/tutor": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_GetTutor",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/tutor/{tutorId}": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_GetByTutor",
+        "parameters": [
+          {
+            "name": "tutorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/{id}/students": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_GetStudents",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "x-position": 5
+          }
+        ],
+        "requestBody": {
+          "x-name": "filters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "x-position": 6
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_BulkGet",
         "parameters": [
           {
             "name": "page",
@@ -207,7 +532,109 @@
         }
       }
     },
-    "/api/v1/data/classes/search": {
+    "/api/v1/data/class/bulk": {
+      "post": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Class"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfClass"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Class"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfClass"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/search": {
       "get": {
         "tags": [
           "Class"
@@ -287,7 +714,41 @@
         }
       }
     },
-    "/api/v1/data/classes/{id}": {
+    "/api/v1/data/class/count": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/{id}": {
       "get": {
         "tags": [
           "Class"
@@ -453,13 +914,22 @@
         }
       }
     },
-    "/api/v1/data/classes/count": {
+    "/api/v1/data/class/export": {
       "get": {
         "tags": [
           "Class"
         ],
-        "operationId": "Class_GetCount",
+        "operationId": "Class_Export",
         "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
           {
             "name": "filters",
             "in": "query",
@@ -470,6 +940,71 @@
                 "type": "string"
               }
             },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/validate": {
+      "post": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Class"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/class/{id}/audit": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
             "x-position": 1
           }
         ],
@@ -479,7 +1014,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultModelOfLong"
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
                 }
               }
             }
@@ -487,12 +1022,12 @@
         }
       }
     },
-    "/api/v1/data/disciplines": {
+    "/api/v1/data/Discipline": {
       "get": {
         "tags": [
           "Discipline"
         ],
-        "operationId": "Discipline_GetAll",
+        "operationId": "Discipline_BulkGet",
         "parameters": [
           {
             "name": "page",
@@ -688,7 +1223,109 @@
         }
       }
     },
-    "/api/v1/data/disciplines/search": {
+    "/api/v1/data/Discipline/bulk": {
+      "post": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Discipline"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfDiscipline"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Discipline"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfDiscipline"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/Discipline/search": {
       "get": {
         "tags": [
           "Discipline"
@@ -768,7 +1405,41 @@
         }
       }
     },
-    "/api/v1/data/disciplines/{id}": {
+    "/api/v1/data/Discipline/count": {
+      "get": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/Discipline/{id}": {
       "get": {
         "tags": [
           "Discipline"
@@ -934,13 +1605,22 @@
         }
       }
     },
-    "/api/v1/data/disciplines/count": {
+    "/api/v1/data/Discipline/export": {
       "get": {
         "tags": [
           "Discipline"
         ],
-        "operationId": "Discipline_GetCount",
+        "operationId": "Discipline_Export",
         "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
           {
             "name": "filters",
             "in": "query",
@@ -951,6 +1631,71 @@
                 "type": "string"
               }
             },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/Discipline/validate": {
+      "post": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Discipline"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/Discipline/{id}/audit": {
+      "get": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
             "x-position": 1
           }
         ],
@@ -960,7 +1705,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultModelOfLong"
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
                 }
               }
             }
@@ -968,12 +1713,12 @@
         }
       }
     },
-    "/api/v1/data/entries": {
+    "/api/v1/data/entry": {
       "get": {
         "tags": [
           "Entry"
         ],
-        "operationId": "Entry_GetAll",
+        "operationId": "Entry_BulkGet",
         "parameters": [
           {
             "name": "page",
@@ -1169,7 +1914,109 @@
         }
       }
     },
-    "/api/v1/data/entries/search": {
+    "/api/v1/data/entry/bulk": {
+      "post": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfEntry"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfEntry"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/entry/search": {
       "get": {
         "tags": [
           "Entry"
@@ -1249,7 +2096,41 @@
         }
       }
     },
-    "/api/v1/data/entries/{id}": {
+    "/api/v1/data/entry/count": {
+      "get": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/entry/{id}": {
       "get": {
         "tags": [
           "Entry"
@@ -1415,12 +2296,503 @@
         }
       }
     },
-    "/api/v1/data/entries/count": {
+    "/api/v1/data/entry/export": {
       "get": {
         "tags": [
           "Entry"
         ],
-        "operationId": "Entry_GetCount",
+        "operationId": "Entry_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/entry/validate": {
+      "post": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entry"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/entry/{id}/audit": {
+      "get": {
+        "tags": [
+          "Entry"
+        ],
+        "operationId": "Entry_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge": {
+      "get": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_BulkGet",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 1
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 2
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Post",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignJudge"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Put",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignJudge"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Options",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "includeModels",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          },
+          {
+            "name": "includeHttpCodes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge/bulk": {
+      "post": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CampaignJudge"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CampaignJudge"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge/search": {
+      "get": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge/count": {
+      "get": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_GetCount",
         "parameters": [
           {
             "name": "filters",
@@ -1449,12 +2821,286 @@
         }
       }
     },
-    "/api/v1/data/locations": {
+    "/api/v1/user/judge/{id}": {
+      "get": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Put2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignJudge"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "patchDoc",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            }
+          },
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignJudge"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge/export": {
+      "get": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge/validate": {
+      "post": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignJudge"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/judge/{id}/audit": {
+      "get": {
+        "tags": [
+          "Judge"
+        ],
+        "operationId": "Judge_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/location": {
       "get": {
         "tags": [
           "Location"
         ],
-        "operationId": "Location_GetAll",
+        "operationId": "Location_BulkGet",
         "parameters": [
           {
             "name": "page",
@@ -1650,7 +3296,109 @@
         }
       }
     },
-    "/api/v1/data/locations/search": {
+    "/api/v1/data/location/bulk": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfLocation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfLocation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/location/search": {
       "get": {
         "tags": [
           "Location"
@@ -1730,7 +3478,41 @@
         }
       }
     },
-    "/api/v1/data/locations/{id}": {
+    "/api/v1/data/location/count": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/location/{id}": {
       "get": {
         "tags": [
           "Location"
@@ -1896,12 +3678,503 @@
         }
       }
     },
-    "/api/v1/data/locations/count": {
+    "/api/v1/data/location/export": {
       "get": {
         "tags": [
           "Location"
         ],
-        "operationId": "Location_GetCount",
+        "operationId": "Location_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/location/validate": {
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Location"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/location/{id}/audit": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager": {
+      "get": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_BulkGet",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 1
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 2
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Post",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignManager"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Put",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignManager"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Options",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "includeModels",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          },
+          {
+            "name": "includeHttpCodes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/bulk": {
+      "post": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CampaignManager"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CampaignManager"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/search": {
+      "get": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/count": {
+      "get": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_GetCount",
         "parameters": [
           {
             "name": "filters",
@@ -1930,12 +4203,3119 @@
         }
       }
     },
-    "/api/v1/_/User": {
+    "/api/v1/user/manager/{id}": {
+      "get": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Put2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignManager"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "patchDoc",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            }
+          },
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/export": {
+      "get": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/validate": {
+      "post": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignManager"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/manager/{id}/audit": {
+      "get": {
+        "tags": [
+          "Manager"
+        ],
+        "operationId": "Manager_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/{id}/classes": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetClasses",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/class/{classId}": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetByClass",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/{id}/class": {
+      "post": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_CreateClass",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "class",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Class"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/{id}/students": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetStudents",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/student/{studentId}": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetByStudent",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/{id}/tutors": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetTutors",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfTutor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_BulkGet",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 1
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 2
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Post",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/School"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Put",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/School"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Options",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "includeModels",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          },
+          {
+            "name": "includeHttpCodes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/bulk": {
+      "post": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/School"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/School"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/search": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/count": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/{id}": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Put2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/School"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "patchDoc",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            }
+          },
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/export": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/validate": {
+      "post": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/School"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/{id}/audit": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/{id}/class": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_GetClass",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/{id}/school": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_GetSchool",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/class/{classId}": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_GetByClass",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/school/{schoolId}": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_GetBySchool",
+        "parameters": [
+          {
+            "name": "schoolId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_BulkGet",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 1
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 2
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Post",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Put",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Options",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "includeModels",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          },
+          {
+            "name": "includeHttpCodes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/bulk": {
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/search": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/count": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/{id}": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Put2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "patchDoc",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            }
+          },
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfStudent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/export": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/validate": {
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/student/{id}/audit": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "operationId": "Student_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/{id}/class": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_GetClass",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfClass"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/class/{classId}": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_GetByClass",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/{id}/school": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_GetSchool",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/{id}/students": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_GetStudents",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfStudent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_BulkGet",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 1
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 2
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Post",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tutor"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Put",
+        "parameters": [
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tutor"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Options",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "includeModels",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 2
+          },
+          {
+            "name": "includeHttpCodes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/bulk": {
+      "post": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Tutor"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Tutor"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/search": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Search",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            },
+            "x-position": 2
+          },
+          {
+            "name": "entities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 10
+            },
+            "x-position": 3
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "sendNull",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 6
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfPageOfTutor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/count": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/{id}": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Put2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ignoreNullProperties",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 3
+          }
+        ],
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tutor"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "patchDoc",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Operation"
+                }
+              }
+            }
+          },
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfTutor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/export": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Export",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/validate": {
+      "post": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tutor"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/tutor/{id}/audit": {
+      "get": {
+        "tags": [
+          "Tutor"
+        ],
+        "operationId": "Tutor_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/_/base": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "User_GetAll",
+        "operationId": "User_BulkGet",
         "parameters": [
           {
             "name": "page",
@@ -2131,7 +7511,109 @@
         }
       }
     },
-    "/api/v1/_/User/search": {
+    "/api/v1/_/base/bulk": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_BulkPost",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfUser"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_BulkPut",
+        "requestBody": {
+          "x-name": "entities",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfUser"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_BulkDelete",
+        "requestBody": {
+          "x-name": "ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/_/base/search": {
       "get": {
         "tags": [
           "User"
@@ -2211,7 +7693,41 @@
         }
       }
     },
-    "/api/v1/_/User/{id}": {
+    "/api/v1/_/base/count": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_GetCount",
+        "parameters": [
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "nullable": true,
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfLong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/_/base/{id}": {
       "get": {
         "tags": [
           "User"
@@ -2377,13 +7893,22 @@
         }
       }
     },
-    "/api/v1/_/User/count": {
+    "/api/v1/_/base/export": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "User_GetCount",
+        "operationId": "User_Export",
         "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "csv"
+            },
+            "x-position": 1
+          },
           {
             "name": "filters",
             "in": "query",
@@ -2394,6 +7919,71 @@
                 "type": "string"
               }
             },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/_/base/validate": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_Validate",
+        "requestBody": {
+          "x-name": "entity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/_/base/{id}/audit": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_GetAuditHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
             "x-position": 1
           }
         ],
@@ -2403,7 +7993,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResultModelOfLong"
+                  "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
                 }
               }
             }
@@ -2414,7 +8004,177 @@
   },
   "components": {
     "schemas": {
-      "ResultModelOfPageOfClass": {
+      "RegisterModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "schoolname": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "LoginModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "username": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "schoolID": {
+            "type": "string",
+            "format": "guid",
+            "nullable": true
+          }
+        }
+      },
+      "User": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityUserOfGuid"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "created",
+              "updated"
+            ],
+            "properties": {
+              "first": {
+                "type": "string",
+                "maxLength": 256,
+                "nullable": true
+              },
+              "last": {
+                "type": "string",
+                "maxLength": 256,
+                "nullable": true
+              },
+              "role": {
+                "$ref": "#/components/schemas/RoleType"
+              },
+              "created": {
+                "type": "string",
+                "format": "date-time",
+                "minLength": 1
+              },
+              "updated": {
+                "type": "string",
+                "format": "date-time",
+                "minLength": 1
+              }
+            }
+          }
+        ]
+      },
+      "RoleType": {
+        "type": "string",
+        "description": "",
+        "x-enumNames": [
+          "Student",
+          "Tutor",
+          "CampaignManager",
+          "CampaignJudge",
+          "User"
+        ],
+        "enum": [
+          "Student",
+          "Tutor",
+          "CampaignManager",
+          "CampaignJudge",
+          "User"
+        ]
+      },
+      "IdentityUserOfGuid": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailConfirmed": {
+            "type": "boolean"
+          },
+          "passwordHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "concurrencyStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumberConfirmed": {
+            "type": "boolean"
+          },
+          "twoFactorEnabled": {
+            "type": "boolean"
+          },
+          "lockoutEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lockoutEnabled": {
+            "type": "boolean"
+          },
+          "accessFailedCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ResultModelOfSchool": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -2432,7 +8192,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/PageOfClass"
+                "$ref": "#/components/schemas/School"
               }
             ]
           },
@@ -2445,31 +8205,7 @@
           }
         }
       },
-      "PageOfClass": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "number": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "total": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Class"
-            }
-          }
-        }
-      },
-      "Class": {
+      "School": {
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityOfGuid"
@@ -2480,126 +8216,61 @@
             "properties": {
               "name": {
                 "type": "string",
-                "maxLength": 64
+                "maxLength": 64,
+                "minLength": 2
               },
-              "short": {
+              "shortName": {
                 "type": "string",
-                "maxLength": 8
+                "maxLength": 16,
+                "minLength": 2
               },
               "comment": {
                 "type": "string",
                 "maxLength": 1024
               },
-              "users": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/User"
-                }
-              },
-              "tutor": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/User"
-                  }
-                ]
-              },
-              "tutorId": {
+              "managerId": {
                 "type": "string",
                 "format": "guid",
                 "nullable": true
               },
-              "room": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Location"
-                  }
-                ]
-              },
-              "students": {
+              "judgeIds": {
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Tutor"
                 }
               },
               "studentIds": {
                 "type": "array",
-                "nullable": true,
                 "items": {
                   "type": "string",
                   "format": "guid"
                 }
-              },
-              "studentCount": {
-                "type": "integer",
-                "format": "int64"
               }
             }
           }
         ]
       },
-      "User": {
+      "Tutor": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/EntityOfGuid"
+            "$ref": "#/components/schemas/User"
           },
           {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "first": {
-                "type": "string",
-                "maxLength": 256
-              },
-              "last": {
-                "type": "string",
-                "maxLength": 256
-              },
-              "role": {
-                "$ref": "#/components/schemas/RoleType"
-              },
               "classId": {
                 "type": "string",
                 "format": "guid",
                 "nullable": true
               },
-              "entryIds": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              },
-              "disciplineIds": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "type": "string",
-                  "format": "guid"
-                }
+              "schoolId": {
+                "type": "string",
+                "format": "guid"
               }
             }
           }
-        ]
-      },
-      "RoleType": {
-        "type": "string",
-        "description": "",
-        "x-enumNames": [
-          "Student",
-          "Tutor",
-          "CampaignManager",
-          "CampaignJudge"
-        ],
-        "enum": [
-          "Student",
-          "Tutor",
-          "CampaignManager",
-          "CampaignJudge"
         ]
       },
       "EntityOfGuid": {
@@ -2625,47 +8296,6 @@
             "minLength": 1
           }
         }
-      },
-      "Location": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EntityOfGuid"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string",
-                "maxLength": 64
-              },
-              "short": {
-                "type": "string",
-                "maxLength": 8
-              },
-              "description": {
-                "type": "string",
-                "maxLength": 1024
-              },
-              "classIds": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              },
-              "disciplineIds": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              }
-            }
-          }
-        ]
       },
       "Message": {
         "type": "object",
@@ -2759,6 +8389,137 @@
           "Fatal"
         ]
       },
+      "ResultModelOfPageOfClass": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageOfClass"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "PageOfClass": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Class"
+            }
+          }
+        }
+      },
+      "Class": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityOfGuid"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "short": {
+                "type": "string",
+                "maxLength": 8
+              },
+              "comment": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "tutorId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "roomId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "schoolId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "locationId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "ResultModelOfTutor": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Tutor"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
       "ResultModelOfClass": {
         "type": "object",
         "additionalProperties": false,
@@ -2780,6 +8541,171 @@
                 "$ref": "#/components/schemas/Class"
               }
             ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfPageOfStudent": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageOfStudent"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "PageOfStudent": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Student"
+            }
+          }
+        }
+      },
+      "Student": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/User"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "classId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "schoolId": {
+                "type": "string",
+                "format": "guid"
+              }
+            }
+          }
+        ]
+      },
+      "ResultModelOfIEnumerableOfClass": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Class"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfIEnumerableOfGuid": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "guid"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfLong": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "integer",
+            "format": "int64"
           },
           "messages": {
             "type": "array",
@@ -2824,33 +8750,6 @@
           }
         }
       },
-      "ResultModelOfLong": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "messages": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Message"
-            }
-          }
-        }
-      },
       "ResultModelOfObject": {
         "type": "object",
         "additionalProperties": false,
@@ -2874,6 +8773,67 @@
             "items": {
               "$ref": "#/components/schemas/Message"
             }
+          }
+        }
+      },
+      "ResultModelOfIEnumerableOfAuditLog": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AuditLog"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "AuditLog": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "entityId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "entityType": {
+            "type": "string",
+            "nullable": true
+          },
+          "action": {
+            "type": "string"
+          },
+          "changedBy": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changes": {
+            "type": "string"
           }
         }
       },
@@ -2943,25 +8903,19 @@
             "properties": {
               "name": {
                 "type": "string",
-                "maxLength": 64
+                "maxLength": 64,
+                "minLength": 2
               },
               "short": {
                 "type": "string",
-                "maxLength": 8
+                "maxLength": 8,
+                "minLength": 2
               },
-              "description": {
+              "comment": {
                 "type": "string",
                 "maxLength": 1024
               },
-              "judgeIds": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              },
-              "managerId": {
+              "judgeId": {
                 "type": "string",
                 "format": "guid",
                 "nullable": true
@@ -2973,8 +8927,42 @@
                     "$ref": "#/components/schemas/Location"
                   }
                 ]
+              }
+            }
+          }
+        ]
+      },
+      "Location": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityOfGuid"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 2
               },
-              "entryIds": {
+              "short": {
+                "type": "string",
+                "maxLength": 8,
+                "minLength": 2
+              },
+              "comment": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "classIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              },
+              "disciplineIds": {
                 "type": "array",
                 "nullable": true,
                 "items": {
@@ -2985,6 +8973,36 @@
             }
           }
         ]
+      },
+      "ResultModelOfIEnumerableOfDiscipline": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Discipline"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
       },
       "ResultModelOfDiscipline": {
         "type": "object",
@@ -3105,6 +9123,36 @@
           }
         ]
       },
+      "ResultModelOfIEnumerableOfEntry": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Entry"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
       "ResultModelOfEntry": {
         "type": "object",
         "additionalProperties": false,
@@ -3124,6 +9172,144 @@
             "oneOf": [
               {
                 "$ref": "#/components/schemas/Entry"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfPageOfCampaignJudge": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageOfCampaignJudge"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "PageOfCampaignJudge": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CampaignJudge"
+            }
+          }
+        }
+      },
+      "CampaignJudge": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/User"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "disciplineId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "schoolId": {
+                "type": "string",
+                "format": "guid"
+              }
+            }
+          }
+        ]
+      },
+      "ResultModelOfIEnumerableOfCampaignJudge": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CampaignJudge"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfCampaignJudge": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CampaignJudge"
               }
             ]
           },
@@ -3191,6 +9377,36 @@
           }
         }
       },
+      "ResultModelOfIEnumerableOfLocation": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
       "ResultModelOfLocation": {
         "type": "object",
         "additionalProperties": false,
@@ -3212,6 +9428,370 @@
                 "$ref": "#/components/schemas/Location"
               }
             ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfPageOfCampaignManager": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageOfCampaignManager"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "PageOfCampaignManager": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CampaignManager"
+            }
+          }
+        }
+      },
+      "CampaignManager": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/User"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "schoolId": {
+                "type": "string",
+                "format": "guid"
+              }
+            }
+          }
+        ]
+      },
+      "ResultModelOfIEnumerableOfCampaignManager": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CampaignManager"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfCampaignManager": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CampaignManager"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfPageOfTutor": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageOfTutor"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "PageOfTutor": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tutor"
+            }
+          }
+        }
+      },
+      "ResultModelOfPageOfSchool": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PageOfSchool"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "PageOfSchool": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/School"
+            }
+          }
+        }
+      },
+      "ResultModelOfIEnumerableOfSchool": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/School"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfIEnumerableOfStudent": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Student"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfStudent": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Student"
+              }
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "ResultModelOfIEnumerableOfTutor": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Tutor"
+            }
           },
           "messages": {
             "type": "array",
@@ -3273,6 +9853,36 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "ResultModelOfIEnumerableOfUser": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
             }
           }
         }

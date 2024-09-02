@@ -137,13 +137,14 @@ export class ApiService {
         );
     }
 
-   public delete<T extends  ApiResultType>(
+    public delete<T extends ApiResultType>(
         key: string,
+        body?: any,
         params?: HttpParams,
         headers?: HttpHeaders,
         cacheClear: boolean = true
     ): Observable<T> {
-        return this.http.delete<T>(key, { params, headers }).pipe(
+        return this.http.request<T>('delete', key, { body, params, headers }).pipe(
             tap((result) => {
                 if (cacheClear) {
                     this.cacheService.clearCache(key);
@@ -210,4 +211,5 @@ export class ApiService {
             );
         }
     }
+
 }

@@ -5,254 +5,968 @@
 @sf.Server_HostAddress = http://localhost:5056
 @sf.ApiKey = {{sf.ApiKey}}
 
-## /api/v1/data/classes
+## /api/v1/auth/register
 
-### GET /api/v1/data/classes
-GET {{sf.Server_HostAddress}}/api/v1/data/classes
-
-### POST /api/v1/data/classes
-POST {{sf.Server_HostAddress}}/api/v1/data/classes
+### POST /api/v1/auth/register
+POST {{sf.Server_HostAddress}}/api/v1/auth/register
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/data/classes
-PUT {{sf.Server_HostAddress}}/api/v1/data/classes
+## /api/v1/auth/login
+
+### POST /api/v1/auth/login
+POST {{sf.Server_HostAddress}}/api/v1/auth/login
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/v1/data/classes
-OPTIONS {{sf.Server_HostAddress}}/api/v1/data/classes
+## /api/v1/data/class/{id}/school
 
-## /api/v1/data/classes/search
+### GET /api/v1/data/class/{id}/school
+GET {{sf.Server_HostAddress}}/api/v1/data/class/{id}/school
 
-### GET /api/v1/data/classes/search
-GET {{sf.Server_HostAddress}}/api/v1/data/classes/search
+## /api/v1/data/class/school/{schoolId}
 
-## /api/v1/data/classes/{id}
+### GET /api/v1/data/class/school/{schoolId}
+GET {{sf.Server_HostAddress}}/api/v1/data/class/school/{schoolId}
 
-### GET /api/v1/data/classes/{id}
-GET {{sf.Server_HostAddress}}/api/v1/data/classes/{id}
+## /api/v1/data/class/{id}/tutor
 
-### PUT /api/v1/data/classes/{id}
-PUT {{sf.Server_HostAddress}}/api/v1/data/classes/{id}
+### GET /api/v1/data/class/{id}/tutor
+GET {{sf.Server_HostAddress}}/api/v1/data/class/{id}/tutor
+
+## /api/v1/data/class/tutor/{tutorId}
+
+### GET /api/v1/data/class/tutor/{tutorId}
+GET {{sf.Server_HostAddress}}/api/v1/data/class/tutor/{tutorId}
+
+## /api/v1/data/class/{id}/students
+
+### GET /api/v1/data/class/{id}/students
+GET {{sf.Server_HostAddress}}/api/v1/data/class/{id}/students
+
+## /api/v1/data/class
+
+### GET /api/v1/data/class
+GET {{sf.Server_HostAddress}}/api/v1/data/class
+
+### POST /api/v1/data/class
+POST {{sf.Server_HostAddress}}/api/v1/data/class
 Content-Type: application/json
 
 {}
 
-### PATCH /api/v1/data/classes/{id}
-PATCH {{sf.Server_HostAddress}}/api/v1/data/classes/{id}
+### PUT /api/v1/data/class
+PUT {{sf.Server_HostAddress}}/api/v1/data/class
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/data/classes/{id}
-DELETE {{sf.Server_HostAddress}}/api/v1/data/classes/{id}
+### OPTIONS /api/v1/data/class
+OPTIONS {{sf.Server_HostAddress}}/api/v1/data/class
 
-## /api/v1/data/classes/count
+## /api/v1/data/class/bulk
 
-### GET /api/v1/data/classes/count
-GET {{sf.Server_HostAddress}}/api/v1/data/classes/count
-
-## /api/v1/data/disciplines
-
-### GET /api/v1/data/disciplines
-GET {{sf.Server_HostAddress}}/api/v1/data/disciplines
-
-### POST /api/v1/data/disciplines
-POST {{sf.Server_HostAddress}}/api/v1/data/disciplines
+### POST /api/v1/data/class/bulk
+POST {{sf.Server_HostAddress}}/api/v1/data/class/bulk
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/data/disciplines
-PUT {{sf.Server_HostAddress}}/api/v1/data/disciplines
+### PUT /api/v1/data/class/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/data/class/bulk
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/v1/data/disciplines
-OPTIONS {{sf.Server_HostAddress}}/api/v1/data/disciplines
+### DELETE /api/v1/data/class/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/data/class/bulk
 
-## /api/v1/data/disciplines/search
+## /api/v1/data/class/search
 
-### GET /api/v1/data/disciplines/search
-GET {{sf.Server_HostAddress}}/api/v1/data/disciplines/search
+### GET /api/v1/data/class/search
+GET {{sf.Server_HostAddress}}/api/v1/data/class/search
 
-## /api/v1/data/disciplines/{id}
+## /api/v1/data/class/count
 
-### GET /api/v1/data/disciplines/{id}
-GET {{sf.Server_HostAddress}}/api/v1/data/disciplines/{id}
+### GET /api/v1/data/class/count
+GET {{sf.Server_HostAddress}}/api/v1/data/class/count
 
-### PUT /api/v1/data/disciplines/{id}
-PUT {{sf.Server_HostAddress}}/api/v1/data/disciplines/{id}
+## /api/v1/data/class/{id}
+
+### GET /api/v1/data/class/{id}
+GET {{sf.Server_HostAddress}}/api/v1/data/class/{id}
+
+### PUT /api/v1/data/class/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/data/class/{id}
 Content-Type: application/json
 
 {}
 
-### PATCH /api/v1/data/disciplines/{id}
-PATCH {{sf.Server_HostAddress}}/api/v1/data/disciplines/{id}
+### PATCH /api/v1/data/class/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/data/class/{id}
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/data/disciplines/{id}
-DELETE {{sf.Server_HostAddress}}/api/v1/data/disciplines/{id}
+### DELETE /api/v1/data/class/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/data/class/{id}
 
-## /api/v1/data/disciplines/count
+## /api/v1/data/class/export
 
-### GET /api/v1/data/disciplines/count
-GET {{sf.Server_HostAddress}}/api/v1/data/disciplines/count
+### GET /api/v1/data/class/export
+GET {{sf.Server_HostAddress}}/api/v1/data/class/export
 
-## /api/v1/data/entries
+## /api/v1/data/class/validate
 
-### GET /api/v1/data/entries
-GET {{sf.Server_HostAddress}}/api/v1/data/entries
-
-### POST /api/v1/data/entries
-POST {{sf.Server_HostAddress}}/api/v1/data/entries
+### POST /api/v1/data/class/validate
+POST {{sf.Server_HostAddress}}/api/v1/data/class/validate
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/data/entries
-PUT {{sf.Server_HostAddress}}/api/v1/data/entries
+## /api/v1/data/class/{id}/audit
+
+### GET /api/v1/data/class/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/data/class/{id}/audit
+
+## /api/v1/data/Discipline
+
+### GET /api/v1/data/Discipline
+GET {{sf.Server_HostAddress}}/api/v1/data/Discipline
+
+### POST /api/v1/data/Discipline
+POST {{sf.Server_HostAddress}}/api/v1/data/Discipline
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/v1/data/entries
-OPTIONS {{sf.Server_HostAddress}}/api/v1/data/entries
-
-## /api/v1/data/entries/search
-
-### GET /api/v1/data/entries/search
-GET {{sf.Server_HostAddress}}/api/v1/data/entries/search
-
-## /api/v1/data/entries/{id}
-
-### GET /api/v1/data/entries/{id}
-GET {{sf.Server_HostAddress}}/api/v1/data/entries/{id}
-
-### PUT /api/v1/data/entries/{id}
-PUT {{sf.Server_HostAddress}}/api/v1/data/entries/{id}
+### PUT /api/v1/data/Discipline
+PUT {{sf.Server_HostAddress}}/api/v1/data/Discipline
 Content-Type: application/json
 
 {}
 
-### PATCH /api/v1/data/entries/{id}
-PATCH {{sf.Server_HostAddress}}/api/v1/data/entries/{id}
+### OPTIONS /api/v1/data/Discipline
+OPTIONS {{sf.Server_HostAddress}}/api/v1/data/Discipline
+
+## /api/v1/data/Discipline/bulk
+
+### POST /api/v1/data/Discipline/bulk
+POST {{sf.Server_HostAddress}}/api/v1/data/Discipline/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/data/entries/{id}
-DELETE {{sf.Server_HostAddress}}/api/v1/data/entries/{id}
-
-## /api/v1/data/entries/count
-
-### GET /api/v1/data/entries/count
-GET {{sf.Server_HostAddress}}/api/v1/data/entries/count
-
-## /api/v1/data/locations
-
-### GET /api/v1/data/locations
-GET {{sf.Server_HostAddress}}/api/v1/data/locations
-
-### POST /api/v1/data/locations
-POST {{sf.Server_HostAddress}}/api/v1/data/locations
+### PUT /api/v1/data/Discipline/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/data/Discipline/bulk
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/data/locations
-PUT {{sf.Server_HostAddress}}/api/v1/data/locations
+### DELETE /api/v1/data/Discipline/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/data/Discipline/bulk
+
+## /api/v1/data/Discipline/search
+
+### GET /api/v1/data/Discipline/search
+GET {{sf.Server_HostAddress}}/api/v1/data/Discipline/search
+
+## /api/v1/data/Discipline/count
+
+### GET /api/v1/data/Discipline/count
+GET {{sf.Server_HostAddress}}/api/v1/data/Discipline/count
+
+## /api/v1/data/Discipline/{id}
+
+### GET /api/v1/data/Discipline/{id}
+GET {{sf.Server_HostAddress}}/api/v1/data/Discipline/{id}
+
+### PUT /api/v1/data/Discipline/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/data/Discipline/{id}
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/v1/data/locations
-OPTIONS {{sf.Server_HostAddress}}/api/v1/data/locations
-
-## /api/v1/data/locations/search
-
-### GET /api/v1/data/locations/search
-GET {{sf.Server_HostAddress}}/api/v1/data/locations/search
-
-## /api/v1/data/locations/{id}
-
-### GET /api/v1/data/locations/{id}
-GET {{sf.Server_HostAddress}}/api/v1/data/locations/{id}
-
-### PUT /api/v1/data/locations/{id}
-PUT {{sf.Server_HostAddress}}/api/v1/data/locations/{id}
+### PATCH /api/v1/data/Discipline/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/data/Discipline/{id}
 Content-Type: application/json
 
 {}
 
-### PATCH /api/v1/data/locations/{id}
-PATCH {{sf.Server_HostAddress}}/api/v1/data/locations/{id}
+### DELETE /api/v1/data/Discipline/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/data/Discipline/{id}
+
+## /api/v1/data/Discipline/export
+
+### GET /api/v1/data/Discipline/export
+GET {{sf.Server_HostAddress}}/api/v1/data/Discipline/export
+
+## /api/v1/data/Discipline/validate
+
+### POST /api/v1/data/Discipline/validate
+POST {{sf.Server_HostAddress}}/api/v1/data/Discipline/validate
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/data/locations/{id}
-DELETE {{sf.Server_HostAddress}}/api/v1/data/locations/{id}
+## /api/v1/data/Discipline/{id}/audit
 
-## /api/v1/data/locations/count
+### GET /api/v1/data/Discipline/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/data/Discipline/{id}/audit
 
-### GET /api/v1/data/locations/count
-GET {{sf.Server_HostAddress}}/api/v1/data/locations/count
+## /api/v1/data/entry
 
-## /api/v1/_/User
+### GET /api/v1/data/entry
+GET {{sf.Server_HostAddress}}/api/v1/data/entry
 
-### GET /api/v1/_/User
-GET {{sf.Server_HostAddress}}/api/v1/_/User
-
-### POST /api/v1/_/User
-POST {{sf.Server_HostAddress}}/api/v1/_/User
+### POST /api/v1/data/entry
+POST {{sf.Server_HostAddress}}/api/v1/data/entry
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/_/User
-PUT {{sf.Server_HostAddress}}/api/v1/_/User
+### PUT /api/v1/data/entry
+PUT {{sf.Server_HostAddress}}/api/v1/data/entry
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/v1/_/User
-OPTIONS {{sf.Server_HostAddress}}/api/v1/_/User
+### OPTIONS /api/v1/data/entry
+OPTIONS {{sf.Server_HostAddress}}/api/v1/data/entry
 
-## /api/v1/_/User/search
+## /api/v1/data/entry/bulk
 
-### GET /api/v1/_/User/search
-GET {{sf.Server_HostAddress}}/api/v1/_/User/search
-
-## /api/v1/_/User/{id}
-
-### GET /api/v1/_/User/{id}
-GET {{sf.Server_HostAddress}}/api/v1/_/User/{id}
-
-### PUT /api/v1/_/User/{id}
-PUT {{sf.Server_HostAddress}}/api/v1/_/User/{id}
+### POST /api/v1/data/entry/bulk
+POST {{sf.Server_HostAddress}}/api/v1/data/entry/bulk
 Content-Type: application/json
 
 {}
 
-### PATCH /api/v1/_/User/{id}
-PATCH {{sf.Server_HostAddress}}/api/v1/_/User/{id}
+### PUT /api/v1/data/entry/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/data/entry/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/_/User/{id}
-DELETE {{sf.Server_HostAddress}}/api/v1/_/User/{id}
+### DELETE /api/v1/data/entry/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/data/entry/bulk
 
-## /api/v1/_/User/count
+## /api/v1/data/entry/search
 
-### GET /api/v1/_/User/count
-GET {{sf.Server_HostAddress}}/api/v1/_/User/count
+### GET /api/v1/data/entry/search
+GET {{sf.Server_HostAddress}}/api/v1/data/entry/search
+
+## /api/v1/data/entry/count
+
+### GET /api/v1/data/entry/count
+GET {{sf.Server_HostAddress}}/api/v1/data/entry/count
+
+## /api/v1/data/entry/{id}
+
+### GET /api/v1/data/entry/{id}
+GET {{sf.Server_HostAddress}}/api/v1/data/entry/{id}
+
+### PUT /api/v1/data/entry/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/data/entry/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/data/entry/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/data/entry/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/data/entry/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/data/entry/{id}
+
+## /api/v1/data/entry/export
+
+### GET /api/v1/data/entry/export
+GET {{sf.Server_HostAddress}}/api/v1/data/entry/export
+
+## /api/v1/data/entry/validate
+
+### POST /api/v1/data/entry/validate
+POST {{sf.Server_HostAddress}}/api/v1/data/entry/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/data/entry/{id}/audit
+
+### GET /api/v1/data/entry/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/data/entry/{id}/audit
+
+## /api/v1/user/judge
+
+### GET /api/v1/user/judge
+GET {{sf.Server_HostAddress}}/api/v1/user/judge
+
+### POST /api/v1/user/judge
+POST {{sf.Server_HostAddress}}/api/v1/user/judge
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/judge
+PUT {{sf.Server_HostAddress}}/api/v1/user/judge
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/user/judge
+OPTIONS {{sf.Server_HostAddress}}/api/v1/user/judge
+
+## /api/v1/user/judge/bulk
+
+### POST /api/v1/user/judge/bulk
+POST {{sf.Server_HostAddress}}/api/v1/user/judge/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/judge/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/user/judge/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/judge/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/user/judge/bulk
+
+## /api/v1/user/judge/search
+
+### GET /api/v1/user/judge/search
+GET {{sf.Server_HostAddress}}/api/v1/user/judge/search
+
+## /api/v1/user/judge/count
+
+### GET /api/v1/user/judge/count
+GET {{sf.Server_HostAddress}}/api/v1/user/judge/count
+
+## /api/v1/user/judge/{id}
+
+### GET /api/v1/user/judge/{id}
+GET {{sf.Server_HostAddress}}/api/v1/user/judge/{id}
+
+### PUT /api/v1/user/judge/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/user/judge/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/user/judge/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/user/judge/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/judge/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/user/judge/{id}
+
+## /api/v1/user/judge/export
+
+### GET /api/v1/user/judge/export
+GET {{sf.Server_HostAddress}}/api/v1/user/judge/export
+
+## /api/v1/user/judge/validate
+
+### POST /api/v1/user/judge/validate
+POST {{sf.Server_HostAddress}}/api/v1/user/judge/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/user/judge/{id}/audit
+
+### GET /api/v1/user/judge/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/user/judge/{id}/audit
+
+## /api/v1/data/location
+
+### GET /api/v1/data/location
+GET {{sf.Server_HostAddress}}/api/v1/data/location
+
+### POST /api/v1/data/location
+POST {{sf.Server_HostAddress}}/api/v1/data/location
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/data/location
+PUT {{sf.Server_HostAddress}}/api/v1/data/location
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/data/location
+OPTIONS {{sf.Server_HostAddress}}/api/v1/data/location
+
+## /api/v1/data/location/bulk
+
+### POST /api/v1/data/location/bulk
+POST {{sf.Server_HostAddress}}/api/v1/data/location/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/data/location/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/data/location/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/data/location/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/data/location/bulk
+
+## /api/v1/data/location/search
+
+### GET /api/v1/data/location/search
+GET {{sf.Server_HostAddress}}/api/v1/data/location/search
+
+## /api/v1/data/location/count
+
+### GET /api/v1/data/location/count
+GET {{sf.Server_HostAddress}}/api/v1/data/location/count
+
+## /api/v1/data/location/{id}
+
+### GET /api/v1/data/location/{id}
+GET {{sf.Server_HostAddress}}/api/v1/data/location/{id}
+
+### PUT /api/v1/data/location/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/data/location/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/data/location/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/data/location/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/data/location/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/data/location/{id}
+
+## /api/v1/data/location/export
+
+### GET /api/v1/data/location/export
+GET {{sf.Server_HostAddress}}/api/v1/data/location/export
+
+## /api/v1/data/location/validate
+
+### POST /api/v1/data/location/validate
+POST {{sf.Server_HostAddress}}/api/v1/data/location/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/data/location/{id}/audit
+
+### GET /api/v1/data/location/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/data/location/{id}/audit
+
+## /api/v1/user/manager
+
+### GET /api/v1/user/manager
+GET {{sf.Server_HostAddress}}/api/v1/user/manager
+
+### POST /api/v1/user/manager
+POST {{sf.Server_HostAddress}}/api/v1/user/manager
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/manager
+PUT {{sf.Server_HostAddress}}/api/v1/user/manager
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/user/manager
+OPTIONS {{sf.Server_HostAddress}}/api/v1/user/manager
+
+## /api/v1/user/manager/bulk
+
+### POST /api/v1/user/manager/bulk
+POST {{sf.Server_HostAddress}}/api/v1/user/manager/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/manager/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/user/manager/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/manager/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/user/manager/bulk
+
+## /api/v1/user/manager/search
+
+### GET /api/v1/user/manager/search
+GET {{sf.Server_HostAddress}}/api/v1/user/manager/search
+
+## /api/v1/user/manager/count
+
+### GET /api/v1/user/manager/count
+GET {{sf.Server_HostAddress}}/api/v1/user/manager/count
+
+## /api/v1/user/manager/{id}
+
+### GET /api/v1/user/manager/{id}
+GET {{sf.Server_HostAddress}}/api/v1/user/manager/{id}
+
+### PUT /api/v1/user/manager/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/user/manager/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/user/manager/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/user/manager/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/manager/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/user/manager/{id}
+
+## /api/v1/user/manager/export
+
+### GET /api/v1/user/manager/export
+GET {{sf.Server_HostAddress}}/api/v1/user/manager/export
+
+## /api/v1/user/manager/validate
+
+### POST /api/v1/user/manager/validate
+POST {{sf.Server_HostAddress}}/api/v1/user/manager/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/user/manager/{id}/audit
+
+### GET /api/v1/user/manager/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/user/manager/{id}/audit
+
+## /api/v1/data/school/{id}/classes
+
+### GET /api/v1/data/school/{id}/classes
+GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}/classes
+
+## /api/v1/data/school/class/{classId}
+
+### GET /api/v1/data/school/class/{classId}
+GET {{sf.Server_HostAddress}}/api/v1/data/school/class/{classId}
+
+## /api/v1/data/school/{id}/class
+
+### POST /api/v1/data/school/{id}/class
+POST {{sf.Server_HostAddress}}/api/v1/data/school/{id}/class
+Content-Type: application/json
+
+{}
+
+## /api/v1/data/school/{id}/students
+
+### GET /api/v1/data/school/{id}/students
+GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}/students
+
+## /api/v1/data/school/student/{studentId}
+
+### GET /api/v1/data/school/student/{studentId}
+GET {{sf.Server_HostAddress}}/api/v1/data/school/student/{studentId}
+
+## /api/v1/data/school/{id}/tutors
+
+### GET /api/v1/data/school/{id}/tutors
+GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}/tutors
+
+## /api/v1/data/school
+
+### GET /api/v1/data/school
+GET {{sf.Server_HostAddress}}/api/v1/data/school
+
+### POST /api/v1/data/school
+POST {{sf.Server_HostAddress}}/api/v1/data/school
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/data/school
+PUT {{sf.Server_HostAddress}}/api/v1/data/school
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/data/school
+OPTIONS {{sf.Server_HostAddress}}/api/v1/data/school
+
+## /api/v1/data/school/bulk
+
+### POST /api/v1/data/school/bulk
+POST {{sf.Server_HostAddress}}/api/v1/data/school/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/data/school/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/data/school/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/data/school/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/data/school/bulk
+
+## /api/v1/data/school/search
+
+### GET /api/v1/data/school/search
+GET {{sf.Server_HostAddress}}/api/v1/data/school/search
+
+## /api/v1/data/school/count
+
+### GET /api/v1/data/school/count
+GET {{sf.Server_HostAddress}}/api/v1/data/school/count
+
+## /api/v1/data/school/{id}
+
+### GET /api/v1/data/school/{id}
+GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}
+
+### PUT /api/v1/data/school/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/data/school/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/data/school/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/data/school/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/data/school/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/data/school/{id}
+
+## /api/v1/data/school/export
+
+### GET /api/v1/data/school/export
+GET {{sf.Server_HostAddress}}/api/v1/data/school/export
+
+## /api/v1/data/school/validate
+
+### POST /api/v1/data/school/validate
+POST {{sf.Server_HostAddress}}/api/v1/data/school/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/data/school/{id}/audit
+
+### GET /api/v1/data/school/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}/audit
+
+## /api/v1/user/student/{id}/class
+
+### GET /api/v1/user/student/{id}/class
+GET {{sf.Server_HostAddress}}/api/v1/user/student/{id}/class
+
+## /api/v1/user/student/{id}/school
+
+### GET /api/v1/user/student/{id}/school
+GET {{sf.Server_HostAddress}}/api/v1/user/student/{id}/school
+
+## /api/v1/user/student/class/{classId}
+
+### GET /api/v1/user/student/class/{classId}
+GET {{sf.Server_HostAddress}}/api/v1/user/student/class/{classId}
+
+## /api/v1/user/student/school/{schoolId}
+
+### GET /api/v1/user/student/school/{schoolId}
+GET {{sf.Server_HostAddress}}/api/v1/user/student/school/{schoolId}
+
+## /api/v1/user/student
+
+### GET /api/v1/user/student
+GET {{sf.Server_HostAddress}}/api/v1/user/student
+
+### POST /api/v1/user/student
+POST {{sf.Server_HostAddress}}/api/v1/user/student
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/student
+PUT {{sf.Server_HostAddress}}/api/v1/user/student
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/user/student
+OPTIONS {{sf.Server_HostAddress}}/api/v1/user/student
+
+## /api/v1/user/student/bulk
+
+### POST /api/v1/user/student/bulk
+POST {{sf.Server_HostAddress}}/api/v1/user/student/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/student/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/user/student/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/student/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/user/student/bulk
+
+## /api/v1/user/student/search
+
+### GET /api/v1/user/student/search
+GET {{sf.Server_HostAddress}}/api/v1/user/student/search
+
+## /api/v1/user/student/count
+
+### GET /api/v1/user/student/count
+GET {{sf.Server_HostAddress}}/api/v1/user/student/count
+
+## /api/v1/user/student/{id}
+
+### GET /api/v1/user/student/{id}
+GET {{sf.Server_HostAddress}}/api/v1/user/student/{id}
+
+### PUT /api/v1/user/student/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/user/student/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/user/student/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/user/student/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/student/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/user/student/{id}
+
+## /api/v1/user/student/export
+
+### GET /api/v1/user/student/export
+GET {{sf.Server_HostAddress}}/api/v1/user/student/export
+
+## /api/v1/user/student/validate
+
+### POST /api/v1/user/student/validate
+POST {{sf.Server_HostAddress}}/api/v1/user/student/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/user/student/{id}/audit
+
+### GET /api/v1/user/student/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/user/student/{id}/audit
+
+## /api/v1/user/tutor/{id}/class
+
+### GET /api/v1/user/tutor/{id}/class
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}/class
+
+## /api/v1/user/tutor/class/{classId}
+
+### GET /api/v1/user/tutor/class/{classId}
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/class/{classId}
+
+## /api/v1/user/tutor/{id}/school
+
+### GET /api/v1/user/tutor/{id}/school
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}/school
+
+## /api/v1/user/tutor/{id}/students
+
+### GET /api/v1/user/tutor/{id}/students
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}/students
+
+## /api/v1/user/tutor
+
+### GET /api/v1/user/tutor
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor
+
+### POST /api/v1/user/tutor
+POST {{sf.Server_HostAddress}}/api/v1/user/tutor
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/tutor
+PUT {{sf.Server_HostAddress}}/api/v1/user/tutor
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/user/tutor
+OPTIONS {{sf.Server_HostAddress}}/api/v1/user/tutor
+
+## /api/v1/user/tutor/bulk
+
+### POST /api/v1/user/tutor/bulk
+POST {{sf.Server_HostAddress}}/api/v1/user/tutor/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/user/tutor/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/user/tutor/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/tutor/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/user/tutor/bulk
+
+## /api/v1/user/tutor/search
+
+### GET /api/v1/user/tutor/search
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/search
+
+## /api/v1/user/tutor/count
+
+### GET /api/v1/user/tutor/count
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/count
+
+## /api/v1/user/tutor/{id}
+
+### GET /api/v1/user/tutor/{id}
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}
+
+### PUT /api/v1/user/tutor/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/user/tutor/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/user/tutor/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}
+
+## /api/v1/user/tutor/export
+
+### GET /api/v1/user/tutor/export
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/export
+
+## /api/v1/user/tutor/validate
+
+### POST /api/v1/user/tutor/validate
+POST {{sf.Server_HostAddress}}/api/v1/user/tutor/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/user/tutor/{id}/audit
+
+### GET /api/v1/user/tutor/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}/audit
+
+## /api/v1/_/base
+
+### GET /api/v1/_/base
+GET {{sf.Server_HostAddress}}/api/v1/_/base
+
+### POST /api/v1/_/base
+POST {{sf.Server_HostAddress}}/api/v1/_/base
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/_/base
+PUT {{sf.Server_HostAddress}}/api/v1/_/base
+Content-Type: application/json
+
+{}
+
+### OPTIONS /api/v1/_/base
+OPTIONS {{sf.Server_HostAddress}}/api/v1/_/base
+
+## /api/v1/_/base/bulk
+
+### POST /api/v1/_/base/bulk
+POST {{sf.Server_HostAddress}}/api/v1/_/base/bulk
+Content-Type: application/json
+
+{}
+
+### PUT /api/v1/_/base/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/_/base/bulk
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/_/base/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/_/base/bulk
+
+## /api/v1/_/base/search
+
+### GET /api/v1/_/base/search
+GET {{sf.Server_HostAddress}}/api/v1/_/base/search
+
+## /api/v1/_/base/count
+
+### GET /api/v1/_/base/count
+GET {{sf.Server_HostAddress}}/api/v1/_/base/count
+
+## /api/v1/_/base/{id}
+
+### GET /api/v1/_/base/{id}
+GET {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+
+### PUT /api/v1/_/base/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+Content-Type: application/json
+
+{}
+
+### PATCH /api/v1/_/base/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+Content-Type: application/json
+
+{}
+
+### DELETE /api/v1/_/base/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+
+## /api/v1/_/base/export
+
+### GET /api/v1/_/base/export
+GET {{sf.Server_HostAddress}}/api/v1/_/base/export
+
+## /api/v1/_/base/validate
+
+### POST /api/v1/_/base/validate
+POST {{sf.Server_HostAddress}}/api/v1/_/base/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/_/base/{id}/audit
+
+### GET /api/v1/_/base/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/_/base/{id}/audit
 
 

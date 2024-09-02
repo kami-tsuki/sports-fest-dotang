@@ -1,0 +1,19 @@
+<!-- File: sf.client/src/app/sf/school/list/school-list.component.html -->
+<div class="container mx-auto p-4">
+    <div>
+        <div *ngIf="selected">
+            <button name="select" class="btn">Select</button>
+        </div>
+        <div *ngIf="!selected">
+            <h1 class="text-2xl font-bold">Select a school</h1>
+        </div>
+    </div>
+    <div class="grid" [ngStyle]="{'grid-template-columns': 'repeat(' + columns + ', 1fr)'}">
+        <sf-school-card
+                *ngFor="let school of schools"
+                [school]="school"
+                (click)="selected = school"
+                [ngClass]="{'selected-card': selected === school}">
+        </sf-school-card>
+    </div>
+</div>
