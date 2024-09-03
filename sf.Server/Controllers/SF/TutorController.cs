@@ -30,7 +30,9 @@ public class TutorController(IServiceProvider services)
         var tutor = await DbService.FindAsync(id);
         if (tutor == null)
             return NotFound(ResultService.BuildErrorResult("Tutor not found", $"Tutor with id {id} not found"));
-        return await SchoolController.GetAsync(tutor.SchoolId);
+        if (!tutor.SchoolId.HasValue)
+            return NotFound(ResultService.BuildErrorResult("School not found", $"Tutor with id {id} has no school"));
+        return await SchoolController.GetAsync(tutor.SchoolId.Value);
     }
 
     #endregion

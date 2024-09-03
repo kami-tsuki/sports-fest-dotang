@@ -10,251 +10,6 @@
 
 
 
-export class RegisterModel implements IRegisterModel {
-    email?: string | undefined;
-    firstName?: string | undefined;
-    lastName?: string | undefined;
-    schoolname?: string | undefined;
-    password?: string | undefined;
-
-    constructor(data?: IRegisterModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.email = _data["email"];
-            this.firstName = _data["firstName"];
-            this.lastName = _data["lastName"];
-            this.schoolname = _data["schoolname"];
-            this.password = _data["password"];
-        }
-    }
-
-    static fromJS(data: any): RegisterModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new RegisterModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["email"] = this.email;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["schoolname"] = this.schoolname;
-        data["password"] = this.password;
-        return data;
-    }
-}
-
-export interface IRegisterModel {
-    email?: string | undefined;
-    firstName?: string | undefined;
-    lastName?: string | undefined;
-    schoolname?: string | undefined;
-    password?: string | undefined;
-}
-
-export class LoginModel implements ILoginModel {
-    username?: User | undefined;
-    password?: string | undefined;
-    schoolID?: string | undefined;
-
-    constructor(data?: ILoginModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.username = _data["username"] ? User.fromJS(_data["username"]) : <any>undefined;
-            this.password = _data["password"];
-            this.schoolID = _data["schoolID"];
-        }
-    }
-
-    static fromJS(data: any): LoginModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new LoginModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["username"] = this.username ? this.username.toJSON() : <any>undefined;
-        data["password"] = this.password;
-        data["schoolID"] = this.schoolID;
-        return data;
-    }
-}
-
-export interface ILoginModel {
-    username?: User | undefined;
-    password?: string | undefined;
-    schoolID?: string | undefined;
-}
-
-export class IdentityUserOfGuid implements IIdentityUserOfGuid {
-    id?: string;
-    userName?: string | undefined;
-    normalizedUserName?: string | undefined;
-    email?: string | undefined;
-    normalizedEmail?: string | undefined;
-    emailConfirmed?: boolean;
-    passwordHash?: string | undefined;
-    securityStamp?: string | undefined;
-    concurrencyStamp?: string | undefined;
-    phoneNumber?: string | undefined;
-    phoneNumberConfirmed?: boolean;
-    twoFactorEnabled?: boolean;
-    lockoutEnd?: Date | undefined;
-    lockoutEnabled?: boolean;
-    accessFailedCount?: number;
-
-    constructor(data?: IIdentityUserOfGuid) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.userName = _data["userName"];
-            this.normalizedUserName = _data["normalizedUserName"];
-            this.email = _data["email"];
-            this.normalizedEmail = _data["normalizedEmail"];
-            this.emailConfirmed = _data["emailConfirmed"];
-            this.passwordHash = _data["passwordHash"];
-            this.securityStamp = _data["securityStamp"];
-            this.concurrencyStamp = _data["concurrencyStamp"];
-            this.phoneNumber = _data["phoneNumber"];
-            this.phoneNumberConfirmed = _data["phoneNumberConfirmed"];
-            this.twoFactorEnabled = _data["twoFactorEnabled"];
-            this.lockoutEnd = _data["lockoutEnd"] ? new Date(_data["lockoutEnd"].toString()) : <any>undefined;
-            this.lockoutEnabled = _data["lockoutEnabled"];
-            this.accessFailedCount = _data["accessFailedCount"];
-        }
-    }
-
-    static fromJS(data: any): IdentityUserOfGuid {
-        data = typeof data === 'object' ? data : {};
-        let result = new IdentityUserOfGuid();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["userName"] = this.userName;
-        data["normalizedUserName"] = this.normalizedUserName;
-        data["email"] = this.email;
-        data["normalizedEmail"] = this.normalizedEmail;
-        data["emailConfirmed"] = this.emailConfirmed;
-        data["passwordHash"] = this.passwordHash;
-        data["securityStamp"] = this.securityStamp;
-        data["concurrencyStamp"] = this.concurrencyStamp;
-        data["phoneNumber"] = this.phoneNumber;
-        data["phoneNumberConfirmed"] = this.phoneNumberConfirmed;
-        data["twoFactorEnabled"] = this.twoFactorEnabled;
-        data["lockoutEnd"] = this.lockoutEnd ? this.lockoutEnd.toISOString() : <any>undefined;
-        data["lockoutEnabled"] = this.lockoutEnabled;
-        data["accessFailedCount"] = this.accessFailedCount;
-        return data;
-    }
-}
-
-export interface IIdentityUserOfGuid {
-    id?: string;
-    userName?: string | undefined;
-    normalizedUserName?: string | undefined;
-    email?: string | undefined;
-    normalizedEmail?: string | undefined;
-    emailConfirmed?: boolean;
-    passwordHash?: string | undefined;
-    securityStamp?: string | undefined;
-    concurrencyStamp?: string | undefined;
-    phoneNumber?: string | undefined;
-    phoneNumberConfirmed?: boolean;
-    twoFactorEnabled?: boolean;
-    lockoutEnd?: Date | undefined;
-    lockoutEnabled?: boolean;
-    accessFailedCount?: number;
-}
-
-export class User extends IdentityUserOfGuid implements IUser {
-    first?: string | undefined;
-    last?: string | undefined;
-    role?: RoleType;
-    created!: Date;
-    updated!: Date;
-
-    constructor(data?: IUser) {
-        super(data);
-    }
-
-    override init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.first = _data["first"];
-            this.last = _data["last"];
-            this.role = _data["role"];
-            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
-            this.updated = _data["updated"] ? new Date(_data["updated"].toString()) : <any>undefined;
-        }
-    }
-
-    static override fromJS(data: any): User {
-        data = typeof data === 'object' ? data : {};
-        let result = new User();
-        result.init(data);
-        return result;
-    }
-
-    override toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["first"] = this.first;
-        data["last"] = this.last;
-        data["role"] = this.role;
-        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
-        data["updated"] = this.updated ? this.updated.toISOString() : <any>undefined;
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface IUser extends IIdentityUserOfGuid {
-    first?: string | undefined;
-    last?: string | undefined;
-    role?: RoleType;
-    created: Date;
-    updated: Date;
-}
-
-export enum RoleType {
-    Student = "Student",
-    Tutor = "Tutor",
-    CampaignManager = "CampaignManager",
-    CampaignJudge = "CampaignJudge",
-    User = "User",
-}
-
 export class ResultModelOfSchool implements IResultModelOfSchool {
     success?: boolean;
     error?: boolean;
@@ -428,9 +183,150 @@ export interface ISchool extends IEntityOfGuid {
     studentIds?: string[];
 }
 
+export class IdentityUserOfGuid implements IIdentityUserOfGuid {
+    id?: string;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed?: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled?: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled?: boolean;
+    accessFailedCount?: number;
+
+    constructor(data?: IIdentityUserOfGuid) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userName = _data["userName"];
+            this.normalizedUserName = _data["normalizedUserName"];
+            this.email = _data["email"];
+            this.normalizedEmail = _data["normalizedEmail"];
+            this.emailConfirmed = _data["emailConfirmed"];
+            this.passwordHash = _data["passwordHash"];
+            this.securityStamp = _data["securityStamp"];
+            this.concurrencyStamp = _data["concurrencyStamp"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.phoneNumberConfirmed = _data["phoneNumberConfirmed"];
+            this.twoFactorEnabled = _data["twoFactorEnabled"];
+            this.lockoutEnd = _data["lockoutEnd"] ? new Date(_data["lockoutEnd"].toString()) : <any>undefined;
+            this.lockoutEnabled = _data["lockoutEnabled"];
+            this.accessFailedCount = _data["accessFailedCount"];
+        }
+    }
+
+    static fromJS(data: any): IdentityUserOfGuid {
+        data = typeof data === 'object' ? data : {};
+        let result = new IdentityUserOfGuid();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["normalizedUserName"] = this.normalizedUserName;
+        data["email"] = this.email;
+        data["normalizedEmail"] = this.normalizedEmail;
+        data["emailConfirmed"] = this.emailConfirmed;
+        data["passwordHash"] = this.passwordHash;
+        data["securityStamp"] = this.securityStamp;
+        data["concurrencyStamp"] = this.concurrencyStamp;
+        data["phoneNumber"] = this.phoneNumber;
+        data["phoneNumberConfirmed"] = this.phoneNumberConfirmed;
+        data["twoFactorEnabled"] = this.twoFactorEnabled;
+        data["lockoutEnd"] = this.lockoutEnd ? this.lockoutEnd.toISOString() : <any>undefined;
+        data["lockoutEnabled"] = this.lockoutEnabled;
+        data["accessFailedCount"] = this.accessFailedCount;
+        return data;
+    }
+}
+
+export interface IIdentityUserOfGuid {
+    id?: string;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed?: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled?: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled?: boolean;
+    accessFailedCount?: number;
+}
+
+export class User extends IdentityUserOfGuid implements IUser {
+    first?: string | undefined;
+    last?: string | undefined;
+    role?: RoleType;
+    created!: Date;
+    updated!: Date;
+
+    constructor(data?: IUser) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.first = _data["first"];
+            this.last = _data["last"];
+            this.role = _data["role"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.updated = _data["updated"] ? new Date(_data["updated"].toString()) : <any>undefined;
+        }
+    }
+
+    static override fromJS(data: any): User {
+        data = typeof data === 'object' ? data : {};
+        let result = new User();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["first"] = this.first;
+        data["last"] = this.last;
+        data["role"] = this.role;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["updated"] = this.updated ? this.updated.toISOString() : <any>undefined;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUser extends IIdentityUserOfGuid {
+    first?: string | undefined;
+    last?: string | undefined;
+    role?: RoleType;
+    created: Date;
+    updated: Date;
+}
+
 export class Tutor extends User implements ITutor {
     classId?: string | undefined;
-    schoolId?: string;
+    schoolId?: string | undefined;
 
     constructor(data?: ITutor) {
         super(data);
@@ -462,7 +358,15 @@ export class Tutor extends User implements ITutor {
 
 export interface ITutor extends IUser {
     classId?: string | undefined;
-    schoolId?: string;
+    schoolId?: string | undefined;
+}
+
+export enum RoleType {
+    Student = "Student",
+    Tutor = "Tutor",
+    CampaignManager = "CampaignManager",
+    CampaignJudge = "CampaignJudge",
+    User = "User",
 }
 
 export class Message implements IMessage {
@@ -951,7 +855,7 @@ export interface IPageOfStudent {
 
 export class Student extends User implements IStudent {
     classId?: string | undefined;
-    schoolId?: string;
+    schoolId?: string | undefined;
 
     constructor(data?: IStudent) {
         super(data);
@@ -983,7 +887,7 @@ export class Student extends User implements IStudent {
 
 export interface IStudent extends IUser {
     classId?: string | undefined;
-    schoolId?: string;
+    schoolId?: string | undefined;
 }
 
 export class ResultModelOfIEnumerableOfClass implements IResultModelOfIEnumerableOfClass {
@@ -2212,7 +2116,7 @@ export interface IPageOfCampaignJudge {
 
 export class CampaignJudge extends User implements ICampaignJudge {
     disciplineId?: string | undefined;
-    schoolId?: string;
+    schoolId?: string | undefined;
 
     constructor(data?: ICampaignJudge) {
         super(data);
@@ -2244,7 +2148,7 @@ export class CampaignJudge extends User implements ICampaignJudge {
 
 export interface ICampaignJudge extends IUser {
     disciplineId?: string | undefined;
-    schoolId?: string;
+    schoolId?: string | undefined;
 }
 
 export class ResultModelOfIEnumerableOfCampaignJudge implements IResultModelOfIEnumerableOfCampaignJudge {
@@ -2736,7 +2640,7 @@ export interface IPageOfCampaignManager {
 }
 
 export class CampaignManager extends User implements ICampaignManager {
-    schoolId?: string;
+    schoolId?: string | undefined;
 
     constructor(data?: ICampaignManager) {
         super(data);
@@ -2765,7 +2669,7 @@ export class CampaignManager extends User implements ICampaignManager {
 }
 
 export interface ICampaignManager extends IUser {
-    schoolId?: string;
+    schoolId?: string | undefined;
 }
 
 export class ResultModelOfIEnumerableOfCampaignManager implements IResultModelOfIEnumerableOfCampaignManager {
@@ -3390,6 +3294,102 @@ export interface IResultModelOfIEnumerableOfTutor {
     message?: string | undefined;
     data?: Tutor[] | undefined;
     messages?: Message[] | undefined;
+}
+
+export class RegisterModel implements IRegisterModel {
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    schoolname?: string | undefined;
+    password?: string | undefined;
+
+    constructor(data?: IRegisterModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.email = _data["email"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.schoolname = _data["schoolname"];
+            this.password = _data["password"];
+        }
+    }
+
+    static fromJS(data: any): RegisterModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RegisterModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["email"] = this.email;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["schoolname"] = this.schoolname;
+        data["password"] = this.password;
+        return data;
+    }
+}
+
+export interface IRegisterModel {
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    schoolname?: string | undefined;
+    password?: string | undefined;
+}
+
+export class LoginModel implements ILoginModel {
+    username?: User | undefined;
+    password?: string | undefined;
+    schoolID?: string | undefined;
+
+    constructor(data?: ILoginModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.username = _data["username"] ? User.fromJS(_data["username"]) : <any>undefined;
+            this.password = _data["password"];
+            this.schoolID = _data["schoolID"];
+        }
+    }
+
+    static fromJS(data: any): LoginModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new LoginModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["username"] = this.username ? this.username.toJSON() : <any>undefined;
+        data["password"] = this.password;
+        data["schoolID"] = this.schoolID;
+        return data;
+    }
+}
+
+export interface ILoginModel {
+    username?: User | undefined;
+    password?: string | undefined;
+    schoolID?: string | undefined;
 }
 
 export class ResultModelOfPageOfUser implements IResultModelOfPageOfUser {

@@ -273,7 +273,7 @@ public abstract class BaseController<TEntity>(IServiceProvider services) : Contr
 
             var result = ResultService.BuildResult(true, entity);
 
-            return CreatedAtAction(nameof(GetAsync), new { id = DbService.GetEntityId(entity) }, result);
+            return Ok(result);
         }
         catch (DbUpdateException ex)
         {

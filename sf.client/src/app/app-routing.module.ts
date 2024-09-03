@@ -5,10 +5,12 @@ import {AppComponent} from './app.component';
 import {AppPaths} from './app-paths';
 import {ClassDetailComponent} from "./sf/class/detail/class-detail.component";
 import {SchoolListComponent} from "./sf/school/list/school-list.component";
+import {HomeComponent} from "./common/home/home.component";
 
 const routes: Routes = [
     {path: '', redirectTo: AppPaths.home, pathMatch: 'full'},
-    {path: AppPaths.home, component: AppComponent, pathMatch: 'full'},
+    {path: '**', redirectTo: AppPaths.home},
+    {path: AppPaths.home, component: HomeComponent, pathMatch: 'full'},
     {path: AppPaths.classBase, redirectTo: AppPaths.classBase + AppPaths.list, pathMatch: 'full'},
     {path: AppPaths.classBase + AppPaths.list, component: ClassListComponent},
     {path: AppPaths.classBase + AppPaths.detail, component: ClassDetailComponent},

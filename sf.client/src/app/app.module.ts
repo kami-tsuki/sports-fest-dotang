@@ -24,6 +24,18 @@ import {StudentListComponent} from './sf/student/student-list/student-list.compo
 import {DetailBannerComponent} from './sf/tutor/detail-banner/detail-banner.component';
 import {SchoolListComponent} from './sf/school/list/school-list.component';
 import {SchoolCardComponent} from './sf/school/school-card/school-card.component';
+import {HomeComponent} from './common/home/home.component';
+import {CounterComponent} from "./common/counters/bas/counter/counter.component";
+import {SchoolCounterComponent} from "./common/counters/school-counter/school-counter.component";
+import {ClassCounterComponent} from "./common/counters/class-counter/class-counter.component";
+import {TutorCounterComponent} from "./common/counters/tutor-counter/tutor-counter.component";
+import {StudentCounterComponent} from "./common/counters/student-counter/student-counter.component";
+import {UserCounterComponent} from "./common/counters/user-counter/user-counter.component";
+import {Placement} from "./enums/placement.enum";
+import {MatToolbar} from "@angular/material/toolbar";
+import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
+import { SelectUserComponent } from './sf/user/select-user/select-user.component';
+import { CreateUserComponent } from './sf/user/create-user/create-user.component';
 
 
 @NgModule({
@@ -41,6 +53,16 @@ import {SchoolCardComponent} from './sf/school/school-card/school-card.component
         DetailBannerComponent,
         SchoolCardComponent,
         SchoolListComponent,
+        HomeComponent,
+        CounterComponent,
+        SchoolCounterComponent,
+        ClassCounterComponent,
+        TutorCounterComponent,
+        StudentCounterComponent,
+        UserCounterComponent,
+        SelectUserComponent,
+        CreateUserComponent,
+        
     ],
     imports: [
         BrowserModule,
@@ -54,15 +76,23 @@ import {SchoolCardComponent} from './sf/school/school-card/school-card.component
         MatIconModule,
         MatSelectModule,
         MatInputModule,
+
         MatDialogModule,
+        MatToolbar,
+        MatCard,
+        MatCardContent,
+        MatCardTitle,
+        MatCardActions,
     ],
     providers: [
         CacheService,
         ApiService,
+        
         provideAnimationsAsync()
     ],
     exports: [
-        SchoolCardComponent
+        SchoolCardComponent,
+        
     ]
 })
 export class AppModule {

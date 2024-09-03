@@ -17,7 +17,7 @@ public class Student : User, IClassReference, IEntriesReference, ISchoolReferenc
     public IEnumerable<Entry>? Entries { get; init; }
     
     [JsonProperty("schoolId")]
-    public Guid SchoolId { get; set; }
+    public Guid? SchoolId { get; set; }
 
     [ForeignKey(nameof(SchoolId)), JsonIgnore]
     public School? School { get; set; }

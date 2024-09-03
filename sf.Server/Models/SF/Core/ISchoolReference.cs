@@ -2,6 +2,6 @@
 
 public interface ISchoolReference
 {
-    public Guid SchoolId { get; set; }
+    public Guid? SchoolId { get; set; }
     public School? School { get; set; }
 }

@@ -1,0 +1,30 @@
+<mat-dialog-content>
+    <form (ngSubmit)="createUser()">
+        <mat-form-field>
+            <input matInput placeholder="First Name" [(ngModel)]="firstName" name="firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Last Name" [(ngModel)]="lastName" name="lastName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Role" [(ngModel)]="role" name="role" required>
+                <mat-option
+                        *ngFor="let role of [
+                            RoleType.Student, 
+                            RoleType.Tutor,
+                            RoleType.CampaignJudge,
+                            RoleType.CampaignManager
+                        ]"
+                        [value]="role">{{ role }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-dialog-actions>
+            <button mat-button type="submit">Create</button>
+            <button mat-button (click)="close()">Cancel</button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>

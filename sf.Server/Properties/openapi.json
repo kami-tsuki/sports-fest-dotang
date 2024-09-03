@@ -6,72 +6,6 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/v1/auth/register": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "operationId": "Auth_Register",
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterModel"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/auth/login": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "operationId": "Auth_Login",
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginModel"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/data/class/{id}/school": {
       "get": {
         "tags": [
@@ -4831,6 +4765,70 @@
         }
       }
     },
+    "/api/v1/data/school/{id}/manager": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetManager",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfCampaignManager"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/school/manager/{managerId}": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "operationId": "School_GetByManager",
+        "parameters": [
+          {
+            "name": "managerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfSchool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/data/school": {
       "get": {
         "tags": [
@@ -7310,7 +7308,73 @@
         }
       }
     },
-    "/api/v1/_/base": {
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_Register",
+        "requestBody": {
+          "x-name": "model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_Login",
+        "requestBody": {
+          "x-name": "model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user": {
       "get": {
         "tags": [
           "User"
@@ -7511,7 +7575,7 @@
         }
       }
     },
-    "/api/v1/_/base/bulk": {
+    "/api/v1/user/bulk": {
       "post": {
         "tags": [
           "User"
@@ -7613,7 +7677,7 @@
         }
       }
     },
-    "/api/v1/_/base/search": {
+    "/api/v1/user/search": {
       "get": {
         "tags": [
           "User"
@@ -7693,7 +7757,7 @@
         }
       }
     },
-    "/api/v1/_/base/count": {
+    "/api/v1/user/count": {
       "get": {
         "tags": [
           "User"
@@ -7727,7 +7791,7 @@
         }
       }
     },
-    "/api/v1/_/base/{id}": {
+    "/api/v1/user/{id}": {
       "get": {
         "tags": [
           "User"
@@ -7893,7 +7957,7 @@
         }
       }
     },
-    "/api/v1/_/base/export": {
+    "/api/v1/user/export": {
       "get": {
         "tags": [
           "User"
@@ -7937,7 +8001,7 @@
         }
       }
     },
-    "/api/v1/_/base/validate": {
+    "/api/v1/user/validate": {
       "post": {
         "tags": [
           "User"
@@ -7969,7 +8033,7 @@
         }
       }
     },
-    "/api/v1/_/base/{id}/audit": {
+    "/api/v1/user/{id}/audit": {
       "get": {
         "tags": [
           "User"
@@ -8004,54 +8068,105 @@
   },
   "components": {
     "schemas": {
-      "RegisterModel": {
+      "ResultModelOfSchool": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "email": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "message": {
             "type": "string",
             "nullable": true
           },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "schoolname": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "LoginModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "username": {
+          "data": {
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/School"
               }
             ]
           },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "schoolID": {
-            "type": "string",
-            "format": "guid",
-            "nullable": true
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
           }
         }
+      },
+      "School": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityOfGuid"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 2
+              },
+              "shortName": {
+                "type": "string",
+                "maxLength": 16,
+                "minLength": 2
+              },
+              "comment": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "managerId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "judgeIds": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Tutor"
+                }
+              },
+              "studentIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Tutor": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/User"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "classId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              },
+              "schoolId": {
+                "type": "string",
+                "format": "guid",
+                "nullable": true
+              }
+            }
+          }
+        ]
       },
       "User": {
         "allOf": [
@@ -8173,105 +8288,6 @@
             "format": "int32"
           }
         }
-      },
-      "ResultModelOfSchool": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/School"
-              }
-            ]
-          },
-          "messages": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Message"
-            }
-          }
-        }
-      },
-      "School": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EntityOfGuid"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string",
-                "maxLength": 64,
-                "minLength": 2
-              },
-              "shortName": {
-                "type": "string",
-                "maxLength": 16,
-                "minLength": 2
-              },
-              "comment": {
-                "type": "string",
-                "maxLength": 1024
-              },
-              "managerId": {
-                "type": "string",
-                "format": "guid",
-                "nullable": true
-              },
-              "judgeIds": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Tutor"
-                }
-              },
-              "studentIds": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "Tutor": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/User"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "classId": {
-                "type": "string",
-                "format": "guid",
-                "nullable": true
-              },
-              "schoolId": {
-                "type": "string",
-                "format": "guid"
-              }
-            }
-          }
-        ]
       },
       "EntityOfGuid": {
         "type": "object",
@@ -8622,7 +8638,8 @@
               },
               "schoolId": {
                 "type": "string",
-                "format": "guid"
+                "format": "guid",
+                "nullable": true
               }
             }
           }
@@ -9255,7 +9272,8 @@
               },
               "schoolId": {
                 "type": "string",
-                "format": "guid"
+                "format": "guid",
+                "nullable": true
               }
             }
           }
@@ -9504,7 +9522,8 @@
             "properties": {
               "schoolId": {
                 "type": "string",
-                "format": "guid"
+                "format": "guid",
+                "nullable": true
               }
             }
           }
@@ -9799,6 +9818,55 @@
             "items": {
               "$ref": "#/components/schemas/Message"
             }
+          }
+        }
+      },
+      "RegisterModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "schoolname": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "LoginModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "username": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "schoolID": {
+            "type": "string",
+            "format": "guid",
+            "nullable": true
           }
         }
       },

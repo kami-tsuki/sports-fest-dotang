@@ -12,7 +12,7 @@ public class CampaignJudge : User, IDisciplineReference, ISchoolReference
     public Discipline? Discipline { get; set; }
     
     [JsonProperty("schoolId")]
-    public Guid SchoolId { get; set; }
+    public Guid? SchoolId { get; set; }
 
     [ForeignKey(nameof(SchoolId)), JsonIgnore]
     public School? School { get; set; }

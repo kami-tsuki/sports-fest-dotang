@@ -1,0 +1,13 @@
+<div [ngClass]="placement" class="relative p-4">
+    <ng-container *ngIf="showLabel">
+        <span *ngIf="placement === 'top-left'" class="text-lg font-bold mb-2">{{ label }}</span>
+        <span *ngIf="placement === 'top-right'" class="text-lg font-bold mb-2 text-right">{{ label }}</span>
+        <span *ngIf="placement === 'bottom-left'" class="text-lg font-bold mt-2">{{ label }}</span>
+        <span *ngIf="placement === 'bottom-right'" class="text-lg font-bold mt-2 text-right">{{ label }}</span>
+    </ng-container>
+    <div *ngIf="count != undefined" class="counter bg-black text-red-600 rounded-full p-2 flex items-center">
+        <span *ngIf="placement === 'inline-left'" class="text-lg font-bold text-white mr-2">{{ label }}</span>
+        <span class="counter__value font-bold text-lg mr-2">{{ formatCount(count) }} </span>
+        <span *ngIf="placement === 'inline-right'" class="text-lg font-bold text-white ml-2">{{ label }}</span>
+    </div>
+</div>

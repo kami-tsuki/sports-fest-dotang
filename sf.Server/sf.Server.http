@@ -5,22 +5,6 @@
 @sf.Server_HostAddress = http://localhost:5056
 @sf.ApiKey = {{sf.ApiKey}}
 
-## /api/v1/auth/register
-
-### POST /api/v1/auth/register
-POST {{sf.Server_HostAddress}}/api/v1/auth/register
-Content-Type: application/json
-
-{}
-
-## /api/v1/auth/login
-
-### POST /api/v1/auth/login
-POST {{sf.Server_HostAddress}}/api/v1/auth/login
-Content-Type: application/json
-
-{}
-
 ## /api/v1/data/class/{id}/school
 
 ### GET /api/v1/data/class/{id}/school
@@ -589,6 +573,16 @@ GET {{sf.Server_HostAddress}}/api/v1/data/school/student/{studentId}
 ### GET /api/v1/data/school/{id}/tutors
 GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}/tutors
 
+## /api/v1/data/school/{id}/manager
+
+### GET /api/v1/data/school/{id}/manager
+GET {{sf.Server_HostAddress}}/api/v1/data/school/{id}/manager
+
+## /api/v1/data/school/manager/{managerId}
+
+### GET /api/v1/data/school/manager/{managerId}
+GET {{sf.Server_HostAddress}}/api/v1/data/school/manager/{managerId}
+
 ## /api/v1/data/school
 
 ### GET /api/v1/data/school
@@ -884,89 +878,105 @@ Content-Type: application/json
 ### GET /api/v1/user/tutor/{id}/audit
 GET {{sf.Server_HostAddress}}/api/v1/user/tutor/{id}/audit
 
-## /api/v1/_/base
+## /api/v1/auth/register
 
-### GET /api/v1/_/base
-GET {{sf.Server_HostAddress}}/api/v1/_/base
-
-### POST /api/v1/_/base
-POST {{sf.Server_HostAddress}}/api/v1/_/base
+### POST /api/v1/auth/register
+POST {{sf.Server_HostAddress}}/api/v1/auth/register
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/_/base
-PUT {{sf.Server_HostAddress}}/api/v1/_/base
+## /api/v1/auth/login
+
+### POST /api/v1/auth/login
+POST {{sf.Server_HostAddress}}/api/v1/auth/login
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/v1/_/base
-OPTIONS {{sf.Server_HostAddress}}/api/v1/_/base
+## /api/v1/user
 
-## /api/v1/_/base/bulk
+### GET /api/v1/user
+GET {{sf.Server_HostAddress}}/api/v1/user
 
-### POST /api/v1/_/base/bulk
-POST {{sf.Server_HostAddress}}/api/v1/_/base/bulk
+### POST /api/v1/user
+POST {{sf.Server_HostAddress}}/api/v1/user
 Content-Type: application/json
 
 {}
 
-### PUT /api/v1/_/base/bulk
-PUT {{sf.Server_HostAddress}}/api/v1/_/base/bulk
+### PUT /api/v1/user
+PUT {{sf.Server_HostAddress}}/api/v1/user
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/_/base/bulk
-DELETE {{sf.Server_HostAddress}}/api/v1/_/base/bulk
+### OPTIONS /api/v1/user
+OPTIONS {{sf.Server_HostAddress}}/api/v1/user
 
-## /api/v1/_/base/search
+## /api/v1/user/bulk
 
-### GET /api/v1/_/base/search
-GET {{sf.Server_HostAddress}}/api/v1/_/base/search
-
-## /api/v1/_/base/count
-
-### GET /api/v1/_/base/count
-GET {{sf.Server_HostAddress}}/api/v1/_/base/count
-
-## /api/v1/_/base/{id}
-
-### GET /api/v1/_/base/{id}
-GET {{sf.Server_HostAddress}}/api/v1/_/base/{id}
-
-### PUT /api/v1/_/base/{id}
-PUT {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+### POST /api/v1/user/bulk
+POST {{sf.Server_HostAddress}}/api/v1/user/bulk
 Content-Type: application/json
 
 {}
 
-### PATCH /api/v1/_/base/{id}
-PATCH {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+### PUT /api/v1/user/bulk
+PUT {{sf.Server_HostAddress}}/api/v1/user/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/v1/_/base/{id}
-DELETE {{sf.Server_HostAddress}}/api/v1/_/base/{id}
+### DELETE /api/v1/user/bulk
+DELETE {{sf.Server_HostAddress}}/api/v1/user/bulk
 
-## /api/v1/_/base/export
+## /api/v1/user/search
 
-### GET /api/v1/_/base/export
-GET {{sf.Server_HostAddress}}/api/v1/_/base/export
+### GET /api/v1/user/search
+GET {{sf.Server_HostAddress}}/api/v1/user/search
 
-## /api/v1/_/base/validate
+## /api/v1/user/count
 
-### POST /api/v1/_/base/validate
-POST {{sf.Server_HostAddress}}/api/v1/_/base/validate
+### GET /api/v1/user/count
+GET {{sf.Server_HostAddress}}/api/v1/user/count
+
+## /api/v1/user/{id}
+
+### GET /api/v1/user/{id}
+GET {{sf.Server_HostAddress}}/api/v1/user/{id}
+
+### PUT /api/v1/user/{id}
+PUT {{sf.Server_HostAddress}}/api/v1/user/{id}
 Content-Type: application/json
 
 {}
 
-## /api/v1/_/base/{id}/audit
+### PATCH /api/v1/user/{id}
+PATCH {{sf.Server_HostAddress}}/api/v1/user/{id}
+Content-Type: application/json
 
-### GET /api/v1/_/base/{id}/audit
-GET {{sf.Server_HostAddress}}/api/v1/_/base/{id}/audit
+{}
+
+### DELETE /api/v1/user/{id}
+DELETE {{sf.Server_HostAddress}}/api/v1/user/{id}
+
+## /api/v1/user/export
+
+### GET /api/v1/user/export
+GET {{sf.Server_HostAddress}}/api/v1/user/export
+
+## /api/v1/user/validate
+
+### POST /api/v1/user/validate
+POST {{sf.Server_HostAddress}}/api/v1/user/validate
+Content-Type: application/json
+
+{}
+
+## /api/v1/user/{id}/audit
+
+### GET /api/v1/user/{id}/audit
+GET {{sf.Server_HostAddress}}/api/v1/user/{id}/audit
 
 

@@ -1,6 +1,6 @@
 ﻿namespace sf.Server.Controllers.Auth;
 
-[Microsoft.AspNetCore.Components.Route("api/v1/[controller]")]
+[Route("api/v1/user")]
 public class UserController(IServiceProvider services)
     : BaseController<User>(services)
 {

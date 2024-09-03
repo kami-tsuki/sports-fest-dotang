@@ -58,9 +58,9 @@ public class SchoolController(IServiceProvider serviceProvider)
         var student = await StudentDb.FindAsync(studentId);
         if (student == null)
             return NotFound(ResultService.BuildErrorResult("Student not found", $"Student with id {studentId} not found"));
-        if (!student.ClassId.HasValue)
+        if (!student.SchoolId.HasValue)
             return NotFound(ResultService.BuildErrorResult("Class not found", $"Student with id {studentId} has no class"));
-        return await GetAsync(student.SchoolId);
+        return await GetAsync(student.SchoolId.Value);
     }
 
     #endregion
@@ -77,5 +77,31 @@ public class SchoolController(IServiceProvider serviceProvider)
         [FromQuery] Dictionary<string, string>? filters = null)
         => TutorController.BulkGetAsync(page, entities, properties, sendNull, filters.AddFilter(nameof(Tutor.SchoolId), id));
 
+    #endregion
+
+    #region CampaignManager
+
+    [HttpGet("{id:guid}/manager")]
+    public async Task<ActionResult<ResultModel<CampaignManager>>> GetManager(Guid id)
+    {
+        var school = await DbService.FindAsync(id);
+        if (school == null)
+            return NotFound(ResultService.BuildErrorResult("School not found", $"School with id {id} not found"));
+        if (!school.ManagerId.HasValue)
+            return NotFound(ResultService.BuildErrorResult("Manager not found", $"School with id {id} has no manager"));
+        return await ManagerController.GetAsync(school.ManagerId.Value);
+    }
+    
+    [HttpGet("manager/{managerId:guid}")]
+    public async Task<ActionResult<ResultModel<School>>> GetByManager(Guid managerId)
+    {
+        var manager = await ManagerDb.FindAsync(managerId);
+        if (manager == null)
+            return NotFound(ResultService.BuildErrorResult("Manager not found", $"Manager with id {managerId} not found"));
+        if (!manager.SchoolId.HasValue)
+            return NotFound(ResultService.BuildErrorResult("School not found", $"Manager with id {managerId} has no school"));
+        return await GetAsync(manager.SchoolId.Value);
+    }
+    
     #endregion
 }

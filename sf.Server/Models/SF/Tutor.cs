@@ -10,7 +10,7 @@ public class Tutor : User, IClassReference, ISchoolReference
     public Class? Class { get; set; }
     
     [JsonProperty("schoolId")]
-    public Guid SchoolId { get; set; }
+    public Guid? SchoolId { get; set; }
 
     [ForeignKey(nameof(SchoolId)), JsonIgnore]
     public School? School { get; set; }

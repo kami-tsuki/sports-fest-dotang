@@ -1,0 +1,16 @@
+<mat-dialog-content class="space-y-4">
+    <div class="flex space-x-4">
+        <mat-form-field class="w-full">
+            <input (ngModelChange)="loadUsers()" [(ngModel)]="query" matInput placeholder="Search Users">
+        </mat-form-field>
+    </div>
+    <div class="space-y-2">
+        <div *ngFor="let user of users" (click)="selectUser(user)" class="cursor-pointer p-2 hover:bg-gray-200" [class.bg-blue-100]="isSelected(user)">
+            <span>{{ user.last }}, {{ user.first }}</span>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="openCreateUserModal()">Create User</button>
+    <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

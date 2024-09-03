@@ -10,6 +10,21 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="mat-typography">
-  <app-root></app-root>
+<div class="flex flex-col min-h-screen">
+    <header class="bg-red-800 text-gray-600 p-4 flex justify-between items-center">
+        <h1 class="text-2xl">Sports Fest</h1>
+        <nav>
+            <a class="ml-4" href="#">Home</a>
+            <a class="ml-4" href="#">About</a>
+            <a class="ml-4" href="#">Contact</a>
+        </nav>
+    </header>
+    <main class="flex-growapp p-4">
+        <app-root></app-root>
+    </main>
+    <footer class="bg-gray-500 text-red-900 p-4 text-center">
+        &#169; 2024 Sports Fest. All rights reserved.
+    </footer>
+</div>
 </body>
 </html>
