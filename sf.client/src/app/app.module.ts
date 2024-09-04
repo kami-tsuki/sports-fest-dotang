@@ -8,6 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import { MatListModule } from '@angular/material/list';
 import {ClassListComponent} from "./sf/class/list/class-list.component";
 import {CacheService} from "./services/cache.service";
 import {ApiService} from "./services/api.service";
@@ -36,6 +37,8 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
 import { SelectUserComponent } from './sf/user/select-user/select-user.component';
 import { CreateUserComponent } from './sf/user/create-user/create-user.component';
+import { SelectSchoolComponent } from './sf/school/select-school/select-school.component';
+import { CreateSchoolComponent } from './sf/school/create-school/create-school.component';
 
 
 @NgModule({
@@ -62,6 +65,8 @@ import { CreateUserComponent } from './sf/user/create-user/create-user.component
         UserCounterComponent,
         SelectUserComponent,
         CreateUserComponent,
+        SelectSchoolComponent,
+        CreateSchoolComponent,
         
     ],
     imports: [
@@ -76,7 +81,7 @@ import { CreateUserComponent } from './sf/user/create-user/create-user.component
         MatIconModule,
         MatSelectModule,
         MatInputModule,
-
+        MatListModule,
         MatDialogModule,
         MatToolbar,
         MatCard,

@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Create School</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>School Name</mat-label>
+        <input matInput [(ngModel)]="schoolName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Short</mat-label>
+        <input matInput [(ngModel)]="short">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Manager ID</mat-label>
+        <input matInput [(ngModel)]="managerId">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button color="primary" (click)="createSchool()">Create</button>
+</div>
