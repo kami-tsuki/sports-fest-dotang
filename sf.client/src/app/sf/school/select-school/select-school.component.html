@@ -4,7 +4,7 @@
         <mat-list-item *ngFor="let school of data.schools" [ngClass]="{'unselectable': !isSelectable(school)}"
                        (click)="selectSchool(school)">
             <h3 mat-line>{{ school.name }}</h3>
-            <p mat-line *ngIf="school.managerId">Managed by: {{ school.managerId }}</p>
+<!--            <p mat-line *ngIf="school.managerId">Managed by: {{ school.managerId }}</p>-->
         </mat-list-item>
     </mat-list>
 </div>

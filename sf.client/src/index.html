@@ -1,22 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>SportsFestDotangularClient</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>SportsFestDotangularClient</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body class="mat-typography">
 <div class="flex flex-col min-h-screen">
     <header class="bg-red-800 text-gray-600 p-4 flex justify-between items-center">
         <h1 class="text-2xl">Sports Fest</h1>
         <nav>
-            <a class="ml-4" href="#">Home</a>
-            <a class="ml-4" href="#">About</a>
-            <a class="ml-4" href="#">Contact</a>
+            <!-- dropdown for sub-menu -->
+            <button class="dropdown-toggle" onclick="toggleMenu()">Menu</button>
+            <div id="dropdownMenu" class="dropdown-menu hidden">
+                <a routerLink="sf/class/list">Class</a>
+            </div>
+            <a class="ml-4" routerLink="/home">Home</a>
+            <a class="ml-4" routerLink="/about">About</a>
+            <a class="ml-4" routerLink="/contact">Contact</a>
         </nav>
     </header>
     <main class="flex-growapp p-4">
@@ -26,5 +36,11 @@
         &#169; 2024 Sports Fest. All rights reserved.
     </footer>
 </div>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    }
+</script>
 </body>
 </html>

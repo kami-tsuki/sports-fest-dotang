@@ -108,6 +108,5 @@ public class SfContext(DbContextOptions<SfContext> options)
         modelBuilder.Entity<Entity<Guid>>()
                     .Property(e => e.UpdatedAt)
                     .ValueGeneratedOnAddOrUpdate();
-        
     }
 }

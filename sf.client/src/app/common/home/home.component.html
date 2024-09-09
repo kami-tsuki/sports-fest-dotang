@@ -4,10 +4,13 @@
             <mat-card-title>User Information</mat-card-title>
             <mat-card-content>
                 <sf-user-counter [placement]="Placement.InlineLeft"></sf-user-counter>
-                <div class="flex flex-col space-y-2">
+                <div *ngIf="user" class="flex flex-col space-y-2">
                     <span class="mat-body-1">{{ user?.last }}, {{ user?.first }}</span>
                     <span class="mat-body-1">{{ user?.email }}</span>
                     <span class="mat-body-1">{{ user?.role }}</span>
+                </div>
+                <div *ngIf="!user" class="flex flex-col space-y-2">
+                    <span class="mat-body-1">No user selected</span>
                 </div>
             </mat-card-content>
             <mat-card-actions>

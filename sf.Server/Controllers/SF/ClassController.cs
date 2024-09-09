@@ -4,14 +4,11 @@
 public class ClassController(IServiceProvider serviceProvider)
     : BaseController<Class>(serviceProvider)
 {
-
-
-
     [HttpGet("{id:guid}/school")]
     public async Task<ActionResult<ResultModel<School>>> GetSchool(Guid id)
     {
         Logger.Information("Getting school for class with id {Id}", id);
-        
+
         var @class = await DbService.FindAsync(id);
         if (@class == null)
             return NotFound(ResultService.BuildErrorResult("Class not found", $"Class with id {id} not found"));
@@ -37,7 +34,7 @@ public class ClassController(IServiceProvider serviceProvider)
     public async Task<ActionResult<ResultModel<Tutor>>> GetTutor(Guid id)
     {
         Logger.Information("Getting tutor for class with id {Id}", id);
-        
+
         var @class = await DbService.FindAsync(id);
         if (@class == null)
             return NotFound(ResultService.BuildErrorResult("Class not found", $"Class with id {id} not found"));
@@ -60,7 +57,8 @@ public class ClassController(IServiceProvider serviceProvider)
         long entities,
         string? properties,
         bool sendNull,
-        Dictionary<string, string>? filters)
+        Dictionary<string, string>? filters
+    )
     {
         Logger.Information("Getting students for class with id {Id}", id);
         return StudentController.GetByClass(id, page, entities, properties, sendNull, filters);
