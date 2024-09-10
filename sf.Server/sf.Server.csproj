@@ -8,16 +8,19 @@
     <SpaRoot>..\sf.client</SpaRoot>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JWT.Extensions.AspNetCore" Version="10.1.1" />
     <PackageReference Include="JWT.Extensions.DependencyInjection" Version="2.2.3" />
+    <PackageReference Include="Markdig" Version="0.37.0" />
+    <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
-      <Version>8.*-*</Version>
+      <Version>8.0.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
@@ -56,6 +59,19 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+    <None Remove="CHANGELOG.md" />
+    <Content Include="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CHANGELOG.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <Target Name="NSwag" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
     <Message Text="Running NSwag..." Importance="high" />
     <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/run-nswag.ps1&quot; $(Configuration)" />
@@ -73,5 +89,6 @@
     <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)Properties/GenerateHttpRequest.ps1&quot; -configFilePath &quot;$(ProjectDir)Properties/http.json&quot;"/>
     <Message Text="HTTP requests have been generated." Importance="high" />
   </Target>
+
 
 </Project>

@@ -1,0 +1,6 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tsuki.Wtf Launch of Project" type="DotNetPublishAndUpload" factoryName="Publish to custom server">
+    <riderPublish configuration="Release" platform="Any CPU" runtime="linux-x64" self_contained="true" server_id="0aefbd54-8e19-448c-9922-6805af98598c" serverName="Tsuki" target_framework="net8.0" trim_unused_assemblies="true" uuid_high="1537386534665734176" uuid_low="-7668674458753399666" />
+    <method v="2" />
+  </configuration>
+</component>

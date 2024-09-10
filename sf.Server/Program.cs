@@ -1,6 +1,7 @@
 using System.Text;
 using JWT.Extensions.AspNetCore;
 using Microsoft.IdentityModel.Tokens;
+using sf.Server.Middlewares;
 using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -102,13 +103,18 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-if (app.Environment.IsDevelopment())
-{
+var readmePath = Path.Combine(app.Environment.ContentRootPath, "README.md");
+var changelogPath = Path.Combine(app.Environment.ContentRootPath, "CHANGELOG.md");
+app.UseMiddleware<ReadmeMiddleware>(readmePath, "/swagger/readme.md");
+app.UseMiddleware<ReadmeMiddleware>(changelogPath, "/swagger/changelog.md");
+
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseOpenApi();
     app.UseDeveloperExceptionPage();
-}
+// }
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

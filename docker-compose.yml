@@ -1,0 +1,9 @@
+﻿services:
+  sf.server:
+    image: sf.server
+    build:
+      context: .
+      dockerfile: sf.Server/Dockerfile
+    ports:
+      - "5056:8080"
+      - "5057:8081"
