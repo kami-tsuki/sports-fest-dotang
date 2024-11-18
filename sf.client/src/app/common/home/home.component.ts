@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
         private router: Router
     ) {
     }
-
+// TODO: Add the following properties
     public user: IUser | undefined = undefined;
     public userIsStudent: boolean = false;
     public userIsTutor: boolean = false;
