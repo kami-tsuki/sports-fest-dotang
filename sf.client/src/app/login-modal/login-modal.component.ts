@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router,ActivatedRoute } from '@angular/router';
-import { AppPaths } from '../app-paths'; // Adjust the import path if necessary
-
+import { AppPaths } from '../app-paths';
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.css'] // Ensure this is 'styleUrls' not 'styleUrl'
+  styleUrls: ['./login-modal.component.css']
 })
 export class LoginModalComponent {
   loginForm: FormGroup;
@@ -15,7 +14,7 @@ export class LoginModalComponent {
   constructor(
     private fb: FormBuilder, 
     private dialogRef: MatDialogRef<LoginModalComponent>,
-    private router: Router // Inject Router
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -25,18 +24,22 @@ export class LoginModalComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value; // Destructure for easier access
+      const { username, password } = this.loginForm.value;
 
-      // Check username and password
+/*ToDo: instead of the fixed used name and password i wrote inside the method
+we need to create api here to check data and also the role of the user to route him
+to the right page[Manager, teacher or student]
+*/
+      // check username and password
       if (username.toLowerCase() === 'student' && password === '123') {
-        this.dialogRef.close(); // Close the modal
-        // Redirect to the student page
-        this.router.navigate([AppPaths.studentPage]); // Navigate to student page
+        this.dialogRef.close(); // closing the modal
+        // redirect to the student page
+        this.router.navigate([AppPaths.studentPage]); // navigate to student page
       } 
       if (username.toLowerCase() === 'teacher' && password === '123') {
-        this.dialogRef.close(); // Close the modal
-        // Redirect to the student page
-        this.router.navigate([AppPaths.teacherPage]); // Navigate to student page
+        this.dialogRef.close(); // close the modal
+        // redirect to the student page
+        this.router.navigate([AppPaths.teacherPage]); // navigate to student page
       } 
       else {
         alert('Username or password is not recognized.');
