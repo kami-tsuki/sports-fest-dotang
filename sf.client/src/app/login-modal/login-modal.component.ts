@@ -26,7 +26,7 @@ export class LoginModalComponent {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
 
-/*ToDo: instead of the fixed used name and password i wrote inside the method
+/*ToDo: instead of the fixed username and password i wrote inside the method
 we need to create api here to check data and also the role of the user to route him
 to the right page[Manager, teacher or student]
 */
@@ -40,6 +40,11 @@ to the right page[Manager, teacher or student]
         this.dialogRef.close(); // close the modal
         // redirect to the student page
         this.router.navigate([AppPaths.teacherPage]); // navigate to student page
+      } 
+      if (username.toLowerCase() === 'manager' && password === '123') {
+        this.dialogRef.close(); // close the modal
+        // redirect to the student page
+        this.router.navigate([AppPaths.mangerComponent]); // navigate to student page
       } 
       else {
         alert('Username or password is not recognized.');

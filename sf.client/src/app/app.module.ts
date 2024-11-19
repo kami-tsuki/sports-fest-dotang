@@ -51,6 +51,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MangerComponentComponent } from './manger-component/manger-component.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         SportsFistivalComponent,
         ContactComponent,
         MainLayoutComponent,
+        MangerComponentComponent,
         
         
     ],
