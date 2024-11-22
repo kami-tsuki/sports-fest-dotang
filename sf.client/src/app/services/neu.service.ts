@@ -25,6 +25,22 @@ export class NeuService {
 getUserByUsername(firstName: string): User | undefined {
   return this.users.find(user => user.firstName === firstName);
 }
+//// to check password
+onSubmit(username: string, password: string): { success: boolean, message: string, user?: User } {
+  const user = this.users.find(u => u.firstName === username);
+  if (user && user.password === password) {
+    return {
+      success: true,
+      message: 'Login successful!',
+      user
+    };
+  } else {
+    return {
+      success: false,
+      message: 'Invalid username or password'
+    };
+  }
+}
 //// to add neu users
  addUser(user: User): void {
     this.users.push(user);
