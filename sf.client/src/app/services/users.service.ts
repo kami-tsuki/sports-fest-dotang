@@ -5,14 +5,17 @@ interface User {
   password: string;
   firstName: string;
   lastName: string;
-  klass: string;
-  group: string;
+  role: string;
+  klass?: string;
+  team?: string;
+  points?: number;
+
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class NeuService {
+export class UsersService {
 
   private users: User[] = [];
 
@@ -51,5 +54,9 @@ updateUser(id: number, updatedUser: Partial<User>): void {
   if (user) {
     Object.assign(user, updatedUser);
   }
+}
+//// Delete a user
+deleteUser(id: number): void {
+  this.users = this.users.filter(user => user.id !== id);
 }
 }

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { MatDialogRef } from '@angular/material/dialog';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 import { AppPaths } from '../app-paths';
+
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
@@ -14,7 +16,8 @@ export class LoginModalComponent {
   constructor(
     private fb: FormBuilder, 
     private dialogRef: MatDialogRef<LoginModalComponent>,
-    private router: Router
+    private router: Router,
+    private usersService: UsersService
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -26,28 +29,22 @@ export class LoginModalComponent {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
 
-/*ToDo: instead of the fixed username and password i wrote inside the method
-we need to create api here to check data and also the role of the user to route him
-to the right page[Manager, teacher or student]
-*/
-      // check username and password
-      if (username.toLowerCase() === 'student' && password === '123') {
-        this.dialogRef.close(); // closing the modal
-        // redirect to the student page
-        this.router.navigate([AppPaths.studentPage]); // navigate to student page
-      } 
-      if (username.toLowerCase() === 'teacher' && password === '123') {
-        this.dialogRef.close(); // close the modal
-        // redirect to the student page
-        this.router.navigate([AppPaths.teacherPage]); // navigate to student page
-      } 
-      if (username.toLowerCase() === 'manager' && password === '123') {
-        this.dialogRef.close(); // close the modal
-        // redirect to the student page
-        this.router.navigate([AppPaths.mangerComponent]); // navigate to student page
-      } 
-      else {
-        alert('Username or password is not recognized.');
+      const result = this.usersService.onSubmit(username, password);
+
+      if (result.success) {
+        this.dialogRef.close();
+
+        if (result.user?.role.toLowerCase() === 'student') {
+          this.router.navigate([AppPaths.studentPage]);
+        } else if (result.user?.role.toLowerCase() === 'teacher') {
+          this.router.navigate([AppPaths.teacherPage]);
+        } else if (result.user?.role.toLowerCase() === 'manager') {
+          this.router.navigate([AppPaths.mangerComponent]);
+        }else if (result.user?.role.toLowerCase() === 'judge') {
+          this.router.navigate([AppPaths.judgeComponent]);
+        }
+      } else {
+        alert(result.message);
       }
     } else {
       console.log('Form is invalid!');

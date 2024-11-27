@@ -52,6 +52,7 @@ import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MangerComponentComponent } from './manger-component/manger-component.component';
+import { JudgeComponentComponent } from './judge-component/judge-component.component';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { MangerComponentComponent } from './manger-component/manger-component.co
         ContactComponent,
         MainLayoutComponent,
         MangerComponentComponent,
+        JudgeComponentComponent,
         
         
     ],
