@@ -1,0 +1,68 @@
+<div class="card m-5 shadow-sm border border-success">
+    <div class="row g-0">
+      <h3 class="text-center text-success mt-2">Suchen Sie Benutzern nach:</h3>
+      <form class="m-2 row">
+        <div class="form-group col">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" [(ngModel)]="searchId" placeholder="Enter ID" name="id">
+        </div>
+        <div class="form-group col">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="searchName" placeholder="Enter Name" name="name">
+        </div>
+        <div class="form-group col">
+          <label for="role">Role</label>
+          <input type="text" class="form-control" id="role" [(ngModel)]="searchRole" placeholder="Enter Role" name="role">
+        </div>
+      </form>
+      <button type="button" class="btn btn-success m-5 col-2" (click)="searchUsers()">Suchen</button>
+    </div>
+  
+    <!-- Show Table for User Data -->
+    <div *ngIf="allUsers.data.length > 0" class="mat-elevation-z8">
+      <table mat-table [dataSource]="allUsers" class="mat-table">
+  
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+        </ng-container>
+  
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> Vorname </th>
+          <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+        </ng-container>
+  
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> Nachname </th>
+          <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+        </ng-container>
+  
+        <!-- Role Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef> Rolle </th>
+          <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+        </ng-container>
+  
+        <!-- Klass Column -->
+        <ng-container matColumnDef="klass">
+          <th mat-header-cell *matHeaderCellDef> Klasse </th>
+          <td mat-cell *matCellDef="let user"> {{user.klass}} </td>
+        </ng-container>
+  
+        <!-- Team Column -->
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef> Team </th>
+          <td mat-cell *matCellDef="let user"> {{user.team}} </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  

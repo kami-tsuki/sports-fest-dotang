@@ -1,21 +1,51 @@
-
-
 <div class="card m-5 shadow-sm border border-success">
-    <div class="row g-0">
-      <div class="col-md-4 shadow-sm">
-        <img src="assets\logo.png" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8 mt-5">
-        <div class="card-body ">
-          <h1 class="card-title text-success">Welkommen {{user?.firstName}}</h1>
-          <h2 class="card-text">Ihre Dashboard zeigt Ihnen Ihre Information</h2>
-          <br>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Name: {{user?.firstName}} {{user?.lastName}}</li>
-          </ul>
-          <button class=" btn btn-outline-success">Leiter-Contact</button>
+  <div class="row g-0">
+    <div class="col-md-4 shadow-sm">
+      <img src="assets/logo.png" class="img-fluid rounded-start" alt="Logo">
+    </div>
+    <div class="col-md-8 mt-5">
+      <div class="card-body">
+        <h1 class="card-title text-success">Willkommen, {{User?.firstName}}</h1>
+        <h2 class="card-text">Ihr Dashboard zeigt Ihnen Ihre Informationen</h2>
+        <br>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Schule: Magdeburg BerufsSchule</li>
+          <li class="list-group-item">Name: {{User?.firstName}} {{User?.lastName}}</li>
+          <li class="list-group-item">Role: Schul Manager</li>
+
+        </ul>
+
+        <!-- Select Category -->
 
         </div>
+
       </div>
     </div>
+  </div>
+  <div class="card m-5 shadow-sm border border-success">
+    <div class="row text-center text-success mt-3">
+    <h2>Welche von den folgenden Kategorien möchten Sie bearbeiten:</h2>
+
+    
+<div class="row cc">
+<div class="hh rounded">
+<div class="col-md-2 fot " (click)="user()">
+
+  <img src="assets/user.png" alt="user" width="160px">
+  <h1 class="text-light tit">Users</h1>
+</div></div>
+<div class="hh rounded">
+<div class="col-md-2 fot ">
+  <img src="assets/teams.png" alt="teams" width="160px">
+  <h1 class="text-light tit">Teams</h1>
+</div></div>
+<div class="hh rounded">
+<div class="col-md-2 fot">
+  <img src="assets/classroom.png" alt="class" width="160px">
+  <h1 class="text-light tit">Classes</h1>
+</div></div>
+
+</div>
+
+  </div>
   </div>

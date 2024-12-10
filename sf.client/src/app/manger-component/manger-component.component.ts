@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppPaths } from '../app-paths';
+
 
 @Component({
   selector: 'app-manger-component',
@@ -7,11 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./manger-component.component.css']
 })
 export class MangerComponentComponent {
-  //ToDo-->following data are required
-  user = {
-    firstName: '',
-    lastName: '',
-  }; 
-
-  
+  User ={
+    id: "",
+    firstName: "",
+    lastName: "",
+  }
+  constructor(
+    private router: Router){}
+user(){
+  this.router.navigate([AppPaths.userPage]);
+}
 }

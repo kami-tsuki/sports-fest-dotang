@@ -8,6 +8,8 @@ import { StudentPageComponent } from './student-page/student-page.component';
 import { TeacherPageComponent } from './teacher-page/teacher-page.component';
 import { MangerComponentComponent } from './manger-component/manger-component.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { UserPageComponent } from './user-page/user-page.component';
+
 
 const routes: Routes = [
     {path: '', redirectTo: AppPaths.mainLayout, pathMatch: 'full'},
@@ -19,6 +21,8 @@ const routes: Routes = [
     // {path: AppPaths.schoolBase, redirectTo: AppPaths.schoolBase + AppPaths.list, pathMatch: 'full'},
     // {path: AppPaths.schoolBase + AppPaths.list, component: SchoolListComponent}
     { path: 'studentPage', component: StudentPageComponent },
+    { path: 'userPage', component: UserPageComponent },
+
     {path: AppPaths.teacherPage, component:TeacherPageComponent, pathMatch:'full'},
     {path: AppPaths.mangerComponent, component:MangerComponentComponent, pathMatch:'full'},
     {path: AppPaths.mainLayout,component: MainLayoutComponent, pathMatch:'full',
