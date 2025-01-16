@@ -20,9 +20,9 @@
   
     <!-- Show Table for User Data -->
     <div *ngIf="allUsers.data.length > 0" class="mat-elevation-z8">
-      <table mat-table [dataSource]="allUsers" class="mat-table">
+      <table mat-table="allUsers" class="mat-table">
   
-        <!-- ID Column -->
+        <!-- ID Column --> 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID </th>
           <td mat-cell *matCellDef="let user"> {{user.id}} </td>
