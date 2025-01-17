@@ -45,8 +45,8 @@ onSubmit(username: string, password: string): { success: boolean, message: strin
   }
 }
 //// to add neu users
- addUser(user: User): void {
-    this.users.push(user);
+ addUser(newUser: User): void {
+    this.users.push(newUser);
   }
 //// to update users
 updateUser(id: number, updatedUser: Partial<User>): void {

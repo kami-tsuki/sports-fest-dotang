@@ -22,8 +22,8 @@ padding-top:4rem ;
   left: 0;
   top: 0;
   z-index: 2;
-  margin-top:20px ;
-  margin-bottom: 30px;
+  margin-top:40px ;
+  margin-bottom: 50px;
   }
   .fot:hover {
     cursor: pointer;
@@ -32,7 +32,7 @@ padding-top:4rem ;
     transform: translateY(-200px);
   }
   .tit{
-    margin-top: 20px;
+    margin-top: 38px;
    font-size: 2rem;
     height: 300px;
     width: 160px;
