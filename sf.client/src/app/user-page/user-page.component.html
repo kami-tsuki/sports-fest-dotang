@@ -15,7 +15,12 @@
           <input type="text" class="form-control" id="role" [(ngModel)]="searchRole" placeholder="Enter Role" name="role">
         </div>
       </form>
+      <div class="row">
       <button type="button" class="btn btn-success m-5 col-2" (click)="searchUsers()">Suchen</button>
+      <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddUserForm()">Hinzufügen</button>
+
+
+    </div>
     </div>
   
     <!-- Show Table for User Data -->
@@ -64,5 +69,36 @@
   
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
+
+
+    <!--  Table to Add new User  -->
+    <!-- ...existing code... -->
+
+<!-- Add User Form -->
+<div *ngIf="showAddUserForm" class="row  m-1">
+  <h3>Add New User</h3>
+  <form (ngSubmit)="addUser(newUser)">
+    <mat-form-field>
+      <input matInput placeholder="ID" [(ngModel)]="newUser.id" name="id" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Role" [(ngModel)]="newUser.role" name="role" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Class" [(ngModel)]="newUser.klass" name="klass" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Team" [(ngModel)]="newUser.team" name="team" required>
+    </mat-form-field><br>
+    <button mat-raised-button color="success" type="submit">Add User</button>
+  </form>
+</div>
+
   </div>
   

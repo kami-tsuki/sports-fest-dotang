@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
+import {Class} from "@app/services/class.service";
+import {Team} from "@app/services/team.service";
 
-interface User {
+export interface User {
   id: number;
   password: string;
   firstName: string;
   lastName: string;
   role: string;
-  klass?: string;
-  team?: string;
-  points?: number;
-
+  class?: Class;
+  team?: Team;  
 }
 
 @Injectable({
@@ -45,8 +45,8 @@ onSubmit(username: string, password: string): { success: boolean, message: strin
   }
 }
 //// to add neu users
- addUser(user: User): void {
-    this.users.push(user);
+ addUser(newUser: User): void {
+    this.users.push(newUser);
   }
 //// to update users
 updateUser(id: number, updatedUser: Partial<User>): void {

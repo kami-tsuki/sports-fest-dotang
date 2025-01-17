@@ -5,6 +5,7 @@ import { UsersService } from '../services/users.service';
 
 interface User {
   id: number;
+  password: string;
   firstName: string;
   lastName: string;
   role: string;
@@ -21,6 +22,9 @@ interface User {
 export class UserPageComponent implements OnInit {
   // User list and data source
   users: User[] = [];
+  newUser: User = { id: 0, password: '', firstName: '', lastName: '', role: '', klass: '', team: '' };
+  showAddUserForm: boolean = false;
+
   allUsers = new MatTableDataSource<User>([]);
 
   // Form fields for search
@@ -41,7 +45,7 @@ export class UserPageComponent implements OnInit {
 
   // Load all users from the service
   loadUsers(): void {
-    this.users = this.usersService.getUsers(); // Replace with API call if necessary
+    this.users = this.usersService.getUsers();
     this.allUsers.data = this.users; // Populate the table data source
     this.allUsers.paginator = this.paginator; // Connect paginator
   }
@@ -60,4 +64,19 @@ export class UserPageComponent implements OnInit {
     // Update the table's data source with the filtered data
     this.allUsers.data = filteredUsers;
   }
+
+/// Add new user
+addUser(user: User): void {
+  this.usersService.addUser(user); // Use the service to add the new user
+  this.allUsers.data = this.usersService.getUsers(); // Update the table data source
+  this.newUser = { id: 0, password: '',firstName: '', lastName: '', role: '', klass: '', team: '' }; // Reset the form
+  this.showAddUserForm = false;
+
+}
+
+toggleAddUserForm(): void {
+  this.showAddUserForm = !this.showAddUserForm;
+}
+
+
 }
