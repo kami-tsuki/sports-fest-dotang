@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Team} from "@app/services/team.service";
 import {User} from "@app/services/users.service";
+import {EntityOfGuid} from "@app/services/api/sf-client";
 
-export interface Discipline {
-  id: number;
+export interface Discipline extends EntityOfGuid{
   name: string;
   teams?: Team[];
   judges?: User[];
@@ -23,7 +23,7 @@ export class DisciplinesService {
   }
 
   //// to get specific discipline
-  getDisciplineById(id: number): Discipline | undefined {
+  getDisciplineById(id: string): Discipline | undefined {
     return this.disciplines.find(discipline => discipline.id === id);
   }
 
@@ -33,7 +33,7 @@ export class DisciplinesService {
   }
 
   ///// to update adiscipline
-  updateDiscipline(id: number, updatedDiscipline: Partial<Discipline>): void {
+  updateDiscipline(id: string, updatedDiscipline: Partial<Discipline>): void {
     const discipline = this.disciplines.find(d => d.id === id);
     if (discipline) {
       Object.assign(discipline, updatedDiscipline);
@@ -41,7 +41,7 @@ export class DisciplinesService {
   }
 
   //// to delete a discipline
-  deleteDiscipline(id: number): void {
+  deleteDiscipline(id: string): void {
     this.disciplines = this.disciplines.filter(d => d.id !== id);
   }
 }

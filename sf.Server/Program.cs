@@ -86,17 +86,6 @@ builder.Services.AddScoped<DataBaseService<CampaignManager>>();
 builder.Services.AddScoped<DataBaseService<CampaignJudge>>();
 builder.Services.AddScoped<DataBaseService<Tutor>>();
 
-builder.Services.AddScoped<UserController>();
-builder.Services.AddScoped<ClassController>();
-builder.Services.AddScoped<DisciplineController>();
-builder.Services.AddScoped<EntryController>();
-builder.Services.AddScoped<LocationController>();
-builder.Services.AddScoped<StudentController>();
-builder.Services.AddScoped<SchoolController>();
-builder.Services.AddScoped<ManagerController>();
-builder.Services.AddScoped<JudgeController>();
-builder.Services.AddScoped<TutorController>();
-
 
 var app = builder.Build();
 

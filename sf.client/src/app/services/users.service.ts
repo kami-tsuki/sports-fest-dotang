@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Class} from "@app/services/class.service";
 import {Team} from "@app/services/team.service";
+import {EntityOfGuid} from "@app/services/api/sf-client";
 
-export interface User {
-  id: number;
+export interface User extends EntityOfGuid {
   password: string;
   firstName: string;
   lastName: string;
@@ -49,14 +49,14 @@ onSubmit(username: string, password: string): { success: boolean, message: strin
     this.users.push(newUser);
   }
 //// to update users
-updateUser(id: number, updatedUser: Partial<User>): void {
+updateUser(id: string, updatedUser: Partial<User>): void {
   const user = this.users.find(u => u.id === id);
   if (user) {
     Object.assign(user, updatedUser);
   }
 }
 //// Delete a user
-deleteUser(id: number): void {
+deleteUser(id: string): void {
   this.users = this.users.filter(user => user.id !== id);
 }
 }
