@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
+import {Class} from "@app/services/class.service";
+import {Team} from "@app/services/team.service";
 
-interface User {
+export interface User {
   id: number;
   password: string;
   firstName: string;
   lastName: string;
   role: string;
-  klass?: string;
-  team?: string;
-  points?: number;
-
+  class?: Class;
+  team?: Team;  
 }
 
 @Injectable({

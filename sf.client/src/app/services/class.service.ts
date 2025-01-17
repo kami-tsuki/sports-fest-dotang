@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import {User} from "@app/services/users.service";
 
-interface Class {
+export interface Class {
   id: number;
   name: string;
-  students: number[]; // this is for student IDs
-  totalScore?: number; // this is to calculate score based on students' points
+  students?: User[];
+  tutors?: User[];
 }
 
 @Injectable({

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { User } from './users.service';
 
-interface Team {
+export interface Team {
   id: number;
   name: string;
-  members: number[]; // according tot sudent ID
-  score?: number;
+  students?: User[];
 }
 
 @Injectable({

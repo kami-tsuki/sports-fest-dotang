@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import {Team} from "@app/services/team.service";
+import {User} from "@app/services/users.service";
 
-interface Discipline {
+export interface Discipline {
   id: number;
   name: string;
-  teamsNumber: number
+  teams?: Team[];
+  judges?: User[];
 }
 
 @Injectable({
