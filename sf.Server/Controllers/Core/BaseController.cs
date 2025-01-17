@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.Routing;
 using sf.Server.Models.Auth.Dto;
+using sf.Server.Models.SF;
 using ILogger = Serilog.ILogger;
 
 namespace sf.Server.Controllers.Core;
@@ -12,22 +13,11 @@ namespace sf.Server.Controllers.Core;
 public abstract class BaseController<TEntity>(IServiceProvider services) : ControllerBase
     where TEntity : class, IEntity<Guid>
 {
-    #region MyRegion
+    #region Properties
 
     internal ILogger Logger => services.GetRequiredService<ILogger>();
     internal ResultService ResultService => services.GetRequiredService<ResultService>();
     internal DataBaseService<TEntity> DbService => services.GetRequiredService<DataBaseService<TEntity>>();
-
-    internal DataBaseService<School> SchoolDb => services.GetRequiredService<DataBaseService<School>>();
-    internal DataBaseService<Class> ClassDb => services.GetRequiredService<DataBaseService<Class>>();
-    internal DataBaseService<Student> StudentDb => services.GetRequiredService<DataBaseService<Student>>();
-    internal DataBaseService<Tutor> TutorDb => services.GetRequiredService<DataBaseService<Tutor>>();
-    internal DataBaseService<CampaignManager> ManagerDb => services.GetRequiredService<DataBaseService<CampaignManager>>();
-    internal DataBaseService<CampaignJudge> JudgeDb => services.GetRequiredService<DataBaseService<CampaignJudge>>();
-    internal DataBaseService<Discipline> DisciplineDb => services.GetRequiredService<DataBaseService<Discipline>>();
-    internal DataBaseService<Location> LocationDb => services.GetRequiredService<DataBaseService<Location>>();
-    internal DataBaseService<Entry> EntryDb => services.GetRequiredService<DataBaseService<Entry>>();
-    internal DataBaseService<User> UserDb => services.GetRequiredService<DataBaseService<User>>();
 
     
 

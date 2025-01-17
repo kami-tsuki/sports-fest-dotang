@@ -2,7 +2,10 @@ using System.Text;
 using JWT.Extensions.AspNetCore;
 using Microsoft.IdentityModel.Tokens;
 using sf.Server.Middlewares;
+using sf.Server.Models.SF;
+using SportsFestApi.Net.Generated;
 using ILogger = Serilog.ILogger;
+using User = sf.Server.Models.Auth.User;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -74,18 +77,6 @@ builder.Services.AddScoped<ILogger>(
            .CreateLogger());
 
 builder.Services.AddScoped<ResultService>();
-
-builder.Services.AddScoped<DataBaseService<User>>();
-builder.Services.AddScoped<DataBaseService<Class>>();
-builder.Services.AddScoped<DataBaseService<Discipline>>();
-builder.Services.AddScoped<DataBaseService<Entry>>();
-builder.Services.AddScoped<DataBaseService<Location>>();
-builder.Services.AddScoped<DataBaseService<Student>>();
-builder.Services.AddScoped<DataBaseService<School>>();
-builder.Services.AddScoped<DataBaseService<CampaignManager>>();
-builder.Services.AddScoped<DataBaseService<CampaignJudge>>();
-builder.Services.AddScoped<DataBaseService<Tutor>>();
-
 
 var app = builder.Build();
 
