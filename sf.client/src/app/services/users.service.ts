@@ -9,7 +9,8 @@ export interface User extends EntityOfGuid {
   lastName: string;
   role: string;
   class?: Class;
-  team?: Team;  
+  team?: Team; 
+  points?: number; 
 }
 
 @Injectable({

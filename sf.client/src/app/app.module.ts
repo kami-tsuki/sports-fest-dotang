@@ -56,6 +56,9 @@ import { JudgeComponentComponent } from './judge-component/judge-component.compo
 import { UserPageComponent } from './user-page/user-page.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { TeamPageComponent } from './team-page/team-page.component';
+import { ClassPageComponent } from './class-page/class-page.component';
+import { DeciplienPageComponent } from './deciplien-page/deciplien-page.component';
 
 @NgModule({
 
@@ -93,6 +96,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MangerComponentComponent,
         JudgeComponentComponent,
         UserPageComponent,
+        TeamPageComponent,
+        ClassPageComponent,
+        DeciplienPageComponent,
         
         
     ],

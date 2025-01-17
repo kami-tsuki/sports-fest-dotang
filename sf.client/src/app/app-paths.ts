@@ -14,6 +14,12 @@
     public static mangerComponent = 'mangerComponent';
     public static judgeComponent = 'judgeComponent';
     public static userPage = 'userPage';
+    public static teamPage = 'teamPage';
+    public static classPage = 'classPage';
+    public static deciplienPage = 'deciplienPage';
+
+
+
 
 
     public static mainLayout = 'mainLayout';

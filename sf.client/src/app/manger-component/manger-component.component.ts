@@ -19,4 +19,13 @@ export class MangerComponentComponent {
 user(){
   this.router.navigate([AppPaths.userPage]);
 }
+team(){
+  this.router.navigate([AppPaths.teamPage]);
+}
+class(){
+  this.router.navigate([AppPaths.classPage]);
+}
+deciplien(){
+  this.router.navigate([AppPaths.deciplienPage]);
+}
 }

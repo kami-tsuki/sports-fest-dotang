@@ -52,9 +52,9 @@
         </ng-container>
   
         <!-- Klass Column -->
-        <ng-container matColumnDef="klass">
+        <ng-container matColumnDef="class">
           <th mat-header-cell *matHeaderCellDef> Klasse </th>
-          <td mat-cell *matCellDef="let user"> {{user.klass}} </td>
+          <td mat-cell *matCellDef="let user"> {{user.class}} </td>
         </ng-container>
   
         <!-- Team Column -->
@@ -72,8 +72,6 @@
 
 
     <!--  Table to Add new User  -->
-    <!-- ...existing code... -->
-
 <!-- Add User Form -->
 <div *ngIf="showAddUserForm" class="row  m-1">
   <h3>Add New User</h3>
@@ -91,7 +89,7 @@
       <input matInput placeholder="Role" [(ngModel)]="newUser.role" name="role" required>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Class" [(ngModel)]="newUser.klass" name="klass" required>
+      <input matInput placeholder="Class" [(ngModel)]="newUser.class" name="class" required>
     </mat-form-field><br>
     <mat-form-field>
       <input matInput placeholder="Team" [(ngModel)]="newUser.team" name="team" required>
