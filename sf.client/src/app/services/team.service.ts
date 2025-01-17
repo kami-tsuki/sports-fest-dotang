@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './users.service';
+import {EntityOfGuid} from "@app/services/api/sf-client";
 
-export interface Team {
-  id: number;
+export interface Team extends EntityOfGuid {
   name: string;
   students?: User[];
 }
@@ -21,7 +21,7 @@ export class TeamsService {
   }
 
   //// to get a specific team
-  getTeamById(id: number): Team | undefined {
+  getTeamById(id: string): Team | undefined {
     return this.teams.find(team => team.id === id);
   }
 
@@ -31,7 +31,7 @@ export class TeamsService {
   }
 
   //// to update ateam
-  updateTeam(id: number, updatedTeam: Partial<Team>): void {
+  updateTeam(id: string, updatedTeam: Partial<Team>): void {
     const team = this.teams.find(t => t.id === id);
     if (team) {
       Object.assign(team, updatedTeam);
@@ -39,7 +39,7 @@ export class TeamsService {
   }
 
   //// to delete a team
-  deleteTeam(id: number): void {
+  deleteTeam(id: string): void {
     this.teams = this.teams.filter(team => team.id !== id);
   }
 }

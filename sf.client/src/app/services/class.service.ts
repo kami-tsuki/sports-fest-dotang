@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {User} from "@app/services/users.service";
+import {EntityOfGuid} from "@app/services/api/sf-client";
 
-export interface Class {
-  id: number;
+export interface Class extends EntityOfGuid {
   name: string;
   students?: User[];
   tutors?: User[];
@@ -22,7 +22,7 @@ export class ClassesService {
   }
 
   //// to get specific class by id
-  getClassById(id: number): Class | undefined {
+  getClassById(id: string): Class | undefined {
     return this.classes.find(cls => cls.id === id);
   }
 
@@ -32,7 +32,7 @@ export class ClassesService {
   }
 
   //// to update a class
-  updateClass(id: number, updatedClass: Partial<Class>): void {
+  updateClass(id: string, updatedClass: Partial<Class>): void {
     const cls = this.classes.find(c => c.id === id);
     if (cls) {
       Object.assign(cls, updatedClass);
@@ -40,7 +40,7 @@ export class ClassesService {
   }
 
   //// to delete a class
-  deleteClass(id: number): void {
+  deleteClass(id: string): void {
     this.classes = this.classes.filter(cls => cls.id !== id);
   }
 }

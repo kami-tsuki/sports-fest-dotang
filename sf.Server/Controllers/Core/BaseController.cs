@@ -29,16 +29,7 @@ public abstract class BaseController<TEntity>(IServiceProvider services) : Contr
     internal DataBaseService<Entry> EntryDb => services.GetRequiredService<DataBaseService<Entry>>();
     internal DataBaseService<User> UserDb => services.GetRequiredService<DataBaseService<User>>();
 
-    internal SchoolController SchoolController => services.GetRequiredService<SchoolController>();
-    internal ClassController ClassController => services.GetRequiredService<ClassController>();
-    internal StudentController StudentController => services.GetRequiredService<StudentController>();
-    internal TutorController TutorController => services.GetRequiredService<TutorController>();
-    internal ManagerController ManagerController => services.GetRequiredService<ManagerController>();
-    internal JudgeController JudgeController => services.GetRequiredService<JudgeController>();
-    internal DisciplineController DisciplineController => services.GetRequiredService<DisciplineController>();
-    internal LocationController LocationController => services.GetRequiredService<LocationController>();
-    internal EntryController EntryController => services.GetRequiredService<EntryController>();
-    internal UserController UserController => services.GetRequiredService<UserController>();
+    
 
     #endregion Services
 
