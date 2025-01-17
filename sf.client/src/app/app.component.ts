@@ -8,4 +8,7 @@ import {School} from "./services/api/sf-client";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

@@ -51,7 +51,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MangerComponentComponent } from './manger-component/manger-component.component';
+import { JudgeComponentComponent } from './judge-component/judge-component.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
 
@@ -86,6 +90,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         SportsFistivalComponent,
         ContactComponent,
         MainLayoutComponent,
+        MangerComponentComponent,
+        JudgeComponentComponent,
+        UserPageComponent,
         
         
     ],
@@ -111,6 +118,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MatCardActions,
         ReactiveFormsModule,
         MatFormFieldModule,
+        MatPaginatorModule,
     ],
     bootstrap: [
         AppComponent

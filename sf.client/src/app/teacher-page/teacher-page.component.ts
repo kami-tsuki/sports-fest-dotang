@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './teacher-page.component.css'
 })
 export class TeacherPageComponent {
+    //ToDo-->following data are required
+    user = {
+      firstName: '',
+      lastName: '',
+      klass: '',
+      group: ''
+
+    }; 
 
 }

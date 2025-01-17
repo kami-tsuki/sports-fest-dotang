@@ -1,20 +1,21 @@
 
 
-<div class="card m-5 shadow-sm border border-success" style="">
+<div class="card m-5 shadow-sm border border-success">
     <div class="row g-0">
       <div class="col-md-4 shadow-sm">
         <img src="assets\logo.png" class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8 mt-5">
         <div class="card-body ">
-          <h1 class="card-title text-success">Welkommen </h1>
+          <h1 class="card-title text-success">Welkommen {{user?.firstName}}</h1>
           <h2 class="card-text">Ihre Dashboard zeigt Ihnen Ihre Information</h2>
           <br>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Name: </li>
-            <li class="list-group-item">Klass: </li>
-            <li class="list-group-item">Group: </li>
+            <li class="list-group-item">Name: {{user?.firstName}} {{user?.lastName}}</li>
+            <li class="list-group-item">Klass: {{user?.klass}}</li>
+            <li class="list-group-item">Group: {{user?.group}}</li>
           </ul>
+          <app-student-list />
           <button class=" btn btn-outline-success">Leiter-Contact</button>
 
           <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
