@@ -50,15 +50,15 @@ import { ContactComponent } from './contact/contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MangerComponentComponent } from './manger-component/manger-component.component';
 import { JudgeComponentComponent } from './judge-component/judge-component.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { ClassPageComponent } from './class-page/class-page.component';
 import { DeciplienPageComponent } from './deciplien-page/deciplien-page.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
 
@@ -125,6 +125,14 @@ import { DeciplienPageComponent } from './deciplien-page/deciplien-page.componen
         ReactiveFormsModule,
         MatFormFieldModule,
         MatPaginatorModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
     ],
     bootstrap: [
         AppComponent

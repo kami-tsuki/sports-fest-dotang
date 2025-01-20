@@ -26,6 +26,8 @@ export class UserPageComponent implements OnInit {
     toJSON: () => ({}) 
   }; 
   showAddUserForm: boolean = false;
+  showSearchResults: boolean = false;
+  selectedUser: User | null = null;
 
   allUsers = new MatTableDataSource<User>([]);
 
@@ -35,7 +37,7 @@ export class UserPageComponent implements OnInit {
   searchRole: string = '';
 
   // TheTable columns
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'role', 'class', 'team', 'points'];
+  displayedColumns: string[] = ['select','id', 'firstName', 'lastName', 'role', 'class', 'team', 'points'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -47,47 +49,111 @@ export class UserPageComponent implements OnInit {
 
   // Load all users from the service
   loadUsers(): void {
-    this.users = this.usersService.getUsers();
-    this.allUsers.data = this.users; // Populate the table data source
-    this.allUsers.paginator = this.paginator;
+    this.users = this.usersService.getUsers();  // Get users from service
+    this.allUsers = new MatTableDataSource<User>(this.users);  // Set data source
+    this.allUsers.paginator = this.paginator;  // Attach paginator
   }
 
   // Search users
   searchUsers(): void {
-    const filteredUsers = this.users.filter(user => {
-      const matchesId = this.searchId ? user.id?.includes(this.searchId) : true; // Safely access id caus i had error here
-      const matchesName = this.searchName
-        ? `${user.firstName} ${user.lastName}`.toLowerCase().includes(this.searchName.toLowerCase())
-        : true;
-      const matchesRole = this.searchRole ? user.role.toLowerCase().includes(this.searchRole.toLowerCase()) : true;
-      return matchesId && matchesName && matchesRole;
-    });
+    let filteredUsers = this.users;
 
-    // Update the table data source with the filtered data
+    // Filter by ID
+    if (this.searchId) {
+      filteredUsers = filteredUsers.filter(user => user.id && user.id.includes(this.searchId));
+    }
+
+    // Filter by Name
+    if (this.searchName) {
+      filteredUsers = filteredUsers.filter(user => 
+        user.firstName.includes(this.searchName) || user.lastName.includes(this.searchName)
+      );
+    }
+
+    // Filter by Role
+    if (this.searchRole) {
+      filteredUsers = filteredUsers.filter(user => user.role.includes(this.searchRole));
+    }
+
+    // Update the data source to show the filtered list
     this.allUsers.data = filteredUsers;
+    this.showSearchResults = !this.showSearchResults;
   }
+
+  // To choose the user for editing
+  onCheckboxChange(user: User, event: Event): void {
+  const isChecked = (event.target as HTMLInputElement).checked;
+  this.onSelectUser(user, isChecked);
+}
+
+  onSelectUser(user: User | null, isChecked: boolean): void {
+    if (!user) {
+      console.error('No user selected');
+      return;
+    }
+  
+    // Proceeding
+    if (isChecked) {
+      this.selectedUser = { 
+        ...user,
+        init: user?.init || (() => {}),  // to avoid the error this is default implementation of init if user is undefined
+        toJSON: user?.toJSON || (() => ({}))  // also same here default implementation of toJSON if user is undefined
+      };
+    } else {
+      this.selectedUser = null; // Clear selection if unchecked
+    }
+  }
+  
+  
+  // To save after editing
+  saveUser(): void {
+    if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
+      this.usersService.updateUser(this.selectedUser.id, this.selectedUser); // Update user via the service
+      this.users = this.usersService.getUsers(); // to refresh the users list
+      this.allUsers.data = [...this.users]; // Update the data source
+      console.log('User updated successfully:', this.selectedUser);
+      this.selectedUser = null; // here i want to clear the selection after finishing
+    } else {
+      console.error('Cannot update user: ID is missing.');
+      alert('Cannot update user: ID is missing.');
+    }
+  }
+  
+  
 
   // Add new user
   addUser(user: User): void {
-    this.usersService.addUser(user); // Add user via service
-    this.users = this.usersService.getUsers(); // Fetch updated list
-    this.allUsers.data = [...this.users]; // Update data source
-    this.newUser = {
-      id: '', 
-      password: '', 
-      firstName: '', 
-      lastName: '', 
-      role: '', 
-      class: undefined, 
-      team: undefined, 
-      points: 0, 
-      created: new Date(), 
-      updated: new Date(),
-      init: () => {}, // Default implementation for init/ I need to check it agian
-      toJSON: () => ({})
-    };
-    this.showAddUserForm = false;
+    try {
+      this.usersService.addUser(user); 
+      this.users = this.usersService.getUsers(); // this is to fetch the updated list
+      this.allUsers.data = [...this.users]; // and here to update data source
+  
+      // Reset the newUser object
+      this.newUser = {
+        id: '', 
+        password: '', 
+        firstName: '', 
+        lastName: '', 
+        role: '', 
+        class: undefined, 
+        team: undefined, 
+        points: 0, 
+        created: new Date(), 
+        updated: new Date(),
+        init: () => {}, // I might use it to implement some default actions
+        toJSON: () => ({})
+      };
+  
+      // Display success message
+      alert('User added successfully!');
+      console.log('User added successfully', this.users);
+      this.showAddUserForm = false;
+    } catch (error) {
+      console.error('Error adding user:', error);
+      alert('Failed to add user. Please try again.');
+    }
   }
+  
 
   // Toggle the add user form
   toggleAddUserForm(): void {

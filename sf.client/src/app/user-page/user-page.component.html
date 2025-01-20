@@ -1,79 +1,90 @@
 <div class="card m-5 shadow-sm border border-success">
-    <div class="row g-0">
-      <h3 class="text-center text-success mt-2">Suchen Sie Benutzern nach:</h3>
-      <form class="m-2 row">
-        <div class="form-group col">
-          <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" [(ngModel)]="searchId" placeholder="Enter ID" name="id">
-        </div>
-        <div class="form-group col">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" [(ngModel)]="searchName" placeholder="Enter Name" name="name">
-        </div>
-        <div class="form-group col">
-          <label for="role">Role</label>
-          <input type="text" class="form-control" id="role" [(ngModel)]="searchRole" placeholder="Enter Role" name="role">
-        </div>
-      </form>
-      <div class="row">
+  <div class="row g-0">
+    <h3 class="text-center text-success mt-2">Suchen Sie Benutzern nach:</h3>
+    <form class="m-2 row">
+      <div class="form-group col">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" id="id" [(ngModel)]="searchId" placeholder="Enter ID" name="id">
+      </div>
+      <div class="form-group col">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="searchName" placeholder="Enter Name" name="name">
+      </div>
+      <div class="form-group col">
+        <label for="role">Role</label>
+        <input type="text" class="form-control" id="role" [(ngModel)]="searchRole" placeholder="Enter Role" name="role">
+      </div>
+    </form>
+    <div class="row">
       <button type="button" class="btn btn-success m-5 col-2" (click)="searchUsers()">Suchen</button>
       <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddUserForm()">Hinzufügen</button>
-
-
     </div>
-    </div>
-  
-    <!-- Show Table for User Data -->
-    <div *ngIf="allUsers.data.length > 0" class="mat-elevation-z8">
-      <table mat-table="allUsers" class="mat-table">
-  
-        <!-- ID Column --> 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-        </ng-container>
-  
-        <!-- First Name Column -->
-        <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef> Vorname </th>
-          <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
-        </ng-container>
-  
-        <!-- Last Name Column -->
-        <ng-container matColumnDef="lastName">
-          <th mat-header-cell *matHeaderCellDef> Nachname </th>
-          <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
-        </ng-container>
-  
-        <!-- Role Column -->
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef> Rolle </th>
-          <td mat-cell *matCellDef="let user"> {{user.role}} </td>
-        </ng-container>
-  
-        <!-- Klass Column -->
-        <ng-container matColumnDef="class">
-          <th mat-header-cell *matHeaderCellDef> Klasse </th>
-          <td mat-cell *matCellDef="let user"> {{user.class}} </td>
-        </ng-container>
-  
-        <!-- Team Column -->
-        <ng-container matColumnDef="team">
-          <th mat-header-cell *matHeaderCellDef> Team </th>
-          <td mat-cell *matCellDef="let user"> {{user.team}} </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-  
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
+  </div>
+
+  <!-- Show Table for User Data -->
+  <div *ngIf="showSearchResults && allUsers.data.length > 0" class="mat-elevation-z8">
+    <table mat-table [dataSource]="allUsers" class="mat-table">
+       <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let user">
+        <input 
+          type="checkbox" 
+          *ngIf="user" 
+          (change)="onCheckboxChange(user, $event)">
+      </td>
+      
+      
+      
+      
+    </ng-container>
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+      </ng-container>
+      <!-- First Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Vorname </th>
+        <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+      </ng-container>
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Nachname </th>
+        <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+      </ng-container>
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Rolle </th>
+        <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+      </ng-container>
+      <!-- Klass Colum -->
+       <ng-container matColumnDef="class">
+        <th mat-header-cell *matHeaderCellDef> Klasse </th>
+        <td mat-cell *matCellDef="let user"> {{user.class}} </td>
+       </ng-container>
+      <!-- Team Column -->
+      <ng-container matColumnDef="team">
+        <th mat-header-cell *matHeaderCellDef> Team </th>
+        <td mat-cell *matCellDef="let user"> {{user.team}} </td>
+      </ng-container>
+      <!-- Points Column -->
+      <ng-container matColumnDef="points">
+        <th mat-header-cell *matHeaderCellDef> Punkte </th>
+        <td mat-cell *matCellDef="let user"> {{user.points}} </td>
+      </ng-container>
 
 
-    <!--  Table to Add new User  -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
 <!-- Add User Form -->
-<div *ngIf="showAddUserForm" class="row  m-1">
+<div *ngIf="showAddUserForm" class="row m-1">
   <h3>Add New User</h3>
   <form (ngSubmit)="addUser(newUser)">
     <mat-form-field>
@@ -94,9 +105,37 @@
     <mat-form-field>
       <input matInput placeholder="Team" [(ngModel)]="newUser.team" name="team" required>
     </mat-form-field><br>
-    <button mat-raised-button color="success" type="submit">Add User</button>
+    <mat-form-field>
+      <input matInput placeholder="Points" [(ngModel)]="newUser.points" name="points" required>
+    </mat-form-field><br>
+    <button type="button" class="btn btn-success m-5 col-2" (click)="addUser(newUser)">Add User</button>
   </form>
 </div>
 
-  </div>
-  
+<!-- To edit selected user -->
+
+<div *ngIf="selectedUser" class="mt-3">
+  <h3>Edit Selected User</h3>
+  <form (ngSubmit)="saveUser()">
+    <mat-form-field>
+      <input matInput placeholder="ID" [(ngModel)]="selectedUser.id" name="id" readonly />
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="First Name" [(ngModel)]="selectedUser.firstName" name="firstName" />
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Last Name" [(ngModel)]="selectedUser.lastName" name="lastName" />
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Role" [(ngModel)]="selectedUser.role" name="role" />
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Class" [(ngModel)]="selectedUser.class" name="class" />
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Team" [(ngModel)]="selectedUser.team" name="team" />
+    </mat-form-field><br>
+    <button type="submit" class="btn btn-success m-5 col-2">Save</button>
+  </form>
+</div>
+
