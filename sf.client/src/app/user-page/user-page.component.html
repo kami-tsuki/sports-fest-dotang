@@ -18,6 +18,8 @@
     <div class="row">
       <button type="button" class="btn btn-success m-5 col-2" (click)="searchUsers()">Suchen</button>
       <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddUserForm()">Hinzufügen</button>
+      <button *ngIf="showSearchResults && allUsers.data.length > 0" type="button" class="btn btn-danger m-5 col-2" (click)="deleteUser()">Löschen</button>
+
     </div>
   </div>
 

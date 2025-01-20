@@ -118,6 +118,20 @@ export class UserPageComponent implements OnInit {
       alert('Cannot update user: ID is missing.');
     }
   }
+
+  // To delete after editing
+  deleteUser(): void {
+    if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
+      this.usersService.deleteUser(this.selectedUser.id); // Update user via the service
+      this.users = this.usersService.getUsers(); // to refresh the users list
+      this.allUsers.data = [...this.users]; // Update the data source
+      console.log('User Deleted successfully:', this.selectedUser);
+      this.selectedUser = null; // here i want to clear the selection after finishing
+    } else {
+      console.error('Cannot update user: ID is missing.');
+      alert('Cannot Delete user: ID is missing.');
+    }
+  }
   
   
 
