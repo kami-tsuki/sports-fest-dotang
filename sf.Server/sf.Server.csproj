@@ -57,6 +57,7 @@
   <ItemGroup>
     <Folder Include="Client\" />
     <Folder Include="Data\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,7 +17,7 @@ public class UserModel : Entity<Guid>
     [JsonProperty(nameof(TeamId)), ForeignKey(nameof(TeamModel.Id))]
     public Guid TeamId { get; set; } = Guid.Empty;
     
-    [JsonProperty(nameof(Team)), ForeignKey(nameof(TeamId))]
+    [JsonProperty(nameof(Team))]
     public TeamModel Team { get; set; } = null!;
     
     [JsonProperty(nameof(ClassId)), ForeignKey(nameof(ClassModel.Id))]

@@ -11,6 +11,6 @@ public class TeamModel : Entity<Guid>
     [JsonProperty(nameof(DisciplineId)), ForeignKey(nameof(DisciplineModel.Id))]
     public Guid DisciplineId { get; set; } = Guid.Empty;
     
-    [JsonProperty(nameof(Discipline)), ForeignKey(nameof(DisciplineId))]
+    [JsonProperty(nameof(Discipline))]
     public DisciplineModel Discipline { get; set; } = null!;
 }

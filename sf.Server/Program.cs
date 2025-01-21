@@ -1,5 +1,7 @@
 using System.Text;
+using Azure.Core;
 using JWT.Extensions.AspNetCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using sf.Server.Middlewares;
 using sf.Server.Models.SF;
@@ -20,11 +22,18 @@ builder.Host.UseSerilog();
 
 builder.Services.AddDbContext<SfContext>(
     options =>
+    {
         options.UseMySql(
             builder.Configuration.GetConnectionString("DefaultConnection"),
-            new MySqlServerVersion(new Version(8, 0, 23))
-        )
+            new MySqlServerVersion(new Version(8, 0, 21)),
+            o =>
+            {
+                o.EnableRetryOnFailure();
+            });
+    },
+    ServiceLifetime.Transient
 );
+
 
 builder.Services.AddControllers()
        .AddNewtonsoftJson(
@@ -90,10 +99,10 @@ app.UseMiddleware<ReadmeMiddleware>(changelogPath, "/swagger/changelog.md");
 
 // if (app.Environment.IsDevelopment())
 // {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseOpenApi();
-    app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseOpenApi();
+app.UseDeveloperExceptionPage();
 // }
 
 app.UseHttpsRedirection();
