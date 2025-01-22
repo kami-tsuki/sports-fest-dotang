@@ -9,6 +9,10 @@ import { TeacherPageComponent } from './teacher-page/teacher-page.component';
 import { MangerComponentComponent } from './manger-component/manger-component.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { TeamPageComponent } from './team-page/team-page.component';
+import { ClassPageComponent } from './class-page/class-page.component';
+import { DeciplienPageComponent } from './deciplien-page/deciplien-page.component';
+
 
 
 const routes: Routes = [
@@ -22,11 +26,16 @@ const routes: Routes = [
     // {path: AppPaths.schoolBase + AppPaths.list, component: SchoolListComponent}
     { path: 'studentPage', component: StudentPageComponent },
     { path: 'userPage', component: UserPageComponent },
+    { path: 'teamPage', component: TeamPageComponent },
+    { path: 'classPage', component: ClassPageComponent },
+    { path: 'deciplienPage', component: DeciplienPageComponent },
+
+
+
 
     {path: AppPaths.teacherPage, component:TeacherPageComponent, pathMatch:'full'},
     {path: AppPaths.mangerComponent, component:MangerComponentComponent, pathMatch:'full'},
-    {path: AppPaths.mainLayout,component: MainLayoutComponent, pathMatch:'full',
-    }
+    {path: AppPaths.mainLayout,component: MainLayoutComponent, pathMatch:'full'}
 ];
 
 @NgModule({

@@ -1,18 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { UsersService } from '../services/users.service';
-
-interface User {
-  id: number;
-  password: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-  klass?: string;
-  team?: string;
-  points?: number;
-}
+import { UsersService, User } from '../services/users.service'; // Import User from the service
 
 @Component({
   selector: 'app-user-page',
@@ -22,8 +11,23 @@ interface User {
 export class UserPageComponent implements OnInit {
   // User list and data source
   users: User[] = [];
-  newUser: User = { id: 0, password: '', firstName: '', lastName: '', role: '', klass: '', team: '' };
+  newUser: User = {
+    id: '', 
+    password: '', 
+    firstName: '', 
+    lastName: '', 
+    role: '', 
+    class: undefined, 
+    team: undefined, 
+    points: 0, 
+    created: new Date(), 
+    updated: new Date(),
+    init: () => {}, // Reset default `init`
+    toJSON: () => ({}) 
+  }; 
   showAddUserForm: boolean = false;
+  showSearchResults: boolean = false;
+  selectedUser: User | null = null;
 
   allUsers = new MatTableDataSource<User>([]);
 
@@ -32,10 +36,10 @@ export class UserPageComponent implements OnInit {
   searchName: string = '';
   searchRole: string = '';
 
-  // Table columns
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'role', 'klass', 'team'];
+  // TheTable columns
+  displayedColumns: string[] = ['select','id', 'firstName', 'lastName', 'role', 'class', 'team', 'points'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator; // Paginator reference
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private usersService: UsersService) {}
 
@@ -45,38 +49,128 @@ export class UserPageComponent implements OnInit {
 
   // Load all users from the service
   loadUsers(): void {
-    this.users = this.usersService.getUsers();
-    this.allUsers.data = this.users; // Populate the table data source
-    this.allUsers.paginator = this.paginator; // Connect paginator
+    this.users = this.usersService.getUsers();  // Get users from service
+    this.allUsers = new MatTableDataSource<User>(this.users);  // Set data source
+    this.allUsers.paginator = this.paginator;  // Attach paginator
   }
 
-  // Search users based on input fields
+  // Search users
   searchUsers(): void {
-    const filteredUsers = this.users.filter(user => {
-      const matchesId = this.searchId ? user.id.toString().includes(this.searchId) : true;
-      const matchesName = this.searchName
-        ? `${user.firstName} ${user.lastName}`.toLowerCase().includes(this.searchName.toLowerCase())
-        : true;
-      const matchesRole = this.searchRole ? user.role.toLowerCase().includes(this.searchRole.toLowerCase()) : true;
-      return matchesId && matchesName && matchesRole;
-    });
+    let filteredUsers = this.users;
 
-    // Update the table's data source with the filtered data
+    // Filter by ID
+    if (this.searchId) {
+      filteredUsers = filteredUsers.filter(user => user.id && user.id.includes(this.searchId));
+    }
+
+    // Filter by Name
+    if (this.searchName) {
+      filteredUsers = filteredUsers.filter(user => 
+        user.firstName.includes(this.searchName) || user.lastName.includes(this.searchName)
+      );
+    }
+
+    // Filter by Role
+    if (this.searchRole) {
+      filteredUsers = filteredUsers.filter(user => user.role.includes(this.searchRole));
+    }
+
+    // Update the data source to show the filtered list
     this.allUsers.data = filteredUsers;
+    this.showSearchResults = !this.showSearchResults;
   }
 
-/// Add new user
-addUser(user: User): void {
-  this.usersService.addUser(user); // Use the service to add the new user
-  this.allUsers.data = this.usersService.getUsers(); // Update the table data source
-  this.newUser = { id: 0, password: '',firstName: '', lastName: '', role: '', klass: '', team: '' }; // Reset the form
-  this.showAddUserForm = false;
-
+  // To choose the user for editing
+  onCheckboxChange(user: User, event: Event): void {
+  const isChecked = (event.target as HTMLInputElement).checked;
+  this.onSelectUser(user, isChecked);
 }
 
-toggleAddUserForm(): void {
-  this.showAddUserForm = !this.showAddUserForm;
-}
+  onSelectUser(user: User | null, isChecked: boolean): void {
+    if (!user) {
+      console.error('No user selected');
+      return;
+    }
+  
+    // Proceeding
+    if (isChecked) {
+      this.selectedUser = { 
+        ...user,
+        init: user?.init || (() => {}),  // to avoid the error this is default implementation of init if user is undefined
+        toJSON: user?.toJSON || (() => ({}))  // also same here default implementation of toJSON if user is undefined
+      };
+    } else {
+      this.selectedUser = null; // Clear selection if unchecked
+    }
+  }
+  
+  
+  // To save after editing
+  saveUser(): void {
+    if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
+      this.usersService.updateUser(this.selectedUser.id, this.selectedUser); // Update user via the service
+      this.users = this.usersService.getUsers(); // to refresh the users list
+      this.allUsers.data = [...this.users]; // Update the data source
+      console.log('User updated successfully:', this.selectedUser);
+      this.selectedUser = null; // here i want to clear the selection after finishing
+    } else {
+      console.error('Cannot update user: ID is missing.');
+      alert('Cannot update user: ID is missing.');
+    }
+  }
 
+  // To delete after editing
+  deleteUser(): void {
+    if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
+      this.usersService.deleteUser(this.selectedUser.id); // Update user via the service
+      this.users = this.usersService.getUsers(); // to refresh the users list
+      this.allUsers.data = [...this.users]; // Update the data source
+      console.log('User Deleted successfully:', this.selectedUser);
+      this.selectedUser = null; // here i want to clear the selection after finishing
+    } else {
+      console.error('Cannot update user: ID is missing.');
+      alert('Cannot Delete user: ID is missing.');
+    }
+  }
+  
+  
 
+  // Add new user
+  addUser(user: User): void {
+    try {
+      this.usersService.addUser(user); 
+      this.users = this.usersService.getUsers(); // this is to fetch the updated list
+      this.allUsers.data = [...this.users]; // and here to update data source
+  
+      // Reset the newUser object
+      this.newUser = {
+        id: '', 
+        password: '', 
+        firstName: '', 
+        lastName: '', 
+        role: '', 
+        class: undefined, 
+        team: undefined, 
+        points: 0, 
+        created: new Date(), 
+        updated: new Date(),
+        init: () => {}, // I might use it to implement some default actions
+        toJSON: () => ({})
+      };
+  
+      // Display success message
+      alert('User added successfully!');
+      console.log('User added successfully', this.users);
+      this.showAddUserForm = false;
+    } catch (error) {
+      console.error('Error adding user:', error);
+      alert('Failed to add user. Please try again.');
+    }
+  }
+  
+
+  // Toggle the add user form
+  toggleAddUserForm(): void {
+    this.showAddUserForm = !this.showAddUserForm;
+  }
 }
