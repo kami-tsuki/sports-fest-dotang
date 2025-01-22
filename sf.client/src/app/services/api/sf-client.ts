@@ -10,4 +10,1475 @@
 
 
 
+export class ResultModelOfPageOfClassModel implements IResultModelOfPageOfClassModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfClassModel | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfClassModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfClassModel.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfClassModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfClassModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfClassModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfClassModel | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfClassModel implements IPageOfClassModel {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: ClassModel[];
+
+    constructor(data?: IPageOfClassModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(ClassModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfClassModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfClassModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfClassModel {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: ClassModel[];
+}
+
+export class EntityOfGuid implements IEntityOfGuid {
+    id?: string;
+    created!: Date;
+    updated!: Date;
+
+    constructor(data?: IEntityOfGuid) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
+            this.updated = _data["updated"] ? new Date(_data["updated"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): EntityOfGuid {
+        data = typeof data === 'object' ? data : {};
+        let result = new EntityOfGuid();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
+        data["updated"] = this.updated ? this.updated.toISOString() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IEntityOfGuid {
+    id?: string;
+    created: Date;
+    updated: Date;
+}
+
+export class ClassModel extends EntityOfGuid implements IClassModel {
+    name!: string;
+    students?: UserModel[];
+    tutors?: UserModel[];
+
+    constructor(data?: IClassModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            if (Array.isArray(_data["students"])) {
+                this.students = [] as any;
+                for (let item of _data["students"])
+                    this.students!.push(UserModel.fromJS(item));
+            }
+            if (Array.isArray(_data["tutors"])) {
+                this.tutors = [] as any;
+                for (let item of _data["tutors"])
+                    this.tutors!.push(UserModel.fromJS(item));
+            }
+        }
+    }
+
+    static override fromJS(data: any): ClassModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ClassModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        if (Array.isArray(this.students)) {
+            data["students"] = [];
+            for (let item of this.students)
+                data["students"].push(item.toJSON());
+        }
+        if (Array.isArray(this.tutors)) {
+            data["tutors"] = [];
+            for (let item of this.tutors)
+                data["tutors"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IClassModel extends IEntityOfGuid {
+    name: string;
+    students?: UserModel[];
+    tutors?: UserModel[];
+}
+
+export class UserModel extends EntityOfGuid implements IUserModel {
+    password!: string;
+    firstName!: string;
+    lastName!: string;
+    role!: RoleType;
+    teamId?: string;
+    team?: TeamModel;
+    classId?: string;
+
+    constructor(data?: IUserModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.password = _data["password"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.role = _data["role"];
+            this.teamId = _data["teamId"];
+            this.team = _data["team"] ? TeamModel.fromJS(_data["team"]) : <any>undefined;
+            this.classId = _data["classId"];
+        }
+    }
+
+    static override fromJS(data: any): UserModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["password"] = this.password;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["role"] = this.role;
+        data["teamId"] = this.teamId;
+        data["team"] = this.team ? this.team.toJSON() : <any>undefined;
+        data["classId"] = this.classId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUserModel extends IEntityOfGuid {
+    password: string;
+    firstName: string;
+    lastName: string;
+    role: RoleType;
+    teamId?: string;
+    team?: TeamModel;
+    classId?: string;
+}
+
+export enum RoleType {
+    Student = "Student",
+    Tutor = "Tutor",
+    CampaignManager = "CampaignManager",
+    CampaignJudge = "CampaignJudge",
+    User = "User",
+}
+
+export class TeamModel extends EntityOfGuid implements ITeamModel {
+    name!: string;
+    students?: UserModel[];
+    disciplineId?: string;
+    discipline?: DisciplineModel;
+
+    constructor(data?: ITeamModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            if (Array.isArray(_data["students"])) {
+                this.students = [] as any;
+                for (let item of _data["students"])
+                    this.students!.push(UserModel.fromJS(item));
+            }
+            this.disciplineId = _data["disciplineId"];
+            this.discipline = _data["discipline"] ? DisciplineModel.fromJS(_data["discipline"]) : <any>undefined;
+        }
+    }
+
+    static override fromJS(data: any): TeamModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new TeamModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        if (Array.isArray(this.students)) {
+            data["students"] = [];
+            for (let item of this.students)
+                data["students"].push(item.toJSON());
+        }
+        data["disciplineId"] = this.disciplineId;
+        data["discipline"] = this.discipline ? this.discipline.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ITeamModel extends IEntityOfGuid {
+    name: string;
+    students?: UserModel[];
+    disciplineId?: string;
+    discipline?: DisciplineModel;
+}
+
+export class DisciplineModel extends EntityOfGuid implements IDisciplineModel {
+    name!: string;
+    students?: UserModel[];
+
+    constructor(data?: IDisciplineModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            if (Array.isArray(_data["students"])) {
+                this.students = [] as any;
+                for (let item of _data["students"])
+                    this.students!.push(UserModel.fromJS(item));
+            }
+        }
+    }
+
+    static override fromJS(data: any): DisciplineModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new DisciplineModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        if (Array.isArray(this.students)) {
+            data["students"] = [];
+            for (let item of this.students)
+                data["students"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IDisciplineModel extends IEntityOfGuid {
+    name: string;
+    students?: UserModel[];
+}
+
+export class Message implements IMessage {
+    errorMessage?: string | undefined;
+    errorType?: ErrorResult | undefined;
+    errorSeverity?: Severity | undefined;
+
+    constructor(data?: IMessage) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.errorMessage = _data["error.message"];
+            this.errorType = _data["error.type"];
+            this.errorSeverity = _data["error.severity"];
+        }
+    }
+
+    static fromJS(data: any): Message {
+        data = typeof data === 'object' ? data : {};
+        let result = new Message();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["error.message"] = this.errorMessage;
+        data["error.type"] = this.errorType;
+        data["error.severity"] = this.errorSeverity;
+        return data;
+    }
+}
+
+export interface IMessage {
+    errorMessage?: string | undefined;
+    errorType?: ErrorResult | undefined;
+    errorSeverity?: Severity | undefined;
+}
+
+export enum ErrorResult {
+    InternalException = "InternalException",
+    InvalidModel = "InvalidModel",
+    InvalidCredentials = "InvalidCredentials",
+    InvalidToken = "InvalidToken",
+    InvalidRole = "InvalidRole",
+    InvalidUser = "InvalidUser",
+    InvalidPassword = "InvalidPassword",
+    InvalidEmail = "InvalidEmail",
+    InvalidUsername = "InvalidUsername",
+    InvalidOldPassword = "InvalidOldPassword",
+    InvalidNewPassword = "InvalidNewPassword",
+    InvalidModelState = "InvalidModelState",
+    PasswordChangeFailed = "PasswordChangeFailed",
+    AccountLocked = "AccountLocked",
+    UserNotFound = "UserNotFound",
+    UserCreationFailed = "UserCreationFailed",
+    RoleCreationFailed = "RoleCreationFailed",
+    Validation = "Validation",
+    InvalidId = "InvalidId",
+}
+
+export enum Severity {
+    Verbose = "Verbose",
+    Debug = "Debug",
+    Information = "Information",
+    Warning = "Warning",
+    Error = "Error",
+    Fatal = "Fatal",
+}
+
+export class ResultModelOfIEnumerableOfClassModel implements IResultModelOfIEnumerableOfClassModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: ClassModel[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfClassModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(ClassModel.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfClassModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfClassModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfClassModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: ClassModel[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfGuid implements IResultModelOfIEnumerableOfGuid {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: string[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfGuid) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(item);
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfGuid {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfGuid();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item);
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfGuid {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: string[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfLong implements IResultModelOfLong {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: number;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfLong) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"];
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfLong {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfLong();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfLong {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: number;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfClassModel implements IResultModelOfClassModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: ClassModel | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfClassModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? ClassModel.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfClassModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfClassModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfClassModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: ClassModel | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class OperationBase implements IOperationBase {
+    path?: string | undefined;
+    op?: string | undefined;
+    from?: string | undefined;
+
+    constructor(data?: IOperationBase) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.path = _data["path"];
+            this.op = _data["op"];
+            this.from = _data["from"];
+        }
+    }
+
+    static fromJS(data: any): OperationBase {
+        data = typeof data === 'object' ? data : {};
+        let result = new OperationBase();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["path"] = this.path;
+        data["op"] = this.op;
+        data["from"] = this.from;
+        return data;
+    }
+}
+
+export interface IOperationBase {
+    path?: string | undefined;
+    op?: string | undefined;
+    from?: string | undefined;
+}
+
+export class Operation extends OperationBase implements IOperation {
+    value?: any | undefined;
+
+    constructor(data?: IOperation) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.value = _data["value"];
+        }
+    }
+
+    static override fromJS(data: any): Operation {
+        data = typeof data === 'object' ? data : {};
+        let result = new Operation();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["value"] = this.value;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IOperation extends IOperationBase {
+    value?: any | undefined;
+}
+
+export class ResultModelOfObject implements IResultModelOfObject {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: any | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfObject) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"];
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfObject {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfObject();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfObject {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: any | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfIEnumerableOfAuditLog implements IResultModelOfIEnumerableOfAuditLog {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: AuditLog[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfAuditLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(AuditLog.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfAuditLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfAuditLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfAuditLog {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: AuditLog[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class AuditLog implements IAuditLog {
+    id?: string;
+    entityId?: string;
+    entityType?: string | undefined;
+    action?: string;
+    changedBy?: string;
+    timestamp?: Date;
+    changes?: string;
+
+    constructor(data?: IAuditLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.entityId = _data["entityId"];
+            this.entityType = _data["entityType"];
+            this.action = _data["action"];
+            this.changedBy = _data["changedBy"];
+            this.timestamp = _data["timestamp"] ? new Date(_data["timestamp"].toString()) : <any>undefined;
+            this.changes = _data["changes"];
+        }
+    }
+
+    static fromJS(data: any): AuditLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new AuditLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["entityId"] = this.entityId;
+        data["entityType"] = this.entityType;
+        data["action"] = this.action;
+        data["changedBy"] = this.changedBy;
+        data["timestamp"] = this.timestamp ? this.timestamp.toISOString() : <any>undefined;
+        data["changes"] = this.changes;
+        return data;
+    }
+}
+
+export interface IAuditLog {
+    id?: string;
+    entityId?: string;
+    entityType?: string | undefined;
+    action?: string;
+    changedBy?: string;
+    timestamp?: Date;
+    changes?: string;
+}
+
+export class ResultModelOfPageOfUserModel implements IResultModelOfPageOfUserModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfUserModel | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfUserModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfUserModel.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfUserModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfUserModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfUserModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfUserModel | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfUserModel implements IPageOfUserModel {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: UserModel[];
+
+    constructor(data?: IPageOfUserModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(UserModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfUserModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfUserModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfUserModel {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: UserModel[];
+}
+
+export class ResultModelOfIEnumerableOfUserModel implements IResultModelOfIEnumerableOfUserModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: UserModel[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfUserModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(UserModel.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfUserModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfUserModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfUserModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: UserModel[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfUserModel implements IResultModelOfUserModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: UserModel | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfUserModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? UserModel.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfUserModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfUserModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfUserModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: UserModel | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfPageOfTeamModel implements IResultModelOfPageOfTeamModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfTeamModel | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfPageOfTeamModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? PageOfTeamModel.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfPageOfTeamModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfPageOfTeamModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfPageOfTeamModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: PageOfTeamModel | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class PageOfTeamModel implements IPageOfTeamModel {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: TeamModel[];
+
+    constructor(data?: IPageOfTeamModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.number = _data["number"];
+            this.size = _data["size"];
+            this.total = _data["total"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(TeamModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PageOfTeamModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageOfTeamModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["number"] = this.number;
+        data["size"] = this.size;
+        data["total"] = this.total;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPageOfTeamModel {
+    number?: number;
+    size?: number;
+    total?: number;
+    data?: TeamModel[];
+}
+
+export class ResultModelOfIEnumerableOfTeamModel implements IResultModelOfIEnumerableOfTeamModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: TeamModel[] | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfIEnumerableOfTeamModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(TeamModel.fromJS(item));
+            }
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfIEnumerableOfTeamModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfIEnumerableOfTeamModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfIEnumerableOfTeamModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: TeamModel[] | undefined;
+    messages?: Message[] | undefined;
+}
+
+export class ResultModelOfTeamModel implements IResultModelOfTeamModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: TeamModel | undefined;
+    messages?: Message[] | undefined;
+
+    constructor(data?: IResultModelOfTeamModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+            this.error = _data["error"];
+            this.message = _data["message"];
+            this.data = _data["data"] ? TeamModel.fromJS(_data["data"]) : <any>undefined;
+            if (Array.isArray(_data["messages"])) {
+                this.messages = [] as any;
+                for (let item of _data["messages"])
+                    this.messages!.push(Message.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ResultModelOfTeamModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResultModelOfTeamModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        data["error"] = this.error;
+        data["message"] = this.message;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        if (Array.isArray(this.messages)) {
+            data["messages"] = [];
+            for (let item of this.messages)
+                data["messages"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IResultModelOfTeamModel {
+    success?: boolean;
+    error?: boolean;
+    message?: string | undefined;
+    data?: TeamModel | undefined;
+    messages?: Message[] | undefined;
+}
+
+export interface FileResponse {
+    data: Blob;
+    status: number;
+    fileName?: string;
+    headers?: { [name: string]: any };
+}
+
 // This file uses TypeScript 4.5 syntax

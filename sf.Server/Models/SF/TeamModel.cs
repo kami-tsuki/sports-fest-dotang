@@ -12,5 +12,5 @@ public class TeamModel : Entity<Guid>
     public Guid DisciplineId { get; set; } = Guid.Empty;
     
     [JsonProperty(nameof(Discipline))]
-    public DisciplineModel Discipline { get; set; } = null!;
+    public DisciplineModel? Discipline { get; set; } = null!;
 }

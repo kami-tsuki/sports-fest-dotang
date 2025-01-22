@@ -36,6 +36,7 @@ builder.Services.AddDbContext<SfContext>(
 
 
 builder.Services.AddControllers()
+       .AddControllersAsServices()
        .AddNewtonsoftJson(
             options =>
             {
@@ -108,5 +109,5 @@ app.UseDeveloperExceptionPage();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.MapFallbackToFile("/index.html");
+app.MapFallbackToFile("/swagger/index.html");
 app.Run();
