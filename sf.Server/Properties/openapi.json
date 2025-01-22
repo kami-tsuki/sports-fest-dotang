@@ -2898,11 +2898,24 @@
                 "format": "guid"
               },
               "team": {
-                "$ref": "#/components/schemas/TeamModel"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TeamModel"
+                  }
+                ]
               },
               "classId": {
                 "type": "string",
                 "format": "guid"
+              },
+              "class": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ClassModel"
+                  }
+                ]
               }
             }
           }
@@ -2954,7 +2967,12 @@
                 "format": "guid"
               },
               "discipline": {
-                "$ref": "#/components/schemas/DisciplineModel"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DisciplineModel"
+                  }
+                ]
               }
             }
           }

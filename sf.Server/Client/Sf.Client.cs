@@ -6399,6 +6399,7 @@ namespace SportsFestApi.Net.Generated
         private System.Guid _teamId;
         private TeamModel _team;
         private System.Guid _classId;
+        private ClassModel _class;
 
         [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -6483,7 +6484,7 @@ namespace SportsFestApi.Net.Generated
             }
         }
 
-        [Newtonsoft.Json.JsonProperty("team", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("team", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public TeamModel Team
         {
             get { return _team; }
@@ -6508,6 +6509,21 @@ namespace SportsFestApi.Net.Generated
                 if (_classId != value)
                 {
                     _classId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [Newtonsoft.Json.JsonProperty("class", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ClassModel Class
+        {
+            get { return _class; }
+
+            set
+            {
+                if (_class != value)
+                {
+                    _class = value;
                     RaisePropertyChanged();
                 }
             }
@@ -6604,7 +6620,7 @@ namespace SportsFestApi.Net.Generated
             }
         }
 
-        [Newtonsoft.Json.JsonProperty("discipline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("discipline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DisciplineModel Discipline
         {
             get { return _discipline; }

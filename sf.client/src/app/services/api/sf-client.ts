@@ -233,8 +233,9 @@ export class UserModel extends EntityOfGuid implements IUserModel {
     lastName!: string;
     role!: RoleType;
     teamId?: string;
-    team?: TeamModel;
+    team?: TeamModel | undefined;
     classId?: string;
+    class?: ClassModel | undefined;
 
     constructor(data?: IUserModel) {
         super(data);
@@ -250,6 +251,7 @@ export class UserModel extends EntityOfGuid implements IUserModel {
             this.teamId = _data["teamId"];
             this.team = _data["team"] ? TeamModel.fromJS(_data["team"]) : <any>undefined;
             this.classId = _data["classId"];
+            this.class = _data["class"] ? ClassModel.fromJS(_data["class"]) : <any>undefined;
         }
     }
 
@@ -269,6 +271,7 @@ export class UserModel extends EntityOfGuid implements IUserModel {
         data["teamId"] = this.teamId;
         data["team"] = this.team ? this.team.toJSON() : <any>undefined;
         data["classId"] = this.classId;
+        data["class"] = this.class ? this.class.toJSON() : <any>undefined;
         super.toJSON(data);
         return data;
     }
@@ -280,8 +283,9 @@ export interface IUserModel extends IEntityOfGuid {
     lastName: string;
     role: RoleType;
     teamId?: string;
-    team?: TeamModel;
+    team?: TeamModel | undefined;
     classId?: string;
+    class?: ClassModel | undefined;
 }
 
 export enum RoleType {
@@ -296,7 +300,7 @@ export class TeamModel extends EntityOfGuid implements ITeamModel {
     name!: string;
     students?: UserModel[];
     disciplineId?: string;
-    discipline?: DisciplineModel;
+    discipline?: DisciplineModel | undefined;
 
     constructor(data?: ITeamModel) {
         super(data);
@@ -342,7 +346,7 @@ export interface ITeamModel extends IEntityOfGuid {
     name: string;
     students?: UserModel[];
     disciplineId?: string;
-    discipline?: DisciplineModel;
+    discipline?: DisciplineModel | undefined;
 }
 
 export class DisciplineModel extends EntityOfGuid implements IDisciplineModel {

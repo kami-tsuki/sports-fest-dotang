@@ -3,54 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CacheService } from './cache.service';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import {
-    IResultModelOfEntry,
-    IResultModelOfObject,
-    ResultModelOfClass,
-    ResultModelOfDiscipline,
-    ResultModelOfEntry,
-    ResultModelOfLocation,
-    ResultModelOfLong,
-    ResultModelOfObject,
-    ResultModelOfPageOfClass,
-    ResultModelOfPageOfDiscipline,
-    ResultModelOfPageOfEntry,
-    ResultModelOfPageOfUser,
-    ResultModelOfUser,
-    IResultModelOfClass,
-    IResultModelOfDiscipline,
-    IResultModelOfLocation,
-    IResultModelOfPageOfClass,
-    IResultModelOfPageOfDiscipline,
-    IResultModelOfPageOfEntry,
-    IResultModelOfPageOfUser,
-    IResultModelOfLong,
-    IResultModelOfUser,
-} from './api/sf-client';
+import {EntityOfGuid, IEntityOfGuid} from "@app/services/api/sf-client";
 
-type ApiResultType =
-    ResultModelOfObject
-    | ResultModelOfClass
-    | ResultModelOfPageOfClass
-    | ResultModelOfLong
-    | ResultModelOfEntry
-    | ResultModelOfDiscipline
-    | ResultModelOfLocation
-    | ResultModelOfPageOfDiscipline
-    | ResultModelOfPageOfEntry
-    | ResultModelOfPageOfUser
-    | ResultModelOfUser
-    | IResultModelOfObject
-    | IResultModelOfClass
-    | IResultModelOfPageOfClass
-    | IResultModelOfLong
-    | IResultModelOfEntry
-    | IResultModelOfDiscipline
-    | IResultModelOfLocation
-    | IResultModelOfPageOfDiscipline
-    | IResultModelOfPageOfEntry
-    | IResultModelOfPageOfUser
-    | IResultModelOfUser;
 @Injectable({
     providedIn: 'root',
 })
@@ -60,7 +14,7 @@ export class ApiService {
         private readonly cacheService: CacheService
     ) {}
 
-    public get<T extends ApiResultType>(
+    public get<T extends IEntityOfGuid | IEntityOfGuid[]>(
         key: string,
         params?: HttpParams,
         headers?: HttpHeaders,
@@ -91,7 +45,7 @@ export class ApiService {
     
     
 
-    public post<T extends ApiResultType>(
+    public post<T extends IEntityOfGuid | IEntityOfGuid[]>(
         key: string,
         body: any,
         params?: HttpParams,
@@ -114,7 +68,7 @@ export class ApiService {
         );
     }
 
-    public put<T extends ApiResultType>(
+    public put<T extends IEntityOfGuid | IEntityOfGuid[]>(
         key: string,
         body: any,
         params?: HttpParams,
@@ -137,7 +91,7 @@ export class ApiService {
         );
     }
 
-    public delete<T extends ApiResultType>(
+    public delete<T extends IEntityOfGuid | IEntityOfGuid[]>(
         key: string,
         body?: any,
         params?: HttpParams,
@@ -160,7 +114,7 @@ export class ApiService {
         );
     }
 
-    public patch<T extends ApiResultType>(
+    public patch<T extends IEntityOfGuid | IEntityOfGuid[]>(
         key: string,
         body: any,
         params?: HttpParams,

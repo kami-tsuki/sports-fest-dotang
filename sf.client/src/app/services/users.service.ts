@@ -1,63 +1,99 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Class} from "@app/services/class.service";
 import {Team} from "@app/services/team.service";
 import {EntityOfGuid} from "@app/services/api/sf-client";
+import {ApiService} from "@app/services/api.service";
 
 export interface User extends EntityOfGuid {
-  password: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-  class?: Class;
-  team?: Team; 
-  points?: number; 
+    password: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    class?: Class;
+    team?: Team;
+    points?: number;
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UsersService {
+    constructor(
+        private apiService: ApiService
+    ) {
+    }
+    
 
-  private users: User[] = [];
-
-  constructor() {}
 //// to get all users
-  getUsers(): User[] {
-    return this.users;
-  }
+    getUsers(): User[] {
+        let users: User[] = [];
+        this.apiService.get<User[]>('users').subscribe(u => {
+            users = u;
+        });
+        return users;
+    }
+
 //// to get user name
-getUserByUsername(firstName: string): User | undefined {
-  return this.users.find(user => user.firstName === firstName);
-}
-//// to check password
-onSubmit(username: string, password: string): { success: boolean, message: string, user?: User } {
-  const user = this.users.find(u => u.firstName === username);
-  if (user && user.password === password) {
-    return {
-      success: true,
-      message: 'Login successful!',
-      user
-    };
-  } else {
-    return {
-      success: false,
-      message: 'Invalid username or password'
-    };
-  }
-}
-//// to add neu users
- addUser(newUser: User): void {
-    this.users.push(newUser);
-  }
+    getUserByUsername(firstName: string): User | undefined {
+        let user: User | undefined;
+        this.apiService.get<User[]>('users').subscribe(u => {
+            user = u.find(u => u.firstName === firstName);
+        });
+        return user;
+    }
+
+//// to check password, //TODO: rename to "login" since OnSubmit dont explains its use
+    onSubmit(username: string, password: string): { success: boolean, message: string, user?: User } {
+        let user: User | undefined;
+        
+        this.apiService.get<User[]>('users').subscribe(u => {
+            //TODO we just have first and lastname, but no username... pls rethink this
+            user = u.find(u => u.firstName + " " + u.lastName === username);
+        });
+        if (user && user.password === password) {
+            return {
+                success: true,
+                message: 'Login successful!',
+                user
+            };
+        } else {
+            return {
+                success: false,
+                message: 'Invalid username or password'
+            };
+        }
+    }
+
+//// to add new a user
+    addUser(newUser: User): void {
+        this.apiService.post<User>('users', newUser);
+    }
+
 //// to update users
-updateUser(id: string, updatedUser: Partial<User>): void {
-  const user = this.users.find(u => u.id === id);
-  if (user) {
-    Object.assign(user, updatedUser);
-  }
-}
+    updateUser(id: string, updatedUser: Partial<User>): void {
+        this.apiService.get<User[]>('users').subscribe(u => {
+            let user = u.find(u => u.id === id);
+            if (user) {
+                Object.assign(user, updatedUser);
+            }
+            else {
+                console.error(`UsersService: updateUser failed to find user with id ${id}`);
+            }
+            this.apiService.put<User>('users', user);
+        });
+        
+    }
+
 //// Delete a user
-deleteUser(id: string): void {
-  this.users = this.users.filter(user => user.id !== id);
-}
+    deleteUser(id: string): void {
+        this.apiService.get<User[]>('users').subscribe(u => {
+            let user = u.find(u => u.id === id);
+            if (user) {
+                this.apiService.delete<User>(`users/${user.id}`);
+            }
+            else {
+                console.error(`UsersService: deleteUser failed to find user with id ${id}`);
+            }
+        });
+    }
 }
