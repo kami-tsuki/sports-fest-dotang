@@ -1482,6 +1482,11 @@ export interface IResultModelOfTeamModel {
     messages?: Message[] | undefined;
 }
 
+export interface FileParameter {
+    data: any;
+    fileName: string;
+}
+
 export interface FileResponse {
     data: Blob;
     status: number;

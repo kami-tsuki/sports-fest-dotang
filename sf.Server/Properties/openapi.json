@@ -697,6 +697,42 @@
         }
       }
     },
+    "/api/Class/import": {
+      "post": {
+        "tags": [
+          "Class"
+        ],
+        "operationId": "Class_ImportCsv",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/User": {
       "get": {
         "tags": [
@@ -1381,6 +1417,42 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/User/import": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_ImportCsv",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
                 }
               }
             }
@@ -2079,6 +2151,42 @@
         }
       }
     },
+    "/api/Discipline/import": {
+      "post": {
+        "tags": [
+          "Discipline"
+        ],
+        "operationId": "Discipline_ImportCsv",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Team": {
       "get": {
         "tags": [
@@ -2763,6 +2871,42 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResultModelOfIEnumerableOfAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Team/import": {
+      "post": {
+        "tags": [
+          "Team"
+        ],
+        "operationId": "Team_ImportCsv",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultModelOfObject"
                 }
               }
             }

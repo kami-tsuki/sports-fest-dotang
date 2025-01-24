@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sf.Server.Data.Sf;
 
@@ -11,9 +12,11 @@ using sf.Server.Data.Sf;
 namespace sf.Server.Data.Migrations
 {
     [DbContext(typeof(SfContext))]
-    partial class SfContextModelSnapshot : ModelSnapshot
+    [Migration("20250124085514_import")]
+    partial class import
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

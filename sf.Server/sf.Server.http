@@ -90,6 +90,14 @@ Content-Type: application/json
 ### GET /api/Class/{id}/audit
 GET {{sf.Server_HostAddress}}/api/Class/{id}/audit
 
+## /api/Class/import
+
+### POST /api/Class/import
+POST {{sf.Server_HostAddress}}/api/Class/import
+Content-Type: application/json
+
+{}
+
 ## /api/User
 
 ### GET /api/User
@@ -174,6 +182,14 @@ Content-Type: application/json
 
 ### GET /api/User/{id}/audit
 GET {{sf.Server_HostAddress}}/api/User/{id}/audit
+
+## /api/User/import
+
+### POST /api/User/import
+POST {{sf.Server_HostAddress}}/api/User/import
+Content-Type: application/json
+
+{}
 
 ## /api/Discipline
 
@@ -260,6 +276,14 @@ Content-Type: application/json
 ### GET /api/Discipline/{id}/audit
 GET {{sf.Server_HostAddress}}/api/Discipline/{id}/audit
 
+## /api/Discipline/import
+
+### POST /api/Discipline/import
+POST {{sf.Server_HostAddress}}/api/Discipline/import
+Content-Type: application/json
+
+{}
+
 ## /api/Team
 
 ### GET /api/Team
@@ -344,5 +368,13 @@ Content-Type: application/json
 
 ### GET /api/Team/{id}/audit
 GET {{sf.Server_HostAddress}}/api/Team/{id}/audit
+
+## /api/Team/import
+
+### POST /api/Team/import
+POST {{sf.Server_HostAddress}}/api/Team/import
+Content-Type: application/json
+
+{}
 
 

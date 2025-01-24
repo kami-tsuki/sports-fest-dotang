@@ -7,4 +7,6 @@ public interface IEntity<TKey> where TKey : IComparable<TKey>
     public DateTime CreatedAt { get; set; }
     
     public DateTime UpdatedAt { get; set; }
+
+    internal bool Imported { get; set; }
 }

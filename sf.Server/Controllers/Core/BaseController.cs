@@ -1,5 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System.Globalization;
+using System.Linq.Expressions;
 using System.Text;
+using CsvHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -18,8 +20,6 @@ public abstract class BaseController<TEntity>(IServiceProvider services) : Contr
     internal ILogger Logger => services.GetRequiredService<ILogger>();
     internal ResultService ResultService => services.GetRequiredService<ResultService>();
     internal DataBaseService<TEntity> DbService => services.GetRequiredService<DataBaseService<TEntity>>();
-
-    
 
     #endregion Services
 
@@ -575,6 +575,72 @@ public abstract class BaseController<TEntity>(IServiceProvider services) : Contr
             httpCodes[method.Name] = attributes.Select(a => ((ProducesResponseTypeAttribute)a).StatusCode).ToArray();
         }
         return httpCodes;
+    }
+
+    #endregion
+
+    #region Import
+
+    [HttpPost("import")]
+    public async Task<ActionResult<ResultModel<object>>> ImportCsvAsync(IFormFile? file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest(ResultService.BuildErrorResult("Invalid file", "The uploaded file is null or empty."));
+
+        var result = new ImportResult();
+
+        try
+        {
+            using var reader = new StreamReader(file.OpenReadStream());
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+            var records = csv.GetRecords<dynamic>().ToList();
+            result.IncomingRows = records.Count;
+
+            foreach (var record in records) 
+                ProcessRecord(record, result);
+
+            await DbService.SaveChangesAsync();
+            return Ok(ResultService.BuildResult(true, result));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ResultService.BuildErrorResult("An error occurred while processing the file", ex.Message));
+        }
+    }
+
+    private void ProcessRecord(dynamic record, ImportResult result)
+    {
+        try
+        {
+            var endpoint = Activator.CreateInstance<TEntity>()
+                        ?? throw new InvalidOperationException("Could not create instance of entity");
+            foreach (var property in record)
+            {
+                var prop = endpoint.GetType().GetProperty(property.Key);
+                if (prop == null)
+                {
+                    result.IgnoredColumns++;
+                    continue;
+                }
+                prop.SetValue(endpoint, property.Value);
+                result.UsedColumns++;
+            }
+
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(endpoint, null, null);
+            if (!Validator.TryValidateObject(endpoint, validationContext, validationResults, true))
+            {
+                result.Errors.AddRange(validationResults.Select(vr => vr?.ErrorMessage ?? "Unknown error"));
+                return;
+            }
+            endpoint.Imported = true;
+            DbService.AddEntity(endpoint);
+            result.CreatedEntities++;
+        }
+        catch (Exception ex)
+        {
+            result.Errors.Add($"Error processing row: {ex.Message}");
+        }
     }
 
     #endregion

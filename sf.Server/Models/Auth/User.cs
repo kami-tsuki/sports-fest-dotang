@@ -28,6 +28,9 @@ public class User : IdentityUser<Guid>, IEntity<Guid>
     
     [Timestamp, Required, JsonProperty("updated")]
     public DateTime UpdatedAt { get; set; }
+    
+    [JsonIgnore]
+    public bool Imported { get; set; } = false;
 }
 
 public enum RoleType

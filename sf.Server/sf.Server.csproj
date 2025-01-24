@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="JWT.Extensions.AspNetCore" Version="10.1.1" />
     <PackageReference Include="JWT.Extensions.DependencyInjection" Version="2.2.3" />
     <PackageReference Include="Markdig" Version="0.37.0" />

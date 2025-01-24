@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sf.Server.Data.Sf;
 
@@ -11,9 +12,11 @@ using sf.Server.Data.Sf;
 namespace sf.Server.Data.Migrations
 {
     [DbContext(typeof(SfContext))]
-    partial class SfContextModelSnapshot : ModelSnapshot
+    [Migration("20250124081544_ad-score")]
+    partial class adscore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +37,6 @@ namespace sf.Server.Data.Migrations
                         .HasColumnType("datetime(6)");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<DateTime>("CreatedAt"));
-
-                    b.Property<bool>("Imported")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .IsConcurrencyToken()
