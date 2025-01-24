@@ -83,6 +83,9 @@ namespace sf.Server.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
                     b.HasIndex("DisciplineId");
 
                     b.ToTable("Teams", (string)null);
@@ -93,12 +96,6 @@ namespace sf.Server.Data.Migrations
                     b.HasBaseType("sf.Server.Models.Core.Entity<System.Guid>");
 
                     b.Property<Guid>("ClassId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("ClassModelId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("ClassModelId1")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid?>("DisciplineModelId")
@@ -125,10 +122,6 @@ namespace sf.Server.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.HasIndex("ClassId");
-
-                    b.HasIndex("ClassModelId");
-
-                    b.HasIndex("ClassModelId1");
 
                     b.HasIndex("DisciplineModelId");
 
@@ -174,19 +167,11 @@ namespace sf.Server.Data.Migrations
 
             modelBuilder.Entity("sf.Server.Models.SF.UserModel", b =>
                 {
-                    b.HasOne("sf.Server.Models.SF.ClassModel", null)
+                    b.HasOne("sf.Server.Models.SF.ClassModel", "Class")
                         .WithMany("Users")
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("sf.Server.Models.SF.ClassModel", null)
-                        .WithMany("Students")
-                        .HasForeignKey("ClassModelId");
-
-                    b.HasOne("sf.Server.Models.SF.ClassModel", null)
-                        .WithMany("Tutors")
-                        .HasForeignKey("ClassModelId1");
 
                     b.HasOne("sf.Server.Models.SF.DisciplineModel", null)
                         .WithMany("Students")
@@ -204,15 +189,13 @@ namespace sf.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Class");
+
                     b.Navigation("Team");
                 });
 
             modelBuilder.Entity("sf.Server.Models.SF.ClassModel", b =>
                 {
-                    b.Navigation("Students");
-
-                    b.Navigation("Tutors");
-
                     b.Navigation("Users");
                 });
 

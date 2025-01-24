@@ -14,13 +14,13 @@ public class UserModel : Entity<Guid>
     [JsonProperty(nameof(Role)), Required]
     public RoleType Role { get; set; } = RoleType.User;
     
-    [JsonProperty(nameof(TeamId)), ForeignKey(nameof(TeamModel.Id))]
+    [JsonProperty(nameof(TeamId)), ForeignKey(nameof(Id))]
     public Guid TeamId { get; set; } = Guid.Empty;
     
     [JsonProperty(nameof(Team))]
     public TeamModel? Team { get; set; } = null;
     
-    [JsonProperty(nameof(ClassId)), ForeignKey(nameof(ClassModel.Id))]
+    [JsonProperty(nameof(ClassId)), ForeignKey(nameof(Id))]
     public Guid ClassId { get; set; } = Guid.Empty;
     
     [JsonProperty(nameof(Class))]

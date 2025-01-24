@@ -6572,6 +6572,7 @@ namespace SportsFestApi.Net.Generated
         private System.Collections.ObjectModel.ObservableCollection<UserModel> _students;
         private System.Guid _disciplineId;
         private DisciplineModel _discipline;
+        private int _points;
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -6630,6 +6631,21 @@ namespace SportsFestApi.Net.Generated
                 if (_discipline != value)
                 {
                     _discipline = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [Newtonsoft.Json.JsonProperty("points", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Points
+        {
+            get { return _points; }
+
+            set
+            {
+                if (_points != value)
+                {
+                    _points = value;
                     RaisePropertyChanged();
                 }
             }

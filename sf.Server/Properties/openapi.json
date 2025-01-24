@@ -2973,6 +2973,10 @@
                     "$ref": "#/components/schemas/DisciplineModel"
                   }
                 ]
+              },
+              "points": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace sf.Server.Middlewares;
 
-public class ReadmeMiddleware(RequestDelegate next, string markdownPath, string requestPath, string pageTitle = "Documentation", string sidebarTitle = "Documentation")
+public partial class ReadmeMiddleware(RequestDelegate next, string markdownPath, string requestPath, string pageTitle = "Documentation", string sidebarTitle = "Documentation")
 {
-    private static readonly Regex HeadingPattern = new(@"^(#{1,6})\s+(.*)", RegexOptions.Compiled);
+    private static readonly Regex HeadingPattern = MyRegex();
 
     private static readonly MarkdownPipeline Pipeline = new MarkdownPipelineBuilder()
                                                        .UseAdvancedExtensions()
@@ -39,7 +39,7 @@ public class ReadmeMiddleware(RequestDelegate next, string markdownPath, string 
         {
             var markdown = await ReadAllTextAsync(markdownPath);
 
-            if (string.IsNullOrWhiteSpace(markdown))
+            if (IsNullOrWhiteSpace(markdown))
             {
                 Log.Warning($"{Path.GetFileName(markdownPath)} not found");
                 await next(context);
@@ -182,8 +182,6 @@ public class ReadmeMiddleware(RequestDelegate next, string markdownPath, string 
         var lines = markdown.Split(["\r\n", "\r", "\n"], StringSplitOptions.None);
         var sidebarContent = new StringBuilder();
         sidebarContent.AppendLine($"<h2>{title}</h2>");
-
-        // Collapsible Menu for External Links
         sidebarContent.AppendLine(
             GenerateCollapsibleMenu(
                 "External Links",
@@ -194,8 +192,6 @@ public class ReadmeMiddleware(RequestDelegate next, string markdownPath, string 
                     { "README GitHub", "https://github.com/kami-tsuki/sports-fest-dotang/sf.Server/README.md" },
                     { "Database", "https://phpmyadmin.tsuki.wtf/index.php" }
                 }));
-
-        // Markdown Headings
         foreach (var line in lines)
         {
             var match = HeadingPattern.Match(line);
@@ -217,12 +213,12 @@ public class ReadmeMiddleware(RequestDelegate next, string markdownPath, string 
             <button class='collapsible'>{title}</button>
             <div class='collapsible-content'>");
 
-        foreach (var (name, url) in links)
-        {
-            content.AppendLine($"<a href='{url}'>{name}</a>");
-        }
+        foreach (var (name, url) in links) content.AppendLine($"<a href='{url}'>{name}</a>");
 
         content.AppendLine("</div>");
         return content.ToString();
     }
+
+    [GeneratedRegex(@"^(#{1,6})\s+(.*)", RegexOptions.Compiled)]
+    private static partial Regex MyRegex();
 }

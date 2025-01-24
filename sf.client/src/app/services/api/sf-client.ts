@@ -301,6 +301,7 @@ export class TeamModel extends EntityOfGuid implements ITeamModel {
     students?: UserModel[];
     disciplineId?: string;
     discipline?: DisciplineModel | undefined;
+    points?: number;
 
     constructor(data?: ITeamModel) {
         super(data);
@@ -317,6 +318,7 @@ export class TeamModel extends EntityOfGuid implements ITeamModel {
             }
             this.disciplineId = _data["disciplineId"];
             this.discipline = _data["discipline"] ? DisciplineModel.fromJS(_data["discipline"]) : <any>undefined;
+            this.points = _data["points"];
         }
     }
 
@@ -337,6 +339,7 @@ export class TeamModel extends EntityOfGuid implements ITeamModel {
         }
         data["disciplineId"] = this.disciplineId;
         data["discipline"] = this.discipline ? this.discipline.toJSON() : <any>undefined;
+        data["points"] = this.points;
         super.toJSON(data);
         return data;
     }
@@ -347,6 +350,7 @@ export interface ITeamModel extends IEntityOfGuid {
     students?: UserModel[];
     disciplineId?: string;
     discipline?: DisciplineModel | undefined;
+    points?: number;
 }
 
 export class DisciplineModel extends EntityOfGuid implements IDisciplineModel {

@@ -64,10 +64,11 @@ public abstract class BaseController<TEntity>(IServiceProvider services) : Contr
 
         try
         {
-            foreach (var entity in entities)
+            var enumerable = entities as TEntity[] ?? entities.ToArray();
+            foreach (var entity in enumerable)
                 DbService.AddEntity(entity);
             await DbService.SaveChangesAsync();
-            return Ok(ResultService.BuildResult(true, entities));
+            return Ok(ResultService.BuildResult(true, enumerable));
         }
         catch (DbUpdateException ex)
         {
@@ -162,7 +163,7 @@ public abstract class BaseController<TEntity>(IServiceProvider services) : Contr
                             Expression.MakeMemberAccess(parameter, property),
                             typeof(string).GetMethod("ToLower", Type.EmptyTypes)
                         ),
-                        typeof(string).GetMethod("Contains", new[] { typeof(string) }),
+                        typeof(string).GetMethod("Contains", [typeof(string)]),
                         Expression.Constant(query.ToLower())
                     )).Aggregate<MethodCallExpression?, Expression?>(null, (current, containsExpression) => current == null ? containsExpression : Expression.OrElse(current, containsExpression));
 

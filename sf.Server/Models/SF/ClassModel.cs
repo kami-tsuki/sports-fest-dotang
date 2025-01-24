@@ -8,9 +8,9 @@ public class ClassModel : Entity<Guid>
     [JsonIgnore, ForeignKey(nameof(UserModel.ClassId))]
     public ICollection<UserModel> Users { get; set; } = new List<UserModel>();
     
-    [JsonProperty(nameof(Students))]
+    [JsonProperty(nameof(Students)), NotMapped]
     public ICollection<UserModel> Students => Users.Where(u => u.Role == RoleType.Student).ToList();
     
-    [JsonProperty(nameof(Tutors))]
+    [JsonProperty(nameof(Tutors)), NotMapped]
     public ICollection<UserModel> Tutors => Users.Where(u => u.Role == RoleType.Tutor).ToList();
 }

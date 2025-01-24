@@ -153,7 +153,7 @@ public class DataBaseService<TEntity> where TEntity : class, IEntity<Guid>
         foreach (var item in data)
         {
             var row = properties.Select(p => p.GetValue(item)?.ToString()?.Replace(",", ";"));
-            csvBuilder.AppendLine(string.Join(",", row));
+            csvBuilder.AppendLine(Join(",", row));
         }
         return csvBuilder.ToString();
     }
