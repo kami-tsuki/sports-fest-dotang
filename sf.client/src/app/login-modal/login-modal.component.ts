@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UsersService } from '../services/users.service';
+import { UsersService, User } from '../services/users.service';
 import { AppPaths } from '../app-paths';
 
 @Component({
@@ -20,27 +20,27 @@ export class LoginModalComponent {
     private usersService: UsersService
   ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
+      const { email, password } = this.loginForm.value;
 
-      const result = this.usersService.onSubmit(username, password);
+      const result = this.usersService.onSubmit(email, password);
 
       if (result.success) {
         this.dialogRef.close();
 
-        if (result.user?.role.toLowerCase() === 'student') {
+        if (Array.isArray(result.user?.role) && result.user?.role.includes('student')) {
           this.router.navigate([AppPaths.studentPage]);
-        } else if (result.user?.role.toLowerCase() === 'teacher') {
+        } else if (Array.isArray(result.user?.role) && result.user?.role.includes('tutor')) {
           this.router.navigate([AppPaths.teacherPage]);
-        } else if (result.user?.role.toLowerCase() === 'manager') {
+        } else if (Array.isArray(result.user?.role) && result.user?.role.includes('manager')) {
           this.router.navigate([AppPaths.mangerComponent]);
-        }else if (result.user?.role.toLowerCase() === 'judge') {
+        } else if (Array.isArray(result.user?.role) && result.user?.role.includes('judge')) {
           this.router.navigate([AppPaths.judgeComponent]);
         }
       } else {

@@ -32,12 +32,10 @@ export class NavBarComponent implements OnInit  {
 
   openLoginModal(): void {
     this.dialog.open(LoginModalComponent, {
-      width: '400px',  // Optional: Set dialog width
+      width: '400px',  // this is Optional to Set dialog width
     });
   }
-    logout(): void {
-      // Perform logout logic (e.g., clear session, etc.)
-  
+    logout(): void {  
       // Redirect to the desired page after logout
       this.router.navigate(['/']);
     }

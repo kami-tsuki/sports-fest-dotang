@@ -3,7 +3,7 @@ import {User} from "@app/services/users.service";
 import {EntityOfGuid} from "@app/services/api/sf-client";
 
 export interface Class extends EntityOfGuid {
-  name: string;
+  name?: string;
   students?: User[];
   tutors?: User[];
 }

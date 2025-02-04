@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { User } from './users.service';
 import {EntityOfGuid} from "@app/services/api/sf-client";
+import { Discipline } from './discipline.service';
 
 export interface Team extends EntityOfGuid {
   name: string;
-  students?: User[];
+  fuhrer: string;
+  user?: User[];
+  deciplien?: Discipline[] | null;
+  point: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeamsService {
-  private teams: Team[] = [];
+export class TeamService {
+  private teams: Team[] = []; 
 
   constructor() {}
 
