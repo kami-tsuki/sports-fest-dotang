@@ -1,6 +1,5 @@
 // File: src/app/app.component.ts
 import { Component } from '@angular/core';
-import {School} from "./services/api/sf-client";
 
 @Component({
   selector: 'app-root',

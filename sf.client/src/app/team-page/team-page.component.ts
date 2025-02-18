@@ -78,7 +78,7 @@ export class TeamPageComponent {
   saveTeam(): void {
     if (this.selectedTeam && this.selectedTeam.id) {
       /// Replace the discipline array with the selected discipline (if any)
-      this.selectedTeam.deciplien = this.selectedDiscipline ? [this.selectedDiscipline] : [];
+      this.selectedTeam.discipline = this.selectedDiscipline ? [this.selectedDiscipline] : [];
 
 
       this.teamService.updateTeam(this.selectedTeam.id, this.selectedTeam);
@@ -111,7 +111,7 @@ export class TeamPageComponent {
   addTeam(): void {
     try {
       //// Set the new team's discipline array to the selected discipline (if any)
-      this.newTeam.deciplien = this.selectedDiscipline ? [this.selectedDiscipline] : [];
+      this.newTeam.discipline = this.selectedDiscipline ? [this.selectedDiscipline] : [];
 
 
       this.teamService.addTeam(this.newTeam);
@@ -130,8 +130,8 @@ export class TeamPageComponent {
 
   // Get discipline names for display in the table
   getDisciplineNames(team: Team): string {
-    return team.deciplien && team.deciplien.length > 0
-      ? team.deciplien.map(d => d.name).join(', ')
+    return team.discipline && team.discipline.length > 0
+      ? team.discipline.map(d => d.name).join(', ')
       : 'None';
   }
 

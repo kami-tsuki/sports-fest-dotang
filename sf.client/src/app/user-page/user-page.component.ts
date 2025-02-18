@@ -16,23 +16,22 @@ export class UserPageComponent implements OnInit {
     id: '', 
     password: '', 
     firstName: '', 
-    lastName: '', 
-    email: '',
-    role: [], 
+    lastName: '',
+    role: '', 
     class: undefined, 
     team: undefined, 
     points: 0, 
     created: new Date(), 
     updated: new Date(),
-    init: () => {}, // Reset default `init`
+    init: () => {},
     toJSON: () => ({}) 
   }; 
   showAddUserForm: boolean = false;
   showSearchResults: boolean = false;
   selectedUser: User | null = null;
   selectedRole: string = '';
-  selectedClass: Class[] = [];
-  allClasses: Class[] = [// I need to replace this hardcoded data with the real data->getClasses() from the service after api finish
+  selectedClass: Class | undefined = undefined;
+  allClasses: Class[] = [//TODO I need to replace this hardcoded data with the real data->getClasses() from the service after api finish
     { id: '1', name: 'Class 1', students: [], tutors: [], created: new Date(), updated: new Date(), init: () => {}, toJSON: () => ({}) },
     { id: '2', name: 'Class 2', students: [], tutors: [], created: new Date(), updated: new Date(), init: () => {}, toJSON: () => ({}) }
     
@@ -120,7 +119,7 @@ export class UserPageComponent implements OnInit {
   // To save after editing
   saveUser(): void {
     if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
-      this.selectedUser.role = [this.selectedRole];
+      this.selectedUser.role = this.selectedRole;
       this.selectedUser.class = this.selectedClass;
       this.usersService.updateUser(this.selectedUser.id, this.selectedUser); // Update user via the service
       this.users = this.usersService.getUsers(); // to refresh the users list
@@ -156,7 +155,7 @@ export class UserPageComponent implements OnInit {
   // Add new user
   addUser(user: User): void {
     try {
-      user.role = [this.selectedRole];
+      user.role = this.selectedRole;
       user.class = this.selectedClass;
       this.usersService.addUser(user); 
       this.users = this.usersService.getUsers(); // this is to fetch the updated list
@@ -168,8 +167,7 @@ export class UserPageComponent implements OnInit {
         password: '', 
         firstName: '', 
         lastName: '',
-        email: '',
-        role: [], 
+        role: '', 
         class: undefined, 
         team: undefined, 
         points: 0, 

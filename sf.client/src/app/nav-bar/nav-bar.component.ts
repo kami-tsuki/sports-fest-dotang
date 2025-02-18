@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { LoginModalComponent } from '@login-modal/login-modal.component';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 
