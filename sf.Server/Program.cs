@@ -106,6 +106,15 @@ var changelogPath = Path.Combine(app.Environment.ContentRootPath, "CHANGELOG.md"
 app.UseMiddleware<ReadmeMiddleware>(readmePath, "/swagger/readme.md");
 app.UseMiddleware<ReadmeMiddleware>(changelogPath, "/swagger/changelog.md");
 
+//redirect / to /swagger
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+        context.Response.Redirect("/swagger");
+    else
+        await next();
+});
+
 // if (app.Environment.IsDevelopment())
 // {
 app.UseSwagger();

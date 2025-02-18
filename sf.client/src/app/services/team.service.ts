@@ -48,7 +48,7 @@ export class TeamService {
         });
     }
 
-    //// to update ateam
+    //// to update a team
     updateTeam(id: string, updatedTeam: Partial<Team>): void {
         this.apiService.put<Team>(`team/${id}`, updatedTeam).subscribe(
             t => {
