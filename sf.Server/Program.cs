@@ -6,8 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using sf.Server.Middlewares;
 using sf.Server.Models.SF;
 using SportsFestApi.Net.Generated;
+using ClassModel = sf.Server.Models.SF.ClassModel;
+using DisciplineModel = sf.Server.Models.SF.DisciplineModel;
 using ILogger = Serilog.ILogger;
+using Message = SportsFestApi.Net.Generated.Message;
+using TeamModel = sf.Server.Models.SF.TeamModel;
 using User = sf.Server.Models.Auth.User;
+using UserModel = sf.Server.Models.SF.UserModel;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -64,7 +69,10 @@ builder.Services.AddApiVersioning(
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<DataBaseService<ClassModel>>();
+builder.Services.AddScoped<DataBaseService<UserModel>>();
+builder.Services.AddScoped<DataBaseService<TeamModel>>();
+builder.Services.AddScoped<DataBaseService<DisciplineModel>>();
 builder.Services.AddSwaggerGen(
     options =>
     {

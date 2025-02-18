@@ -23,7 +23,7 @@ export class DisciplinesService {
     //// to get all disciplines
     getDisciplines(): Discipline[] {
         let disciplines: Discipline[] = [];
-        this.apiService.get<Discipline[]>('disciplines').subscribe(d => {
+        this.apiService.get<Discipline[]>('discipline').subscribe(d => {
             disciplines = d;
         });
         return disciplines;
@@ -32,7 +32,7 @@ export class DisciplinesService {
     //// to get specific discipline
     getDisciplineById(id: string): Discipline | undefined {
         let discipline: Discipline | undefined;
-        this.apiService.get<Discipline>(`disciplines/${id}`).subscribe(d => {
+        this.apiService.get<Discipline>(`discipline/${id}`).subscribe(d => {
             discipline = d;
         });
         return discipline;
@@ -40,7 +40,7 @@ export class DisciplinesService {
 
     //// to add new discipline
     addDiscipline(newDiscipline: Discipline): void {
-        this.apiService.post<Discipline>('disciplines', newDiscipline).subscribe(
+        this.apiService.post<Discipline>('discipline', newDiscipline).subscribe(
             d => {
                 newDiscipline = d;
             }
@@ -49,7 +49,7 @@ export class DisciplinesService {
 
     ///// to update a discipline
     updateDiscipline(id: string, updatedDiscipline: Partial<Discipline>): void {
-        this.apiService.put<Discipline>(`disciplines/${id}`, updatedDiscipline).subscribe(
+        this.apiService.put<Discipline>(`discipline/${id}`, updatedDiscipline).subscribe(
             d => {
                 updatedDiscipline = d;
             }
@@ -58,6 +58,6 @@ export class DisciplinesService {
 
     //// to delete a discipline 
     deleteDiscipline(id: string): void {
-        this.apiService.delete(`disciplines/${id}`).subscribe();
+        this.apiService.delete(`discipline/${id}`).subscribe();
     }
 }

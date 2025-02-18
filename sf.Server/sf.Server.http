@@ -5,374 +5,374 @@
 @sf.Server_HostAddress = http://localhost:5056
 @sf.ApiKey = {{sf.ApiKey}}
 
-## /api/Class
+## /api/class
 
-### GET /api/Class
-GET {{sf.Server_HostAddress}}/api/Class
+### GET /api/class
+GET {{sf.Server_HostAddress}}/api/class
 
-### POST /api/Class
-POST {{sf.Server_HostAddress}}/api/Class
+### POST /api/class
+POST {{sf.Server_HostAddress}}/api/class
 Content-Type: application/json
 
 {}
 
-### PUT /api/Class
-PUT {{sf.Server_HostAddress}}/api/Class
+### PUT /api/class
+PUT {{sf.Server_HostAddress}}/api/class
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/Class
-OPTIONS {{sf.Server_HostAddress}}/api/Class
+### OPTIONS /api/class
+OPTIONS {{sf.Server_HostAddress}}/api/class
 
-## /api/Class/bulk
+## /api/class/bulk
 
-### POST /api/Class/bulk
-POST {{sf.Server_HostAddress}}/api/Class/bulk
+### POST /api/class/bulk
+POST {{sf.Server_HostAddress}}/api/class/bulk
 Content-Type: application/json
 
 {}
 
-### PUT /api/Class/bulk
-PUT {{sf.Server_HostAddress}}/api/Class/bulk
+### PUT /api/class/bulk
+PUT {{sf.Server_HostAddress}}/api/class/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/Class/bulk
-DELETE {{sf.Server_HostAddress}}/api/Class/bulk
+### DELETE /api/class/bulk
+DELETE {{sf.Server_HostAddress}}/api/class/bulk
 
-## /api/Class/search
+## /api/class/search
 
-### GET /api/Class/search
-GET {{sf.Server_HostAddress}}/api/Class/search
+### GET /api/class/search
+GET {{sf.Server_HostAddress}}/api/class/search
 
-## /api/Class/count
+## /api/class/count
 
-### GET /api/Class/count
-GET {{sf.Server_HostAddress}}/api/Class/count
+### GET /api/class/count
+GET {{sf.Server_HostAddress}}/api/class/count
 
-## /api/Class/{id}
+## /api/class/{id}
 
-### GET /api/Class/{id}
-GET {{sf.Server_HostAddress}}/api/Class/{id}
+### GET /api/class/{id}
+GET {{sf.Server_HostAddress}}/api/class/{id}
 
-### PUT /api/Class/{id}
-PUT {{sf.Server_HostAddress}}/api/Class/{id}
+### PUT /api/class/{id}
+PUT {{sf.Server_HostAddress}}/api/class/{id}
 Content-Type: application/json
 
 {}
 
-### PATCH /api/Class/{id}
-PATCH {{sf.Server_HostAddress}}/api/Class/{id}
+### PATCH /api/class/{id}
+PATCH {{sf.Server_HostAddress}}/api/class/{id}
 Content-Type: application/json
 
 {}
 
-### DELETE /api/Class/{id}
-DELETE {{sf.Server_HostAddress}}/api/Class/{id}
+### DELETE /api/class/{id}
+DELETE {{sf.Server_HostAddress}}/api/class/{id}
 
-## /api/Class/export
+## /api/class/export
 
-### GET /api/Class/export
-GET {{sf.Server_HostAddress}}/api/Class/export
+### GET /api/class/export
+GET {{sf.Server_HostAddress}}/api/class/export
 
-## /api/Class/validate
+## /api/class/validate
 
-### POST /api/Class/validate
-POST {{sf.Server_HostAddress}}/api/Class/validate
+### POST /api/class/validate
+POST {{sf.Server_HostAddress}}/api/class/validate
 Content-Type: application/json
 
 {}
 
-## /api/Class/{id}/audit
+## /api/class/{id}/audit
 
-### GET /api/Class/{id}/audit
-GET {{sf.Server_HostAddress}}/api/Class/{id}/audit
+### GET /api/class/{id}/audit
+GET {{sf.Server_HostAddress}}/api/class/{id}/audit
 
-## /api/Class/import
+## /api/class/import
 
-### POST /api/Class/import
-POST {{sf.Server_HostAddress}}/api/Class/import
+### POST /api/class/import
+POST {{sf.Server_HostAddress}}/api/class/import
 Content-Type: application/json
 
 {}
 
-## /api/User
+## /api/user
 
-### GET /api/User
-GET {{sf.Server_HostAddress}}/api/User
+### GET /api/user
+GET {{sf.Server_HostAddress}}/api/user
 
-### POST /api/User
-POST {{sf.Server_HostAddress}}/api/User
+### POST /api/user
+POST {{sf.Server_HostAddress}}/api/user
 Content-Type: application/json
 
 {}
 
-### PUT /api/User
-PUT {{sf.Server_HostAddress}}/api/User
+### PUT /api/user
+PUT {{sf.Server_HostAddress}}/api/user
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/User
-OPTIONS {{sf.Server_HostAddress}}/api/User
+### OPTIONS /api/user
+OPTIONS {{sf.Server_HostAddress}}/api/user
 
-## /api/User/bulk
+## /api/user/bulk
 
-### POST /api/User/bulk
-POST {{sf.Server_HostAddress}}/api/User/bulk
+### POST /api/user/bulk
+POST {{sf.Server_HostAddress}}/api/user/bulk
 Content-Type: application/json
 
 {}
 
-### PUT /api/User/bulk
-PUT {{sf.Server_HostAddress}}/api/User/bulk
+### PUT /api/user/bulk
+PUT {{sf.Server_HostAddress}}/api/user/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/User/bulk
-DELETE {{sf.Server_HostAddress}}/api/User/bulk
+### DELETE /api/user/bulk
+DELETE {{sf.Server_HostAddress}}/api/user/bulk
 
-## /api/User/search
+## /api/user/search
 
-### GET /api/User/search
-GET {{sf.Server_HostAddress}}/api/User/search
+### GET /api/user/search
+GET {{sf.Server_HostAddress}}/api/user/search
 
-## /api/User/count
+## /api/user/count
 
-### GET /api/User/count
-GET {{sf.Server_HostAddress}}/api/User/count
+### GET /api/user/count
+GET {{sf.Server_HostAddress}}/api/user/count
 
-## /api/User/{id}
+## /api/user/{id}
 
-### GET /api/User/{id}
-GET {{sf.Server_HostAddress}}/api/User/{id}
+### GET /api/user/{id}
+GET {{sf.Server_HostAddress}}/api/user/{id}
 
-### PUT /api/User/{id}
-PUT {{sf.Server_HostAddress}}/api/User/{id}
+### PUT /api/user/{id}
+PUT {{sf.Server_HostAddress}}/api/user/{id}
 Content-Type: application/json
 
 {}
 
-### PATCH /api/User/{id}
-PATCH {{sf.Server_HostAddress}}/api/User/{id}
+### PATCH /api/user/{id}
+PATCH {{sf.Server_HostAddress}}/api/user/{id}
 Content-Type: application/json
 
 {}
 
-### DELETE /api/User/{id}
-DELETE {{sf.Server_HostAddress}}/api/User/{id}
+### DELETE /api/user/{id}
+DELETE {{sf.Server_HostAddress}}/api/user/{id}
 
-## /api/User/export
+## /api/user/export
 
-### GET /api/User/export
-GET {{sf.Server_HostAddress}}/api/User/export
+### GET /api/user/export
+GET {{sf.Server_HostAddress}}/api/user/export
 
-## /api/User/validate
+## /api/user/validate
 
-### POST /api/User/validate
-POST {{sf.Server_HostAddress}}/api/User/validate
+### POST /api/user/validate
+POST {{sf.Server_HostAddress}}/api/user/validate
 Content-Type: application/json
 
 {}
 
-## /api/User/{id}/audit
+## /api/user/{id}/audit
 
-### GET /api/User/{id}/audit
-GET {{sf.Server_HostAddress}}/api/User/{id}/audit
+### GET /api/user/{id}/audit
+GET {{sf.Server_HostAddress}}/api/user/{id}/audit
 
-## /api/User/import
+## /api/user/import
 
-### POST /api/User/import
-POST {{sf.Server_HostAddress}}/api/User/import
+### POST /api/user/import
+POST {{sf.Server_HostAddress}}/api/user/import
 Content-Type: application/json
 
 {}
 
-## /api/Discipline
+## /api/discipline
 
-### GET /api/Discipline
-GET {{sf.Server_HostAddress}}/api/Discipline
+### GET /api/discipline
+GET {{sf.Server_HostAddress}}/api/discipline
 
-### POST /api/Discipline
-POST {{sf.Server_HostAddress}}/api/Discipline
+### POST /api/discipline
+POST {{sf.Server_HostAddress}}/api/discipline
 Content-Type: application/json
 
 {}
 
-### PUT /api/Discipline
-PUT {{sf.Server_HostAddress}}/api/Discipline
+### PUT /api/discipline
+PUT {{sf.Server_HostAddress}}/api/discipline
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/Discipline
-OPTIONS {{sf.Server_HostAddress}}/api/Discipline
+### OPTIONS /api/discipline
+OPTIONS {{sf.Server_HostAddress}}/api/discipline
 
-## /api/Discipline/bulk
+## /api/discipline/bulk
 
-### POST /api/Discipline/bulk
-POST {{sf.Server_HostAddress}}/api/Discipline/bulk
+### POST /api/discipline/bulk
+POST {{sf.Server_HostAddress}}/api/discipline/bulk
 Content-Type: application/json
 
 {}
 
-### PUT /api/Discipline/bulk
-PUT {{sf.Server_HostAddress}}/api/Discipline/bulk
+### PUT /api/discipline/bulk
+PUT {{sf.Server_HostAddress}}/api/discipline/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/Discipline/bulk
-DELETE {{sf.Server_HostAddress}}/api/Discipline/bulk
+### DELETE /api/discipline/bulk
+DELETE {{sf.Server_HostAddress}}/api/discipline/bulk
 
-## /api/Discipline/search
+## /api/discipline/search
 
-### GET /api/Discipline/search
-GET {{sf.Server_HostAddress}}/api/Discipline/search
+### GET /api/discipline/search
+GET {{sf.Server_HostAddress}}/api/discipline/search
 
-## /api/Discipline/count
+## /api/discipline/count
 
-### GET /api/Discipline/count
-GET {{sf.Server_HostAddress}}/api/Discipline/count
+### GET /api/discipline/count
+GET {{sf.Server_HostAddress}}/api/discipline/count
 
-## /api/Discipline/{id}
+## /api/discipline/{id}
 
-### GET /api/Discipline/{id}
-GET {{sf.Server_HostAddress}}/api/Discipline/{id}
+### GET /api/discipline/{id}
+GET {{sf.Server_HostAddress}}/api/discipline/{id}
 
-### PUT /api/Discipline/{id}
-PUT {{sf.Server_HostAddress}}/api/Discipline/{id}
+### PUT /api/discipline/{id}
+PUT {{sf.Server_HostAddress}}/api/discipline/{id}
 Content-Type: application/json
 
 {}
 
-### PATCH /api/Discipline/{id}
-PATCH {{sf.Server_HostAddress}}/api/Discipline/{id}
+### PATCH /api/discipline/{id}
+PATCH {{sf.Server_HostAddress}}/api/discipline/{id}
 Content-Type: application/json
 
 {}
 
-### DELETE /api/Discipline/{id}
-DELETE {{sf.Server_HostAddress}}/api/Discipline/{id}
+### DELETE /api/discipline/{id}
+DELETE {{sf.Server_HostAddress}}/api/discipline/{id}
 
-## /api/Discipline/export
+## /api/discipline/export
 
-### GET /api/Discipline/export
-GET {{sf.Server_HostAddress}}/api/Discipline/export
+### GET /api/discipline/export
+GET {{sf.Server_HostAddress}}/api/discipline/export
 
-## /api/Discipline/validate
+## /api/discipline/validate
 
-### POST /api/Discipline/validate
-POST {{sf.Server_HostAddress}}/api/Discipline/validate
+### POST /api/discipline/validate
+POST {{sf.Server_HostAddress}}/api/discipline/validate
 Content-Type: application/json
 
 {}
 
-## /api/Discipline/{id}/audit
+## /api/discipline/{id}/audit
 
-### GET /api/Discipline/{id}/audit
-GET {{sf.Server_HostAddress}}/api/Discipline/{id}/audit
+### GET /api/discipline/{id}/audit
+GET {{sf.Server_HostAddress}}/api/discipline/{id}/audit
 
-## /api/Discipline/import
+## /api/discipline/import
 
-### POST /api/Discipline/import
-POST {{sf.Server_HostAddress}}/api/Discipline/import
+### POST /api/discipline/import
+POST {{sf.Server_HostAddress}}/api/discipline/import
 Content-Type: application/json
 
 {}
 
-## /api/Team
+## /api/team
 
-### GET /api/Team
-GET {{sf.Server_HostAddress}}/api/Team
+### GET /api/team
+GET {{sf.Server_HostAddress}}/api/team
 
-### POST /api/Team
-POST {{sf.Server_HostAddress}}/api/Team
+### POST /api/team
+POST {{sf.Server_HostAddress}}/api/team
 Content-Type: application/json
 
 {}
 
-### PUT /api/Team
-PUT {{sf.Server_HostAddress}}/api/Team
+### PUT /api/team
+PUT {{sf.Server_HostAddress}}/api/team
 Content-Type: application/json
 
 {}
 
-### OPTIONS /api/Team
-OPTIONS {{sf.Server_HostAddress}}/api/Team
+### OPTIONS /api/team
+OPTIONS {{sf.Server_HostAddress}}/api/team
 
-## /api/Team/bulk
+## /api/team/bulk
 
-### POST /api/Team/bulk
-POST {{sf.Server_HostAddress}}/api/Team/bulk
+### POST /api/team/bulk
+POST {{sf.Server_HostAddress}}/api/team/bulk
 Content-Type: application/json
 
 {}
 
-### PUT /api/Team/bulk
-PUT {{sf.Server_HostAddress}}/api/Team/bulk
+### PUT /api/team/bulk
+PUT {{sf.Server_HostAddress}}/api/team/bulk
 Content-Type: application/json
 
 {}
 
-### DELETE /api/Team/bulk
-DELETE {{sf.Server_HostAddress}}/api/Team/bulk
+### DELETE /api/team/bulk
+DELETE {{sf.Server_HostAddress}}/api/team/bulk
 
-## /api/Team/search
+## /api/team/search
 
-### GET /api/Team/search
-GET {{sf.Server_HostAddress}}/api/Team/search
+### GET /api/team/search
+GET {{sf.Server_HostAddress}}/api/team/search
 
-## /api/Team/count
+## /api/team/count
 
-### GET /api/Team/count
-GET {{sf.Server_HostAddress}}/api/Team/count
+### GET /api/team/count
+GET {{sf.Server_HostAddress}}/api/team/count
 
-## /api/Team/{id}
+## /api/team/{id}
 
-### GET /api/Team/{id}
-GET {{sf.Server_HostAddress}}/api/Team/{id}
+### GET /api/team/{id}
+GET {{sf.Server_HostAddress}}/api/team/{id}
 
-### PUT /api/Team/{id}
-PUT {{sf.Server_HostAddress}}/api/Team/{id}
+### PUT /api/team/{id}
+PUT {{sf.Server_HostAddress}}/api/team/{id}
 Content-Type: application/json
 
 {}
 
-### PATCH /api/Team/{id}
-PATCH {{sf.Server_HostAddress}}/api/Team/{id}
+### PATCH /api/team/{id}
+PATCH {{sf.Server_HostAddress}}/api/team/{id}
 Content-Type: application/json
 
 {}
 
-### DELETE /api/Team/{id}
-DELETE {{sf.Server_HostAddress}}/api/Team/{id}
+### DELETE /api/team/{id}
+DELETE {{sf.Server_HostAddress}}/api/team/{id}
 
-## /api/Team/export
+## /api/team/export
 
-### GET /api/Team/export
-GET {{sf.Server_HostAddress}}/api/Team/export
+### GET /api/team/export
+GET {{sf.Server_HostAddress}}/api/team/export
 
-## /api/Team/validate
+## /api/team/validate
 
-### POST /api/Team/validate
-POST {{sf.Server_HostAddress}}/api/Team/validate
+### POST /api/team/validate
+POST {{sf.Server_HostAddress}}/api/team/validate
 Content-Type: application/json
 
 {}
 
-## /api/Team/{id}/audit
+## /api/team/{id}/audit
 
-### GET /api/Team/{id}/audit
-GET {{sf.Server_HostAddress}}/api/Team/{id}/audit
+### GET /api/team/{id}/audit
+GET {{sf.Server_HostAddress}}/api/team/{id}/audit
 
-## /api/Team/import
+## /api/team/import
 
-### POST /api/Team/import
-POST {{sf.Server_HostAddress}}/api/Team/import
+### POST /api/team/import
+POST {{sf.Server_HostAddress}}/api/team/import
 Content-Type: application/json
 
 {}

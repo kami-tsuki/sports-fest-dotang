@@ -3,18 +3,18 @@ using sf.Server.Models.SF;
 
 namespace sf.Server.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("api/class"), ApiController]
 public partial class ClassController(IServiceProvider services)
     : BaseController<ClassModel>(services);
 
-[Route("api/[controller]"), ApiController]
+[Route("api/user"), ApiController]
 public partial class UserController(IServiceProvider services)
     : BaseController<UserModel>(services);
 
-[Route("api/[controller]"), ApiController]
+[Route("api/discipline"), ApiController]
 public partial class DisciplineController(IServiceProvider services)
     : BaseController<ClassModel>(services);
 
-[Route("api/[controller]"), ApiController]
+[Route("api/team"), ApiController]
 public partial class TeamController(IServiceProvider services)
     : BaseController<TeamModel>(services);

@@ -159,8 +159,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class"
-                    urlBuilder_.Append("api/Class");
+                    // Operation Path: "api/class"
+                    urlBuilder_.Append("api/class");
                     urlBuilder_.Append('?');
                     if (page != null)
                     {
@@ -258,8 +258,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class"
-                    urlBuilder_.Append("api/Class");
+                    // Operation Path: "api/class"
+                    urlBuilder_.Append("api/class");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -341,8 +341,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class"
-                    urlBuilder_.Append("api/Class");
+                    // Operation Path: "api/class"
+                    urlBuilder_.Append("api/class");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -418,8 +418,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class"
-                    urlBuilder_.Append("api/Class");
+                    // Operation Path: "api/class"
+                    urlBuilder_.Append("api/class");
                     urlBuilder_.Append('?');
                     if (path != null)
                     {
@@ -509,8 +509,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/bulk"
-                    urlBuilder_.Append("api/Class/bulk");
+                    // Operation Path: "api/class/bulk"
+                    urlBuilder_.Append("api/class/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -586,8 +586,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/bulk"
-                    urlBuilder_.Append("api/Class/bulk");
+                    // Operation Path: "api/class/bulk"
+                    urlBuilder_.Append("api/class/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -663,8 +663,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/bulk"
-                    urlBuilder_.Append("api/Class/bulk");
+                    // Operation Path: "api/class/bulk"
+                    urlBuilder_.Append("api/class/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -733,8 +733,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/search"
-                    urlBuilder_.Append("api/Class/search");
+                    // Operation Path: "api/class/search"
+                    urlBuilder_.Append("api/class/search");
                     urlBuilder_.Append('?');
                     if (query != null)
                     {
@@ -829,8 +829,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/count"
-                    urlBuilder_.Append("api/Class/count");
+                    // Operation Path: "api/class/count"
+                    urlBuilder_.Append("api/class/count");
                     urlBuilder_.Append('?');
                     if (filters != null)
                     {
@@ -908,8 +908,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/{id}"
-                    urlBuilder_.Append("api/Class/");
+                    // Operation Path: "api/class/{id}"
+                    urlBuilder_.Append("api/class/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (properties != null)
@@ -995,8 +995,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/{id}"
-                    urlBuilder_.Append("api/Class/");
+                    // Operation Path: "api/class/{id}"
+                    urlBuilder_.Append("api/class/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
@@ -1079,8 +1079,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/{id}"
-                    urlBuilder_.Append("api/Class/");
+                    // Operation Path: "api/class/{id}"
+                    urlBuilder_.Append("api/class/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -1153,8 +1153,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/{id}"
-                    urlBuilder_.Append("api/Class/");
+                    // Operation Path: "api/class/{id}"
+                    urlBuilder_.Append("api/class/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -1224,8 +1224,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/export"
-                    urlBuilder_.Append("api/Class/export");
+                    // Operation Path: "api/class/export"
+                    urlBuilder_.Append("api/class/export");
                     urlBuilder_.Append('?');
                     if (format != null)
                     {
@@ -1309,8 +1309,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/validate"
-                    urlBuilder_.Append("api/Class/validate");
+                    // Operation Path: "api/class/validate"
+                    urlBuilder_.Append("api/class/validate");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1382,8 +1382,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/{id}/audit"
-                    urlBuilder_.Append("api/Class/");
+                    // Operation Path: "api/class/{id}/audit"
+                    urlBuilder_.Append("api/class/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/audit");
 
@@ -1467,8 +1467,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Class/import"
-                    urlBuilder_.Append("api/Class/import");
+                    // Operation Path: "api/class/import"
+                    urlBuilder_.Append("api/class/import");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1771,8 +1771,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User"
-                    urlBuilder_.Append("api/User");
+                    // Operation Path: "api/user"
+                    urlBuilder_.Append("api/user");
                     urlBuilder_.Append('?');
                     if (page != null)
                     {
@@ -1870,8 +1870,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User"
-                    urlBuilder_.Append("api/User");
+                    // Operation Path: "api/user"
+                    urlBuilder_.Append("api/user");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -1953,8 +1953,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User"
-                    urlBuilder_.Append("api/User");
+                    // Operation Path: "api/user"
+                    urlBuilder_.Append("api/user");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -2030,8 +2030,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User"
-                    urlBuilder_.Append("api/User");
+                    // Operation Path: "api/user"
+                    urlBuilder_.Append("api/user");
                     urlBuilder_.Append('?');
                     if (path != null)
                     {
@@ -2121,8 +2121,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/bulk"
-                    urlBuilder_.Append("api/User/bulk");
+                    // Operation Path: "api/user/bulk"
+                    urlBuilder_.Append("api/user/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -2198,8 +2198,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/bulk"
-                    urlBuilder_.Append("api/User/bulk");
+                    // Operation Path: "api/user/bulk"
+                    urlBuilder_.Append("api/user/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -2275,8 +2275,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/bulk"
-                    urlBuilder_.Append("api/User/bulk");
+                    // Operation Path: "api/user/bulk"
+                    urlBuilder_.Append("api/user/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -2345,8 +2345,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/search"
-                    urlBuilder_.Append("api/User/search");
+                    // Operation Path: "api/user/search"
+                    urlBuilder_.Append("api/user/search");
                     urlBuilder_.Append('?');
                     if (query != null)
                     {
@@ -2441,8 +2441,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/count"
-                    urlBuilder_.Append("api/User/count");
+                    // Operation Path: "api/user/count"
+                    urlBuilder_.Append("api/user/count");
                     urlBuilder_.Append('?');
                     if (filters != null)
                     {
@@ -2520,8 +2520,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/{id}"
-                    urlBuilder_.Append("api/User/");
+                    // Operation Path: "api/user/{id}"
+                    urlBuilder_.Append("api/user/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (properties != null)
@@ -2607,8 +2607,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/{id}"
-                    urlBuilder_.Append("api/User/");
+                    // Operation Path: "api/user/{id}"
+                    urlBuilder_.Append("api/user/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
@@ -2691,8 +2691,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/{id}"
-                    urlBuilder_.Append("api/User/");
+                    // Operation Path: "api/user/{id}"
+                    urlBuilder_.Append("api/user/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -2765,8 +2765,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/{id}"
-                    urlBuilder_.Append("api/User/");
+                    // Operation Path: "api/user/{id}"
+                    urlBuilder_.Append("api/user/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -2836,8 +2836,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/export"
-                    urlBuilder_.Append("api/User/export");
+                    // Operation Path: "api/user/export"
+                    urlBuilder_.Append("api/user/export");
                     urlBuilder_.Append('?');
                     if (format != null)
                     {
@@ -2921,8 +2921,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/validate"
-                    urlBuilder_.Append("api/User/validate");
+                    // Operation Path: "api/user/validate"
+                    urlBuilder_.Append("api/user/validate");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -2994,8 +2994,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/{id}/audit"
-                    urlBuilder_.Append("api/User/");
+                    // Operation Path: "api/user/{id}/audit"
+                    urlBuilder_.Append("api/user/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/audit");
 
@@ -3079,8 +3079,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/User/import"
-                    urlBuilder_.Append("api/User/import");
+                    // Operation Path: "api/user/import"
+                    urlBuilder_.Append("api/user/import");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -3383,8 +3383,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline"
-                    urlBuilder_.Append("api/Discipline");
+                    // Operation Path: "api/discipline"
+                    urlBuilder_.Append("api/discipline");
                     urlBuilder_.Append('?');
                     if (page != null)
                     {
@@ -3482,8 +3482,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline"
-                    urlBuilder_.Append("api/Discipline");
+                    // Operation Path: "api/discipline"
+                    urlBuilder_.Append("api/discipline");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -3565,8 +3565,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline"
-                    urlBuilder_.Append("api/Discipline");
+                    // Operation Path: "api/discipline"
+                    urlBuilder_.Append("api/discipline");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -3642,8 +3642,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline"
-                    urlBuilder_.Append("api/Discipline");
+                    // Operation Path: "api/discipline"
+                    urlBuilder_.Append("api/discipline");
                     urlBuilder_.Append('?');
                     if (path != null)
                     {
@@ -3733,8 +3733,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/bulk"
-                    urlBuilder_.Append("api/Discipline/bulk");
+                    // Operation Path: "api/discipline/bulk"
+                    urlBuilder_.Append("api/discipline/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -3810,8 +3810,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/bulk"
-                    urlBuilder_.Append("api/Discipline/bulk");
+                    // Operation Path: "api/discipline/bulk"
+                    urlBuilder_.Append("api/discipline/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -3887,8 +3887,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/bulk"
-                    urlBuilder_.Append("api/Discipline/bulk");
+                    // Operation Path: "api/discipline/bulk"
+                    urlBuilder_.Append("api/discipline/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -3957,8 +3957,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/search"
-                    urlBuilder_.Append("api/Discipline/search");
+                    // Operation Path: "api/discipline/search"
+                    urlBuilder_.Append("api/discipline/search");
                     urlBuilder_.Append('?');
                     if (query != null)
                     {
@@ -4053,8 +4053,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/count"
-                    urlBuilder_.Append("api/Discipline/count");
+                    // Operation Path: "api/discipline/count"
+                    urlBuilder_.Append("api/discipline/count");
                     urlBuilder_.Append('?');
                     if (filters != null)
                     {
@@ -4132,8 +4132,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/{id}"
-                    urlBuilder_.Append("api/Discipline/");
+                    // Operation Path: "api/discipline/{id}"
+                    urlBuilder_.Append("api/discipline/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (properties != null)
@@ -4219,8 +4219,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/{id}"
-                    urlBuilder_.Append("api/Discipline/");
+                    // Operation Path: "api/discipline/{id}"
+                    urlBuilder_.Append("api/discipline/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
@@ -4303,8 +4303,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/{id}"
-                    urlBuilder_.Append("api/Discipline/");
+                    // Operation Path: "api/discipline/{id}"
+                    urlBuilder_.Append("api/discipline/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -4377,8 +4377,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/{id}"
-                    urlBuilder_.Append("api/Discipline/");
+                    // Operation Path: "api/discipline/{id}"
+                    urlBuilder_.Append("api/discipline/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -4448,8 +4448,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/export"
-                    urlBuilder_.Append("api/Discipline/export");
+                    // Operation Path: "api/discipline/export"
+                    urlBuilder_.Append("api/discipline/export");
                     urlBuilder_.Append('?');
                     if (format != null)
                     {
@@ -4533,8 +4533,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/validate"
-                    urlBuilder_.Append("api/Discipline/validate");
+                    // Operation Path: "api/discipline/validate"
+                    urlBuilder_.Append("api/discipline/validate");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -4606,8 +4606,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/{id}/audit"
-                    urlBuilder_.Append("api/Discipline/");
+                    // Operation Path: "api/discipline/{id}/audit"
+                    urlBuilder_.Append("api/discipline/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/audit");
 
@@ -4691,8 +4691,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Discipline/import"
-                    urlBuilder_.Append("api/Discipline/import");
+                    // Operation Path: "api/discipline/import"
+                    urlBuilder_.Append("api/discipline/import");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -4995,8 +4995,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team"
-                    urlBuilder_.Append("api/Team");
+                    // Operation Path: "api/team"
+                    urlBuilder_.Append("api/team");
                     urlBuilder_.Append('?');
                     if (page != null)
                     {
@@ -5094,8 +5094,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team"
-                    urlBuilder_.Append("api/Team");
+                    // Operation Path: "api/team"
+                    urlBuilder_.Append("api/team");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -5177,8 +5177,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team"
-                    urlBuilder_.Append("api/Team");
+                    // Operation Path: "api/team"
+                    urlBuilder_.Append("api/team");
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
                     {
@@ -5254,8 +5254,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team"
-                    urlBuilder_.Append("api/Team");
+                    // Operation Path: "api/team"
+                    urlBuilder_.Append("api/team");
                     urlBuilder_.Append('?');
                     if (path != null)
                     {
@@ -5345,8 +5345,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/bulk"
-                    urlBuilder_.Append("api/Team/bulk");
+                    // Operation Path: "api/team/bulk"
+                    urlBuilder_.Append("api/team/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -5422,8 +5422,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/bulk"
-                    urlBuilder_.Append("api/Team/bulk");
+                    // Operation Path: "api/team/bulk"
+                    urlBuilder_.Append("api/team/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -5499,8 +5499,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/bulk"
-                    urlBuilder_.Append("api/Team/bulk");
+                    // Operation Path: "api/team/bulk"
+                    urlBuilder_.Append("api/team/bulk");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -5569,8 +5569,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/search"
-                    urlBuilder_.Append("api/Team/search");
+                    // Operation Path: "api/team/search"
+                    urlBuilder_.Append("api/team/search");
                     urlBuilder_.Append('?');
                     if (query != null)
                     {
@@ -5665,8 +5665,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/count"
-                    urlBuilder_.Append("api/Team/count");
+                    // Operation Path: "api/team/count"
+                    urlBuilder_.Append("api/team/count");
                     urlBuilder_.Append('?');
                     if (filters != null)
                     {
@@ -5744,8 +5744,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/{id}"
-                    urlBuilder_.Append("api/Team/");
+                    // Operation Path: "api/team/{id}"
+                    urlBuilder_.Append("api/team/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (properties != null)
@@ -5831,8 +5831,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/{id}"
-                    urlBuilder_.Append("api/Team/");
+                    // Operation Path: "api/team/{id}"
+                    urlBuilder_.Append("api/team/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     if (ignoreNullProperties != null)
@@ -5915,8 +5915,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/{id}"
-                    urlBuilder_.Append("api/Team/");
+                    // Operation Path: "api/team/{id}"
+                    urlBuilder_.Append("api/team/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -5989,8 +5989,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/{id}"
-                    urlBuilder_.Append("api/Team/");
+                    // Operation Path: "api/team/{id}"
+                    urlBuilder_.Append("api/team/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -6060,8 +6060,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/export"
-                    urlBuilder_.Append("api/Team/export");
+                    // Operation Path: "api/team/export"
+                    urlBuilder_.Append("api/team/export");
                     urlBuilder_.Append('?');
                     if (format != null)
                     {
@@ -6145,8 +6145,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/validate"
-                    urlBuilder_.Append("api/Team/validate");
+                    // Operation Path: "api/team/validate"
+                    urlBuilder_.Append("api/team/validate");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -6218,8 +6218,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/{id}/audit"
-                    urlBuilder_.Append("api/Team/");
+                    // Operation Path: "api/team/{id}/audit"
+                    urlBuilder_.Append("api/team/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append("/audit");
 
@@ -6303,8 +6303,8 @@ namespace SportsFestApi.Net.Generated
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/Team/import"
-                    urlBuilder_.Append("api/Team/import");
+                    // Operation Path: "api/team/import"
+                    urlBuilder_.Append("api/team/import");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 

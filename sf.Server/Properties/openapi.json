@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Class": {
+    "/api/class": {
       "get": {
         "tags": [
           "Class"
@@ -207,7 +207,7 @@
         }
       }
     },
-    "/api/Class/bulk": {
+    "/api/class/bulk": {
       "post": {
         "tags": [
           "Class"
@@ -309,7 +309,7 @@
         }
       }
     },
-    "/api/Class/search": {
+    "/api/class/search": {
       "get": {
         "tags": [
           "Class"
@@ -389,7 +389,7 @@
         }
       }
     },
-    "/api/Class/count": {
+    "/api/class/count": {
       "get": {
         "tags": [
           "Class"
@@ -423,7 +423,7 @@
         }
       }
     },
-    "/api/Class/{id}": {
+    "/api/class/{id}": {
       "get": {
         "tags": [
           "Class"
@@ -589,7 +589,7 @@
         }
       }
     },
-    "/api/Class/export": {
+    "/api/class/export": {
       "get": {
         "tags": [
           "Class"
@@ -633,7 +633,7 @@
         }
       }
     },
-    "/api/Class/validate": {
+    "/api/class/validate": {
       "post": {
         "tags": [
           "Class"
@@ -665,7 +665,7 @@
         }
       }
     },
-    "/api/Class/{id}/audit": {
+    "/api/class/{id}/audit": {
       "get": {
         "tags": [
           "Class"
@@ -697,7 +697,7 @@
         }
       }
     },
-    "/api/Class/import": {
+    "/api/class/import": {
       "post": {
         "tags": [
           "Class"
@@ -733,7 +733,7 @@
         }
       }
     },
-    "/api/User": {
+    "/api/user": {
       "get": {
         "tags": [
           "User"
@@ -934,7 +934,7 @@
         }
       }
     },
-    "/api/User/bulk": {
+    "/api/user/bulk": {
       "post": {
         "tags": [
           "User"
@@ -1036,7 +1036,7 @@
         }
       }
     },
-    "/api/User/search": {
+    "/api/user/search": {
       "get": {
         "tags": [
           "User"
@@ -1116,7 +1116,7 @@
         }
       }
     },
-    "/api/User/count": {
+    "/api/user/count": {
       "get": {
         "tags": [
           "User"
@@ -1150,7 +1150,7 @@
         }
       }
     },
-    "/api/User/{id}": {
+    "/api/user/{id}": {
       "get": {
         "tags": [
           "User"
@@ -1316,7 +1316,7 @@
         }
       }
     },
-    "/api/User/export": {
+    "/api/user/export": {
       "get": {
         "tags": [
           "User"
@@ -1360,7 +1360,7 @@
         }
       }
     },
-    "/api/User/validate": {
+    "/api/user/validate": {
       "post": {
         "tags": [
           "User"
@@ -1392,7 +1392,7 @@
         }
       }
     },
-    "/api/User/{id}/audit": {
+    "/api/user/{id}/audit": {
       "get": {
         "tags": [
           "User"
@@ -1424,7 +1424,7 @@
         }
       }
     },
-    "/api/User/import": {
+    "/api/user/import": {
       "post": {
         "tags": [
           "User"
@@ -1460,7 +1460,7 @@
         }
       }
     },
-    "/api/Discipline": {
+    "/api/discipline": {
       "get": {
         "tags": [
           "Discipline"
@@ -1661,7 +1661,7 @@
         }
       }
     },
-    "/api/Discipline/bulk": {
+    "/api/discipline/bulk": {
       "post": {
         "tags": [
           "Discipline"
@@ -1763,7 +1763,7 @@
         }
       }
     },
-    "/api/Discipline/search": {
+    "/api/discipline/search": {
       "get": {
         "tags": [
           "Discipline"
@@ -1843,7 +1843,7 @@
         }
       }
     },
-    "/api/Discipline/count": {
+    "/api/discipline/count": {
       "get": {
         "tags": [
           "Discipline"
@@ -1877,7 +1877,7 @@
         }
       }
     },
-    "/api/Discipline/{id}": {
+    "/api/discipline/{id}": {
       "get": {
         "tags": [
           "Discipline"
@@ -2043,7 +2043,7 @@
         }
       }
     },
-    "/api/Discipline/export": {
+    "/api/discipline/export": {
       "get": {
         "tags": [
           "Discipline"
@@ -2087,7 +2087,7 @@
         }
       }
     },
-    "/api/Discipline/validate": {
+    "/api/discipline/validate": {
       "post": {
         "tags": [
           "Discipline"
@@ -2119,7 +2119,7 @@
         }
       }
     },
-    "/api/Discipline/{id}/audit": {
+    "/api/discipline/{id}/audit": {
       "get": {
         "tags": [
           "Discipline"
@@ -2151,7 +2151,7 @@
         }
       }
     },
-    "/api/Discipline/import": {
+    "/api/discipline/import": {
       "post": {
         "tags": [
           "Discipline"
@@ -2187,7 +2187,7 @@
         }
       }
     },
-    "/api/Team": {
+    "/api/team": {
       "get": {
         "tags": [
           "Team"
@@ -2388,7 +2388,7 @@
         }
       }
     },
-    "/api/Team/bulk": {
+    "/api/team/bulk": {
       "post": {
         "tags": [
           "Team"
@@ -2490,7 +2490,7 @@
         }
       }
     },
-    "/api/Team/search": {
+    "/api/team/search": {
       "get": {
         "tags": [
           "Team"
@@ -2570,7 +2570,7 @@
         }
       }
     },
-    "/api/Team/count": {
+    "/api/team/count": {
       "get": {
         "tags": [
           "Team"
@@ -2604,7 +2604,7 @@
         }
       }
     },
-    "/api/Team/{id}": {
+    "/api/team/{id}": {
       "get": {
         "tags": [
           "Team"
@@ -2770,7 +2770,7 @@
         }
       }
     },
-    "/api/Team/export": {
+    "/api/team/export": {
       "get": {
         "tags": [
           "Team"
@@ -2814,7 +2814,7 @@
         }
       }
     },
-    "/api/Team/validate": {
+    "/api/team/validate": {
       "post": {
         "tags": [
           "Team"
@@ -2846,7 +2846,7 @@
         }
       }
     },
-    "/api/Team/{id}/audit": {
+    "/api/team/{id}/audit": {
       "get": {
         "tags": [
           "Team"
@@ -2878,7 +2878,7 @@
         }
       }
     },
-    "/api/Team/import": {
+    "/api/team/import": {
       "post": {
         "tags": [
           "Team"

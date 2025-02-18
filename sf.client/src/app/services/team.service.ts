@@ -26,7 +26,7 @@ export class TeamService {
     //// to get all teams
     getTeams(): Team[] {
         let teams: Team[] = [];
-        this.apiService.get<Team[]>('teams').subscribe(t => {
+        this.apiService.get<Team[]>('team').subscribe(t => {
             teams = t;
         });
         return teams;
@@ -35,7 +35,7 @@ export class TeamService {
     //// to get a specific team
     getTeamById(id: string): Team | undefined {
         let team: Team | undefined;
-        this.apiService.get<Team>(`teams/${id}`).subscribe(t => {
+        this.apiService.get<Team>(`team/${id}`).subscribe(t => {
             team = t;
         });
         return team;
@@ -43,14 +43,14 @@ export class TeamService {
 
     //// to add neu team
     addTeam(newTeam: Team): void {
-        this.apiService.post<Team>('teams', newTeam).subscribe(t => {
+        this.apiService.post<Team>('team', newTeam).subscribe(t => {
             newTeam = t;
         });
     }
 
     //// to update ateam
     updateTeam(id: string, updatedTeam: Partial<Team>): void {
-        this.apiService.put<Team>(`teams/${id}`, updatedTeam).subscribe(
+        this.apiService.put<Team>(`team/${id}`, updatedTeam).subscribe(
             t => {
                 updatedTeam = t;
             }
@@ -59,6 +59,6 @@ export class TeamService {
 
     //// to delete a team
     deleteTeam(id: string): void {
-        this.apiService.delete<Team>(`teams/${id}`).subscribe();
+        this.apiService.delete<Team>(`team/${id}`).subscribe();
     }
 }

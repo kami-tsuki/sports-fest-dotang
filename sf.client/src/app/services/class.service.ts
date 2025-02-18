@@ -22,7 +22,7 @@ export class ClassesService {
     //// to get all classes
     getClasses(): Class[] {
         let classes: Class[] = [];
-        this.apiService.get<Class[]>('classes').subscribe(c => {
+        this.apiService.get<Class[]>('class').subscribe(c => {
             classes = c;
         });
         return classes;
@@ -31,7 +31,7 @@ export class ClassesService {
     //// to get specific class by id
     getClassById(id: string): Class | undefined {
         let cls: Class | undefined;
-        this.apiService.get<Class>(`classes/${id}`).subscribe(c => {
+        this.apiService.get<Class>(`class/${id}`).subscribe(c => {
             cls = c;
         });
         return cls;
@@ -39,14 +39,14 @@ export class ClassesService {
 
     //// to add new class
     addClass(newClass: Class): void {
-        this.apiService.post<Class>('classes', newClass).subscribe(c => {
+        this.apiService.post<Class>('class', newClass).subscribe(c => {
             newClass = c;
         });
     }
 
     //// to update a class
     updateClass(id: string, updatedClass: Partial<Class>): void {
-        this.apiService.put<Class>(`classes/${id}`, updatedClass).subscribe(
+        this.apiService.put<Class>(`class/${id}`, updatedClass).subscribe(
             c => {
                 updatedClass = c;
             }
@@ -55,6 +55,6 @@ export class ClassesService {
 
     //// to delete a class
     deleteClass(id: string): void {
-        this.apiService.delete(`classes/${id}`).subscribe();
+        this.apiService.delete(`class/${id}`).subscribe();
     }
 }

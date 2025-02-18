@@ -30,7 +30,7 @@ export class UsersService {
 //// to get all users
     getUsers(): User[] {
         let users: User[] = [];
-        this.apiService.get<User[]>('users').subscribe(u => {
+        this.apiService.get<User[]>('user').subscribe(u => {
             users = u;
         });
         return users;
@@ -49,7 +49,7 @@ export class UsersService {
 
     getUserByUsername(firstName: string): User | undefined {
         let user: User | undefined;
-        this.apiService.get<User[]>('users').subscribe(u => {
+        this.apiService.get<User[]>('user').subscribe(u => {
             user = u.find(u => u.firstName === firstName);
         });
         return user;
@@ -59,7 +59,7 @@ export class UsersService {
     onSubmit(username: string, password: string): { success: boolean, message: string, user?: User } {
         let user: User | undefined;
 
-        this.apiService.get<User[]>('users').subscribe(u => {
+        this.apiService.get<User[]>('user').subscribe(u => {
             //TODO we just have first and lastname, but no username... pls rethink this
             user = u.find(u => u.firstName + " " + u.lastName === username);
         });
@@ -79,29 +79,29 @@ export class UsersService {
 
 //// to add new a user
     addUser(newUser: User): void {
-        this.apiService.post<User>('users', newUser);
+        this.apiService.post<User>('user', newUser);
     }
 
 //// to update users
     updateUser(id: string, updatedUser: Partial<User>): void {
-        this.apiService.get<User[]>('users').subscribe(u => {
+        this.apiService.get<User[]>('user').subscribe(u => {
             let user = u.find(u => u.id === id);
             if (user) {
                 Object.assign(user, updatedUser);
             } else {
                 console.error(`UsersService: updateUser failed to find user with id ${id}`);
             }
-            this.apiService.put<User>('users', user);
+            this.apiService.put<User>('user', user);
         });
 
     }
 
 //// Delete a user
     deleteUser(id: string): void {
-        this.apiService.get<User[]>('users').subscribe(u => {
+        this.apiService.get<User[]>('user').subscribe(u => {
             let user = u.find(u => u.id === id);
             if (user) {
-                this.apiService.delete<User>(`users/${user.id}`);
+                this.apiService.delete<User>(`user/${user.id}`);
             } else {
                 console.error(`UsersService: deleteUser failed to find user with id ${id}`);
             }
