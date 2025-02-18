@@ -6,14 +6,17 @@ import {Discipline} from "@app/services/discipline.service";
 export interface Team extends EntityOfGuid {
   name: string;
   students?: User[];
-  discipline?: Discipline;
+  fuhrer: string;
+  user?: User[];
+  discipline?: Discipline[] | null;
+  point: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeamsService {
-  private teams: Team[] = [];
+export class TeamService {
+  private teams: Team[] = []; 
 
   constructor() {}
 

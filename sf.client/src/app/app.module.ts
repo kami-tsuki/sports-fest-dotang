@@ -59,6 +59,7 @@ import { ClassPageComponent } from './class-page/class-page.component';
 import { DeciplienPageComponent } from './deciplien-page/deciplien-page.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TopClassComponent } from './main-layout/top-class/top-class.component';
 
 @NgModule({
 
@@ -99,6 +100,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         TeamPageComponent,
         ClassPageComponent,
         DeciplienPageComponent,
+        TopClassComponent,
         
         
     ],

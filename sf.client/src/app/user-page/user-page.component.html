@@ -12,8 +12,11 @@
       </div>
       <div class="form-group col">
         <label for="role">Role</label>
-        <input type="text" class="form-control" id="role" [(ngModel)]="searchRole" placeholder="Enter Role" name="role">
+        <select class="form-control" id="role" [(ngModel)]="selectedRole" name="role">
+          <option *ngFor="let role of allRoles" [value]="role">{{ role }}</option>
+        </select>
       </div>
+      
     </form>
     <div class="row">
       <button type="button" class="btn btn-success m-5 col-2" (click)="searchUsers()">Suchen</button>
@@ -63,8 +66,10 @@
       <!-- Klass Colum -->
        <ng-container matColumnDef="class">
         <th mat-header-cell *matHeaderCellDef> Klasse </th>
-        <td mat-cell *matCellDef="let user"> {{user.class}} </td>
-       </ng-container>
+        <td mat-cell *matCellDef="let user">
+          {{ getClassNames(user) }}
+        </td>
+             </ng-container>
       <!-- Team Column -->
       <ng-container matColumnDef="team">
         <th mat-header-cell *matHeaderCellDef> Team </th>
@@ -99,10 +104,20 @@
       <input matInput placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName" required>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Role" [(ngModel)]="newUser.role" name="role" required>
+      <mat-label>Select Role</mat-label>
+      <mat-select [(ngModel)]="selectedRole" name="role">
+        <mat-option *ngFor="let role of allRoles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Class" [(ngModel)]="newUser.class" name="class" required>
+      <mat-label>Select Klass</mat-label>
+      <mat-select [(ngModel)]="selectedClass" name="class" multiple>
+        <mat-option *ngFor="let class of allClasses" [value]="class">
+          {{ class.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field><br>
     <mat-form-field>
       <input matInput placeholder="Team" [(ngModel)]="newUser.team" name="team" required>
@@ -129,10 +144,20 @@
       <input matInput placeholder="Last Name" [(ngModel)]="selectedUser.lastName" name="lastName" />
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Role" [(ngModel)]="selectedUser.role" name="role" />
+      <mat-label>Select Discipline</mat-label>
+      <mat-select [(ngModel)]="selectedRole" name="role">
+        <mat-option *ngFor="let role of allRoles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Class" [(ngModel)]="selectedUser.class" name="class" />
+      <mat-label>Select Klass</mat-label>
+      <mat-select [(ngModel)]="selectedClass" name="class" multiple>
+        <mat-option *ngFor="let class of allClasses" [value]="class">
+          {{ class.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field><br>
     <mat-form-field>
       <input matInput placeholder="Team" [(ngModel)]="selectedUser.team" name="team" />

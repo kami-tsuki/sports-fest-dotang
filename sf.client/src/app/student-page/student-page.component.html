@@ -10,13 +10,12 @@
           <h2 class="card-text">Hier können Sie Daten kontrollieren</h2>
           <br>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Name: </li>
-            <li class="list-group-item">Klass: </li>
-            <li class="list-group-item">Group: </li>
-            <li class="list-group-item">Leiter: </li>
-            <li class="list-group-item">Sport: </li>
+            <li class="list-group-item">Name: {{loggedInUser?.firstName}} {{loggedInUser?.lastName}}</li>
+            <li class="list-group-item">Klass: {{loggedInUser?.class}} </li>
+            <li class="list-group-item">Team: {{loggedInUser?.team}}</li>
+            <li class="list-group-item">Points: {{loggedInUser?.points}}</li>
           </ul><br>
-          <button class="btn btn-outline-success" type="button" data-bs-toggle="" data-bs-target="#">Lehrer-Contact</button>
+          <button class="btn btn-outline-success" type="button" data-bs-toggle="" data-bs-target="#" (click)="tacherContact()">Lehrer-Contact</button>
 
           <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
         </div>

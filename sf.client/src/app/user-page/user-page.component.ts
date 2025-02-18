@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { UsersService, User } from '../services/users.service'; // Import User from the service
+import { UsersService, User } from '../services/users.service';
+import { Class } from '../services/class.service';
 
 @Component({
   selector: 'app-user-page',
@@ -16,7 +17,8 @@ export class UserPageComponent implements OnInit {
     password: '', 
     firstName: '', 
     lastName: '', 
-    role: '', 
+    email: '',
+    role: [], 
     class: undefined, 
     team: undefined, 
     points: 0, 
@@ -28,8 +30,17 @@ export class UserPageComponent implements OnInit {
   showAddUserForm: boolean = false;
   showSearchResults: boolean = false;
   selectedUser: User | null = null;
+  selectedRole: string = '';
+  selectedClass: Class[] = [];
+  allClasses: Class[] = [// I need to replace this hardcoded data with the real data->getClasses() from the service after api finish
+    { id: '1', name: 'Class 1', students: [], tutors: [], created: new Date(), updated: new Date(), init: () => {}, toJSON: () => ({}) },
+    { id: '2', name: 'Class 2', students: [], tutors: [], created: new Date(), updated: new Date(), init: () => {}, toJSON: () => ({}) }
+    
+  ]
+  
 
   allUsers = new MatTableDataSource<User>([]);
+  allRoles: string[] = ['Student', 'Tutor', 'Manager', 'Judge'];
 
   // Form fields for search
   searchId: string = '';
@@ -45,6 +56,7 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers(); // Load users when the component initializes
+    //later I might need to load the function of classes from the service getClasses()
   }
 
   // Load all users from the service
@@ -71,8 +83,8 @@ export class UserPageComponent implements OnInit {
     }
 
     // Filter by Role
-    if (this.searchRole) {
-      filteredUsers = filteredUsers.filter(user => user.role.includes(this.searchRole));
+    if (this.selectedRole) {
+      filteredUsers = filteredUsers.filter(user => user.role.includes(this.selectedRole));
     }
 
     // Update the data source to show the filtered list
@@ -108,6 +120,8 @@ export class UserPageComponent implements OnInit {
   // To save after editing
   saveUser(): void {
     if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
+      this.selectedUser.role = [this.selectedRole];
+      this.selectedUser.class = this.selectedClass;
       this.usersService.updateUser(this.selectedUser.id, this.selectedUser); // Update user via the service
       this.users = this.usersService.getUsers(); // to refresh the users list
       this.allUsers.data = [...this.users]; // Update the data source
@@ -118,7 +132,11 @@ export class UserPageComponent implements OnInit {
       alert('Cannot update user: ID is missing.');
     }
   }
-
+  // this function to get the class names of the user, i allowed multiple classes for the user
+  getClassNames(user: User): string {
+    return Array.isArray(user.class) ? user.class.map(c => c.name).join(', ') : 'No classes';
+  }
+  
   // To delete after editing
   deleteUser(): void {
     if (this.selectedUser && this.selectedUser.id) { // to check if id is defined--i might edit it
@@ -138,6 +156,8 @@ export class UserPageComponent implements OnInit {
   // Add new user
   addUser(user: User): void {
     try {
+      user.role = [this.selectedRole];
+      user.class = this.selectedClass;
       this.usersService.addUser(user); 
       this.users = this.usersService.getUsers(); // this is to fetch the updated list
       this.allUsers.data = [...this.users]; // and here to update data source
@@ -147,8 +167,9 @@ export class UserPageComponent implements OnInit {
         id: '', 
         password: '', 
         firstName: '', 
-        lastName: '', 
-        role: '', 
+        lastName: '',
+        email: '',
+        role: [], 
         class: undefined, 
         team: undefined, 
         points: 0, 
@@ -157,6 +178,7 @@ export class UserPageComponent implements OnInit {
         init: () => {}, // I might use it to implement some default actions
         toJSON: () => ({})
       };
+      this.selectedRole = ''; // Clear the selected role
   
       // Display success message
       alert('User added successfully!');

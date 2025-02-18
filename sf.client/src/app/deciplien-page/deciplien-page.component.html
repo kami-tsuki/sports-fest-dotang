@@ -1,1 +1,107 @@
-<p>deciplien-page works!</p>
+<div class="card m-5 shadow-sm border border-success">
+    <div class="row g-0">
+      <h3 class="text-center text-success mt-2">Suchen Sie Desciplien:</h3>
+      <form class="m-2 row">
+
+        <div class="form-group col">
+          <label for="name">Desciplien Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="searchName" placeholder="Enter Name" name="name">
+        </div>
+
+      </form>
+      <div class="row">
+        <button type="button" class="btn btn-success m-5 col-2" (click)="searchDes()">Suchen</button>
+    <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddDesForm()">Hinzufügen</button>
+        <button *ngIf="showSearchResults" type="button" class="btn btn-danger m-5 col-2" (click)="deleteDes()">Löschen</button>
+      </div>
+
+    </div>
+
+
+<!-- Show Table for Class Data -->
+<div *ngIf="showSearchResults" class="mat-elevation-z8">
+    <table mat-table [dataSource]="allDes" class="mat-table">
+        Checkbox Column
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let des">
+        <input 
+          type="checkbox" 
+          *ngIf="des" 
+          (change)="onCheckboxChange(des, $event)">
+      </td>
+    </ng-container>
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let des"> {{des.id}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>     
+        <td mat-cell *matCellDef="let des">
+          {{ des.name }}
+        </td>
+              </ng-container>
+
+     <!-- Team Colum -->
+<!-- Team Column -->
+<ng-container matColumnDef="team">
+  <th mat-header-cell *matHeaderCellDef>Team </th>
+  <td mat-cell *matCellDef="let des">
+
+  <ng-container *ngFor="let team of des.teams">
+    {{ team.name }}
+  </ng-container>
+</td>
+</ng-container>
+      <!-- Judge Column -->
+      <ng-container matColumnDef="judge">
+        <th mat-header-cell *matHeaderCellDef> Judge </th>
+        <td mat-cell *matCellDef="let des">
+          <ng-container *ngFor="let judge of des.judges; let last = last">
+            {{ judge.firstName }} {{ judge.lastName }}<span *ngIf="!last">, </span>
+          </ng-container>
+        </td>
+      </ng-container>
+      
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+<!-- Add Desciplien Form -->
+<div *ngIf="showAddDesForm" class="row m-1">
+  <h3>Add New Desciplien</h3>
+  <form (ngSubmit)="addDes()">
+    <mat-form-field>
+      <input matInput placeholder="ID" [(ngModel)]="newDes.id" name="id" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="name" [(ngModel)]="newDes.name" name="name" required>
+    </mat-form-field><br>
+    <button type="button" class="btn btn-success m-5 col-2" (click)="addDes()">Add Desciplien</button>
+  </form>
+</div>
+
+<!-- To edit selected Class 
+
+<div *ngIf="selectedTeam" class="mt-3">
+  <h3>Edit Selected Class</h3>
+  <form (ngSubmit)="saveClass()">
+    <mat-form-field>
+      <input matInput placeholder="ID" [(ngModel)]="selectedClass.id" name="id" readonly />
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="selectedClass.name" name="name" />
+    </mat-form-field><br>
+
+    <button type="submit" class="btn btn-success m-5 col-2" (click)="saveClass()">Save</button>
+  </form> 
+</div>  -->
+
+

@@ -2,9 +2,9 @@
   <h2 mat-dialog-title class="text-center text-success">Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="container">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username">
-      <mat-error *ngIf="loginForm.get('username')?.invalid">Username is required</mat-error>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="loginForm.get('email')?.invalid">Email is required</mat-error>
     </mat-form-field>
 
     <mat-form-field  class="container">

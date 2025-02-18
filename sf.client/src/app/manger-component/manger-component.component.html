@@ -5,17 +5,17 @@
     </div>
     <div class="col-md-8 mt-5">
       <div class="card-body">
-        <h1 class="card-title text-success">Willkommen, {{User?.firstName}}</h1>
+        <h1 class="card-title text-success">Willkommen, {{loggedInUser?.firstName}}</h1>
         <h2 class="card-text">Ihr Dashboard zeigt Ihnen Ihre Informationen</h2>
         <br>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Schule: Magdeburg BerufsSchule</li>
-          <li class="list-group-item">Name: {{User?.firstName}} {{User?.lastName}}</li>
+          <li class="list-group-item">Name: {{loggedInUser?.firstName}} {{loggedInUser?.lastName}}</li>
           <li class="list-group-item">Role: Schul Manager</li>
 
         </ul>
 
-        <!-- Select Category -->
+        <!-- Select Category --->
 
         </div>
 
