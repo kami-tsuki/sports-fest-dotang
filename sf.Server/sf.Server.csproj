@@ -59,6 +59,7 @@
     <Folder Include="Client\" />
     <Folder Include="Data\" />
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
