@@ -40,8 +40,6 @@ export class LoginModalComponent {
           this.router.navigate([AppPaths.teacherPage]);
         } else if (Array.isArray(result.user?.role) && result.user?.role.includes('manager')) {
           this.router.navigate([AppPaths.mangerComponent]);
-        } else if (Array.isArray(result.user?.role) && result.user?.role.includes('judge')) {
-          this.router.navigate([AppPaths.judgeComponent]);
         }
       } else {
         alert(result.message);

@@ -10,9 +10,9 @@
 
       </form>
       <div class="row">
-        <button type="button" class="btn btn-success m-5 col-2" (click)="searchDes()">Suchen</button>
-    <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddDesForm()">Hinzufügen</button>
-        <button *ngIf="showSearchResults" type="button" class="btn btn-danger m-5 col-2" (click)="deleteDes()">Löschen</button>
+        <button type="button" class="btn btn-success m-2 col-md-4 col-sm-4" (click)="searchDes()">Suchen</button>
+    <button type="button" class="btn btn-success m-2 col-md-4 col-sm-12" (click)="toggleAddDesForm()">Hinzufügen</button>
+        <button *ngIf="showSearchResults" type="button" class="btn btn-danger m-2 col-md-4 col-sm-4" (click)="deleteDes()">Löschen</button>
       </div>
 
     </div>
@@ -84,7 +84,7 @@
     <mat-form-field>
       <input matInput placeholder="name" [(ngModel)]="newDes.name" name="name" required>
     </mat-form-field><br>
-    <button type="button" class="btn btn-success m-5 col-2" (click)="addDes()">Add Desciplien</button>
+    <button type="button" class="btn btn-success m-5 col-md-2 col-sm-4" (click)="addDes()">Add Desciplien</button>
   </form>
 </div>
 

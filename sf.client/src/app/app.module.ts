@@ -51,7 +51,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MangerComponentComponent } from './manger-component/manger-component.component';
-import { JudgeComponentComponent } from './judge-component/judge-component.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { MatTableModule } from '@angular/material/table';
 import { TeamPageComponent } from './team-page/team-page.component';
@@ -95,7 +94,6 @@ import { TopClassComponent } from './main-layout/top-class/top-class.component';
         ContactComponent,
         MainLayoutComponent,
         MangerComponentComponent,
-        JudgeComponentComponent,
         UserPageComponent,
         TeamPageComponent,
         ClassPageComponent,

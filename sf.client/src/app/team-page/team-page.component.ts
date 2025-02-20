@@ -77,7 +77,7 @@ export class TeamPageComponent {
   // Save team after editing
   saveTeam(): void {
     if (this.selectedTeam && this.selectedTeam.id) {
-      /// Replace the discipline array with the selected discipline (if any)
+      /// Replace the discipline array with the selected discipline
       this.selectedTeam.deciplien = this.selectedDiscipline ? [this.selectedDiscipline] : [];
 
 
@@ -110,7 +110,7 @@ export class TeamPageComponent {
   // Add new team
   addTeam(): void {
     try {
-      //// Set the new team's discipline array to the selected discipline (if any)
+      //// Set the new team's discipline array to the selected discipline
       this.newTeam.deciplien = this.selectedDiscipline ? [this.selectedDiscipline] : [];
 
 

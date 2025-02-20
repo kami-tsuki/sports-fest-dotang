@@ -12,7 +12,6 @@
     public static studentPage = 'studentPage';
     public static teacherPage = 'teacherPage';
     public static mangerComponent = 'mangerComponent';
-    public static judgeComponent = 'judgeComponent';
     public static userPage = 'userPage';
     public static teamPage = 'teamPage';
     public static classPage = 'classPage';

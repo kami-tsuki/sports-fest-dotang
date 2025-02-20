@@ -15,7 +15,6 @@
             <li class="list-group-item">Klass: {{loggedInUser?.class}}</li>
             <li class="list-group-item">Role: {{loggedInUser?.role}}</li>
           </ul>
-          <app-student-list />
           <button class=" btn btn-outline-success" (click)="contactManager()">Kontakt-Manger</button>
 
           <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
@@ -28,9 +27,9 @@
     <h2>Welche von den folgenden Kategorien möchten Sie bearbeiten:</h2>
 
     
-<div class="row cc">
+<div class="row p-3">
 <div class="hh rounded shadow">
-<div class="col-md-2 fot " (click)="user()">
+<div class="col-md-2 fot col-sm-6" (click)="user()">
 
   <img src="assets/user.png" alt="user" width="119px">
   <h1 class="text-light tit">Users</h1>

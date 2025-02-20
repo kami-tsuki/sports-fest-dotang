@@ -10,8 +10,8 @@
 
       </form>
       <div class="row">
-        <button type="button" class="btn btn-success m-5 col-2" (click)="searchTeam()">Suchen</button>
-        <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddTeamForm()">Hinzufügen</button>
+        <button type="button" class="btn btn-success m-2 col-md-4 col-sm-4" (click)="searchTeam()">Suchen</button>
+        <button type="button" class="btn btn-success m-2 col-md-4 col-sm-4" (click)="toggleAddTeamForm()">Hinzufügen</button>
         <button *ngIf="showSearchResults" type="button" class="btn btn-danger m-5 col-2" (click)="deleteTeam()">Löschen</button>
       </div>
 
@@ -99,7 +99,7 @@
       <input matInput placeholder="point" [(ngModel)]="newTeam.point" name="point" required>
     </mat-form-field><br>
 
-    <button type="button" class="btn btn-success m-5 col-2" (click)="addTeam()">Add teams</button>
+    <button type="button" class="btn btn-success m-5 col-md-2 col-sm-4" (click)="addTeam()">Add teams</button>
   </form>
 </div>
 

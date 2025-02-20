@@ -2,15 +2,15 @@
   <div class="row g-0">
     <h3 class="text-center text-success mt-2">Suchen Sie Benutzern nach:</h3>
     <form class="m-2 row">
-      <div class="form-group col">
+      <div class="form-group col-md-4 col-sm-12">
         <label for="id">ID</label>
         <input type="text" class="form-control" id="id" [(ngModel)]="searchId" placeholder="Enter ID" name="id">
       </div>
-      <div class="form-group col">
+      <div class="form-group col-md-4 col-sm-12">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" [(ngModel)]="searchName" placeholder="Enter Name" name="name">
       </div>
-      <div class="form-group col">
+      <div class="form-group col-md-4 col-sm-12">
         <label for="role">Role</label>
         <select class="form-control" id="role" [(ngModel)]="selectedRole" name="role">
           <option *ngFor="let role of allRoles" [value]="role">{{ role }}</option>
@@ -18,9 +18,9 @@
       </div>
       
     </form>
-    <div class="row">
-      <button type="button" class="btn btn-success m-5 col-2" (click)="searchUsers()">Suchen</button>
-      <button type="button" class="btn btn-success m-5 col-2" (click)="toggleAddUserForm()">Hinzufügen</button>
+    <div class="row ">
+      <button type="button" class="btn btn-success m-2 col-md-4 col-sm-4" (click)="searchUsers()">Suchen</button>
+      <button type="button" class="btn btn-success m-2 col-md-4 col-sm-4" (click)="toggleAddUserForm()">Hinzufügen</button>
       <button *ngIf="showSearchResults && allUsers.data.length > 0" type="button" class="btn btn-danger m-5 col-2" (click)="deleteUser()">Löschen</button>
 
     </div>
@@ -125,7 +125,7 @@
     <mat-form-field>
       <input matInput placeholder="Points" [(ngModel)]="newUser.points" name="points" required>
     </mat-form-field><br>
-    <button type="button" class="btn btn-success m-5 col-2" (click)="addUser(newUser)">Add User</button>
+    <button type="button" class="btn btn-success m-5 col-md-2 col-sm-4" (click)="addUser(newUser)">Add User</button>
   </form>
 </div>
 
