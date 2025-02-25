@@ -18,7 +18,7 @@ public class DataBaseService<TEntity> where TEntity : class, IEntity<Guid>
         _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
     }
 
-   public DbSet<TEntity> DbSet => _dbSet;
+    public DbSet<TEntity> DbSet => _dbSet;
     public DbSet<Entity<Guid>> AuditLogSet => _auditLogSet;
 
     public IQueryable<TEntity> GetQueryable() => _dbSet.AsQueryable();
@@ -36,7 +36,7 @@ public class DataBaseService<TEntity> where TEntity : class, IEntity<Guid>
 
     public void RemoveEntity(TEntity entity) => _dbSet.Remove(entity);
 
-    public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+    public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
 
     public IQueryable<TEntity> ApplyFilters(IQueryable<TEntity> query, Dictionary<string, string>? filters)
     {
@@ -129,22 +129,23 @@ public class DataBaseService<TEntity> where TEntity : class, IEntity<Guid>
         var entity = await _dbSet.FindAsync(entityId);
         var log = await _auditLogSet
                        .Where(e => e.Id == entityId)
-                       .Select(e => new AuditLog
-                        {
-                            Id = e.Id,
-                            EntityId = e.Id,
-                            EntityType = entity.GetType().Name,
-                            Action = "not yet implemented",
-                            ChangedBy = "not yet implemented",
-                            Timestamp = e.UpdatedAt,
-                            Changes = "not yet implemented"
-                        })
+                       .Select(
+                            e => new AuditLog
+                            {
+                                Id = e.Id,
+                                EntityId = e.Id,
+                                EntityType = entity.GetType().Name,
+                                Action = "not yet implemented",
+                                ChangedBy = "not yet implemented",
+                                Timestamp = e.UpdatedAt,
+                                Changes = "not yet implemented"
+                            })
                        .ToListAsync();
         return log;
     }
-        
+
     public Task<List<TEntity>> GetAllAsync(IQueryable<TEntity> query) => query.ToListAsync();
-    
+
     public string ConvertToCsv(IEnumerable<TEntity> data)
     {
         var properties = typeof(TEntity).GetProperties();
@@ -157,6 +158,4 @@ public class DataBaseService<TEntity> where TEntity : class, IEntity<Guid>
         }
         return csvBuilder.ToString();
     }
-
-    
 }

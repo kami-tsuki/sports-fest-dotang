@@ -1,10 +1,10 @@
 const { env } = require('process');
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:5000';
+    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7149';
 const PROXY_CONFIG = [
   {
     context: [
-      "/api/class",
+       "/api/class",
        "/api/class/bulk",
        "/api/class/search",
        "/api/class/count",
@@ -40,7 +40,6 @@ const PROXY_CONFIG = [
        "/api/team/validate",
        "/api/team/{id}/audit",
        "/api/team/import",
-
     ],
     target,
     secure: false

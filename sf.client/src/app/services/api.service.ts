@@ -12,7 +12,10 @@ export class ApiService {
     constructor(
         private http: HttpClient,
         private readonly cacheService: CacheService
-    ) {}
+    ) {
+        
+    }
+    public baseUrl = "api.sf.tsuki.wtf/api/";
 
     public get<T extends IEntityOfGuid | IEntityOfGuid[]>(
         key: string,
@@ -21,22 +24,22 @@ export class ApiService {
         cacheLoad: boolean = true,
         cacheSet: boolean = true
     ): Observable<T> {
-        if (this.cacheService.hasCache(key) && cacheLoad) {
-            const cache = this.cacheService.getCache<T>(key);
+        if (this.cacheService.hasCache(this.baseUrl+key) && cacheLoad) {
+            const cache = this.cacheService.getCache<T>(this.baseUrl+key);
             console.log(' loaded from cache');
             return of(cache as T);
         } else {
-            return this.http.get<T>(key, { params, headers }).pipe(
+            return this.http.get<T>(this.baseUrl+key, { params, headers }).pipe(
                 tap((result) => {
                     if (cacheSet) {
-                        this.cacheService.setCache(key, result);
-                        console.log(`ApiService: ${key} loaded from API and cached`);
+                        this.cacheService.setCache(this.baseUrl+key, result);
+                        console.log(`ApiService: ${this.baseUrl+key} loaded from API and cached`);
                     } else {
-                        console.log(`ApiService: ${key} loaded from API`);
+                        console.log(`ApiService: ${this.baseUrl+key} loaded from API`);
                     }
                 }),
                 catchError((error) => {
-                    console.error(`ApiService: ${key} failed to load from API`, error);
+                    console.error(`ApiService: ${this.baseUrl+key} failed to load from API`, error);
                     return of(undefined as unknown as T);
                 })
             );
@@ -52,17 +55,17 @@ export class ApiService {
         headers?: HttpHeaders,
         cacheSet: boolean = false
     ): Observable<T> {
-        return this.http.post<T>(key, body, { params, headers }).pipe(
+        return this.http.post<T>(this.baseUrl+key, body, { params, headers }).pipe(
             tap((result) => {
                 if (cacheSet) {
-                    this.cacheService.setCache(key, result);
-                    console.log(`ApiService: ${key} posted to API and cached`);
+                    this.cacheService.setCache(this.baseUrl+key, result);
+                    console.log(`ApiService: ${this.baseUrl+key} posted to API and cached`);
                 } else {
-                    console.log(`ApiService: ${key} posted to API`);
+                    console.log(`ApiService: ${this.baseUrl+key} posted to API`);
                 }
             }),
             catchError((error) => {
-                console.error(`ApiService: ${key} failed to post to API`, error);
+                console.error(`ApiService: ${this.baseUrl+key} failed to post to API`, error);
                 return of(undefined as unknown as T);
             })
         );
@@ -75,17 +78,17 @@ export class ApiService {
         headers?: HttpHeaders,
         cacheSet: boolean = false
     ): Observable<T> {
-        return this.http.put<T>(key, body, { params, headers }).pipe(
+        return this.http.put<T>(this.baseUrl+key, body, { params, headers }).pipe(
             tap((result) => {
                 if (cacheSet) {
-                    this.cacheService.setCache(key, result);
-                    console.log(`ApiService: ${key} put to API and cached`);
+                    this.cacheService.setCache(this.baseUrl+key, result);
+                    console.log(`ApiService: ${this.baseUrl+key} put to API and cached`);
                 } else {
-                    console.log(`ApiService: ${key} put to API`);
+                    console.log(`ApiService: ${this.baseUrl+key} put to API`);
                 }
             }),
             catchError((error) => {
-                console.error(`ApiService: ${key} failed to put to API`, error);
+                console.error(`ApiService: ${this.baseUrl+key} failed to put to API`, error);
                 return of(undefined as unknown as T);
             })
         );
@@ -98,17 +101,17 @@ export class ApiService {
         headers?: HttpHeaders,
         cacheClear: boolean = true
     ): Observable<T> {
-        return this.http.request<T>('delete', key, { body, params, headers }).pipe(
+        return this.http.request<T>('delete', this.baseUrl+key, { body, params, headers }).pipe(
             tap((result) => {
                 if (cacheClear) {
-                    this.cacheService.clearCache(key);
-                    console.log(`ApiService: ${key} deleted from API and cache cleared`);
+                    this.cacheService.clearCache(this.baseUrl+key);
+                    console.log(`ApiService: ${this.baseUrl+key} deleted from API and cache cleared`);
                 } else {
-                    console.log(`ApiService: ${key} deleted from API`);
+                    console.log(`ApiService: ${this.baseUrl+key} deleted from API`);
                 }
             }),
             catchError((error) => {
-                console.error(`ApiService: ${key} failed to delete from API`, error);
+                console.error(`ApiService: ${this.baseUrl+key} failed to delete from API`, error);
                 return of(undefined as unknown as T);
             })
         );
@@ -121,17 +124,17 @@ export class ApiService {
         headers?: HttpHeaders,
         cacheSet: boolean = false
     ): Observable<T> {
-        return this.http.patch<T>(key, body, { params, headers }).pipe(
+        return this.http.patch<T>(this.baseUrl+key, body, { params, headers }).pipe(
             tap((result) => {
                 if (cacheSet) {
-                    this.cacheService.setCache(key, result);
-                    console.log(`ApiService: ${key} patched to API and cached`);
+                    this.cacheService.setCache(this.baseUrl+key, result);
+                    console.log(`ApiService: ${this.baseUrl+key} patched to API and cached`);
                 } else {
-                    console.log(`ApiService: ${key} patched to API`);
+                    console.log(`ApiService: ${this.baseUrl+key} patched to API`);
                 }
             }),
             catchError((error) => {
-                console.error(`ApiService: ${key} failed to patch to API`, error);
+                console.error(`ApiService: ${this.baseUrl+key} failed to patch to API`, error);
                 return of(undefined as unknown as T);
             })
         );
@@ -144,22 +147,22 @@ export class ApiService {
         cacheLoad: boolean = false,
         cacheSet: boolean = false
     ): Observable<T> {
-        if (this.cacheService.hasCache(key) && cacheLoad) {
+        if (this.cacheService.hasCache(this.baseUrl+key) && cacheLoad) {
             const cache = this.cacheService.getCache<T>(key);
             console.log(' loaded from cache');
             return of(cache as T);
         } else {
-            return this.http.options<T>(key, { params, headers }).pipe(
+            return this.http.options<T>(this.baseUrl+key, { params, headers }).pipe(
                 tap((result) => {
                     if (cacheSet) {
-                        this.cacheService.setCache(key, result);
-                        console.log(`ApiService: ${key} options loaded from API and cached`);
+                        this.cacheService.setCache(this.baseUrl+key, result);
+                        console.log(`ApiService: ${this.baseUrl+key} options loaded from API and cached`);
                     } else {
-                        console.log(`ApiService: ${key} options loaded from API`);
+                        console.log(`ApiService: ${this.baseUrl+key} options loaded from API`);
                     }
                 }),
                 catchError((error) => {
-                    console.error(`ApiService: ${key} failed to load options from API`, error);
+                    console.error(`ApiService: ${this.baseUrl+key} failed to load options from API`, error);
                     return of(undefined as unknown as T);
                 })
             );

@@ -47,6 +47,8 @@ COPY sf.Server/README.md .
 COPY sf.Server/CHANGELOG.md .
 #COPY CHANGELOG.md .
 
+
+
 # Set the entrypoint and environment variables based on the build configuration
 ARG BUILD_CONFIGURATION=Release
 ENV ASPNETCORE_ENVIRONMENT=${BUILD_CONFIGURATION}

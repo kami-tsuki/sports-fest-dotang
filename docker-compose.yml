@@ -7,3 +7,10 @@
     ports:
       - "5056:8080"
       - "5057:8081"
+  sf.client:
+    image: sf.client
+    build:
+      context: ./sf.client
+      dockerfile: Dockerfile
+    ports:
+      - "5058:80"
