@@ -1,286 +1,132 @@
-## Endpoints
+# Benutzerhandbuch für die Anwendung
 
-### BaseController<T> Overview
+## Inhaltsverzeichnis
 
-The `BaseController<TEntity>` in our .NET API provides a set of generic endpoints for managing entities. This controller includes CRUD operations and additional functionalities such as bulk operations, search, and export. Below is a detailed description of each endpoint and its usage.
+1. Einleitung
+2. Systemanforderungen
+3. Installation
+4. Konfiguration
+5. Start der Anwendung
+6. Vorbereitung der Anwendung
+7. Anwendung nutzen
+8. Fehlerbehebung
+9. Häufig gestellte Fragen (FAQ)
+10. Support und Kontakt
 
-#### Basic Endpoints
+## 1. Einleitung
 
-1. **GET /api/v1/<T>/base**
-    - **Description**: Retrieves a paginated list of entities.
-    - **Parameters**:
-        - `page` (optional): The page number to retrieve (default is 1).
-        - `entities` (optional): The number of entities per page (default is 10).
-        - `properties` (optional): A comma-separated list of properties to include in the response.
-        - `sendNull` (optional): Whether to include null properties in the response.
-        - `filters` (optional): A dictionary of filters to apply to the query.
-    - **Response**: A paginated list of entities.
+Willkommen zum Benutzerhandbuch für die Anwendung. Dieses Handbuch soll Ihnen helfen, die Anwendung zu installieren, zu
+konfigurieren und zu nutzen.
 
-2. **POST /api/v1/<T>/base/bulk**
-    - **Description**: Creates multiple entities in bulk.
-    - **Request Body**: An array of entities to create.
-    - **Response**: The created entities.
+## 2. Systemanforderungen
 
-3. **PUT /api/v1/<T>/base/bulk**
-    - **Description**: Updates multiple entities in bulk.
-    - **Request Body**: An array of entities to update.
-    - **Response**: The updated entities.
+- Betriebssystem: Windows 10 oder höher
+- Node.js: Version 18 oder höher
+- .NET SDK: Version 8.0 oder höher
+- Docker: Version 20.10 oder höher
+- Docker Compose: Version 1.29 oder höher
 
-4. **DELETE /api/v1/<T>/base/bulk**
-    - **Description**: Deletes multiple entities in bulk.
-    - **Request Body**: An array of entity IDs to delete.
-    - **Response**: The IDs of the deleted entities.
+## 3. Installation
 
-5. **GET /api/v1/<T>/base/search**
-    - **Description**: Searches for entities based on a query string.
-    - **Parameters**:
-        - `query`: The search query.
-        - `page` (optional): The page number to retrieve (default is 1).
-        - `entities` (optional): The number of entities per page (default is 10).
-        - `properties` (optional): A comma-separated list of properties to include in the response.
-        - `sendNull` (optional): Whether to include null properties in the response.
-        - `filters` (optional): A dictionary of filters to apply to the query.
-    - **Response**: A paginated list of entities matching the search query.
+### 3.1. Node.js und Angular CLI installieren
 
-6. **GET /api/v1/<T>/base/count**
-    - **Description**: Retrieves the count of entities.
-    - **Parameters**:
-        - `filters` (optional): A dictionary of filters to apply to the query.
-    - **Response**: The count of entities.
+1. Laden Sie Node.js von der offiziellen Website herunter und installieren Sie es.
+2. Installieren Sie Angular CLI global:
+   ```sh
+   npm install -g @angular/cli
+   ```
 
-7. **GET /api/v1/<T>/base/{id}**
-    - **Description**: Retrieves a single entity by its ID.
-    - **Parameters**:
-        - `id`: The ID of the entity to retrieve.
-        - `properties` (optional): A comma-separated list of properties to include in the response.
-    - **Response**: The entity with the specified ID.
+### 3.2. .NET SDK installieren
 
-8. **POST /api/v1/<T>/base**
-    - **Description**: Creates a new entity.
-    - **Request Body**: The entity to create.
-    - **Parameters**:
-        - `ignoreNullProperties` (optional): Whether to ignore null properties during creation.
-    - **Response**: The created entity.
+1. Laden Sie das .NET SDK von der offiziellen Microsoft-Website herunter und installieren Sie es.
 
-9. **PUT /api/v1/<T>/base/{id}**
-    - **Description**: Updates an existing entity by its ID.
-    - **Parameters**:
-        - `id`: The ID of the entity to update.
-        - `ignoreNullProperties` (optional): Whether to ignore null properties during the update.
-    - **Request Body**: The updated entity.
-    - **Response**: No content.
+### 3.3. Docker und Docker Compose installieren
 
-10. **PATCH /api/v1/<T>/base/{id}**
-    - **Description**: Partially updates an existing entity by its ID.
-    - **Parameters**:
-        - `id`: The ID of the entity to update.
-    - **Request Body**: A JSON Patch document describing the changes.
-    - **Response**: No content.
+1. Laden Sie Docker Desktop von der offiziellen Website herunter und installieren Sie es.
+2. Stellen Sie sicher, dass Docker Compose zusammen mit Docker Desktop installiert wird.
 
-11. **DELETE /api/v1/<T>/base/{id}**
-    - **Description**: Deletes an entity by its ID.
-    - **Parameters**:
-        - `id`: The ID of the entity to delete.
-    - **Response**: The deleted entity.
+## 4. Konfiguration
 
-12. **OPTIONS /api/v1/<T>/base**
-    - **Description**: Retrieves the allowed HTTP methods for the controller.
-    - **Parameters**:
-        - `path` (optional): The specific path to get options for.
-        - `includeModels` (optional): Whether to include model information in the response.
-        - `includeHttpCodes` (optional): Whether to include HTTP status codes in the response.
-    - **Response**: The allowed HTTP methods, models, and HTTP status codes.
+### 4.1. Projekt aus dem Repository klonen
 
-13. **GET /api/v1/<T>/base/export**
-    - **Description**: Exports entities in the specified format.
-    - **Parameters**:
-        - `format` (optional): The export format (default is "csv").
-        - `filters` (optional): A dictionary of filters to apply to the query.
-    - **Response**: The exported data in the specified format.
+1. Klonen Sie das Projekt-Repository:
+   ```sh
+   git clone <repository-url>
+   ```
+2. Navigieren Sie in das Projektverzeichnis:
+   ```sh
+   cd <project-directory>
+   ```
 
-14. **POST /api/v1/<T>/base/validate**
-    - **Description**: Validates an entity.
-    - **Request Body**: The entity to validate.
-    - **Response**: The validation result.
+### 4.2. Umgebungsvariablen konfigurieren
 
-15. **GET /api/v1/<T>/base/{id}/audit**
-    - **Description**: Retrieves the audit history for an entity by its ID.
-    - **Parameters**:
-        - `id`: The ID of the entity to retrieve audit history for.
-    - **Response**: The audit history of the entity.
+1. Erstellen Sie eine `.env`-Datei im Projektverzeichnis und fügen Sie die erforderlichen Umgebungsvariablen hinzu.
 
-These endpoints provide a comprehensive set of operations for managing entities in a consistent and reusable manner.
+## 5. Start der Anwendung
 
-## Result Models
+### 5.1. Anwendung starten
 
-### ResultModel\<T\> Overview
+1. Starten Sie Docker Compose, um die Anwendung zu starten:
+   ```sh
+   docker-compose up --build
+   ```
+2. Die Anwendung sollte nun auf den konfigurierten Ports laufen.
 
-The `ResultModel<T>` is a standardized response model used by our API to encapsulate the results of API operations. This model provides a consistent structure for both successful and error responses, making it easier for API users to handle and interpret the results.
+### 5.2. Zugriff auf die Anwendung
 
-#### JSON Structure
+- Server: `http://localhost:5056`
+- Client: `http://localhost:8080`
 
-The JSON response from the API using `ResultModel<T>` will have the following structure:
+## 6. Vorbereitung der Anwendung
 
-```json
-{
-  "success": true,
-  "error": false,
-  "message": "Operation completed successfully.",
-  "data": {
-    // Entity-specific data: <T>
-  },
-  "messages": [
-    {
-      "error.message": "An error occurred.",
-      "error.type": 1,
-      "error.severity": 4
-    }
-  ]
-}
-```
+### 6.1. Nutzer Importieren
 
-#### Fields
+### 6.2. Manager Anlegen
 
-1. **success** (boolean)
-    - Indicates whether the operation was successful.
-    - `true` if the operation was successful, `false` otherwise.
+### 6.3. Richter Anlegen
 
-2. **error** (boolean)
-    - Indicates whether there was an error.
-    - `true` if there was an error, `false` otherwise.
-    - This field is derived from the `success` field (`error` is `!success`).
+### 6.4. Klassenlehrer Anlegen
 
-3. **message** (string)
-    - Provides a human-readable message about the result of the operation.
-    - Default value is "An error occurred." for error responses.
+### 6.5. Schüler Anlegen
 
-4. **data** (<T>)
-    - Contains the data specific to the entity being operated on.
-    - This field will be populated with the relevant entity data for successful operations.
+### 6.6. Klassen Anlegen
 
-5. **messages** (array of Message)
-    - Contains detailed error messages if the operation failed.
-    - Each message includes:
-        - **error.message** (string): A description of the error.
-        - **error.type** (integer): An enumeration value representing the type of error.
-        - **error.severity** (integer): An enumeration value representing the severity of the error.
+### 6.7. Disziplinen Anlegen
 
-#### Example Usage
+### 6.8. Teams Anlegen
 
-**Successful Response:**
+## 7. Anwendung nutzen
 
-```json
-{
-  "success": true,
-  "error": false,
-  "message": "Entity retrieved successfully.",
-  "data": {
-    "id": "123",
-    "name": "Sample Entity",
-    "createdAt": "2023-10-01T12:00:00Z",
-    "updatedAt": "2023-10-01T12:00:00Z"
-  },
-  "messages": []
-}
-```
+### 7.1. Schüler in Teams eintragen
 
-**Error Response:**
+### 7.2. Schüler in Disziplinen eintragen
 
-```json
-{
-  "success": false,
-  "error": true,
-  "message": "Validation failed.",
-  "data": null,
-  "messages": [
-    {
-      "error.message": "The 'name' field is required.",
-      "error.type": 2,
-      "error.severity": 4
-    }
-  ]
-}
-```
+### 7.3. Punkte vergeben
 
-### Error Types and Severities
+### 7.4. Ergebnisse einsehen
 
-- **Error Types** (`ErrorResult` enum):
-    - `1`: InternalException
-    - `2`: InvalidModel
-    - `3`: InvalidCredentials
-    - `4`: InvalidToken
-    - `5`: InvalidRole
-    - `6`: InvalidUser
-    - `7`: InvalidPassword
-    - `8`: InvalidEmail
-    - `9`: InvalidUsername
-    - `10`: InvalidOldPassword
-    - `11`: InvalidNewPassword
-    - `12`: InvalidModelState
-    - `13`: PasswordChangeFailed
-    - `14`: AccountLocked
-    - `15`: UserNotFound
-    - `16`: UserCreationFailed
-    - `17`: RoleCreationFailed
-    - `18`: Validation
-    - `19`: InvalidId
-    - (More could be coming)
+## 8. Fehlerbehebung
 
-- **Severities** (`Severity` enum):
-    - `0`: Verbose
-    - `1`: Debug
-    - `2`: Information
-    - `3`: Warning
-    - `4`: Error
-    - `5`: Fatal
+### 8.1. Häufige Fehler und Lösungen
 
-### Pagination in List Returning Endpoints
+- **Fehler:** Angular CLI-Befehl wird außerhalb eines Arbeitsbereichs ausgeführt.
+  **Lösung:** Stellen Sie sicher, dass die `angular.json`-Datei im richtigen Verzeichnis vorhanden ist.
 
-In our API, list returning endpoints utilize pagination to manage large sets of data efficiently. The pagination mechanism is implemented using the `Page<TEntity>` class, which encapsulates the paginated data along with metadata about the pagination state. The paginated results are always returned within a `ResultModel<Page<TEntity>>` to provide a consistent response structure.
+- **Fehler:** Anwendung wird nicht korrekt gebaut.
+  **Lösung:** Überprüfen Sie die `Dockerfile`- und `docker-compose.yml`-Konfigurationen.
 
-#### How Pagination Works
+## 9. Häufig gestellte Fragen (FAQ)
 
-When you request a list of entities from the API, you can specify pagination parameters to control the number of entities returned and the page of results you want to retrieve. The key parameters for pagination are:
+### 9.1. Wie kann ich die Anwendung auf einem anderen Port ausführen?
 
-- `page`: The page number to retrieve (default is 1).
-- `entities`: The number of entities per page (default is 10).
+- Ändern Sie die Port-Mappings in der `docker-compose.yml`-Datei.
 
-The API processes these parameters and returns a `Page<TEntity>` object wrapped in a `ResultModel`. The `Page<TEntity>` object contains the following fields:
+### 9.2. Wie kann ich Abhängigkeiten aktualisieren?
 
-- `number`: The current page number.
-- `size`: The number of entities in the current page.
-- `total`: The total number of entities available.
-- `data`: The list of entities in the current page.
-- `total.pages`: The total number of pages available (calculated as `total / size`).
+- Führen Sie `npm update` im `sf.client`-Verzeichnis aus.
+- Führen Sie `dotnet restore` im `sf.Server`-Verzeichnis aus.
 
-#### Example Response
+## 10. Support und Kontakt
 
-Here is an example of how the paginated response looks in JSON format:
-
-```json
-{
-  "success": true,
-  "error": false,
-  "message": "Entities retrieved successfully.",
-  "data": {
-    "number": 1,
-    "size": 10,
-    "total": 100,
-    "data": [
-      {
-        "id": "123",
-        "name": "Sample Entity",
-        "createdAt": "2023-10-01T12:00:00Z",
-        "updatedAt": "2023-10-01T12:00:00Z"
-      },
-      // More entities.. of type TEntity
-    ],
-    "total.pages": 10
-  },
-  "messages": []
-}
-```
-
-In this example:
-- The `number` field indicates that the first page of results is being returned.
-
+Für weitere Unterstützung kontaktieren Sie bitte das Support-Team
+unter [support.sf.github@tsuki.wtf](mailto:support.sf.github@tsuki.wtf).
