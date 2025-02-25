@@ -12,7 +12,7 @@ import { User, UsersService } from '@app/services/users.service';
   templateUrl: './deciplien-page.component.html',
   styleUrl: './deciplien-page.component.css'
 })
-export class DeciplienPageComponent {
+export class DisciplinePageComponent {
   users: User[] = [];
   dess: Discipline[] = [];
   newDes: Discipline = {
