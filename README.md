@@ -115,7 +115,7 @@ konfigurieren und zu nutzen.
 - **Fehler:** Anwendung wird nicht korrekt gebaut.
   **Lösung:** Überprüfen Sie die `Dockerfile`- und `docker-compose.yml`-Konfigurationen.
 
-## 9. Häufig gestellte Fragen (FAQ)
+## 9. Häufig gestellte Fragen (FAQ)!
 
 ### 9.1. Wie kann ich die Anwendung auf einem anderen Port ausführen?
 
