@@ -12,3 +12,18 @@
 i{
     margin-right: 10px;
 }
+
+@media (max-width: 767px) {
+    .get {
+      font-size: 2.5rem;
+    }
+  
+    .getBox h3 {
+      font-size: 1.25rem;
+    }
+  
+    .icn i {
+      font-size: 1.5rem;
+      margin-right: 5px;
+    }
+  }

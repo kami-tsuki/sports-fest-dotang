@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'userPage', component: UserPageComponent },
     { path: 'teamPage', component: TeamPageComponent },
     { path: 'classPage', component: ClassPageComponent },
-    { path: 'deciplienPage', component: DeciplienPageComponent }, //TODO its 'discipline', please fix that everywhere!
+    { path: 'deciplienPage', component: DeciplienPageComponent },
 
 
 

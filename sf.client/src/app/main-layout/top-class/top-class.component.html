@@ -3,23 +3,50 @@
 <div id="about" class="container border border-success mt-5 form-control shadow-sm" style="background-color:seagreen ;">
     <div class=" row text-center ">
        <h2 class="text-light fw-bold"> Höchste Ergebniss </h2>
-       <p> Shau mal die best 10 Klasses in unseren Sport Festival</p>
+       <p> Shau mal die best 10 Teams in unseren Sport Festival</p>
     </div>     
     </div>
     <div class="container border border-success form-control shadow">
     <div class="row mt-5 text-center">
-<div class="btn-group">
-    <button type="button" class="btn btn-success dropdown-toggle m-4 col-3" data-bs-toggle="dropdown" data-bs-display="dropdown" aria-expanded="false">
-Die Top 10 Klasses anhand die folgende Desiplien:    </button>
-    <ul class="dropdown-menu  dropdown-menu-lg-end">
-      <li><button class="dropdown-item" type="button">Action</button></li>
-      <li><button class="dropdown-item" type="button">Another action</button></li>
-      <li><button class="dropdown-item" type="button">Something else here</button></li>
+<div class="btn-group d-flex flex-column flex-md-row justify-content-center">
+    <button type="button" class="btn btn-outline-success dropdown-toggle m-2 col-12 col-md-4" data-bs-toggle="dropdown" data-bs-display="dropdown" aria-expanded="false">
+        Top 10 Team jede Desiplien:</button>
+    <ul class="dropdown-menu  dropdown-menu-end" [(ngModel)]="selectedDiscipline" name="discipline">
+      <li><button class="dropdown-item" 
+                  type="button" 
+                  *ngFor="let discipline of allDisciplines" 
+                  [value]="discipline"
+                  (click)="searchInTeam()">
+        {{ discipline.name }}</button></li>
+
     </ul>
-    <button type="button" class="btn btn-success mr-5 m-4 col-3" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-        Die Top 10 Klasses in allen Desiplien    </button>
+    <button type="button" 
+            class="btn btn-outline-success  m-2 col-12 col-md-4"
+            (click)="getTop10Teams()"
+              >
+        Top 10 Team allen Desiplien    </button>
   </div>
-
-
+    </div>
+<!-----To show results---->
+    <div class="row mt-5" *ngIf="result.length > 0">
+      <div class="col-12">
+        <h3>Top 10 Results</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Team Name</th>
+              <th scope="col">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let team of result; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ team.name }}</td>
+              <td>{{ team.point }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     </div>

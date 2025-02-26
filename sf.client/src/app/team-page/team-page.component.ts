@@ -130,8 +130,8 @@ export class TeamPageComponent {
 
   // Get discipline names for display in the table
   getDisciplineNames(team: Team): string {
-    return team.discipline && team.discipline.length > 0
-      ? team.discipline.map(d => d.name).join(', ')
+    return team.deciplien && team.deciplien.length > 0
+      ? team.deciplien.map(d => d.name).join(', ')
       : 'None';
   }
 
