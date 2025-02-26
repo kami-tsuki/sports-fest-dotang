@@ -81,29 +81,76 @@ konfigurieren und zu nutzen.
 
 ### 6.1. Nutzer Importieren
 
+Um Nutzer zu importieren, können Sie eine CSV-Datei mit den Nutzerdaten verwenden. Die Datei sollte die folgenden Spalten enthalten: `id`, `password`, `firstName`, `lastName`, `email`, `role`, `class`, `team`, `points`. Verwenden Sie das Admin-Panel, um die Datei hochzuladen und die Nutzer zu importieren.
+
+
 ### 6.2. Manager Anlegen
+
+Manager können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie "Neuen Nutzer hinzufügen". Füllen Sie das Formular aus und wählen Sie die Rolle "Manager" aus der Dropdown-Liste.
+
 
 ### 6.3. Richter Anlegen
 
+Richter können ebenfalls über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie "Neuen Nutzer hinzufügen". Füllen Sie das Formular aus und wählen Sie die Rolle "Judge" aus der Dropdown-Liste.
+
+
 ### 6.4. Klassenlehrer Anlegen
+
+Um Klassenlehrer anzulegen, gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie "Neuen Nutzer hinzufügen". Füllen Sie das Formular aus und wählen Sie die Rolle "Klassenlehrer" aus der Dropdown-Liste. Weisen Sie dem Klassenlehrer eine oder mehrere Klassen zu.
+
 
 ### 6.5. Schüler Anlegen
 
+Schüler können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie "Neuen Nutzer hinzufügen". Füllen Sie das Formular aus und wählen Sie die Rolle "Schüler" aus der Dropdown-Liste. Weisen Sie dem Schüler eine Klasse und ein Team zu.
+
+
 ### 6.6. Klassen Anlegen
+
+Klassen können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Klassenverwaltung" und wählen Sie "Neue Klasse hinzufügen". Füllen Sie das Formular aus und geben Sie den Namen der Klasse an. Die zugehörigen Schüler und Lehrer können durch den Abschnitt "Nutzerverwaltung" aus der Klass-Dropdown-Liste zugeordnet werden.
+
 
 ### 6.7. Disziplinen Anlegen
 
+Disziplinen können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Disziplinenverwaltung" und wählen Sie "Neue Disziplin hinzufügen". Füllen Sie das Formular aus und geben Sie den Namen der Disziplin an. Die zugehörigen Teams und Richter können durch den Abschnitt "Teamverwaltung" aus der Disziplinen-Dropdown-Liste zugeordnet werden.
+
+
+
 ### 6.8. Teams Anlegen
+
+Teams können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Teamverwaltung" und wählen Sie "Neues Team hinzufügen". Füllen Sie das Formular aus und geben Sie den Namen des Teams und Disziplinen an. Die zugehörigen Schüler können durch den Abschnitt "Nutzerverwaltung" zugeordnet werden.
+
+
 
 ## 7. Anwendung nutzen
 
 ### 7.1. Schüler in Teams eintragen
 
-### 7.2. Schüler in Disziplinen eintragen
+Um Schüler in Teams einzutragen, gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie den gewünschten Schüler aus. Bearbeiten Sie das Profil des Schülers und wählen Sie das Team aus der Dropdown-Liste aus. Speichern Sie die Änderungen, um den Schüler dem Team zuzuweisen.
+
+### 7.2. Disziplinen verwalten
+
+Um Disziplinen zu verwalten, gehen Sie zum Abschnitt "Disziplinenverwaltung". Hier können Sie Disziplinen hinzufügen, bearbeiten oder löschen. Sie können aber Teams und Richter den Disziplinen durch abschnitt "Teams" zuweisen.
 
 ### 7.3. Punkte vergeben
 
-### 7.4. Ergebnisse einsehen
+Um Punkte zu vergeben, gehen Sie zum Abschnitt "NutzerverWaltung". Hier können Sie Punkte für Schülern hinzufügen. 
+
+### 7.4. Ergebnisse anzeigen
+
+Um die Ergebnisse anzuzeigen, gehen Sie zum Abschnitt "Ergebnisse". Hier können Sie die Top 10 Teams nach Disziplin oder insgesamt anzeigen. Verwenden Sie die Dropdown-Menüs, um die gewünschten Filter auszuwählen.
+
+### 7.5. Benutzerrollen verwalten
+
+Um Benutzerrollen zu verwalten, gehen Sie zum Abschnitt "Nutzerverwaltung". Hier können Sie die Rollen der Benutzer ändern, neue Benutzer hinzufügen oder bestehende Benutzer löschen. Verwenden Sie die Dropdown-Menüs, um die gewünschten Rollen auszuwählen.
+
+### 7.6. Benutzerprofile bearbeiten
+
+Um Benutzerprofile zu bearbeiten, gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie den gewünschten Benutzer aus. Klicken Sie auf "Profil bearbeiten" und aktualisieren Sie die gewünschten Informationen. Speichern Sie die Änderungen, um das Profil zu aktualisieren.
+
+### 7.7. Kontaktinformationen anzeigen
+
+Um die Kontaktinformationen anzuzeigen, gehen Sie zum Abschnitt "Kontakt". Hier finden Sie die Kontaktdaten und Social-Media-Links des Veranstalters. Verwenden Sie die bereitgestellten Links, um den Veranstalter zu kontaktieren.
+
 
 ## 8. Fehlerbehebung
 
