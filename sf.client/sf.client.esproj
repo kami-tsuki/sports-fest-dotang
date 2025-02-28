@@ -13,7 +13,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\app\common\counters\" />
     <Folder Include="src\app\services\api\" />
   </ItemGroup>
 </Project>
