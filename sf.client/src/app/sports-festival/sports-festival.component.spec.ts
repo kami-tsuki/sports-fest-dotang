@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SportsFistivalComponent } from './sports-fistival.component';
+import { SportsFestivalComponent } from './sports-festival.component';
 
 describe('SportsFistivalComponent', () => {
-  let component: SportsFistivalComponent;
-  let fixture: ComponentFixture<SportsFistivalComponent>;
+  let component: SportsFestivalComponent;
+  let fixture: ComponentFixture<SportsFestivalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SportsFistivalComponent]
+      declarations: [SportsFestivalComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SportsFistivalComponent);
+    fixture = TestBed.createComponent(SportsFestivalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

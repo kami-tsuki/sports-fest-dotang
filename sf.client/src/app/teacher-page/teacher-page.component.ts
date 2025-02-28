@@ -33,7 +33,7 @@ export class TeacherPageComponent implements OnInit {
   class(){
     this.router.navigate([AppPaths.classPage]);
   }
-  deciplien(){
-    this.router.navigate([AppPaths.deciplienPage]);
+  discipline(){
+    this.router.navigate([AppPaths.disciplinePage]);
   }
 }
