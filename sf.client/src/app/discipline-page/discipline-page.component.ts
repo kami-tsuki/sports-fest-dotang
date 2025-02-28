@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TeamService, Team } from '../services/team.service';
 import { DisciplinesService , Discipline } from '../services/discipline.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -8,11 +7,11 @@ import { User, UsersService } from '@app/services/users.service';
 
 
 @Component({
-  selector: 'app-deciplien-page',
-  templateUrl: './deciplien-page.component.html',
-  styleUrl: './deciplien-page.component.css'
+  selector: 'app-discipline-page',
+  templateUrl: './discipline-page.component.html',
+  styleUrl: './discipline-page.component.css'
 })
-export class DeciplienPageComponent {
+export class DisciplinePageComponent {
   users: User[] = [];
   dess: Discipline[] = [];
   newDes: Discipline = {

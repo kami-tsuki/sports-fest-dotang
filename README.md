@@ -1,5 +1,6 @@
 # Benutzerhandbuch für die Anwendung
 
+---
 ## Inhaltsverzeichnis
 
 1. Einleitung
@@ -13,11 +14,13 @@
 9. Häufig gestellte Fragen (FAQ)
 10. Support und Kontakt
 
+---
 ## 1. Einleitung
 
 Willkommen zum Benutzerhandbuch für die Anwendung. Dieses Handbuch soll Ihnen helfen, die Anwendung zu installieren, zu
 konfigurieren und zu nutzen.
 
+---
 ## 2. Systemanforderungen
 
 - Betriebssystem: Windows 10 oder höher
@@ -26,6 +29,7 @@ konfigurieren und zu nutzen.
 - Docker: Version 20.10 oder höher
 - Docker Compose: Version 1.29 oder höher
 
+---
 ## 3. Installation
 
 ### 3.1. Node.js und Angular CLI installieren
@@ -45,6 +49,7 @@ konfigurieren und zu nutzen.
 1. Laden Sie Docker Desktop von der offiziellen Website herunter und installieren Sie es.
 2. Stellen Sie sicher, dass Docker Compose zusammen mit Docker Desktop installiert wird.
 
+---
 ## 4. Konfiguration
 
 ### 4.1. Projekt aus dem Repository klonen
@@ -62,6 +67,7 @@ konfigurieren und zu nutzen.
 
 1. Erstellen Sie eine `.env`-Datei im Projektverzeichnis und fügen Sie die erforderlichen Umgebungsvariablen hinzu.
 
+---
 ## 5. Start der Anwendung
 
 ### 5.1. Anwendung starten
@@ -77,16 +83,14 @@ konfigurieren und zu nutzen.
 - Server: `http://localhost:5056`
 - Client: `http://localhost:8080`
 
+---
 ## 6. Vorbereitung der Anwendung
 
-### 6.1. Nutzer Importieren
 
-Um Nutzer zu importieren, können Sie eine CSV-Datei mit den Nutzerdaten verwenden. Die Datei sollte die folgenden Spalten enthalten: `id`, `password`, `firstName`, `lastName`, `email`, `role`, `class`, `team`, `points`. Verwenden Sie das Admin-Panel, um die Datei hochzuladen und die Nutzer zu importieren.
-
-
-### 6.2. Manager Anlegen
+### 6.1. Manager Anlegen
 
 Manager können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Nutzerverwaltung" und wählen Sie "Neuen Nutzer hinzufügen". Füllen Sie das Formular aus und wählen Sie die Rolle "Manager" aus der Dropdown-Liste.
+![img.png](img.png)
 
 
 ### 6.3. Richter Anlegen
@@ -120,7 +124,7 @@ Disziplinen können über das Admin-Panel angelegt werden. Gehen Sie zum Abschni
 Teams können über das Admin-Panel angelegt werden. Gehen Sie zum Abschnitt "Teamverwaltung" und wählen Sie "Neues Team hinzufügen". Füllen Sie das Formular aus und geben Sie den Namen des Teams und Disziplinen an. Die zugehörigen Schüler können durch den Abschnitt "Nutzerverwaltung" zugeordnet werden.
 
 
-
+---
 ## 7. Anwendung nutzen
 
 ### 7.1. Schüler in Teams eintragen
@@ -151,17 +155,18 @@ Um Benutzerprofile zu bearbeiten, gehen Sie zum Abschnitt "Nutzerverwaltung" und
 
 Um die Kontaktinformationen anzuzeigen, gehen Sie zum Abschnitt "Kontakt". Hier finden Sie die Kontaktdaten und Social-Media-Links des Veranstalters. Verwenden Sie die bereitgestellten Links, um den Veranstalter zu kontaktieren.
 
-
+---
 ## 8. Fehlerbehebung
 
 ### 8.1. Häufige Fehler und Lösungen
 
 - **Fehler:** Angular CLI-Befehl wird außerhalb eines Arbeitsbereichs ausgeführt.
-  **Lösung:** Stellen Sie sicher, dass die `angular.json`-Datei im richtigen Verzeichnis vorhanden ist.
-
+- **Lösung:** Stellen Sie sicher, dass die `angular.json`-Datei im richtigen Verzeichnis vorhanden ist.
+---
 - **Fehler:** Anwendung wird nicht korrekt gebaut.
-  **Lösung:** Überprüfen Sie die `Dockerfile`- und `docker-compose.yml`-Konfigurationen.
+- **Lösung:** Überprüfen Sie die `Dockerfile`- und `docker-compose.yml`-Konfigurationen.
 
+---
 ## 9. Häufig gestellte Fragen (FAQ)
 
 ### 9.1. Wie kann ich die Anwendung auf einem anderen Port ausführen?
@@ -173,6 +178,7 @@ Um die Kontaktinformationen anzuzeigen, gehen Sie zum Abschnitt "Kontakt". Hier 
 - Führen Sie `npm update` im `sf.client`-Verzeichnis aus.
 - Führen Sie `dotnet restore` im `sf.Server`-Verzeichnis aus.
 
+---
 ## 10. Support und Kontakt
 
 Für weitere Unterstützung kontaktieren Sie bitte das Support-Team
