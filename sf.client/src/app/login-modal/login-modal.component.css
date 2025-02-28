@@ -4,18 +4,18 @@
     border: 2px solid #3f51b5; /* Blue border */
     border-radius: 8px; /* Rounded corners */
     padding: 20px; /* Add padding */
-  }
-  
-  /* Title and content styles */
-  .mat-dialog-title {
+}
+
+/* Title and content styles */
+.mat-dialog-title {
     font-weight: bold; /* Make title bold */
     font-size: 20px; /* Change title font size */
     color: #bb1d2f; /* Title color */
-  }
-  
-  .mat-dialog-content {
+}
+
+.mat-dialog-content {
     font-size: 16px; /* Change content font size */
     color: #555; /* Content color */
     padding: 20px;
-    
-  }
+
+}

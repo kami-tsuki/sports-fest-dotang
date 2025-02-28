@@ -11,14 +11,11 @@
     public static detail = ':id';
     public static studentPage = 'studentPage';
     public static teacherPage = 'teacherPage';
-    public static mangerComponent = 'mangerComponent';
+    public static managerComponent = 'managerComponent';
     public static userPage = 'userPage';
     public static teamPage = 'teamPage';
     public static classPage = 'classPage';
-    public static deciplienPage = 'deciplienPage';
-
-
-
+    public static disciplinePage = 'disciplinePage';
 
 
     public static mainLayout = 'mainLayout';

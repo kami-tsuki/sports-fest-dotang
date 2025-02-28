@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeciplienPageComponent } from './deciplien-page.component';
+import { SportsFestivalComponent } from './sports-festival.component';
 
-describe('DeciplienPageComponent', () => {
-  let component: DeciplienPageComponent;
-  let fixture: ComponentFixture<DeciplienPageComponent>;
+describe('SportsFistivalComponent', () => {
+  let component: SportsFestivalComponent;
+  let fixture: ComponentFixture<SportsFestivalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DeciplienPageComponent]
+      declarations: [SportsFestivalComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DeciplienPageComponent);
+    fixture = TestBed.createComponent(SportsFestivalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

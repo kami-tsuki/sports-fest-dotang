@@ -35,31 +35,26 @@ import {UserCounterComponent} from "./common/counters/user-counter/user-counter.
 import {Placement} from "./enums/placement.enum";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
-import { SelectUserComponent } from './sf/user/select-user/select-user.component';
-import { CreateUserComponent } from './sf/user/create-user/create-user.component';
-import { SelectSchoolComponent } from './sf/school/select-school/select-school.component';
-import { CreateSchoolComponent } from './sf/school/create-school/create-school.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HomeCoverComponent } from './main-layout/home-cover/home-cover.component';
-import { AboutSectionComponent } from './main-layout/about-section/about-section.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
-import { StudentPageComponent } from './student-page/student-page.component';
-import { TeacherPageComponent } from './teacher-page/teacher-page.component';
-import { SportsFistivalComponent } from './main-layout/sports-fistival/sports-fistival.component';
-import { ContactComponent } from './contact/contact.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { MangerComponentComponent } from './manger-component/manger-component.component';
-import { JudgeComponentComponent } from './judge-component/judge-component.component';
-import { UserPageComponent } from './user-page/user-page.component';
-import { MatTableModule } from '@angular/material/table';
-import { TeamPageComponent } from './team-page/team-page.component';
-import { ClassPageComponent } from './class-page/class-page.component';
-import { DeciplienPageComponent } from './deciplien-page/deciplien-page.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { TopClassComponent } from './main-layout/top-class/top-class.component';
+import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {HomeCoverComponent} from './main-layout/home-cover/home-cover.component';
+import {AboutSectionComponent} from './main-layout/about-section/about-section.component';
+import {LoginModalComponent} from './login-modal/login-modal.component';
+import {StudentPageComponent} from './student-page/student-page.component';
+import {TeacherPageComponent} from './teacher-page/teacher-page.component';
+import {ContactComponent} from './contact/contact.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {MainLayoutComponent} from './main-layout/main-layout.component';
+import {UserPageComponent} from './user-page/user-page.component';
+import {MatTableModule} from '@angular/material/table';
+import {TeamPageComponent} from './team-page/team-page.component';
+import {ClassPageComponent} from './class-page/class-page.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {TopClassComponent} from './main-layout/top-class/top-class.component';
+import {SportsFestivalComponent} from "@app/sports-festival/sports-festival.component";
+import {ManagerComponentComponent} from "@app/manager-component/manager-component.component";
+import {DisciplinePageComponent} from "@app/discipline-page/discipline-page.component";
 
 @NgModule({
 
@@ -71,18 +66,18 @@ import { TopClassComponent } from './main-layout/top-class/top-class.component';
         LoginModalComponent,
         StudentPageComponent,
         TeacherPageComponent,
-        SportsFistivalComponent,
+        SportsFestivalComponent,
         ContactComponent,
         MainLayoutComponent,
-        MangerComponentComponent,
         JudgeComponentComponent,
+        ManagerComponentComponent,
         UserPageComponent,
         TeamPageComponent,
         ClassPageComponent,
-        DeciplienPageComponent,
+        DisciplinePageComponent,
         TopClassComponent,
-        
-        
+
+
     ],
     imports: [
         BrowserModule,
@@ -122,11 +117,9 @@ import { TopClassComponent } from './main-layout/top-class/top-class.component';
     providers: [
         CacheService,
         ApiService,
-        
         provideAnimationsAsync()
     ],
     exports: [
-        
     ]
 })
 export class AppModule {
