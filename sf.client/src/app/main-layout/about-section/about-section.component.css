@@ -3,8 +3,9 @@
     height: 400px; /* Set the height you want for the scrollable area */
     overflow-y: scroll; /* Enables vertical scrolling */
     padding: 1rem;
-  }
-  .list-group-item.active {
+}
+
+.list-group-item.active {
     background-color: seagreen !important;
     color: white; /* Optionally change the text color to white for better contrast */
-  }
+}

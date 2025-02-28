@@ -1,12 +1,12 @@
-.car{
+.car {
     height: 560px;
 }
 
 .foto img {
     display: block;
-    width: auto;            
+    width: auto;
     height: 550px;
-    max-width: 100%;         
-      
+    max-width: 100%;
+
     filter: brightness(40%);
 }

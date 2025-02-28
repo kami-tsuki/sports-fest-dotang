@@ -18,9 +18,6 @@
     public static disciplinePage = 'disciplinePage';
 
 
-
-
-
     public static mainLayout = 'mainLayout';
 
 }
