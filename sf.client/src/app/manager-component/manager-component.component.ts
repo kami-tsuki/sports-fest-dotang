@@ -6,11 +6,11 @@ import { UsersService, User } from '../services/users.service';
 
 
 @Component({
-  selector: 'app-manger-component',
-  templateUrl: './manger-component.component.html',
-  styleUrls: ['./manger-component.component.css']
+  selector: 'app-manager-component',
+  templateUrl: './manager-component.component.html',
+  styleUrls: ['./manager-component.component.css']
 })
-export class MangerComponentComponent implements OnInit {
+export class ManagerComponentComponent implements OnInit {
     //ToDo-->following data are required
     loggedInUser: User | null = null;
 
@@ -29,7 +29,7 @@ team(){
 class(){
   this.router.navigate([AppPaths.classPage]);
 }
-deciplien(){
-  this.router.navigate([AppPaths.deciplienPage]);
+discipline(){
+  this.router.navigate([AppPaths.disciplinePage]);
 }
 }
