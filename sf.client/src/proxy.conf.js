@@ -4,7 +4,7 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 const PROXY_CONFIG = [
   {
     context: [
-       "/api/class",
+      "/api/class",
        "/api/class/bulk",
        "/api/class/search",
        "/api/class/count",
@@ -40,6 +40,7 @@ const PROXY_CONFIG = [
        "/api/team/validate",
        "/api/team/{id}/audit",
        "/api/team/import",
+
     ],
     target,
     secure: false
